@@ -11,21 +11,21 @@ __Schriftführer: Timon Trettin__
 *Nächstes Treffen:* +
 03.11.2020, 18:30 Uhr, Zoom
 
-__Teilnehmer:__
-- Lennart Wittkowski: Tutor, Kunde
-- Lars
-- Falk Natkowski
-- Lukas L.
-- Jonas
-- Timon Trettin
-- Clemens
+__Teilnehmer:__ +
+- Lennart Wittkowski: Tutor, Kunde +
+- Lars +
+- Falk Natkowski +
+- Lukas L. +
+- Jonas +
+- Timon Trettin +
+- Clemens +
 
 == UML Tool: MagicDraw
 
 == Videothek
-- Clemens: Nachbestellungen
-- Lars: Warenkorb: Artikel-Anzahl anzeigen; Artikel löschen; verhindern, dass mehr bestellt werden als im Lager sind
-- Jonas: Durchschnittliche Bewertung berechnen und anzeigen
-- Lukas: Registrierung: Name vorhanden?; 2x Passwort mit überprüfen (auf Sicherheit achten, Mindestlänge, Groß, Klein, Sonderzeichen, gibts dafür nicht irgendeinen Standard?)
-- Falk: Suche: Schlagwortsuche, Genre, leere Strings, 1 Zeichen ablehnen
-- Timon: Passwort: Passwort ändern, Name, Adresse
+- Clemens: Nachbestellungen +
+- Lars: Warenkorb: Artikel-Anzahl anzeigen; Artikel löschen; verhindern, dass mehr bestellt werden als im Lager sind +
+- Jonas: Durchschnittliche Bewertung berechnen und anzeigen +
+- Lukas: Registrierung: Name vorhanden?; 2x Passwort mit überprüfen (auf Sicherheit achten, Mindestlänge, Groß, Klein, Sonderzeichen, gibts dafür nicht irgendeinen Standard?) +
+- Falk: Suche: Schlagwortsuche, Genre, leere Strings, 1 Zeichen ablehnen +
+- Timon: Passwort: Passwort ändern, Name, Adresse +
