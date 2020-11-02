@@ -11,7 +11,7 @@ __Schriftführer: Timon Trettin__
 *Nächstes Treffen:* +
 03.11.2020, 18:30 Uhr, Zoom
 
-__Teilnehmer:__
+Teilnehmer: +
 - Lennart Wittkowski: Tutor, Kunde +
 - Lars +
 - Falk Natkowski +
@@ -20,7 +20,7 @@ __Teilnehmer:__
 - Timon Trettin +
 - Clemens +
 
-__UML Tool: MagicDraw__
+UML Tool: MagicDraw
 
 == Videothek
 - Clemens: Nachbestellungen +
