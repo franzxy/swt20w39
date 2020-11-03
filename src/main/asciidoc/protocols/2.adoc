@@ -8,10 +8,10 @@ Ende:     10:40 Uhr
 
 __Schriftführer: Timon Trettin__
 
-*Nächstes Treffen:* +
+*Nächstes Treffen* +
 03.11.2020, 18:30 Uhr, Zoom
 
-*Teilnehmer:* +
+*Teilnehmer* +
 - Lennart Wittkowski: Tutor, Kunde +
 - Lars +
 - Falk Natkowski +
@@ -26,7 +26,7 @@ __Schriftführer: Timon Trettin__
 
 *Pflichtenheft Apotheke*
 
-*Videothek*
+*Videothek* +
 - Clemens: Nachbestellungen +
 - Lars: Warenkorb: Artikel-Anzahl anzeigen; Artikel löschen; verhindern, dass mehr bestellt werden als im Lager sind +
 - Jonas: Durchschnittliche Bewertung berechnen und anzeigen +
