@@ -11,7 +11,7 @@ __Schriftführer: Timon Trettin__
 *Nächstes Treffen:* +
 03.11.2020, 18:30 Uhr, Zoom
 
-Teilnehmer: +
+*Teilnehmer:* +
 - Lennart Wittkowski: Tutor, Kunde +
 - Lars +
 - Falk Natkowski +
@@ -20,9 +20,13 @@ Teilnehmer: +
 - Timon Trettin +
 - Clemens +
 
-UML Tool: MagicDraw
+*UML Tool: MagicDraw*
 
-== Videothek
+== Aufgaben bis zum 08.11.2020 23:59
+
+*Pflichtenheft Apotheke*
+
+*Videothek*
 - Clemens: Nachbestellungen +
 - Lars: Warenkorb: Artikel-Anzahl anzeigen; Artikel löschen; verhindern, dass mehr bestellt werden als im Lager sind +
 - Jonas: Durchschnittliche Bewertung berechnen und anzeigen +
