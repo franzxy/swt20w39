@@ -27,9 +27,9 @@ __Schriftführer: Timon Trettin__
 *Pflichtenheft Apotheke*
 
 *Videothek* +
-- Clemens: Nachbestellungen +
-- Lars: Warenkorb: Artikel-Anzahl anzeigen; Artikel löschen; verhindern, dass mehr bestellt werden als im Lager sind +
-- Jonas: Durchschnittliche Bewertung berechnen und anzeigen +
-- Lukas: Registrierung: Name vorhanden?; 2x Passwort mit überprüfen (auf Sicherheit achten, Mindestlänge, Groß, Klein, Sonderzeichen, gibts dafür nicht irgendeinen Standard?) +
-- Falk: Suche: Schlagwortsuche, Genre, leere Strings, 1 Zeichen ablehnen +
-- Timon: Passwort: Passwort ändern, Name, Adresse +
+- Clemens: Nachbestellung (Chef kann Nachbestellen im Lager, Warnen bei Niedrigem Bestand) +
+- Lars: Warenkorb (Anzahl Artiekl ändern, löschen, Nicht über bestand bestellen) +
+- Jonas: Durchschnitt berechnen (Aus Bewertungen Durchschnitt errechnen und darstellen) +
+- Lukas: Registrierung neuer Nutzer (Passwort richtlinien (Timon), keine Doppelten Namen in der Datenbank) +
+- Falk: Suche (Schlagwortsuche, keine leeren Strings oder leerzeichen, min. 2 Zeichen) +
+- Timon: Möglichkeit zum ändern des Passwortes (Passwort ändern, Altes + Neues + Bestätigung Neues, Mindestlänge, Großbuchstaben, Zahlen, Sonderzeichen)
