@@ -22,6 +22,9 @@ __Schriftführer: Timon Trettin__
 
 *UML Tool: MagicDraw*
 
+*Apotheke*
+- Kundengespräch: Details im Pflichtenheft
+
 == Aufgaben bis zum 08.11.2020 23:59
 
 *Pflichtenheft Apotheke*
