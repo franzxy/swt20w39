@@ -17,6 +17,7 @@ Eine kurze Beschreibung des Dokuments. Wenige Absätze.
 == Aufgabenstellung und Zielsetzung
 Text aus Aufgabenstellung kopieren und ggfs. präzisieren.
 Insbesondere ergänzen, welche Ziele mit dem Abschluss des Projektes erreicht werden sollen.
+
 Dem großen Unterbrunner Ärztehaus wird eine Apotheke angegliedert. Es handelt sich um einen Verkaufsraum mit drei Kassen und einer Selbstbedienungsabteilung für nicht rezeptpflichtige Waren (Pflaster, medizinische Badezusätze, Heiltees aller Art, Pflegesalben etc.). Daneben gibt es ein kleines chemisches Labor, wo auf Anforderung der Ärzte spezielle Pulver, Salben und Tinkturen bereitet werden können (abzuholen einen Tag nach Bestellung). Bei Bestellungen von Mixturen oder nicht vorrätigen Medikamenten werden den Kunden Bestellzettel mit einer eindeutigen Identifikationsnummer ausgegeben (das Rezept verbleibt in der Apotheke). Die Apothekenschränke sind wie üblich alphabetisch sortiert. An jeder Medikamentenpackung ist ein Strichcode angebracht, welcher das Medikament und die Packungsgröße eindeutig identifiziert. Bei Verkauf eines Medikaments wird der Code an der Kasse eingelesen. Auf diese Weise wird der Posten auf die Kundenrechnung und gleichzeitig in die tägliche Nachbestellung übernommen. Medikamente werden entweder wie andere Waren bar bezahlt oder an Kassenpatienten gegen Entrichtung der Zuzahlung (10% des Preises, jedoch mindestens 5 EUR und maximal 10 EUR pro Arzneimittel) abgegeben. Kassenleistungen werden von den Apotheken mit einer Zentralkasse monatlich abgerechnet. Mit Hilfe der neuen Apotheke ersparen sich die Praxen auch die Bewirtschaftung eigener Medizinvorräte: Neben den Mitarbeitern der Apotheke haben auch die Ärzte und einige besonders zuverlässige Arzthelferinnen jederzeit Zugang zum Medikamentenschrank. Für diesen Zweck gibt es eine Tür zur Apotheke, die vom Ärztehaus aus durch Eingabe einer praxisspezifischen PIN geöffnet werden kann. Auf der anderen Seite der Tür befindet sich ein Lesegerät, an dem beim Verlassen der Strichcode der entnommenen Medikamente erfaßt wird. Zwecks eindeutiger Zuordnung der Medikamente und um den Betrieb der Apotheke nicht übermäßig zu stören, hat zu einem Zeitpunkt höchstens eine Praxis Zugang zur Apotheke. Die Ärzte haben erklärt, daß dies keine wesentliche Einschränkung darstellt. Die Abrechnung mit den einzelnen Arztpraxen erfolgt monatlich. Alle Lesegeräte sind an den Computer der Apotheke angeschlossen, über den die automatische Nachbestellung von Medikamenten, die eigene Bilanz und die Abrechnung mit den Ersatzkassen läuft. Außerdem wird an diesem Computer wöchentlich eine Liste der Medikamente ausgedruckt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist. Diese werden wöchentlich ausgesondert. Die Einführung eines weiteren Dienstes - die Auslieferung von Medikamenten an das nahegelegene Altersheim und andere bewegungseingeschränkte Patienten - wird derzeit diskutiert. Entwickeln Sie eine Software, die die oben dargestellten Vorgänge (einschließlich Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslieferservice werden ebenfalls erwartet. 
 
 
@@ -74,10 +75,18 @@ Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem ein
 == Funktionale Anforderungen
 
 === Muss-Kriterien
-Was das zu erstellende Programm auf alle Fälle leisten muss.
+- Verwaltung aller in der Apotheke befindlichen Medikamente
+- Automatisches tägliches nachbestellen, wenn ein Vorrat aufgebraucht ist
+- Kassenverwaltung (Einnahmen, Ausgaben, Gehälter)
+- Es hat jeweils eine Praxis Zugang zu den Medikamenten
+- Monatliche Abrechnung mit Arztpraxen
+- Verfallsdatum berücksichtigen und Mitarbeiter benachrichtigen
+- Auslieferservice für Orte der gleichen Postleitzahl
 
 === Kann-Kriterien
-Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
+- Kalendermanagement für Arbeitszeiten und Urlaubstage der Mitarbeiter
+- Hinzufügen und entfernen von Mitarbeitern
+- Intelligentes Nachbestellen bzw. reservieren von Medikamenten
 
 == Nicht-Funktionale Anforderungen
 
