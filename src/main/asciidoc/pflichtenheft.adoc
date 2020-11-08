@@ -3,10 +3,9 @@
 == __{project_name}__
 
 [options="header"]
-[cols="1, 1, 1, 1, 4"]
 |===
-|Version | Status      | Bearbeitungsdatum   | Autoren(en) |  Vermerk
-|0.1     | In Arbeit   | 10.10.2020          | Autor       | Initiale Version
+| Version | Bearbeitungsdatum
+| 0.1     | 08.11.2020    
 |===
 
 == Inhaltsverzeichnis
@@ -18,13 +17,27 @@ Eine kurze Beschreibung des Dokuments. Wenige Absätze.
 == Aufgabenstellung und Zielsetzung
 Text aus Aufgabenstellung kopieren und ggfs. präzisieren.
 Insbesondere ergänzen, welche Ziele mit dem Abschluss des Projektes erreicht werden sollen.
+Dem großen Unterbrunner Ärztehaus wird eine Apotheke angegliedert. Es handelt sich um einen Verkaufsraum mit drei Kassen und einer Selbstbedienungsabteilung für nicht rezeptpflichtige Waren (Pflaster, medizinische Badezusätze, Heiltees aller Art, Pflegesalben etc.). Daneben gibt es ein kleines chemisches Labor, wo auf Anforderung der Ärzte spezielle Pulver, Salben und Tinkturen bereitet werden können (abzuholen einen Tag nach Bestellung). Bei Bestellungen von Mixturen oder nicht vorrätigen Medikamenten werden den Kunden Bestellzettel mit einer eindeutigen Identifikationsnummer ausgegeben (das Rezept verbleibt in der Apotheke). Die Apothekenschränke sind wie üblich alphabetisch sortiert. An jeder Medikamentenpackung ist ein Strichcode angebracht, welcher das Medikament und die Packungsgröße eindeutig identifiziert. Bei Verkauf eines Medikaments wird der Code an der Kasse eingelesen. Auf diese Weise wird der Posten auf die Kundenrechnung und gleichzeitig in die tägliche Nachbestellung übernommen. Medikamente werden entweder wie andere Waren bar bezahlt oder an Kassenpatienten gegen Entrichtung der Zuzahlung (10% des Preises, jedoch mindestens 5 EUR und maximal 10 EUR pro Arzneimittel) abgegeben. Kassenleistungen werden von den Apotheken mit einer Zentralkasse monatlich abgerechnet. Mit Hilfe der neuen Apotheke ersparen sich die Praxen auch die Bewirtschaftung eigener Medizinvorräte: Neben den Mitarbeitern der Apotheke haben auch die Ärzte und einige besonders zuverlässige Arzthelferinnen jederzeit Zugang zum Medikamentenschrank. Für diesen Zweck gibt es eine Tür zur Apotheke, die vom Ärztehaus aus durch Eingabe einer praxisspezifischen PIN geöffnet werden kann. Auf der anderen Seite der Tür befindet sich ein Lesegerät, an dem beim Verlassen der Strichcode der entnommenen Medikamente erfaßt wird. Zwecks eindeutiger Zuordnung der Medikamente und um den Betrieb der Apotheke nicht übermäßig zu stören, hat zu einem Zeitpunkt höchstens eine Praxis Zugang zur Apotheke. Die Ärzte haben erklärt, daß dies keine wesentliche Einschränkung darstellt. Die Abrechnung mit den einzelnen Arztpraxen erfolgt monatlich. Alle Lesegeräte sind an den Computer der Apotheke angeschlossen, über den die automatische Nachbestellung von Medikamenten, die eigene Bilanz und die Abrechnung mit den Ersatzkassen läuft. Außerdem wird an diesem Computer wöchentlich eine Liste der Medikamente ausgedruckt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist. Diese werden wöchentlich ausgesondert. Die Einführung eines weiteren Dienstes - die Auslieferung von Medikamenten an das nahegelegene Altersheim und andere bewegungseingeschränkte Patienten - wird derzeit diskutiert. Entwickeln Sie eine Software, die die oben dargestellten Vorgänge (einschließlich Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslieferservice werden ebenfalls erwartet. 
+
 
 == Produktnutzung
-In welchem Kontext soll das System später genutzt werden? Welche Rahmenbedingungen gelten?
-Zusätzlich kurze Einleitung für fachfremde Personen
+Das System soll für eine Apotheke genutzt werden um ihre Produkte zu verkaufen. Die Software soll auf einem Server laufen und ist über das Internet (via Browser) zu erreichen.
+Das System soll erreichbar und visuell optimiert sein für folgende Browser:
+Mozilla Firefox, Version 55.0.3+
+Google Chrome, Version 61.0.3163+
+Die Hauptnutzer des Programms sind die Mitarbeiter der Apotheke, welche typische Webseitennavigation beherrschen, wie auch Ärzte und ihre vertrauenswürdigen Schwestern, der Chef, Selbstbedienungskundschaft und registrierte Kunden bei sich daheim.
 
-== Interessensgruppen (Stakeholders)
-Welche realen und juristischen Personen(-gruppen) haben Einfluss auf die Anforderungen im Projekt?
+== Interessensgruppen
+[options="header"]
+|===
+| Name | Priorität (1..5) | Beschreibung | Ziele
+| Ärztehaus | 5 | Auftraggeber | Automatisierter Verkauf von Medikamenten, Gemeinsames Lager von Apotheke und Praxen, Mehr Geld verdienen
+| Kunden | 4 | Primärer Nutzer | Medikamente kaufen / geliefert bekommen, Gutes User Experience
+| Administratoren | 2 | Verwaltung des Computersystems | Möglichkeit, sämtliche Daten im System zu Überprüfen, Prozesse Überwachen und evtl. verändern
+| Programmierer | 3 | Entwicklung und Instandhaltung der Software
+Gut erweiterbare Software, Geringer Instandhaltungsaufwand, Gute Debugging-Möglichkeiten
+| Ärzte / Praxen | 3 | An das Ärztehaus angrenzende Praxen | Zugriff auf Lager
+|===
 
 == Systemgrenze und Top-Level-Architektur
 
@@ -37,16 +50,16 @@ Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm
 == Anwendungsfälle
 
 === Akteure
-
-Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Dokumentieren Sie die Akteure in einer Tabelle. Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz. Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
-Weitere relevante Spalten können bei Bedarf ergänzt werden.
-
-// See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
-[cols="1,4"]
 |===
 |Name |Beschreibung
-|...  |...
+|Boss  | verantwortlich für die Verwaltung des Systems sowie seine Angestellten
+|Angestellte | verantwortlich für den Verkauf sowie die Nachbestellung
+|Praxis | können Waren direkt aus dem Lager holen
+|Registrierte Nutzer | können Waren aus dem Online Shop kaufen
+|Nicht-registrierte Nutzer | können sich im Online Shop umschauen, aber nichts zum Warenkorb hinzufügen
+|Kunden | können Artikel vor Ort kaufen
+|eingeschränkte Kunden | nach einmaliger Registrierung können eingeschränkte Kunden Artikel zur Lieferung bestellen
 |===
 
 === Überblick Anwendungsfalldiagramm
