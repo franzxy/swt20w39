@@ -11,6 +11,7 @@
 
 == Inhaltsverzeichnis
 link:#zusammenfassung[Zusammenfassung]
+link:#aufgabenstellung-und-zielsetzung[Aufgabenstellung und Zielsetzung]
 
 == Zusammenfassung
 Das Pflichtenheft bietet einen Überblick zu Zielsetzung und Umsetzung des Softwareprojekts.
