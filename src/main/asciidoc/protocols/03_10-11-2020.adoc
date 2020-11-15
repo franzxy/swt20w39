@@ -29,5 +29,5 @@ __Schriftführer: Timon Trettin__
 - Dateien im main branch erstellen: pflichtenheft/<aufgabenname>.adoc
 
 *Videothek* +
-- Pull requests auf developer branch
+- Pull requests auf developer branch +
 - Final Version auf main branch
