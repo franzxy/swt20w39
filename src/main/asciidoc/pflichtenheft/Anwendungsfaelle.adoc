@@ -17,7 +17,7 @@
 === Überblick Anwendungsfalldiagramm
 
 [#img-Anwendungsfalldiagramm]
-.Anwendugsfalldiagramm
+.Anwendungsfalldiagramm
 image::./../../asciidoc/models/analysis/Anwendungsfalldiagramm.png[Anwendugsfalldiagramm]
 
 === Anwendungsfallbeschreibungen
