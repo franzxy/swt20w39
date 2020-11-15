@@ -1,3 +1,4 @@
+:figure-caption!:
 == Anwendungsfälle
 
 === Akteure
@@ -14,7 +15,10 @@
 |===
 
 === Überblick Anwendungsfalldiagramm
-Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt
+
+[#img-Anwendungsfalldiagramm]
+.Anwendugsfalldiagramm
+image::./../../asciidoc/models/analysis/Anwendungsfalldiagramm.png[Anwendugsfalldiagramm]
 
 === Anwendungsfallbeschreibungen
 
@@ -73,10 +77,7 @@ _Logout_:
 |Akteure                     |jeder
 |Auslöser                    |Besucher will Produkte der Apotheke sehen
 |Bedingungen            a|keine
-|Notwendige Schritte           a|
-
-  Nutzer kommt auf die Webseite
-
+|Notwendige Schritte           a|Nutzer kommt auf die Webseite
 |===
 
 [cols="1h, 3"]
