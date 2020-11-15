@@ -1,29 +1,29 @@
-image::(https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/home.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/home.PNG
 Die Startseite bietet Einblick in das Inventar und die Möglichkeit sich anzumelden.
 
-image::(https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kunde.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kunde.PNG
 Ein registrierter Kunde kann Artikel in die Apotheke bestellen lassen oder, mit der entsprechenden Berechtigung, nach Hause liefern lassen.
 
-image::(https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kunde_account.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kunde_account.PNG
 Account Verwaltung für Kunden.
 
-image::(https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kasse.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kasse.PNG
 Die Selbstbediener-Kasse, Mitarbeiter haben das gleiche Interface bei ihrer Kasse. Praxen sehen dieses Interface auch, es kann aber nur eine Praxis aktiv bestellen.
 
-image::(https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_account.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_account.PNG
 Mitarbeiter können Artikel hinzufügen.
 
-image::[Mitarbeiter Kunden](https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_kunden.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_kunden.PNG
 Kunden können als bewegungseingeschränkt gekennzeichnet werden.
 
-image::[Mitarbeiter Account](https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_account.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_account.PNG
 Mitarbeiter können ihren Account während des Arbeitsverhältnisses nicht löschen und haben die Möglichkeit Urlaub zu nehmen.
 
-image::(https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss.PNG
 Der Boss kann Artikel nachbestellen.
 
-image::(https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss_user.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss_user.PNG
 Neue Selbstbedienerkassen, Praxen, Kunden und Mitarbeiter können erstellt, eingesehen und angepasst werden.
 
-image::(https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss_finanzen.PNG)
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss_finanzen.PNG
 Überblick über jegliche Finanzen.
