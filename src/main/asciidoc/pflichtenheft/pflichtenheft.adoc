@@ -14,8 +14,8 @@
 ==== link:#aufgabenstellung-und-zielsetzung[Aufgabenstellung und Zielsetzung] +
 ==== link:#interessensgruppen[Interessensgruppen] +
 ==== link:#systemgrenze-und-top-level-architektur[Systemgrenze und Top-Level-Architektur] +
-===== link:#kontextdiagramm[Kontextdiagramm] +
-===== link:#top-level-architektur[Top-Level-Architektur] +
+  ===== link:#kontextdiagramm[Kontextdiagramm] +
+  ===== link:#top-level-architektur[Top-Level-Architektur] +
 
 == Zusammenfassung
 Das Pflichtenheft bietet einen Überblick zu Zielsetzung und Umsetzung des Softwareprojekts.
