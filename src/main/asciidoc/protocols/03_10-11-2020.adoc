@@ -1,18 +1,18 @@
 = Protokoll Gruppe 39
 
-Treffen am 02.11.2020
+Treffen am 10.11.2020
 
 Ort:      Zoom +
-Beginn:   09:20 Uhr +
-Ende:     10:40 Uhr
+Beginn:   16:40 Uhr +
+Ende:     18:10 Uhr
 
 __Schriftführer: Timon Trettin__
 
 *Nächstes Treffen* +
-10.11.2020, 16:40 Uhr, Zoom
+17.11.2020, 16:40 Uhr, Zoom
 
 *Teilnehmer* +
-- Lennart Wittkowski: Tutor, Kunde +
+- Lennart Wittkowski: Tutor +
 - Lars +
 - Falk Natkowski +
 - Lukas L. +
@@ -20,19 +20,14 @@ __Schriftführer: Timon Trettin__
 - Timon Trettin +
 - Clemens +
 
-*UML Tool: MagicDraw*
-
 *Apotheke* +
-- Kundengespräch: Details im Pflichtenheft
+- Korrekturen am Pflichtenheft
 
-== Aufgaben bis zum 08.11.2020 23:59
+== Aufgaben bis zum 15.11.2020 23:59
 
-*Pflichtenheft Apotheke*
+*Pflichtenheft Apotheke* +
+- Dateien im main branch erstellen: pflichtenheft/<aufgabenname>.adoc
 
 *Videothek* +
-- Clemens: Nachbestellung (Chef kann Nachbestellen im Lager, Warnen bei Niedrigem Bestand) +
-- Lars: Warenkorb (Anzahl Artiekl ändern, löschen, Nicht über bestand bestellen) +
-- Jonas: Durchschnitt berechnen (Aus Bewertungen Durchschnitt errechnen und darstellen) +
-- Lukas: Registrierung neuer Nutzer (Passwort richtlinien (Timon), keine Doppelten Namen in der Datenbank) +
-- Falk: Suche (Schlagwortsuche, keine leeren Strings oder leerzeichen, min. 2 Zeichen) +
-- Timon: Möglichkeit zum ändern des Passwortes (Passwort ändern, Altes + Neues + Bestätigung Neues, Mindestlänge, Großbuchstaben, Zahlen, Sonderzeichen)
+- Pull requests auf developer branch
+- Final Version auf main branch
