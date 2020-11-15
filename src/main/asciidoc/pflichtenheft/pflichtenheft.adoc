@@ -6,13 +6,14 @@
 |===
 | Version | Bearbeitungsdatum
 | 0.1     | 08.11.2020    
+| 0.5     | 15.11.2020    
 |===
 
 == Inhaltsverzeichnis
-Dieses Dokument benötigt ein Inhaltsverzeichnis. Es existieren mehrere Einbindungsmöglichkeiten.
+link:#zusammenfassung[Zusammenfassung]
 
 == Zusammenfassung
-Eine kurze Beschreibung des Dokuments. Wenige Absätze.
+Das Pflichtenheft bietet einen Überblick zu Zielsetzung und Umsetzung des Softwareprojekts.
 
 == Aufgabenstellung und Zielsetzung
 Es soll eine Website für die Apotheke des Unterbrunner Ärztehaus entstehen. In der Apotheke gibt es eine Selbstbedienungsabteilung für nicht rezeptpflichtige Waren in der Kunden Artikel einscannen und bezahlen können sollen. Zusätzlich gibt es ein chemisches Labor, wo auf Anforderung von Praxen spezielle Pulver, Salben und Tinkturen bereitet werden sollen (abzuholen einen Tag nach Bestellung). Bei Bestellungen von Mixturen oder nicht vorrätigen Medikamenten werden den Kunden Bestellzettel mit einer eindeutigen Identifikationsnummer ausgegeben. An jeder Medikamentenpackung ist ein Strichcode angebracht, welcher das Medikament und die Packungsgröße eindeutig identifiziert. Bei Verkauf eines Medikaments wird der Code an der Kasse eingelesen. Auf diese Weise wird der Posten auf die Kundenrechnung und gleichzeitig in die tägliche Nachbestellung übernommen. Medikamente werden entweder wie andere Waren bar bezahlt oder an Kassenpatienten gegen Entrichtung der Zuzahlung (10% des Preises, jedoch mindestens 5 EUR und maximal 10 EUR pro Arzneimittel) abgegeben. Kassenleistungen werden von den Apotheken mit einer Zentralkasse monatlich abgerechnet. Mit Hilfe der neuen Apotheke ersparen sich die Praxen auch die Bewirtschaftung eigener Medizinvorräte: Neben den Mitarbeitern der Apotheke haben auch Praxen Zugang zum Medikamentenschrank. Für diesen Zweck gibt es eine Tür zur Apotheke, die vom Ärztehaus aus durch Eingabe einer praxisspezifischen PIN geöffnet werden kann. Auf der anderen Seite der Tür befindet sich ein Lesegerät, an dem beim Verlassen der Strichcode der entnommenen Medikamente erfaßt wird. Zwecks eindeutiger Zuordnung der Medikamente und um den Betrieb der Apotheke nicht übermäßig zu stören, hat zu einem Zeitpunkt höchstens eine Praxis Zugang zur Apotheke. Die Abrechnung mit den einzelnen Arztpraxen erfolgt monatlich. Alle Lesegeräte sind an den Computer der Apotheke angeschlossen, über den die automatische Nachbestellung von Medikamenten, die eigene Bilanz und die Abrechnung mit den Ersatzkassen läuft. Außerdem wird an diesem Computer wöchentlich eine Liste der Medikamente ausgedruckt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist. Diese werden wöchentlich ausgesondert. Außerdem soll ein Dienst zum auslieferun von Medikamenten entwickelt werden.
