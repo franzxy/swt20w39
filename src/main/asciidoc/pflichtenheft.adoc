@@ -6,20 +6,22 @@
 |===
 | Version | Bearbeitungsdatum
 | 0.1     | 08.11.2020    
+| 0.5     | 15.11.2020    
 |===
 
 == Inhaltsverzeichnis
-Dieses Dokument benötigt ein Inhaltsverzeichnis. Es existieren mehrere Einbindungsmöglichkeiten.
+. link:#zusammenfassung[Zusammenfassung] +
+. link:#aufgabenstellung-und-zielsetzung[Aufgabenstellung und Zielsetzung] +
+. link:#interessensgruppen[Interessensgruppen] +
+. link:#systemgrenze-und-top-level-architektur[Systemgrenze und Top-Level-Architektur] +
+.. link:#kontextdiagramm[Kontextdiagramm] +
+.. link:#top-level-architektur[Top-Level-Architektur] +
 
 == Zusammenfassung
-Eine kurze Beschreibung des Dokuments. Wenige Absätze.
+Das Pflichtenheft bietet einen Überblick zu Zielsetzung und Umsetzung des Softwareprojekts.
 
 == Aufgabenstellung und Zielsetzung
-Text aus Aufgabenstellung kopieren und ggfs. präzisieren.
-Insbesondere ergänzen, welche Ziele mit dem Abschluss des Projektes erreicht werden sollen.
-
-Dem großen Unterbrunner Ärztehaus wird eine Apotheke angegliedert. Es handelt sich um einen Verkaufsraum mit drei Kassen und einer Selbstbedienungsabteilung für nicht rezeptpflichtige Waren (Pflaster, medizinische Badezusätze, Heiltees aller Art, Pflegesalben etc.). Daneben gibt es ein kleines chemisches Labor, wo auf Anforderung der Ärzte spezielle Pulver, Salben und Tinkturen bereitet werden können (abzuholen einen Tag nach Bestellung). Bei Bestellungen von Mixturen oder nicht vorrätigen Medikamenten werden den Kunden Bestellzettel mit einer eindeutigen Identifikationsnummer ausgegeben (das Rezept verbleibt in der Apotheke). Die Apothekenschränke sind wie üblich alphabetisch sortiert. An jeder Medikamentenpackung ist ein Strichcode angebracht, welcher das Medikament und die Packungsgröße eindeutig identifiziert. Bei Verkauf eines Medikaments wird der Code an der Kasse eingelesen. Auf diese Weise wird der Posten auf die Kundenrechnung und gleichzeitig in die tägliche Nachbestellung übernommen. Medikamente werden entweder wie andere Waren bar bezahlt oder an Kassenpatienten gegen Entrichtung der Zuzahlung (10% des Preises, jedoch mindestens 5 EUR und maximal 10 EUR pro Arzneimittel) abgegeben. Kassenleistungen werden von den Apotheken mit einer Zentralkasse monatlich abgerechnet. Mit Hilfe der neuen Apotheke ersparen sich die Praxen auch die Bewirtschaftung eigener Medizinvorräte: Neben den Mitarbeitern der Apotheke haben auch die Ärzte und einige besonders zuverlässige Arzthelferinnen jederzeit Zugang zum Medikamentenschrank. Für diesen Zweck gibt es eine Tür zur Apotheke, die vom Ärztehaus aus durch Eingabe einer praxisspezifischen PIN geöffnet werden kann. Auf der anderen Seite der Tür befindet sich ein Lesegerät, an dem beim Verlassen der Strichcode der entnommenen Medikamente erfaßt wird. Zwecks eindeutiger Zuordnung der Medikamente und um den Betrieb der Apotheke nicht übermäßig zu stören, hat zu einem Zeitpunkt höchstens eine Praxis Zugang zur Apotheke. Die Ärzte haben erklärt, daß dies keine wesentliche Einschränkung darstellt. Die Abrechnung mit den einzelnen Arztpraxen erfolgt monatlich. Alle Lesegeräte sind an den Computer der Apotheke angeschlossen, über den die automatische Nachbestellung von Medikamenten, die eigene Bilanz und die Abrechnung mit den Ersatzkassen läuft. Außerdem wird an diesem Computer wöchentlich eine Liste der Medikamente ausgedruckt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist. Diese werden wöchentlich ausgesondert. Die Einführung eines weiteren Dienstes - die Auslieferung von Medikamenten an das nahegelegene Altersheim und andere bewegungseingeschränkte Patienten - wird derzeit diskutiert. Entwickeln Sie eine Software, die die oben dargestellten Vorgänge (einschließlich Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslieferservice werden ebenfalls erwartet. 
-
+Es soll eine Website für die Apotheke des Unterbrunner Ärztehaus entstehen. In der Apotheke gibt es eine Selbstbedienungsabteilung für nicht rezeptpflichtige Waren in der Kunden Artikel einscannen und bezahlen können sollen. Zusätzlich gibt es ein chemisches Labor, wo auf Anforderung von Praxen spezielle Pulver, Salben und Tinkturen bereitet werden sollen (abzuholen einen Tag nach Bestellung). Bei Bestellungen von Mixturen oder nicht vorrätigen Medikamenten werden den Kunden Bestellzettel mit einer eindeutigen Identifikationsnummer ausgegeben. An jeder Medikamentenpackung ist ein Strichcode angebracht, welcher das Medikament und die Packungsgröße eindeutig identifiziert. Bei Verkauf eines Medikaments wird der Code an der Kasse eingelesen. Auf diese Weise wird der Posten auf die Kundenrechnung und gleichzeitig in die tägliche Nachbestellung übernommen. Medikamente werden entweder wie andere Waren bar bezahlt oder an Kassenpatienten gegen Entrichtung der Zuzahlung (10% des Preises, jedoch mindestens 5 EUR und maximal 10 EUR pro Arzneimittel) abgegeben. Kassenleistungen werden von den Apotheken mit einer Zentralkasse monatlich abgerechnet. Mit Hilfe der neuen Apotheke ersparen sich die Praxen auch die Bewirtschaftung eigener Medizinvorräte: Neben den Mitarbeitern der Apotheke haben auch Praxen Zugang zum Medikamentenschrank. Für diesen Zweck gibt es eine Tür zur Apotheke, die vom Ärztehaus aus durch Eingabe einer praxisspezifischen PIN geöffnet werden kann. Auf der anderen Seite der Tür befindet sich ein Lesegerät, an dem beim Verlassen der Strichcode der entnommenen Medikamente erfaßt wird. Zwecks eindeutiger Zuordnung der Medikamente und um den Betrieb der Apotheke nicht übermäßig zu stören, hat zu einem Zeitpunkt höchstens eine Praxis Zugang zur Apotheke. Die Abrechnung mit den einzelnen Arztpraxen erfolgt monatlich. Alle Lesegeräte sind an den Computer der Apotheke angeschlossen, über den die automatische Nachbestellung von Medikamenten, die eigene Bilanz und die Abrechnung mit den Ersatzkassen läuft. Außerdem wird an diesem Computer wöchentlich eine Liste der Medikamente ausgedruckt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist. Diese werden wöchentlich ausgesondert. Außerdem soll ein Dienst zum auslieferun von Medikamenten entwickelt werden.
 
 == Produktnutzung
 Dieser Bereich gibt einen überblick darüber wie das Programm schlussendlich genutzt werden soll und unter welchen Bedingungen.
@@ -53,222 +55,7 @@ Das Kontextdiagramm zeigt das geplante Software-System in seiner Umgebung. Zur U
 === Top-Level-Architektur
 Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm.
 
-== Anwendungsfälle
-
-=== Akteure
-[options="header"]
-|===
-|Name |Beschreibung
-|Boss  | verantwortlich für die Verwaltung des Systems sowie seine Angestellten
-|Angestellte | verantwortlich für den Verkauf sowie die Nachbestellung
-|Praxis | können Waren direkt aus dem Lager holen
-|Registrierte Nutzer | können Waren aus dem Online Shop kaufen
-|Nicht-registrierte Nutzer | können sich im Online Shop umschauen, aber nichts zum Warenkorb hinzufügen
-|Kunden | können Artikel vor Ort kaufen
-|eingeschränkte Kunden | nach einmaliger Registrierung können eingeschränkte Kunden Artikel zur Lieferung bestellen
-|===
-
-=== Überblick Anwendungsfalldiagramm
-Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt
-
-=== Anwendungsfallbeschreibungen
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Login/Logout
-|Beschreibung                |Nutzer kann sich einloggen um erweiterte Möglichkeiten im Onlineshop zu bekommen.
-Ausloggen macht das rückgängig.
-|Akteure                     |registrierte Nutzer
-|Auslöser                    |
-_Login_: Nutzer will erweiterte Funktionalitäten erlangen.
-
-_Logout_: Nutzer will den Shop verlassen.
-|Bedingungen            a|
-_Login_: Nutzer ist noch nicht eingeloggt
-
-_Logout_: Nutzer ist registriert
-|Notwendige Schritte           a|
-_Login_:
-
-  1. Nutzer drückt auf "Einloggen"
-  2. Nutzer gibt seine Daten ein
-  3. Nutzer drückt auf "Log In" Knopf
-
-_Logout_:
-
-  1. Nutzer drückt auf "Ausloggen"
-  2. Nutzer ist ausgeloggt und wieder auf der Startseite
-
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |registrieren
-|Beschreibung                |nicht-registrierter Nutzer kann sich einen Account erstellen
-|Akteure                     |nicht-registrierte Nutzer
-|Auslöser                    |nicht-registrierter Nutzer will sich einen Account erstellen durch Drücken von "Registrieren"
-|Bedingungen            a|Akteur ist noch nicht registriert
-|Notwendige Schritte           a|
-
-  1. nicht-registrierter Nutzer drückt auf "Registrieren"
-  2. Nutzer gibt seinen erwünschten Nutzernamen und Passwort ein
-  3. System überprüft ob Nutzername eindeutig ist
-    . wenn eindeutig: Account mit eingegebenen Daten erstellen
-    . sonst: eine Fehler-Nachricht wird angezeigt
-
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Katalog anschauen
-|Beschreibung                |Jeder Besucher des Onlineshops soll in der Lage sein den Katalog der Apotheke und damit alle angebotenen Produkte anzuschauen
-|Akteure                     |jeder
-|Auslöser                    |Besucher will Produkte der Apotheke sehen
-|Bedingungen            a|keine
-|Notwendige Schritte           a|
-
-  Nutzer kommt auf die Webseite
-
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |zum Warenkorb hinzufügen
-|Beschreibung                |das gewünschte Produkt in gewünschter Menge zum Warenkorb hinzufügen
-|Akteure                     |registrierte Nutzer, Angestellte, Praxis, eingeschränkte Kunden, Kunden
-|Auslöser                    |Nutzer will ein Produkt kaufen
-|Bedingungen            a|ein registrierter Nutzer sein
-|Notwendige Schritte           a|
-
-  1. Nutzer ist eingeloggt
-  2. Nutzer ist auf der Startseite
-  3. Nutzer wählt das gewünschte Produkt sowie die gewünschte Anzahl aus
-  4. Nutzer klickt auf zum Warenkorb hinzufügen
-
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Warenkorb kaufen
-|Beschreibung                |Nutzer kauft die ausgewählten Produkte, woraufhin der Warenkorb geleert wird
-|Akteure                     |registrierte Nutzer, Angestellte, Praxis, eingeschränkte Kunden, Kunden
-|Auslöser                    |Nutzer will Kaufvorgang abschließen
-|Bedingungen            a|ein registrierter Nutzer muss mindestens ein Produkt im Warenkorb haben
-|Notwendige Schritte           a|
-
-  1. Nutzer fügt beliebig viele Elemente (mindestens 1) zum Warenkorb hinzu
-  2. Nutzer drückt auf "Kaufen"
-
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Kundenliste anschauen/bearbeiten
-|Beschreibung                |der Boss sowie die Angestellten können die Kundenliste einsehen und Kunden mit bestimmten Eigenschaften austatten
-|Akteure                     |Boss, Angestellte
-|Auslöser                    |Kunden sollen mit neuen Attributen ausgestattet werden
-|Bedingungen                a|Benutzer ist eingeloggt und hat Rolle "Boss" oder "Angestellter"
-|Notwendige Schritte           a|
-
-  1. Boss/Angestellte suchen bestimmte Kunden-Accounts
-  2. Bestimmten Account neue Attribute hinzufügen
-
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Angestellte verwalten
-|Beschreibung                |der Boss kann neue Angestellte hinzufügen, Angestellte feuern und Gehalt anpassen
-|Akteure                     |Boss
-|Auslöser                    |
-_einstellen_: Boss will neue Angestellte einstellen
-
-_feuern_: Boss will einen Angestellten feuern
-
-_Gehalt anpassen_: ein Angestellter kriegt eine Gehaltsanpassung
-|Bedingungen            a|Benutzer ist eingeloggt und hat Rolle "Boss"
-|Notwendige Schritte           a|
-_einstellen_:  
-
-  1. Boss drückt auf "Angestellten hinzufügen"
-  2. Boss füllt die Daten des Angestellten aus
-  3. Boss drückt auf "Hinzufügen"
-
-_feuern_: Boss will einen Angestellten feuern
-
-  1. Boss drückt auf "Angestellten entlassen"
-  2. Boss wählt den Angestellten aus der entlassen wird
-  3. Boss drückt auf "entlassen"
-
-_Gehalt anpassen_:
-
-  1. Boss wählt den gewünschten Angestellten aus
-  2. Boss füllt die Daten des Angestellten aus
-  3. Boss drückt auf "aktualisieren"
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Account erstellen
-|Beschreibung                |der Boss sowie die Angestellten können neue Accounts erstellen
-|Akteure                     |Boss, Angestellte
-|Auslöser                    |Kunden wollen einen Account bei der Apotheke haben, z.B. um als eingeschränkter Kunden registriert werden zu können
-|Bedingungen                a|Kunde darf noch kein Account haben, Benutzer ist eingeloggt und hat Rolle "Boss" oder "Angestellter"
-|Notwendige Schritte           a|
-
-  1. Boss/Angestellte klicken auf "registrieren"
-  2. Daten sowie Extra-Attribute des Kunden eingeben
-  3. Vorgang abschließen durch "registrieren"
-
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Vorrat anschauen
-|Beschreibung                |der Boss kann den Bestand der Apotheke einsehen
-|Akteure                     |Boss
-|Auslöser                    |der Boss will einen Überblick über die Vorräte des Shops haben
-|Bedingungen                a|Benutzer ist eingeloggt und hat Rolle "Boss"
-|Notwendige Schritte           a|Boss klickt auf "Vorrat"
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Produkt nachbestellen
-|Beschreibung                |der Boss kann nach seinem Belieben Produkte der Apotheke nachbestellen
-|Akteure                     |Boss
-|Auslöser                    |der Boss will ein bestimmtes Produkt öfter im Inventar haben
-|Bedingungen                a|Benutzer ist eingeloggt und hat Rolle "Boss"
-|Notwendige Schritte           a|
-
-  1. Boss schaut den Vorrat an
-  2. Boss klickt wählt ein bestimmtes Produkt aus
-  3. er wählt die Menge aus
-  4. abschließen durch Klicken auf "Produkt bestellen"
-
-|===
-
-[cols="1h, 3"]
-[[UC0010]]
-|===
-|Name                       |Bestellungen anschauen
-|Beschreibung                |der Boss kann alle abgeschlossenen Bestellungen einsehen
-|Akteure                     |Boss
-|Auslöser                    |der Boss will die Bestellungen überprüfen
-|Bedingungen                a|Benutzer ist eingeloggt und hat Rolle "Boss"
-|Notwendige Schritte           a|Boss klickt auf "Bestellungen"
-|===
-
+include::Anwendungsfaelle.adoc[]
 
 == Funktionale Anforderungen
 
@@ -290,30 +77,23 @@ _Gehalt anpassen_:
 
 === Qualitätsziele
 
-Dokumentieren Sie in einer Tabelle die Qualitätsziele, welche das System erreichen soll, sowie deren Priorität.
+1 = Not Important ..
+5 = Very Important
+[options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
+|===
+|Quality Demand           | 1 | 2 | 3 | 4 | 5
+|Maintainability          |   |   |   | x |
+|Usability                |   |   | x |   |
+|Security                 |   | x |   |   |
+|===
 
 === Konkrete Nicht-Funktionale Anforderungen
 
-Beschreiben Sie Nicht-Funktionale Anforderungen, welche dazu dienen, die zuvor definierten Qualitätsziele zu erreichen.
-Achten Sie darauf, dass deren Erfüllung (mindestens theoretisch) messbar sein muss.
+:desired-uptime: 99,5%
 
-== GUI Prototyp
+== UI Prototyp
 
-In diesem Kapitel soll ein Entwurf der Navigationsmöglichkeiten und Dialoge des Systems erstellt werden.
-Idealerweise entsteht auch ein grafischer Prototyp, welcher dem Kunden zeigt, wie sein System visuell umgesetzt werden soll.
-Konkrete Absprachen - beispielsweise ob der grafische Prototyp oder die Dialoglandkarte höhere Priorität hat - sind mit dem Kunden zu treffen.
-
-=== Überblick: Dialoglandkarte
-Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur Laufzeit darstellt. Also mit welchen Aktionen zwischen den Masken navigiert wird.
-//Die nachfolgende Abbildung zeigt eine an die Pinnwand gezeichnete Dialoglandkarte. Ihre Karte sollte zusätzlich die Buttons/Funktionen darstellen, mit deren Hilfe Sie zwischen den Masken navigieren.
-
-=== Dialogbeschreibung
-Für jeden Dialog:
-
-1. Kurze textuelle Dialogbeschreibung eingefügt: Was soll der jeweilige Dialog? Was kann man damit tun? Überblick?
-2. Maskenentwürfe (Screenshot, Mockup)
-3. Maskenelemente (Ein/Ausgabefelder, Aktionen wie Buttons, Listen, …)
-4. Evtl. Maskendetails, spezielle Widgets
+include::ui.adoc[]
 
 == Datenmodell
 
@@ -338,6 +118,3 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 Sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essentiell ist, sollten hier aufgeführt werden.
 Insbesondere Begriffe der zu implementierenden Domäne wurden bereits beschrieben, jedoch gibt es meist mehr Begriffe, die einer Beschreibung bedürfen. +
 Beispiel: Was bedeutet "Kunde"? Ein Nutzer des Systems? Der Kunde des Projektes (Auftraggeber)?
-
-== Offene Punkte
-Offene Punkte werden entweder direkt in der Spezifikation notiert. Wenn das Pflichtenheft zum finalen Review vorgelegt wird, sollte es keine offenen Punkte mehr geben.
