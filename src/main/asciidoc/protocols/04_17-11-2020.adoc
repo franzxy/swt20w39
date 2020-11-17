@@ -1,0 +1,42 @@
+= Protokoll Gruppe 39
+
+Treffen am 17.11.2020
+
+Ort:      BBB +
+Beginn:   16.50 Uhr +
+Ende:     18.10 Uhr
+
+__Schriftführer:__ Falk Natkowski
+
+*Nächstes Treffen:* +
+24.11.2020, 16.40 Uhr, BBB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Lennart Wittkowski: Tutor
+- Lars
+- Falk Natkowski
+- Lukas L.
+- Jonas
+- Timon Trettin
+- Clemens Rose
+
+== Bemerkungen
+
+- Ergebnisse Videoshop präsentiert
+- Pflichtenheft Apotheke nicht vollständig
+
+== Aufgaben bis zum 19.11.2020
+- Pflichtenheft Apotheke vervollständigen
+- Lukas: Funktionale Anforderungen ergänzen
+- Lars: Anwendungsfälle leicht ergänzen, Dateien aufteilen
+- Timon: Inhaltsverzeichniss
+- Jonas: Klassen und Enumeration / Klassendiagramm
+
+
+== Aufgaben bis zum 21.11.2020
+- Packages (Komponenten des Projekts) an Teammitglieder verteilen
+- Prototypen der Packages entwickeln
+- Grobentwurf des Projekts
+
