@@ -36,7 +36,8 @@ __Teilnehmer:__
 
 
 == Aufgaben bis zum 21.11.2020
+- Anpassung Analysemodell
 - Packages (Komponenten des Projekts) an Teammitglieder verteilen
-- Prototypen der Packages entwickeln
+- Prototypen der Packages beginnen
 - Grobentwurf des Projekts
 
