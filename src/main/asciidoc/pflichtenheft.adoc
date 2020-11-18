@@ -1,3 +1,4 @@
+// suppress inspection "LanguageDetectionInspection" for whole file
 = Pflichtenheft
 :project_name: Projektname
 == __{project_name}__
@@ -46,7 +47,19 @@ Das Kontextdiagramm zeigt das geplante Software-System in seiner Umgebung. Zur U
 === Top-Level-Architektur
 Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm.
 
-include::Anwendungsfaelle.adoc[]
+== Anwendungsfälle
+
+=== Akteure
+
+include::../asciidoc/pflichtenheft/Akteure.adoc[]
+
+=== Überblick Anwendungsfalldiagramm
+
+include::../asciidoc/pflichtenheft/Anwendungsfalldiagramm.adoc[]
+
+=== Anwendungsfallbeschreibungen
+
+include::../asciidoc/pflichtenheft/Anwendungsfallbeschreibungen.adoc[]
 
 == Funktionale Anforderungen
 
