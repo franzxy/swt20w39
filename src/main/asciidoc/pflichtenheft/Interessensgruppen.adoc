@@ -1,3 +1,5 @@
+Dies ist eine Tabelle aller Personen oder Personengruppen (natürlich oder juristisch), die einen Einfluss auf die Anforderungen des Systems haben. Den einzelnen Einträgen wird eine Priorität zugewiesen (was eine Entscheidung bei Interessenskonflikten vereinfachen soll) und deren Ziele benannt. 
+
 [options="header"]
 |===
 | Name | Priorität (1..5) | Beschreibung | Ziele
