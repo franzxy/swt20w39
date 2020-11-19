@@ -45,15 +45,8 @@ include::../asciidoc/pflichtenheft/Aufgabenstellung_und_Zielsetzung.adoc[]
 include::../asciidoc/pflichtenheft/Produktnutzung.adoc[]
 
 == Interessensgruppen
-[options="header"]
-|===
-| Name | Priorität (1..5) | Beschreibung | Ziele
-| Ärztehaus | 5 | Auftraggeber | Automatisierter Verkauf von Medikamenten, Gemeinsames Lager von Apotheke und Praxen, Mehr Geld verdienen
-| Kunden | 4 | Primärer Nutzer | Medikamente kaufen / geliefert bekommen, Gutes User Experience
-| Administratoren | 2 | Verwaltung des Computersystems | Möglichkeit, sämtliche Daten im System zu Überprüfen, Prozesse Überwachen und evtl. verändern
-| Programmierer | 3 | Wir |Entwicklung und Instandhaltung der Software, Gut erweiterbare Software, Geringer Instandhaltungsaufwand, Gute Debugging-Möglichkeiten
-| Ärzte / Praxen | 3 | An das Ärztehaus angrenzende Praxen | Zugriff auf Lager
-|===
+
+include::../asciidoc/pflichtenheft/Interessensgruppen.adoc[]
 
 == Systemgrenze und Top-Level-Architektur
 
