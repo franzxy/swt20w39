@@ -1,4 +1,4 @@
-== Funktionale Anforderungen
+
 In diesem Abschnitt werden die funktionellen Anforderungen des Systems aufgelistet. Die Tabelle enthält:
 
 * Eine eindeutige Kennung der Anforderung (ID), die während des gesamten Projekts zur Referenzierung verwendet werden kann
@@ -16,7 +16,7 @@ Anmerkung: Die funktionalen Anforderungen werden verwendet, um darzustellen, was
 |ID
 |Version
 |Name
-|Description
+|Beschreibung
 
 |01
 |v0.1
