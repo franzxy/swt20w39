@@ -95,15 +95,12 @@ include::UI_Prototyp.adoc[]
 === Überblick: Klassendiagramm
 UML-Analyseklassendiagramm
 
+include::ÜberblickKlassendiagramm.drawio[]
+
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
 
-// See http://asciidoctor.org/docs/user-manual/#tables
-[options="header"]
-|===
-|Klasse/Enumeration |Beschreibung |
-|…                  |…            |
-|===
+include::Klassen_und_Enumerationen.adoc[]
 
 == Akzeptanztestfälle
 
