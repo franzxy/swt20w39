@@ -20,15 +20,15 @@
 
 == Zusammenfassung
 
-include::Zusammenfassung.adoc[]
+include::../asciidoc/pflichtenheft/Zusammenfassung.adoc[]
 
 == Aufgabenstellung und Zielsetzung
 
-include::Aufgabenstellung_und_Zielsetzung.adoc[]
+include::../asciidoc/pflichtenheft/Aufgabenstellung_und_Zielsetzung.adoc[]
 
 == Produktnutzung
 
-include::Produktnutzung.adoc[]
+include::../asciidoc/pflichtenheft/Produktnutzung.adoc[]
 
 == Interessensgruppen
 [options="header"]
