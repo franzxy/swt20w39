@@ -1,4 +1,3 @@
-== Akzeptanzfälle
 
 Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Diese dienen dazu die Anwendung ausführlich auf Fehler zu Testen. Die Tests basieren auf den Sequenzdiagrammen, sowie den Anwendungsfällen. In folgender Tabelle sind Abnahmetests aufgelistet, die die Anwendung durchlaufen muss, um den Kunden zufrieden zu stellen und den Vertrag zu erfüllen.
 
