@@ -1,0 +1,11 @@
+Dieser Bereich gibt einen überblick darüber wie das Programm schlussendlich genutzt werden soll und unter welchen Bedingungen.
+
+Das System soll für eine Apotheke genutzt werden um ihre Produkte zu verkaufen. Die Software soll auf einem Server laufen und ist über das Internet (via Browser) zu erreichen.
+
+Das System soll erreichbar und visuell optimiert sein für folgende Browser:
+
+Mozilla Firefox, Version 55.0.3+
+
+Google Chrome, Version 61.0.3163+
+
+Die Hauptnutzer des Programms sind die Mitarbeiter der Apotheke, welche typische Webseitennavigation beherrschen, wie auch Ärzte und ihre vertrauenswürdigen Schwestern, der Chef, Selbstbedienungskundschaft und registrierte Kunden bei sich daheim.

@@ -1,0 +1,14 @@
+Akteure sind Benutzer des Systems sowie von angrenzenden Systemen die auf unser System zugreifen.
+Die folgende Tabelle fasst alle Akteure zusammen und gibt zu jedem eine kurze Beschreibung.
+
+[options="header"]
+|===
+|Name |Beschreibung
+|Boss  | verantwortlich für die Verwaltung des Systems sowie seine Angestellten
+|Angestellte | verantwortlich für den Verkauf sowie die Nachbestellung
+|Praxis | können Waren direkt aus dem Lager holen
+|Registrierte Nutzer | können Waren aus dem Online Shop kaufen
+|Nicht-registrierte Nutzer | können sich im Online Shop umschauen, aber nichts zum Warenkorb hinzufügen
+|Kunden | können Artikel vor Ort kaufen
+|eingeschränkte Kunden | nach einmaliger Registrierung können eingeschränkte Kunden Artikel zur Lieferung bestellen
+|===

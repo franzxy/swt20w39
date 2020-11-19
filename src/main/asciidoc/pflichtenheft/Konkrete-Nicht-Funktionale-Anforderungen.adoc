@@ -1,0 +1,24 @@
+
+:desired-uptime: 99,5%
+
+[options="header", cols="2h, 1, 3, 12"]
+|===
+|ID
+|Version
+|Name
+|Beschreibung
+
+|[[NF0010]]<<NF0010>>
+|v0.1
+|Erreichbarkeit - 
+Betriebszeit
+a|
+Das System soll eine Betriebszeit von **{desired-uptime}**  erreichen.
+
+|[[NF0020]]<<NF0020>>
+|v0.1
+|Sicherheit - Passwordspeicherung
+a|
+Passwörter von Benutzern sollen nur als "hash-values" gespeichert werden um Diebstahl zu verhindern.
+
+|===

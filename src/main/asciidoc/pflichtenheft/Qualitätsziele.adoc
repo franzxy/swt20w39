@@ -1,0 +1,17 @@
+
+Die folgende Tabelle zeigt die Qualitätsanforderungen welche vollfüllt werden müssen und zu welchem Umfang.
+Die erste Spalte listet die Qualitätsanforderungen auf, worauf hin in den folgenden mit einem "x" markiert die höhe der Priorotät ist.
+Die gewählte Priorität muss beachtet werden in der Formulierung der Konkrete Nicht-Funktionale Anforderungen.
+
+
+1 = nicht wichtig ..
+5 = sehr wichtig
+[options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
+|===
+|Qualitätsanforderung   | 1 | 2 | 3 | 4 | 5
+|Wartbarkeit            |   |   |   | x |
+|Benutzbarkeit          |   |   | x |   |
+|Sicherheit             |   | x |   |   |
+|===
+
+
