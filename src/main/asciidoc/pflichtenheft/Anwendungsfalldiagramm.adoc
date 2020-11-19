@@ -1,0 +1,5 @@
+:figure-caption!:
+
+[#img-Anwendungsfalldiagramm]
+.Anwendungsfalldiagramm
+image::./../../asciidoc/models/design/Anwendungsfalldiagramm.png[Anwendugsfalldiagramm]

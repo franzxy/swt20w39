@@ -1,0 +1,3 @@
+Dieses Dokument ist das Pflichtenheft für eine neue Webapp der Apotheke des Unterbrunner Ärztehauses. Es stellt eine Grundlage zur Entwicklung dar und füht detailliert die Anforderungen des Kunden auf.
+
+Vor allem soll ein agiles Dokument geschaffen werden, welches auch im Laufe der Entwicklung an die Kundenwünsche anpasst werden kann. Dies bezieht sich besonders auf das UI und den technischen Aufbau der Software.
