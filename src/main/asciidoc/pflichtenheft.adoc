@@ -42,7 +42,7 @@ include::../asciidoc/pflichtenheft/Aufgabenstellung_und_Zielsetzung.adoc[]
 
 == Produktnutzung
 
-include::../pflichtenheft/Produktnutzung.adoc[]
+include::../asciidoc/pflichtenheft/Produktnutzung.adoc[]
 
 == Interessensgruppen
 
