@@ -34,7 +34,7 @@
 
 == Zusammenfassung
 
-include::../asciidoc/pflichtenheft/Zusammenfassung.adoc[]
+include::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/pflichtenheft/Zusammenfassung.adoc[]
 
 == Aufgabenstellung und Zielsetzung
 
@@ -80,27 +80,27 @@ include::../asciidoc/pflichtenheft/Funktionale_Anforderungen.adoc[]
 
 === Qualitätsziele
 
-include::Qualitätsziele.adoc[]
+include::../asciidoc/pflichtenheft/Qualitätsziele.adoc[]
 
 === Konkrete Nicht-Funktionale Anforderungen
 
-include::Konkrete-Nicht-Funktionale-Anforderungen.adoc[]
+include::../asciidoc/pflichtenheft/Konkrete-Nicht-Funktionale-Anforderungen.adoc[]
 
 == UI Prototyp
 
-include::UI_Prototyp.adoc[]
+include::../asciidoc/pflichtenheft/UI_Prototyp.adoc[]
 
 == Datenmodell
 
 === Überblick: Klassendiagramm
 UML-Analyseklassendiagramm
 
-include::ÜberblickKlassendiagramm.svg[]
+include::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/ÜberblickKlassendiagramm.svg[]
 
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
 
-include::Klassen_und_Enumerationen.adoc[]
+include::../asciidoc/pflichtenheft/Klassen_und_Enumerationen.adoc[]
 
 == Akzeptanztestfälle
 
