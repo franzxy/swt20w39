@@ -52,7 +52,7 @@ include::../asciidoc/pflichtenheft/Interessensgruppen.adoc[]
 
 === Kontextdiagramm
 
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Kontext.PNG[]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Kontext.png[]
 
 === Top-Level-Architektur
 
