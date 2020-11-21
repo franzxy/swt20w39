@@ -7,7 +7,7 @@ Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Dies
 
 [cols="1h, 4"]
 |===
-|ID            |01
+|ID            |[[AF01]]<<AF01>>
 |Use Case      |..
 |{Pre}        a|Existierender Nutzer im System.
 |{Event}      a|Ein nicht authentifizierter Benutzer meldet sich mit seinen anmeldedaten an und clickt auf login.
@@ -24,7 +24,7 @@ Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Dies
 
 [cols="1h, 4"]
 |===
-|ID            |02
+|ID            |[[AF02]]<<AF02>>
 |Use Case      |..
 |{Pre}        a|Ein authentifizierter Benutzer benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "abmelden".
@@ -35,7 +35,7 @@ Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Dies
 
 [cols="1h, 4"]
 |===
-|ID            |03
+|ID            |[[AF03]]<<AF03>>
 |Use Case      |..
 |{Pre}        a|Ein nicht authentifizierter Benutzer benutzt das System.
 |{Event}      a|Der nicht angemeldete Benutzer clickt auf "Registrieren" in der Navigationszeile und gibt folgende Informationen an:
@@ -53,7 +53,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |04
+|ID            |[[AF04]]<<AF04>>
 |Use Case      |..
 |{Pre}        a|Ein nicht authentifizierter Nutzer benutzt das System.
 |{Event}      a|Der nicht angemeldete Benutzer clickt auf "Registrieren" in der Navigationszeile und gibt folgende Informationen an:
@@ -68,7 +68,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |05
+|ID            |[[AF05]]<<AF05>>
 |Use Case      |..
 |{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "hinzufügen" im Kontext eines Medikaments.
@@ -78,7 +78,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |06
+|ID            |[[AF06]]<<AF06>>
 |Use Case      |..
 |{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Pay" bzw. "Deliver". Die liste des "Cart" ist leer.
@@ -87,7 +87,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |07
+|ID            |[[AF07]]<<AF07>>
 |Use Case      |..
 |{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf eines der Filter-Kriterien.
@@ -96,7 +96,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |08
+|ID            |[[AF08]]<<AF08>>
 |Use Case      |
 |{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Kasse" und scannt das Medikament ein.
@@ -105,7 +105,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |09
+|ID            |[[AF09]]<<AF09>>
 |Use Case      |..
 |{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Kasse" und scannt Medikamente ein. Anschließend clickt er auf "pay".
@@ -114,7 +114,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |10
+|ID            |[[AF10]]<<AF10>>
 |Use Case      |..
 |{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Kasse" und scannt Medikamente ein. Anschließend clickt er auf "pay".
@@ -123,7 +123,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |11
+|ID            |[[AF11]]<<AF11>>
 |Use Case      |..
 |{Pre}        a|Der Benutzer "Chef" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "User".
@@ -132,7 +132,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 
 [cols="1h, 4"]
 |===
-|ID            |12
+|ID            |[[AF12]]<<AF12>>
 |Use Case      |..
 |{Pre}        a|Der Benutzer "Chef" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Finanzen".
