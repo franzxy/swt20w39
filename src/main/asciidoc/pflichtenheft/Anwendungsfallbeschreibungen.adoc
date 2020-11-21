@@ -7,6 +7,7 @@ Bei komplexeren Fällen ist auch noch ein Sequenzdiagramm hinterlegt.
 [cols="1h, 3"]
 [[UC0010]]
 |===
+|ID                         |**<<UC0010>>**
 |Name                       |Login/Logout
 |Beschreibung                |Nutzer kann sich einloggen um erweiterte Möglichkeiten im Onlineshop zu bekommen.
 Ausloggen macht das rückgängig.
@@ -31,12 +32,17 @@ _Logout_:
 1. Nutzer drückt auf "Ausloggen"
 2. Nutzer ist ausgeloggt und wieder auf der Startseite
 
+
+|Voraussetzungen                 |-
+|Funktionale Anforderungen    |<<01>>
 |===
 
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0020]]
 |===
+|ID                         |**<<UC0020>>**
 |Name                       |registrieren
 |Beschreibung                |nicht-registrierter Nutzer kann sich einen Account erstellen
 |Akteure                     |nicht-registrierte Nutzer
@@ -55,7 +61,9 @@ _Logout_:
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0030]]
 |===
+|ID                         |**<<UC0030>>**
 |Name                       |Katalog anschauen
 |Beschreibung                |Jeder Besucher des Onlineshops soll in der Lage sein den Katalog der Apotheke und damit alle angebotenen Produkte anzuschauen
 |Akteure                     |jeder
@@ -71,7 +79,9 @@ image::./../../asciidoc/models/design/Katalog_anschauen.png[Sequenzdiagramm Kata
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0040]]
 |===
+|ID                         |**<<UC0040>>**
 |Name                       |zum Warenkorb hinzufügen
 |Beschreibung                |das gewünschte Produkt in gewünschter Menge zum Warenkorb hinzufügen
 |Akteure                     |registrierte Nutzer, Angestellte, Praxis, eingeschränkte Kunden, Kunden
@@ -93,7 +103,9 @@ image::./../../asciidoc/models/design/zum_Warenkorb_hinzufuegen.png[Sequenzdiagr
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0050]]
 |===
+|ID                         |**<<UC0050>>**
 |Name                       |Warenkorb kaufen
 |Beschreibung                |Nutzer kauft die ausgewählten Produkte, woraufhin der Warenkorb geleert wird
 |Akteure                     |registrierte Nutzer, Angestellte, Praxis, eingeschränkte Kunden, Kunden
@@ -113,7 +125,9 @@ image::./../../asciidoc/models/design/Warenkorb_kaufen.png[Sequenzdiagramm Waren
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0060]]
 |===
+|ID                         |**<<UC0060>>**
 |Name                       |Kundenliste anschauen/bearbeiten
 |Beschreibung                |der Boss sowie die Angestellten können die Kundenliste einsehen und Kunden mit bestimmten Eigenschaften austatten
 |Akteure                     |Boss, Angestellte
@@ -129,7 +143,9 @@ image::./../../asciidoc/models/design/Warenkorb_kaufen.png[Sequenzdiagramm Waren
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0070]]
 |===
+|ID                         |**<<UC0070>>**
 |Name                       |Angestellte verwalten
 |Beschreibung                |der Boss kann neue Angestellte hinzufügen, Angestellte feuern und Gehalt anpassen
 |Akteure                     |Boss
@@ -163,7 +179,9 @@ _Gehalt anpassen_:
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0080]]
 |===
+|ID                         |**<<UC0080>>**
 |Name                       |Account erstellen
 |Beschreibung                |der Boss sowie die Angestellten können neue Accounts erstellen
 |Akteure                     |Boss, Angestellte
@@ -180,7 +198,9 @@ _Gehalt anpassen_:
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0090]]
 |===
+|ID                         |**<<UC0090>>**
 |Name                       |Vorrat anschauen
 |Beschreibung                |der Boss kann den Bestand der Apotheke einsehen
 |Akteure                     |Boss
@@ -214,7 +234,9 @@ image::./../../asciidoc/models/design/Produkt_nachbestellen.png[Sequenzdiagramm 
 {nbsp} +
 
 [cols="1h, 3"]
+[[UC0100]]
 |===
+|ID                         |**<<UC0100>>**
 |Name                       |Bestellungen anschauen
 |Beschreibung                |der Boss kann alle abgeschlossenen Bestellungen einsehen
 |Akteure                     |Boss
