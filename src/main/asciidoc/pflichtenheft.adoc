@@ -611,7 +611,7 @@ Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Dies
 [cols="1h, 4"]
 |===
 |ID            |[[AT01]]<<AT01>>
-|Use Case      |..
+|Use Case      |<<UC0010>>
 |{Pre}        a|Existierender Nutzer im System.
 |{Event}      a|Ein nicht authentifizierter Benutzer meldet sich mit seinen anmeldedaten an und clickt auf login.
 |{Result}     a|
@@ -628,7 +628,7 @@ Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Dies
 [cols="1h, 4"]
 |===
 |ID            |[[AT02]]<<AT02>>
-|Use Case      |..
+|Use Case      |<<UC0010>>
 |{Pre}        a|Ein authentifizierter Benutzer benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "abmelden".
 |{Result}     a|
@@ -639,7 +639,7 @@ Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Dies
 [cols="1h, 4"]
 |===
 |ID            |[[AT03]]<<AT03>>
-|Use Case      |..
+|Use Case      |<<UC0020>>
 |{Pre}        a|Ein nicht authentifizierter Benutzer benutzt das System.
 |{Event}      a|Der nicht angemeldete Benutzer clickt auf "Registrieren" in der Navigationszeile und gibt folgende Informationen an:
 - Name
@@ -657,7 +657,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 [cols="1h, 4"]
 |===
 |ID            |[[AT04]]<<AT04>>
-|Use Case      |..
+|Use Case      |<<UC0010>>
 |{Pre}        a|Ein nicht authentifizierter Nutzer benutzt das System.
 |{Event}      a|Der nicht angemeldete Benutzer clickt auf "Registrieren" in der Navigationszeile und gibt folgende Informationen an:
 - Name
@@ -672,7 +672,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 [cols="1h, 4"]
 |===
 |ID            |[[AT05]]<<AT05>>
-|Use Case      |..
+|Use Case      |<<UC0040>>
 |{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "hinzufügen" im Kontext eines Medikaments.
 |{Result}     a|Das Medikament erscheint im Kontext des "Cart" - Widgets und kann durch "pay" bezahlt werden. Wenn der Benutzer jedoch bewegungseingeschränkt ist kann es auch durch "deliver" bestellt werden, eine Bezahlung ist in beiden Fällen notwendig.
@@ -682,7 +682,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 [cols="1h, 4"]
 |===
 |ID            |[[AT06]]<<AT06>>
-|Use Case      |..
+|Use Case      |<<UC0050>>
 |{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Pay" bzw. "Deliver". Die liste des "Cart" ist leer.
 |{Result}     a|Eine Fehlermeldung erscheint, dass kein Medikament im Warenkorb befindlich ist.
@@ -691,7 +691,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 [cols="1h, 4"]
 |===
 |ID            |[[AT07]]<<AT07>>
-|Use Case      |..
+|Use Case      |<<UC0030>>
 |{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf eines der Filter-Kriterien.
 |{Result}     a|Das System zeigt nur Medikamente an deren Eigenschaften mit dem Filter übereinstimmen.
@@ -700,7 +700,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 [cols="1h, 4"]
 |===
 |ID            |[[AT08]]<<AT08>>
-|Use Case      |
+|Use Case      |<<UC0040>>
 |{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Kasse" und scannt das Medikament ein.
 |{Result}     a|Das Medikament erscheint auf der Liste.
@@ -709,7 +709,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 [cols="1h, 4"]
 |===
 |ID            |[[AT09]]<<AT09>>
-|Use Case      |..
+|Use Case      |<<UC0050>>
 |{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Kasse" und scannt Medikamente ein. Anschließend clickt er auf "pay".
 |{Result}     a|Eine Fehlermeldung erscheint das keine Bezahlmethode ausgewählt wurde.
@@ -718,7 +718,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 [cols="1h, 4"]
 |===
 |ID            |[[AT10]]<<AT10>>
-|Use Case      |..
+|Use Case      |<<UC0050>>
 |{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
 |{Event}      a|Der Benutzer clickt auf "Kasse" und scannt Medikamente ein. Anschließend clickt er auf "pay".
 |{Result}     a|Der bezahlte Betrag wird an das Kassenmanagement übergeben. Das Inventar wird dem Verkauf entsprechend verändert. Die Liste im Interface wird geleert.
@@ -727,23 +727,56 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 [cols="1h, 4"]
 |===
 |ID            |[[AT11]]<<AT11>>
-|Use Case      |..
-|{Pre}        a|Der Benutzer "Chef" benutzt das System.
+|Use Case      |<<UC0060>>
+|{Pre}        a|Der Benutzer "Boss" bzw. Mitarbeiter benutzen das System.
 |{Event}      a|Der Benutzer clickt auf "User".
-|{Result}     a|Das System listet alle registrierten Benutzer auf, nach Gruppen geordnet.
+|{Result}     a|Das System listet alle registrierten Kunden auf, nach Gruppen geordnet.
 |===
 
 [cols="1h, 4"]
 |===
 |ID            |[[AT12]]<<AT12>>
-|Use Case      |..
-|{Pre}        a|Der Benutzer "Chef" benutzt das System.
-|{Event}      a|Der Benutzer clickt auf "Finanzen".
+|Use Case      |<<UC0110>>
+|{Pre}        a|Der Benutzer "Boss" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Bestellungen".
 |{Result}     a|Das System erstellt eine Finanzübersicht in der alle Transaktionen von der Kasse dargestellt werden.
 |===
 
+[cols="1h, 4"]
+|===
+|ID            |[[AT13]]<<AT13>>
+|Use Case      |<<UC0100>>
+|{Pre}        a|Der Benutzer "Boss" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Nachbestellen".
+|{Result}     a|Das System bietet die möglichkeit Medikamente über die Lagerkapazität hinaus nachzubestellen.
+|===
 
+[cols="1h, 4"]
+|===
+|ID            |[[AT14]]<<AT14>>
+|Use Case      |<<UC0090>>
+|{Pre}        a|Der Benutzer "Boss" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Vorrat".
+|{Result}     a|Das System erstellt eine vereinfachte Übersicht die Anzahl aller vorhandenen und nicht vorhandenen Medikamente.
+|===
 
+[cols="1h, 4"]
+|===
+|ID            |[[AT15]]<<AT15>>
+|Use Case      |<<UC0080>>
+|{Pre}        a|Der Benutzer "Boss" bzw. Mitarbeiter benutzen das System.
+|{Event}      a|Der Benutzer clickt auf "User".
+|{Result}     a|Das System bietet die Möglichkeit neue Kunden zu registrieren.
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT16]]<<AT16>>
+|Use Case      |<<UC0070>>
+|{Pre}        a|Der Benutzer "Boss" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Mitarbeiter".
+|{Result}     a|Das System bietet die möglichkeit Mitarbeiter zu feuern und einzustellen.
+|===
 == Glossar
 
 include::../asciidoc/pflichtenheft/Glossar.adoc[]
