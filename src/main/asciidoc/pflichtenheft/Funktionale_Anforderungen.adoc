@@ -18,7 +18,7 @@ Anmerkung: Die funktionalen Anforderungen werden verwendet, um darzustellen, was
 |Name
 |Beschreibung
 
-|01
+|[[F01]]<<F01>>
 |v0.1
 |Authentisieren
 a|
@@ -27,7 +27,7 @@ Benutzer werden in Gruppen unterteilt, zum Beispiel: Online Kunden, Mitarbeiter,
 *	Benutzername
 *	Passwort
 
-|02
+|[[F02]]<<F02>>
 |v0.1
 |Registrierung
 a|
@@ -46,7 +46,7 @@ Mitarbeiter werden vom Chef bzw. Administrator erstellt, gelöscht und editiert.
 *	Name
 *	Anschrift
 *	Gehalt
-|03
+|[[F03]]<<F03>>
 |v0.1
 |Registrierung Validieren
 a|
@@ -56,38 +56,38 @@ Es wird überprüft ob:
 *	Der Benutzer ist mit den gegebenen expliziten Daten noch nicht in der Datenbank
 
 
-|04
+|[[F04]]<<F04>>
 |v0.1
 |Inventur
 a|
 Alle Arzneimittel werden beim Eingang registriert und in einen Lagerbestand eingetragen.
 Wenn eines Verkauft wird, wird dies ebenfalls registriert
 
-|05
+|[[F05]]<<F05>>
 |v0.1
 |Nachbestellung
 a|
 Das System erkennt, wenn ein Produkt nicht mehr im Lager vorhanden ist und bestellt automatisch nach.
 
-|06
+|[[F06]]<<F06>>
 |v0.1
 |Ablaufdatumsverarbeitung
 a|
 Wenn ein Medikament ein Monat vor dem Ablaufdatum ist, werden die Mitarbeiter benachrichtigt und aufgefordert diese Zeitnah zu entsorgen.
 
-|07
+|[[F07]]<<F07>>
 |v0.1
 |Katalog
 a|
 Das System stellt ein Lesezugriff auf die Medikamenten-Datenbank für Online-Kunden zur Verfügung.  Mitarbeiter, Ärzte und der Chef haben entsprechend einen Änderungszugriff.
 
-|08
+|[[F08]]<<F08>>
 |v0.1
 |Kasse
 a|
 Eine integrierte Kasse Verwaltet Bestellungen, Gehaltsauszahlungen und Verkäufe, Miete und Strom, allgemeine Einnahmen und Ausgaben, sowie Abrechnung mit den jeweiligen Praxen. Desweiteren können Rechnungen und Berichte erstellt und archiviert werden
 
-|09
+|[[F09]]<<F09>>
 |v0.1
 |Produktdetails
 a|
@@ -102,26 +102,26 @@ Produkte sollten folgende Attribute haben:
 *	Preis
 *	Rezeptpflichtig Ja/Nein
 
-|10
+|[[F10]]<<F10>>
 |v0.1
 |Warenkorb
 a|
 Online registrierte und authentifizierte Nutzer haben die Möglichkeit Produkte in einen Warenkorb zu legen und diese zu bestellen. Ein nicht eingeloggter Benutzer bekommt eine Nachricht sich anzumelden bzw. sich zu registrieren.
 
-|11
+|[[F11]]<<F11>>
 |v0.1
 |Warenkorb einsehen
 a|
 Im Warenkorb wird die Vollständige Produktbezeichnung, Preis und evtl. Bild angezeigt. Ebenso werden der Gesamtpreis und die Lieferadresse zur manuellen Validierung angezeigt. (nur für angemeldete Benutzer)
 
-|12
+|[[F12]]<<F12>>
 |v0.1
 |Bezahlung
 a|
 Nachdem man den Warenkorb eingesehen hat wird man zu Bezahlung weitergeleitet.
 
 
-|13
+|[[F13]]<<F13>>
 |v0.1
 |Administrator Konto
 a|
@@ -135,7 +135,7 @@ Das Konto wird beim Initialisieren des Systems festgelegt. Die Möglichkeiten si
 *	Übersicht vom Lagerbestand
 *	Übersicht aller Bestellungen und Verkäufe
 
-|14
+|[[F14]]<<F14>>
 |v0.1
 |Kunden Konto
 a|
@@ -147,7 +147,7 @@ Das Konto wird beim Initialisieren des Systems festgelegt. Die Möglichkeiten si
 *   Kunden können Account selbst löschen
 *   Haben einen Warenkorb
 
-|15
+|[[F15]]<<F15>>
 |v0.1
 |Mitarbeiter Konto
 a|
