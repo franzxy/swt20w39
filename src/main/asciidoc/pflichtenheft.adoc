@@ -439,7 +439,148 @@ include::../asciidoc/pflichtenheft/Klassen_und_Enumerationen.adoc[]
 
 == Akzeptanztestfälle
 
-include::../asciidoc/pflichtenheft/Akzeptanztestfaelle.adoc[]
+
+Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Diese dienen dazu die Anwendung ausführlich auf Fehler zu Testen. Die Tests basieren auf den Sequenzdiagrammen, sowie den Anwendungsfällen. In folgender Tabelle sind Abnahmetests aufgelistet, die die Anwendung durchlaufen muss, um den Kunden zufrieden zu stellen und den Vertrag zu erfüllen.
+
+:Pre: Vorbedingung(en)
+:Event: Ereignis
+:Result: Erwartetes Resultat
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT01]]<<AT01>>
+|Use Case      |..
+|{Pre}        a|Existierender Nutzer im System.
+|{Event}      a|Ein nicht authentifizierter Benutzer meldet sich mit seinen anmeldedaten an und clickt auf login.
+|{Result}     a|
+- Der Benutzer ist nun unter seinem Benutzerkonto angemeldet
+- Er wird auf die Startseite weitergeleitet
+- Er hat erweiterte möglichkeiten je nach Rolle, z.B. Kunden: 
+** haben einen warenkorb
+** können bestellen
+- Mitarbeiter:
+** können Kunden hinzufügen und entfernen
+** haben erweiterte einsicht in Inventar und Bestellungen
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT02]]<<AT02>>
+|Use Case      |..
+|{Pre}        a|Ein authentifizierter Benutzer benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "abmelden".
+|{Result}     a|
+- Der Benutzer wird abgemeldet
+- Er verliert die Rechte die ihm vorher als eingeloggter Benutzer zur Verfügung standen
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT03]]<<AT03>>
+|Use Case      |..
+|{Pre}        a|Ein nicht authentifizierter Benutzer benutzt das System.
+|{Event}      a|Der nicht angemeldete Benutzer clickt auf "Registrieren" in der Navigationszeile und gibt folgende Informationen an:
+- Name
+- E-Mail
+- Adresse
+- Passwort
+- Bewegungseingeschränkt ja/nein
+Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
+|{Result}     a|
+- Ein neuer Benutzer mit den gegebenen Daten wird im System erstellt
+- Es ist möglich sich mit diesen Daten im System zu authentifizieren
+- Der nicht authentifizierte Nutzer wird zur Startseite weitergeleitet wo er sich anmelden kann
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT04]]<<AT04>>
+|Use Case      |..
+|{Pre}        a|Ein nicht authentifizierter Nutzer benutzt das System.
+|{Event}      a|Der nicht angemeldete Benutzer clickt auf "Registrieren" in der Navigationszeile und gibt folgende Informationen an:
+- Name
+- E-Mail (bereits im System registriert)
+- Adresse
+- Passwort
+- Bewegungseingeschränkt ja/nein
+Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
+|{Result}     a|Der Benutzer bekommt die Fehlermeldung "Benutzer existiert bereits".
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT05]]<<AT05>>
+|Use Case      |..
+|{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "hinzufügen" im Kontext eines Medikaments.
+|{Result}     a|Das Medikament erscheint im Kontext des "Cart" - Widgets und kann durch "pay" bezahlt werden. Wenn der Benutzer jedoch bewegungseingeschränkt ist kann es auch durch "deliver" bestellt werden, eine Bezahlung ist in beiden Fällen notwendig.
+
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT06]]<<AT06>>
+|Use Case      |..
+|{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Pay" bzw. "Deliver". Die liste des "Cart" ist leer.
+|{Result}     a|Eine Fehlermeldung erscheint, dass kein Medikament im Warenkorb befindlich ist.
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT07]]<<AT07>>
+|Use Case      |..
+|{Pre}        a|Ein Benutzer der Gruppe "Kunde" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf eines der Filter-Kriterien.
+|{Result}     a|Das System zeigt nur Medikamente an deren Eigenschaften mit dem Filter übereinstimmen.
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT08]]<<AT08>>
+|Use Case      |
+|{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Kasse" und scannt das Medikament ein.
+|{Result}     a|Das Medikament erscheint auf der Liste.
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT09]]<<AT09>>
+|Use Case      |..
+|{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Kasse" und scannt Medikamente ein. Anschließend clickt er auf "pay".
+|{Result}     a|Eine Fehlermeldung erscheint das keine Bezahlmethode ausgewählt wurde.
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT10]]<<AT10>>
+|Use Case      |..
+|{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Kasse" und scannt Medikamente ein. Anschließend clickt er auf "pay".
+|{Result}     a|Der bezahlte Betrag wird an das Kassenmanagement übergeben. Das Inventar wird dem Verkauf entsprechend verändert. Die Liste im Interface wird geleert.
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT11]]<<AT11>>
+|Use Case      |..
+|{Pre}        a|Der Benutzer "Chef" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "User".
+|{Result}     a|Das System listet alle registrierten Benutzer auf, nach Gruppen geordnet.
+|===
+
+[cols="1h, 4"]
+|===
+|ID            |[[AT12]]<<AT12>>
+|Use Case      |..
+|{Pre}        a|Der Benutzer "Chef" benutzt das System.
+|{Event}      a|Der Benutzer clickt auf "Finanzen".
+|{Result}     a|Das System erstellt eine Finanzübersicht in der alle Transaktionen von der Kasse dargestellt werden.
+|===
+
+
 
 == Glossar
 
