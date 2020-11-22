@@ -34,11 +34,31 @@
 
 == Zusammenfassung
 
-include::../asciidoc/pflichtenheft/Zusammenfassung.adoc[]
+Dieses Dokument ist das Pflichtenheft für eine neue Webapp der Apotheke des Unterbrunner Ärztehauses. Es stellt eine Grundlage zur Entwicklung dar und füht detailliert die Anforderungen des Kunden auf.
+
+Vor allem soll ein agiles Dokument geschaffen werden, welches auch im Laufe der Entwicklung an die Kundenwünsche anpasst werden kann. Dies bezieht sich besonders auf das UI und den technischen Aufbau der Software.
 
 == Aufgabenstellung und Zielsetzung
 
-include::../asciidoc/pflichtenheft/Aufgabenstellung_und_Zielsetzung.adoc[]
+In so schwierigen Zeiten wird es immer wichtiger, dass essenzielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. Deshalb soll eine neue Webapp für die Apotheke des Unterbrunner Ärztehaus entstehen, welche unter anderem die Möglichkeit der Lieferung für bewegungseingeschränkte oder gefährdete Personen ermöglicht.
+
+Die Apotheke hat mehrere Benutzer mit verschiedenen Rechten. Jeder Besucher kann das Inventar einsehen, ohne sich anzumelden, um bequem den Bestand prüfen zu können. Im Inventar wird unterschieden zwischen Medikamenten und Zutaten für das Labor. Außerdem hat jeder Artikel einen Bestand, eine Nachbestellmenge und eine Information, ob der Artikel rezeptpflichtig ist.
+
+Nach einer kurzen Anmeldung können Nutzer auch Waren in die Apotheke bestellen lassen, bewegungseingeschränkte Nutzer können außerdem diese Waren zu sich nach Hause liefern lassen. Arzt Praxen bekommen ihren eigenen Account, welcher es einer Praxis ermöglicht auf den Medikamentenschrank zuzugreifen. In der Apotheke selbst gibt es die Möglichkeit Kassenaccounts zu erstellen, um in Zukunft mehrere Selbstbedienerkassen zu unterstützen. Mitarbeiter können neben dem abrechnen von rezeptpflichtigen Medikamenten auch eigene hinzufügen, welche im Labor hergestellt wurden. Zudem können Mitarbeiter sich Urlaub nehmen. Der Boss hat die Möglichkeit Artikel manuell nachzubestellen, Nutzer zu erstellen, Mitarbeiter einzustellen, zu feuern und deren Gehalt anzupassen, außerdem kann er die Finanzen der Apotheke verwalten.
+
+Wenn eine Bestellung ausgelöst wurde, werden Zeitpunkt, Betrag, Artikel und zugehörige Menge, Kunde und eventuelle Rezept-Nummern gespeichert. Wenn der Vorgang abgeschlossen wurde, wird bei regulären Kunden abhängig von der Krankenkasse abgerechnet. Bei Praxen wird am Ende des Monats abgerechnet. Zudem werden die Gehälter der Mitarbeiter so verwaltet, genau wie die monatliche Abrechnung mit den Krankenkassen.
+
+Wenn eine Praxis eine Anfrage an das Labor schickt, wird eine offene Bestellung erzeugt, der im Labor tätige Mitarbeiter kann diese dann erfüllen, indem er die benötigten Materialien aus dem Inventar entfernt und daraufhin die Bestellung als abgeschlossen kennzeichnet.
+
+Auch die Inventarverwaltung soll erleichtert werden, daher wird wöchentlich eine Liste mit Medikamenten erstellt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist.
+
+Zwar können Nutzer sich frei Registrieren, mithilfe einer E-Mail-Adresse und eines Passworts, allerdings muss die Akkreditierung der Bewegungseinschränkung vor Ort geschehen. Das Erstellen von Kassen, Praxen und Mitarbeiter Accounts wurde erleichtert, damit nicht jeder erst einen Account manuell erstellen muss.
+
+Das Ziel der Anwendung ist es, sehr zuverlässig und langwierig betrieben werden zu können, weshalb eine Webapp eine gute Wahl darstellt. Zudem bietet die modualre Nutzer-Struktur die Möglichkeit weitere Account-Typen ohne viel Aufwand hinzuzufügen.
+
+Der Aufbau der Seite sollte additiv sein, also niemals dem Nutzer Funktionalität entziehen, wenn seine Freigabe steigt. Das heißt, dass der Boss mindestens genau so viele Funktionen wie der Mitarbeiter hat. Dies hilft zusätzlich bei der Inbetriebnahme des Systems, da Nutzer sich gegenseitig besser unterstützen können.
+
+Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige Bilder verzichtet werden und statt dessen auf korrekte Kontrast verhätnisse und gut skalierende Schrift geachtet werden.
 
 == Produktnutzung
 
@@ -132,7 +152,7 @@ _Logout_:
 
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<01>>
+|Funktionale Anforderungen    |<<F01>>
 |===
 
 {nbsp} +
@@ -155,7 +175,7 @@ _Logout_:
 . sonst: eine Fehler-Nachricht wird angezeigt
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<02>>, <<03>>
+|Funktionale Anforderungen    |<<F02>>, <<F03>>
 |===
 
 {nbsp} +
@@ -171,7 +191,7 @@ _Logout_:
 |Bedingungen            a|keine
 |Notwendige Schritte           a|Nutzer kommt auf die Webseite
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<04>>, <<07>>
+|Funktionale Anforderungen    |<<F04>>, <<F07>>
 |===
 
 [#img-Katalog_anschauen]
@@ -197,7 +217,7 @@ image::../asciidoc/models/design/Katalog_anschauen.png[Sequenzdiagramm Katalog a
 4. Nutzer klickt auf zum Warenkorb hinzufügen
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<10>>
+|Funktionale Anforderungen    |<<F10>>
 |===
 
 [#img-zum_Warenkorb_hinzufügen]
@@ -221,7 +241,7 @@ image::../asciidoc/models/design/zum_Warenkorb_hinzufuegen.png[Sequenzdiagramm z
 2. Nutzer drückt auf "Kaufen"
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<12>>
+|Funktionale Anforderungen    |<<F12>>
 |===
 
 [#img-Warenkorb_kaufen]
@@ -284,7 +304,7 @@ _Gehalt anpassen_:
 3. Boss drückt auf "aktualisieren"
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<15>>
+|Funktionale Anforderungen    |<<F15>>
 |===
 
 {nbsp} +
@@ -305,7 +325,7 @@ _Gehalt anpassen_:
 3. Vorgang abschließen durch "registrieren"
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<13>>, <<14>>, <<15>>
+|Funktionale Anforderungen    |<<F13>>, <<F14>>, <<F15>>
 |===
 
 {nbsp} +
@@ -321,7 +341,7 @@ _Gehalt anpassen_:
 |Bedingungen                a|Benutzer ist eingeloggt und hat Rolle "Boss"
 |Notwendige Schritte           a|Boss klickt auf "Vorrat"
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<04>>
+|Funktionale Anforderungen    |<<F04>>
 |===
 
 {nbsp} +
@@ -343,7 +363,7 @@ _Gehalt anpassen_:
 4. abschließen durch Klicken auf "Produkt bestellen"
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<04>>, <<05>>
+|Funktionale Anforderungen    |<<F04>>, <<F05>>
 |===
 
 [#img-Produkt_nachbestellen]
@@ -585,14 +605,42 @@ Passwörter von Benutzern sollen nur als "hash-values" gespeichert werden um Die
 
 == UI Prototyp
 
-include::../asciidoc/pflichtenheft/UI_Prototyp.adoc[]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/home.PNG[]
+Die Startseite bietet Einblick in das Inventar und die Möglichkeit sich anzumelden.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kunde.PNG[]
+Ein registrierter Kunde kann Artikel in die Apotheke bestellen lassen oder, mit der entsprechenden Berechtigung, nach Hause liefern lassen.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kunde_account.PNG[]
+Account Verwaltung für Kunden.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kasse.PNG[]
+Die Selbstbediener-Kasse, Mitarbeiter haben das gleiche Interface bei ihrer Kasse. Praxen sehen dieses Interface auch, es kann aber nur eine Praxis aktiv bestellen.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_account.PNG[]
+Mitarbeiter können Artikel hinzufügen.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_kunden.PNG[]
+Kunden können als bewegungseingeschränkt gekennzeichnet werden.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_account.PNG[]
+Mitarbeiter können ihren Account während des Arbeitsverhältnisses nicht löschen und haben die Möglichkeit Urlaub zu nehmen.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss.PNG[]
+Der Boss kann Artikel nachbestellen.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss_user.PNG[]
+Neue Selbstbedienerkassen, Praxen, Kunden und Mitarbeiter können erstellt, eingesehen und angepasst werden.
+
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss_finanzen.PNG[]
+Überblick über jegliche Finanzen.
 
 == Datenmodell
 
 === Überblick: Klassendiagramm
 UML-Analyseklassendiagramm
 
-include::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/ÜberblickKlassendiagramm.svg[]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/ÜberblickKlassendiagramm.png[]
 
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
