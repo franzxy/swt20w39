@@ -132,7 +132,7 @@ _Logout_:
 
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<01>>
+|Funktionale Anforderungen    |<<F01>>
 |===
 
 {nbsp} +
@@ -155,7 +155,7 @@ _Logout_:
 . sonst: eine Fehler-Nachricht wird angezeigt
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<02>>, <<03>>
+|Funktionale Anforderungen    |<<F02>>, <<F03>>
 |===
 
 {nbsp} +
@@ -171,7 +171,7 @@ _Logout_:
 |Bedingungen            a|keine
 |Notwendige Schritte           a|Nutzer kommt auf die Webseite
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<04>>, <<07>>
+|Funktionale Anforderungen    |<<F04>>, <<F07>>
 |===
 
 [#img-Katalog_anschauen]
@@ -197,7 +197,7 @@ image::../asciidoc/models/design/Katalog_anschauen.png[Sequenzdiagramm Katalog a
 4. Nutzer klickt auf zum Warenkorb hinzufügen
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<10>>
+|Funktionale Anforderungen    |<<F10>>
 |===
 
 [#img-zum_Warenkorb_hinzufügen]
@@ -221,7 +221,7 @@ image::../asciidoc/models/design/zum_Warenkorb_hinzufuegen.png[Sequenzdiagramm z
 2. Nutzer drückt auf "Kaufen"
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<12>>
+|Funktionale Anforderungen    |<<F12>>
 |===
 
 [#img-Warenkorb_kaufen]
@@ -284,7 +284,7 @@ _Gehalt anpassen_:
 3. Boss drückt auf "aktualisieren"
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<15>>
+|Funktionale Anforderungen    |<<F15>>
 |===
 
 {nbsp} +
@@ -305,7 +305,7 @@ _Gehalt anpassen_:
 3. Vorgang abschließen durch "registrieren"
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<13>>, <<14>>, <<15>>
+|Funktionale Anforderungen    |<<F13>>, <<F14>>, <<F15>>
 |===
 
 {nbsp} +
@@ -321,7 +321,7 @@ _Gehalt anpassen_:
 |Bedingungen                a|Benutzer ist eingeloggt und hat Rolle "Boss"
 |Notwendige Schritte           a|Boss klickt auf "Vorrat"
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<04>>
+|Funktionale Anforderungen    |<<F04>>
 |===
 
 {nbsp} +
@@ -343,7 +343,7 @@ _Gehalt anpassen_:
 4. abschließen durch Klicken auf "Produkt bestellen"
 
 |Voraussetzungen                 |-
-|Funktionale Anforderungen    |<<04>>, <<05>>
+|Funktionale Anforderungen    |<<F04>>, <<F05>>
 |===
 
 [#img-Produkt_nachbestellen]
