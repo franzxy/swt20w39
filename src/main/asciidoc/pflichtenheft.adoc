@@ -592,7 +592,7 @@ include::../asciidoc/pflichtenheft/UI_Prototyp.adoc[]
 === Überblick: Klassendiagramm
 UML-Analyseklassendiagramm
 
-include::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/ÜberblickKlassendiagramm.svg[]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/ÜberblickKlassendiagramm.png[]
 
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
