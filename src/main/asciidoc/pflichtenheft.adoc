@@ -94,7 +94,7 @@ Dies ist eine Tabelle aller Personen oder Personengruppen (natürlich oder juris
 
 [#img-Kontext]
 .Kontext
-image::../asciidoc/models/design/Kontext.png[Kontext]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/asciidoc/models/design/Kontext.png[Kontext]
 
 === Top-Level-Architektur
 
@@ -102,7 +102,7 @@ image::../asciidoc/models/design/Kontext.png[Kontext]
 
 [#img-Top-Level-Architektur]
 .Top-Level-Architektur
-image::./../../asciidoc/models/design/Top-Level-Architektur.png[Top-Level-Architektur]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Top-Level-Architektur.png[Top-Level-Architektur]
 
 == Anwendungsfälle
 
@@ -127,7 +127,7 @@ Die folgende Tabelle fasst alle Akteure zusammen und gibt zu jedem eine kurze Be
 
 [#img-Anwendungsfalldiagramm]
 .Anwendungsfalldiagramm
-image::../asciidoc/models/design/Anwendungsfalldiagramm.png[Anwendugsfalldiagramm]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Anwendungsfalldiagramm.png[Anwendugsfalldiagramm]
 
 === Anwendungsfallbeschreibungen
 
@@ -208,7 +208,7 @@ _Logout_:
 
 [#img-Katalog_anschauen]
 .Seqeunzdiagramm: Katalog anschauen
-image::../asciidoc/models/design/Katalog_anschauen.png[Sequenzdiagramm Katalog anschauen]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Katalog_anschauen.png[Sequenzdiagramm Katalog anschauen]
 
 {nbsp} +
 
@@ -234,7 +234,7 @@ image::../asciidoc/models/design/Katalog_anschauen.png[Sequenzdiagramm Katalog a
 
 [#img-zum_Warenkorb_hinzufügen]
 .Seqeunzdiagramm: zum Warenkorb hinzufügen
-image::../asciidoc/models/design/zum_Warenkorb_hinzufuegen.png[Sequenzdiagramm zum Warenkkorb hinzufügen]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/zum_Warenkorb_hinzufuegen.png[Sequenzdiagramm zum Warenkkorb hinzufügen]
 
 {nbsp} +
 
@@ -258,7 +258,7 @@ image::../asciidoc/models/design/zum_Warenkorb_hinzufuegen.png[Sequenzdiagramm z
 
 [#img-Warenkorb_kaufen]
 .Seqeunzdiagramm: Warenkorb kaufen
-image::../asciidoc/models/design/Warenkorb_kaufen.png[Sequenzdiagramm Warenkorb kaufen]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Warenkorb_kaufen.png[Sequenzdiagramm Warenkorb kaufen]
 
 {nbsp} +
 
@@ -380,7 +380,7 @@ _Gehalt anpassen_:
 
 [#img-Produkt_nachbestellen]
 .Seqeunzdiagramm: Produkt nachbestellen
-image::../asciidoc/models/design/Produkt_nachbestellen.png[Sequenzdiagramm Produkt nachbestellen]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Produkt_nachbestellen.png[Sequenzdiagramm Produkt nachbestellen]
 
 {nbsp} +
 
@@ -401,7 +401,7 @@ image::../asciidoc/models/design/Produkt_nachbestellen.png[Sequenzdiagramm Produ
 
 [#img-Bestellungen_anschauen]
 .Seqeunzdiagramm: Bestellungen anschauen
-image::../asciidoc/models/design/Bestellungen_anschauen.png[Sequenzdiagramm Bestellungen anschauen]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Bestellungen_anschauen.png[Sequenzdiagramm Bestellungen anschauen]
 
 == Funktionale Anforderungen
 
