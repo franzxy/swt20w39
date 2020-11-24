@@ -1,16 +1,16 @@
 // suppress inspection "LanguageDetectionInspection" for whole file
 = Pflichtenheft
-:project_name: Projektname
-== __{project_name}__
 
 [options="header"]
 |===
 | Version | Bearbeitungsdatum
 | 0.1     | 08.11.2020    
 | 0.5     | 15.11.2020    
+| 1.0     | 19.11.2020    
 |===
 
 == Inhaltsverzeichnis
+
 . link:#zusammenfassung[Zusammenfassung] +
 . link:#aufgabenstellung-und-zielsetzung[Aufgabenstellung und Zielsetzung] +
 . link:#interessensgruppen[Interessensgruppen] +
@@ -76,7 +76,17 @@ Die Hauptnutzer des Programms sind die Mitarbeiter der Apotheke, welche typische
 
 == Interessensgruppen
 
-include::../asciidoc/pflichtenheft/Interessensgruppen.adoc[]
+Dies ist eine Tabelle aller Personen oder Personengruppen (natürlich oder juristisch), die einen Einfluss auf die Anforderungen des Systems haben. Den einzelnen Einträgen wird eine Priorität zugewiesen (was eine Entscheidung bei Interessenskonflikten vereinfachen soll) und deren Ziele benannt. 
+
+[options="header"]
+|===
+| Name | Priorität (1..5) | Beschreibung | Ziele
+| Ärztehaus | 5 | Auftraggeber | Automatisierter Verkauf von Medikamenten, Gemeinsames Lager von Apotheke und Praxen, Mehr Geld verdienen
+| Kunden | 4 | Primärer Nutzer | Medikamente kaufen / geliefert bekommen, Gutes User Experience
+| Administratoren | 2 | Verwaltung des Computersystems | Möglichkeit, sämtliche Daten im System zu Überprüfen, Prozesse Überwachen und evtl. verändern
+| Programmierer | 3 | Wir |Entwicklung und Instandhaltung der Software, Gut erweiterbare Software, Geringer Instandhaltungsaufwand, Gute Debugging-Möglichkeiten
+| Ärzte / Praxen | 3 | An das Ärztehaus angrenzende Praxen | Zugriff auf Lager
+|===
 
 == Systemgrenze und Top-Level-Architektur
 
@@ -88,7 +98,11 @@ image::../asciidoc/models/design/Kontext.png[Kontext]
 
 === Top-Level-Architektur
 
-include::../asciidoc/pflichtenheft/Top-Level-Architektur.adoc[]
+:figure-caption!:
+
+[#img-Top-Level-Architektur]
+.Top-Level-Architektur
+image::./../../asciidoc/models/design/Top-Level-Architektur.png[Top-Level-Architektur]
 
 == Anwendungsfälle
 
@@ -109,7 +123,6 @@ Die folgende Tabelle fasst alle Akteure zusammen und gibt zu jedem eine kurze Be
 |eingeschränkte Kunden | nach einmaliger Registrierung können eingeschränkte Kunden Artikel zur Lieferung bestellen
 |===
 
-
 === Überblick Anwendungsfalldiagramm
 
 [#img-Anwendungsfalldiagramm]
@@ -117,7 +130,6 @@ Die folgende Tabelle fasst alle Akteure zusammen und gibt zu jedem eine kurze Be
 image::../asciidoc/models/design/Anwendungsfalldiagramm.png[Anwendugsfalldiagramm]
 
 === Anwendungsfallbeschreibungen
-
 
 Hier werden die Anwendungsfälle aus dem Anwendungsfalldiagramm näher beschrieben.
 Bei komplexeren Fällen ist auch noch ein Sequenzdiagramm hinterlegt.
@@ -391,9 +403,7 @@ image::../asciidoc/models/design/Produkt_nachbestellen.png[Sequenzdiagramm Produ
 .Seqeunzdiagramm: Bestellungen anschauen
 image::../asciidoc/models/design/Bestellungen_anschauen.png[Sequenzdiagramm Bestellungen anschauen]
 
-
 == Funktionale Anforderungen
-
 
 In diesem Abschnitt werden die funktionellen Anforderungen des Systems aufgelistet. Die Tabelle enthält:
 
@@ -638,11 +648,14 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 == Datenmodell
 
 === Überblick: Klassendiagramm
+
 UML-Analyseklassendiagramm
 
 image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/ÜberblickKlassendiagramm.png[]
 
 === Klassen und Enumerationen
+
+Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
 
 |===
 |Klasse/Enumeration |Beschreibung
@@ -663,7 +676,6 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 
 
 == Akzeptanztestfälle
-
 
 Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Diese dienen dazu die Anwendung ausführlich auf Fehler zu Testen. Die Tests basieren auf den Sequenzdiagrammen, sowie den Anwendungsfällen. In folgender Tabelle sind Abnahmetests aufgelistet, die die Anwendung durchlaufen muss, um den Kunden zufrieden zu stellen und den Vertrag zu erfüllen.
 
@@ -842,4 +854,13 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 |===
 == Glossar
 
-include::../asciidoc/pflichtenheft/Glossar.adoc[]
+[options="header"]
+|===
+|Begriff                 |Beschreibung
+|Inventar            | Digitale Darstellung des Medikamentenbestands.
+|Artikel                | Zusammenfassung aller Medikamente, Tinkturen, Zutaten etc.
+|Bestand                | Verfügbare Menge eines Artikels
+|Account                 | Zugriff, welcher Kundendaten enthält
+|Registrierung | Anlegen eines neuen Accounts
+|===
+
