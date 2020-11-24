@@ -1,0 +1,56 @@
+== Protokoll Gruppe 39
+
+Treffen am 24.11.2020
+
+Ort:      BBB +
+Beginn:   16.40 Uhr +
+Ende:     18:20 +
+__Schriftführer:__ Jonas Kabelitz +
+
+*Nächstes Treffen:* +
+01.12.2020, 16.40 Uhr, BBB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Lennart Wittkowski: Tutor
+- Falk Natkowski
+- Lukas L.
+- Jonas Kabelitz 
+- Timon Trettin
+- Clemens Rose
+
+
+== Packages 
+
+
+- Inventar: Clemens
+- Order: Jonas
+- Finanzen: Lukas 
+- Nutzerverwaltung: Timon
+- Filter/Suche: Falk
+
+== Testfälle
+- Einführung: Timon 
+
+== Entwickler Dokumentation bis 29.11.20
+
+
+- Einführung und Ziele: Timon 
+- Randbedingungen: Clemens 
+- Kontextabgrenzung: Clemens
+- Erfüllung der Qualitätsziele: Clemens
+- Softwarearchitektur :Falk
+- Entwurfsentscheidung: Timon
+- Bausteinsicht: jeder für sein Package 
+- Rückverfolgbarkeit: jeder für sein Package
+- Laufzeiteinsicht: jeder für sein Package 
+- Technische Schulden: später 
+
+
+== Aufgaben bis zum 29.11.2020
+
+
+- Developer Documentation
+- Fertigstellung Anwendungsprototypen
+- Testplan 
