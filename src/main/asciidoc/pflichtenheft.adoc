@@ -94,7 +94,7 @@ Dies ist eine Tabelle aller Personen oder Personengruppen (natürlich oder juris
 
 [#img-Kontext]
 .Kontext
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/asciidoc/models/design/Kontext.png[Kontext]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Kontext.png[Kontext]
 
 === Top-Level-Architektur
 
