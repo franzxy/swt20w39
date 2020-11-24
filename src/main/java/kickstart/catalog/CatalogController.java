@@ -4,10 +4,6 @@ import kickstart.catalog.Medicine.MedicineType;
 
 import java.time.LocalDateTime;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Range;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
@@ -69,35 +65,5 @@ class CatalogController {
 		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
 
 		return "detail";
-	}
-
-	// (｡◕‿◕｡)
-	// Der Katalog bzw die Datenbank "weiß" nicht, dass die Disc mit einem Kommentar versehen wurde,
-	// deswegen wird die update-Methode aufgerufen
-	@PostMapping("/medicine/{medicine}/comments")
-	public String comment(@PathVariable Medicine medicine, @Valid CommentAndRating payload) {
-
-		medicine.addComment(payload.toComment(businessTime.getTime()));
-		catalog.save(medicine);
-
-		return "redirect:/medicine/" + medicine.getId();
-	}
-
-	/**
-	 * Describes the payload to be expected to add a comment.
-	 *
-	 * @author Oliver Gierke
-	 */
-	interface CommentAndRating {
-
-		@NotEmpty
-		String getComment();
-
-		@Range(min = 1, max = 5)
-		int getRating();
-
-		default Comment toComment(LocalDateTime time) {
-			return new Comment(getComment(), getRating(), time);
-		}
 	}
 }
