@@ -1,10 +1,11 @@
+= Entwicklerdokumentation
+
 [options="header"]
 |===
 | Version | Bearbeitungsdatum  
 | 1.0     | 29.11.2020    
 |===
 
-<<<<<<< HEAD
 == Inhaltsverzeichnis
 
 . link:#einführung-und-ziele[Einführung und Ziele] +
@@ -37,20 +38,6 @@ Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige 
 
 === Qualitätsziele
 
-* Quali
-=======
-:project_name: Apotheke
-:company_name: Gruppe 39
-:toc: left
-:numbered:
-
-= Entwicklerdokumentation
-
-== Einführung und Ziele
-=== Aufgabenstellung
-
-=== Qualitätsziele
-
 Um die Qualität der Software zu messen, werden Qualitätsanforderungen bestimmt, welche vollfüllt werden müssen.
 _Notiz: Die folgenden Beschreibungen sind aus https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^] entnommen worden.
 
@@ -78,7 +65,6 @@ In der ersten Spalte werden die Qualitätsanforderungen aufgeführt, während in
 |Benutzbarkeit              |   |   | x |   |
 |Sicherheit                 |   | x |   |   |
 |===
->>>>>>> 89041f61c8e555f59d6d2f3fc8c92fcd45654d4e
 
 == Randbedingungen
 === Hardware-Vorgaben
