@@ -1,4 +1,4 @@
-package kickstart.catalog;
+package kickstart.inventory;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package kickstart.catalog;
+package kickstart.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +21,16 @@ public class Medicine extends Product {
 	public static enum MedicineType {
 		PRESCRIPTIONONLY, WITHOUTPRESCRIPTION;
 	}
+	
+	public static enum IngredientType {
+		LABOR, SHOP;
+	}
 
 	// (｡◕‿◕｡)
 	// primitive Typen oder Strings müssen nicht extra für JPA annotiert werden
-	private String genre, image;
+	private String image, usage;
 	private MedicineType type;
-
+	private IngredientType ingredients;
 	// (｡◕‿◕｡)
 	// Jede Disc besitzt mehrere Kommentare, eine "1 zu n"-Beziehung -> @OneToMany für JPA
 	// cascade gibt an, was mit den Kindelementen (Comment) passieren soll wenn das Parentelement
@@ -37,17 +41,14 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String name, String image, Money price, String genre, MedicineType type) {
+	public Medicine(String name, String image, Money price, String usage, IngredientType ingredients, MedicineType type) {
 
 		super(name, price);
 
 		this.image = image;
-		this.genre = genre;
+		this.usage = usage;
+		this.ingredients = ingredients;
 		this.type = type;
-	}
-
-	public String getGenre() {
-		return genre;
 	}
 
 	public void addComment(Comment comment) {
@@ -68,7 +69,15 @@ public class Medicine extends Product {
 		return image;
 	}
 
+	public String getUsage() {
+		return usage;
+	}
+	
 	public MedicineType getType() {
 		return type;
+	}
+	
+	public IngredientType getIngredient() {
+		return ingredients;
 	}
 }

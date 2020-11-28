@@ -1,8 +1,6 @@
-package kickstart.catalog;
+package kickstart.inventory;
 
 import static org.salespointframework.core.Currencies.*;
-
-import kickstart.catalog.Medicine.MedicineType;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
@@ -11,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+
+import kickstart.inventory.Medicine.IngredientType;
+import kickstart.inventory.Medicine.MedicineType;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.
@@ -21,13 +22,13 @@ import org.springframework.util.Assert;
  */
 @Component
 @Order(20)
-class CatalogDataInitializer implements DataInitializer {
+class InventoryDataInitializer implements DataInitializer {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CatalogDataInitializer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(InventoryDataInitializer.class);
 
 	private final MedicineCatalog medicineCatalog;
 
-	CatalogDataInitializer(MedicineCatalog medicineCatalog) {
+	InventoryDataInitializer(MedicineCatalog medicineCatalog) {
 
 		Assert.notNull(medicineCatalog, "MedicineCatalog must not be null!");
 
@@ -45,11 +46,11 @@ class CatalogDataInitializer implements DataInitializer {
 			return;
 		}
 
-		LOG.info("Creating default catalog entries.");
+		LOG.info("Creating default inventory entries.");
 
-		medicineCatalog.save(new Medicine("prescription only med a", "lac", Money.of(100, EURO), "Äktschn/Comedy", MedicineType.PRESCRIPTIONONLY));
+		medicineCatalog.save(new Medicine("prescription only med a", "Bildpfad", Money.of(100, EURO),"Kopfschmerzen", IngredientType.LABOR, MedicineType.PRESCRIPTIONONLY));
 
-		medicineCatalog.save(new Medicine("without prescription med b", "secretary", Money.of(6.99, EURO), "Political Drama", MedicineType.WITHOUTPRESCRIPTION));
+		medicineCatalog.save(new Medicine("without prescription med b", "Bildpfad", Money.of(6.99, EURO),"Krebs", IngredientType.SHOP, MedicineType.WITHOUTPRESCRIPTION));
 
 	}
 }
