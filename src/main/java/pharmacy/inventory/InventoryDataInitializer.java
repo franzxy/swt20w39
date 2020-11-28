@@ -1,4 +1,4 @@
-package kickstart.inventory;
+package pharmacy.inventory;
 
 import static org.salespointframework.core.Currencies.*;
 
@@ -10,8 +10,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import kickstart.inventory.Medicine.IngredientType;
-import kickstart.inventory.Medicine.MedicineType;
+import pharmacy.inventory.Medicine.IngredientType;
+import pharmacy.inventory.Medicine.MedicineType;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.

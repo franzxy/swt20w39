@@ -1,4 +1,4 @@
-package kickstart.inventory;
+package pharmacy.inventory;
 
 import javax.persistence.Entity;
 

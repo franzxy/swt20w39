@@ -1,9 +1,9 @@
-package kickstart.inventory;
+package pharmacy.inventory;
 
 import org.salespointframework.catalog.Catalog;
 import org.springframework.data.domain.Sort;
 
-import kickstart.inventory.Medicine.MedicineType;
+import pharmacy.inventory.Medicine.MedicineType;
 
 /**
  * An extension of {@link Catalog} to add video shop specific query methods.

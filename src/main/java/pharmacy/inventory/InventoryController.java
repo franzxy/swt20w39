@@ -1,4 +1,4 @@
-package kickstart.inventory;
+package pharmacy.inventory;
 
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.UniqueInventory;
@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import kickstart.inventory.Medicine.MedicineType;
+import pharmacy.inventory.Medicine.MedicineType;
 
 @Controller
 class InventoryController {
