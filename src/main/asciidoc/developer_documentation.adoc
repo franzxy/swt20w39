@@ -1,29 +1,106 @@
-= Entwicklerdokumentation
-
 [options="header"]
 |===
 | Version | Bearbeitungsdatum  
 | 1.0     | 29.11.2020    
 |===
 
+:project_name: Apotheke
+:company_name: Gruppe 39
+:toc: left
+:numbered:
+
+= Entwicklerdokumentation
+
 == Einführung und Ziele
-* Aufgabenstellung
-* Qualitätsziele
+=== Aufgabenstellung
+
+=== Qualitätsziele
+
+Um die Qualität der Software zu messen, werden Qualitätsanforderungen bestimmt, welche vollfüllt werden müssen.
+_Notiz: Die folgenden Beschreibungen sind aus https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^] entnommen worden.
+
+Wartbarkeit::
+
+Diese Eigenschaft gibt den Grad an Effektivität und Effizienz an, mit dem ein Produkt oder System modifiziert werden kann, um es zu verbessern, zu korrigieren oder an Änderungen der Umgebung und der Anforderungen anzupassen.
+
+Benutzbarkeit::
+
+Grad, in dem ein Produkt oder System von bestimmten Benutzern verwendet werden kann, um bestimmte Ziele mit Effektivität, Effizienz und Zufriedenheit in einem bestimmten Anwendungskontext zu erreichen.
+
+Sicherheit::
+
+Grad, in dem ein Produkt oder System Informationen und Daten schützt, so dass Personen, andere Produkte oder Systeme den Grad des Datenzugriffs haben, der ihren Arten und Berechtigungsstufen entspricht.
+
+Die folgende Tabelle zeigt, welche Qualitätsanforderungen in welchem ​​Umfang erfüllt werden müssen.
+In der ersten Spalte werden die Qualitätsanforderungen aufgeführt, während in den folgenden Spalten ein "x" zum Markieren der Priorität verwendet wird.
+
+1 = nicht wichtig ..
+5 = sehr wichtig
+[options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
+|===
+|Qualitätsanforderung       | 1 | 2 | 3 | 4 | 5
+|Wartbarkeit   		        |   |   |   | x |
+|Benutzbarkeit              |   |   | x |   |
+|Sicherheit                 |   | x |   |   |
+|===
 
 == Randbedingungen
-* Hardware-Vorgaben
-* Software-Vorgaben
-* Vorgaben zum Betrieb des Software
+=== Hardware-Vorgaben
+Eine Liste der erforderlichen Geräte / Hardware zum Ausführen und Verwenden der Anwendung.
+
+* Server
+* Computer
+* Tastatur
+* Maus
+
+=== Software-Vorgaben
+Eine Liste der erforderlichen Software zum Ausführen und Verwenden der Anwendung.
+
+Die folgende (oder neuere) Java-Version ist erforderlich, um die Anwendung auszuführen:
+
+* Java 11
+
+Die folgenden (oder neueren) Browserversionen sind erforderlich, um die Anwendung zu verwenden:
+
+* Internet Explorer / Edge 10.0
+* Firefox 4.0
+* Google Chrome 4.0
+* Opera 9.6
+
+=== Vorgaben zum Betrieb der Software
+Dieser Abschnitt gibt einen Überblick darüber, wie und unter welchen Umständen das Produkt nach Fertigstellung verwendet werden soll.
+
+Das System wird von einer Apotheke sowohl als Webshop als auch Vorort Arbeitsumgebung verwendet, um ihre Medikamente an Kunden zu verkaufen. Die Software soll auf einem Server laufen und interessierten Kunden rund um die Uhr über das Internet (über einen Browser) zur Verfügung stehen.
+
+Die Hauptbenutzer der Software sind Kunden, Mitarbeiter, Laboranten und Ärzte die angeblich typische Website-Navigationsschemata kennen, sowie der Boss, der nicht unbedingt einen technischen Hintergrund hat.
+
+Das System muss nicht technisch gewartet werden, da die Mitarbeiter der Apotheke bereits alle Hände voll zu tun haben. Alle Daten müssen dauerhaft in einer Datenbank gespeichert sein und über die Anwendung zugänglich sein (z. B. sollten für einen Chef keine SQL-Kenntnisse erforderlich sein).
 
 == Kontextabgrenzung
-* Kontextdiagramm
+=== Kontextdiagramm
+[#img-Kontext]
+.Kontext
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Kontext.png[Kontext]
 
 == Lösungsstrategie
 === Erfüllung der Qualitätsziele
+_Hinweis: Die folgende Tabelle zeigt die zuvor definierten Qualitätsanforderungen und Lösungsansätze, um diese zu erfüllen._
 [options="header"]
 |=== 
 |Qualitätsziel |Lösungsansatz
-|... |...
+|Wartbarkeit a|
+* *Modularität* Stellen Sie die Anwendung aus diskreten Komponenten zusammen, sodass Änderungen einer Komponente weniger Auswirkungen auf andere Komponenten haben.
+* *Wiederverwendbarkeit* Stellen Sie sicher, dass Komponenten des Systems von anderen Komponenten oder Systemen wiederverwendet werden können.
+* *Modifizierbarkeit* Stellen Sie sicher, dass die Anwendung geändert oder erweitert werden kann, ohne dass Fehler auftreten oder die Produktqualität beeinträchtigt wird.
+|Benutzbarkeit a|
+* *Lernfähigkeit* Stellen Sie sicher, dass das System von seinen Benutzern leicht verwendet und verstanden werden kann. Dies kann z.B. Eindeutige Beschreibung des Inhalts von Eingaben mit Beschriftungen oder Tooltips.
+* *Benutzerfehlerschutz / Fehlerbehandlung* Schützen Sie den Benutzer vor Fehlern. Ungültige Eingaben dürfen nicht zu ungültigen Systemzuständen führen.
+* *Ästhetik der Benutzeroberfläche* Bieten Sie dem Benutzer eine angenehme und zufriedenstellende Interaktion.
+* *Barrierefreiheit* Stellen Sie sicher, dass Personen mit einer Vielzahl von Merkmalen das System vollständig nutzen können. Dies kann z.B. mit geeigneten Schriftgrößen und Farbkontrasten. 
+|Sicherheit a|
+* *Vertraulichkeit* Stellen Sie sicher, dass nur Personen auf Daten zugreifen können, die zum Zugriff darauf berechtigt sind.
+* *Integrität* Verhindern Sie unbefugte Änderungen von Daten.
+* *Verantwortlichkeit* Rückverfolgbarkeit von Handlungen oder Ereignissen auf eine eindeutige Entität oder Person. Für diese Anwendung sollte jede "Bestellung" mit einem "Kunden" verknüpft sein.
 |===
 
 === Softwarearchitektur
