@@ -1,11 +1,6 @@
 package kickstart.inventory;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
@@ -31,12 +26,6 @@ public class Medicine extends Product {
 	private String image, usage;
 	private MedicineType type;
 	private IngredientType ingredients;
-	// (｡◕‿◕｡)
-	// Jede Disc besitzt mehrere Kommentare, eine "1 zu n"-Beziehung -> @OneToMany für JPA
-	// cascade gibt an, was mit den Kindelementen (Comment) passieren soll wenn das Parentelement
-	// (Disc) mit der Datenbank "interagiert"
-	@OneToMany(cascade = CascadeType.ALL) //
-	private List<Comment> comments = new ArrayList<>();
 
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
@@ -49,20 +38,6 @@ public class Medicine extends Product {
 		this.usage = usage;
 		this.ingredients = ingredients;
 		this.type = type;
-	}
-
-	public void addComment(Comment comment) {
-		comments.add(comment);
-	}
-
-	// (｡◕‿◕｡)
-	// Es ist immer sinnvoll sich zu überlegen wie speziell der Rückgabetyp sein sollte
-	// Da sowies nur über die Kommentare iteriert wird, ist ein Iterable<T> das sinnvollste.
-	// Weil wir keine Liste zurück geben, verhindern wir auch, dass jemand die comments-Liste
-	// einfach durch clear() leert. Deswegen geben auch so viele Salespoint Klassen nur
-	// Iterable<T> zurück ;)
-	public Iterable<Comment> getComments() {
-		return comments;
 	}
 
 	public String getImage() {

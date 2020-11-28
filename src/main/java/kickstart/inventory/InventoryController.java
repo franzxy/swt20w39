@@ -1,7 +1,5 @@
 package kickstart.inventory;
 
-import java.time.LocalDateTime;
-
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import kickstart.inventory.Medicine.MedicineType;
 
@@ -22,14 +19,12 @@ class InventoryController {
 
 	private final MedicineCatalog catalog;
 	private final UniqueInventory<UniqueInventoryItem> inventory;
-	private final BusinessTime businessTime;
 
 	InventoryController(MedicineCatalog medicineCatalog, UniqueInventory<UniqueInventoryItem> inventory,
 			BusinessTime businessTime) {
 
 		this.catalog = medicineCatalog;
 		this.inventory = inventory;
-		this.businessTime = businessTime;
 	}
 
 	@GetMapping("/prescriptiononly")
