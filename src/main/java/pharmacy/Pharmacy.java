@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kickstart;
+package pharmacy;
 
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @EnableSalespoint
-public class Application {
+public class Pharmacy {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(Pharmacy.class, args);
 	}
 
 	@Configuration
@@ -37,6 +39,15 @@ public class Application {
 			http.authorizeRequests().antMatchers("/**").permitAll().and()
 					.formLogin().loginProcessingUrl("/login").and()
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
+		}
+	}
+
+	@Controller
+	public class WelcomeController {
+
+		@GetMapping("/")
+		public String index() {
+			return "welcome";
 		}
 	}
 }
