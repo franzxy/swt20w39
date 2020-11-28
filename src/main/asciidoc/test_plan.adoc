@@ -3,7 +3,8 @@
 Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
 
 == Einführung
-Wozu dient das Dokument? Zielgruppe?
+
+Bei dem vorliegenden Dokument handelt es sich um einen Testplan für die neue Software der Apotheke des Unterbrunner Ärztehaus.
 
 == Aufbau der Testbezeichner
 Nach welchem Schema sind die Tests benannt?
