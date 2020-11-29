@@ -279,7 +279,7 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 |Accountancy			|Salespoint.Accountancy |
 |Money					|javamoney.Money	|
 |UserAccountManagement	|Salespoint.UserAccountManagement|
-|BusinessTime			|Salespoint.BusienessTime
+|BusinessTime			|Salespoint.BusienessTime	|
 |Cash					|Salespoint.Cash	|
 |User                   a|
 						* Salespoint.UserAccount 
