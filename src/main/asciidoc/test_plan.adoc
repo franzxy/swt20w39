@@ -23,7 +23,6 @@ Nach welchem Schema sind die Tests benannt?
 * Search: Falk
 
 == Nicht zu testende Funktionalitäten
-z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel). +
 * Salespoint
 * Spring
 
@@ -44,6 +43,7 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |===
 
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+
 |I-1.1  
 |Bestellung wird in Buchhaltung aufgenommen 
 |Bestellung wurde Bezahlt 
@@ -62,6 +62,18 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |Aufruf von /finances
 |In der Tabelle ist, wenn bereits von den Praxen bezahlt, eine Gutschrift zu sehen von dem zu erwartenden Betrag, den die Praxen bazhalt haben
 
+|I-2.1  
+|Nutzer wird ins System aufgenommen
+|Nutzer nicht vorher Registriert
+|Aufruf von /register
+|Nutzer erscheint in /users
+
+|I-2.2 
+|Nutzer ändert Passwort
+|Nutzer vorher Registriert
+|Aufruf von /password
+|Nutzer kann sich mit neuem Passwort einloggen
+
 |U-1.1
 |Benutzer nicht mit Rolle "Chef" hat kein zugang
 |Ein Benutzer der nicht die Rolle "Chef" besitzt das System
@@ -79,5 +91,12 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |Ein Produkt "null" wird zum bezahlen an die Buchhaltung übergeben
 |Der Benutzer clickt auf "Bezahlen"
 |Die Buchhaltung wirft eine NullPointerException. Die Zahlung erfolgt nicht
+
+
+|U-2.1
+|Benutzer kann sich keinen Account erstellen
+|Benutzer mit E-Mail gibt es bereits
+|Aufruf von /register
+|Der Nutzer kann sich keinen weiteren Account erstellen
 
 |===
