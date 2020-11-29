@@ -1,5 +1,8 @@
 package pharmacy.inventory;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import static org.salespointframework.core.Currencies.*;
 
 import org.javamoney.moneta.Money;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import pharmacy.inventory.Medicine.IngredientType;
+import pharmacy.inventory.Medicine.MedicineType;
 import pharmacy.inventory.Medicine.PrescriptionType;
 
 /**
@@ -47,10 +51,13 @@ class InventoryDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default inventory entries.");
+		
+		ArrayList<Date> testmhd = null;
+		ArrayList<String> testingredients = null;
+		
+		medicineCatalog.save(new Medicine("id", "name", Money.of(100, EURO), "usage", "image", 10, 10, testmhd, testingredients, 
+				IngredientType.LABOR, PrescriptionType.PRESCRIPTIONONLY, MedicineType.CAPSULE));
 
-		medicineCatalog.save(new Medicine("prescription only med a", "Bildpfad", Money.of(100, EURO),"Kopfschmerzen", IngredientType.LABOR, PrescriptionType.PRESCRIPTIONONLY));
-
-		medicineCatalog.save(new Medicine("without prescription med b", "Bildpfad", Money.of(6.99, EURO),"Krebs", IngredientType.SHOP, PrescriptionType.WITHOUTPRESCRIPTION));
 
 	}
 }
