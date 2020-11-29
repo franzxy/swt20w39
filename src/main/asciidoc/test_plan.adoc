@@ -9,8 +9,6 @@ Bei dem vorliegenden Dokument handelt es sich um einen Testplan für die neue So
 == Aufbau der Testbezeichner
 Nach welchem Schema sind die Tests benannt?
 
-*Bsp.*
-
 *U - Unit Test, I - Integrationstest*
 
 *U-1, U-2, I-1*
@@ -18,22 +16,25 @@ Nach welchem Schema sind die Tests benannt?
 == Test Gegenstände
 
 == Zu testende Funktionalitäten
+*Inventory: Clemens
+*Orders: Jonas
+*Finances: Lukas 
+*Users, Counters: Timon
+*Search: Falk
 
 == Nicht zu testende Funktionalitäten
 z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
+*Salespoint
+*Spring
 
 == Herangehensweise
-*Bsp.:*
-
 *Klassen werden mit JUnit getestet.*
 
 *Integrationstest nach Bottom-Up Prinzip*
 
 == Umgebungsvoraussetzungen
-* Wird spezielle Hardware benötigt?
-* Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
-* Wird zusätzliche Software für das Testen benötigt?
-* Wie kommuniziert die Software während des Testens? Internet? Netzwerk?
+
+Es wird die Business time des Salsepoint Frameworks zum testen verwendet.
 
 == Testfälle und Verantwortlichkeit
 Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
