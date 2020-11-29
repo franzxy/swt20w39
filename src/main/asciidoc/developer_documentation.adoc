@@ -127,7 +127,9 @@ _Hinweis: Die folgende Tabelle zeigt die zuvor definierten Qualitätsanforderung
 |===
 
 === Softwarearchitektur
-* Beschreibung der Architektur anhand der Top-Level-Architektur oder eines Client-Server-Diagramms
+[#img-Softwarearchitektur]
+.Softwarearchitektur
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Software Architecture.png[Software Architecture]
 
 === Entwurfsentscheidungen
 
