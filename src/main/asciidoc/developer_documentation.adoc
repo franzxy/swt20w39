@@ -276,6 +276,11 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 |OrderManager           |Salespoint.OrderManager<Order> |
 |OrderStatus            |Salespoint.OrderStatus |
 |ROLE/Role              |Salespoint.Role |
+|Accountancy			|Salespoint.Accountancy |
+|Money					|javamoney.Money	|
+|UserAccountManagement	|Salespoint.UserAccountManagement|
+|BusinessTime			|Salespoint.BusienessTime
+|Cash					|Salespoint.Cash	|
 |User                   a|
 						* Salespoint.UserAccount 
 						* customer.Customer |
