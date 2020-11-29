@@ -30,7 +30,7 @@
 .. link:#customer[Customer] +
 .. link:#order[Order] +
 .. link:#search[Search] +
-.. link:#rückverfolgbarkeit-zwischen-analyse--und-entwurfsmodell[Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell] +
+.. link:#rückverfolgbarkeit-zwischen-analyse-und-entwurfsmodell[Rückverfolgbarkeit zwischen Analyse und Entwurfsmodell] +
 . link:#laufzeitsicht[Laufzeitsicht] +
 .. link:#customer[Customer] +
 .. link:#order[Order] +
@@ -256,7 +256,7 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 |FinanceController|Ein Spring MVC-Controller für die Buchhaltung
 |===
 
-=== Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
+=== Rückverfolgbarkeit zwischen Analyse und Entwurfsmodell
 _Die folgende Tabelle zeigt die Rückverfolgbarkeit zwischen Entwurfs- und Analysemodell. Falls eine Klasse aus einem externen Framework im Entwurfsmodell eine Klasse des Analysemodells ersetzt,
 wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwendung* mithilfe der folgenden Begriffe definiert:_
 
