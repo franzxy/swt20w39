@@ -23,7 +23,7 @@ Nach welchem Schema sind die Tests benannt?
 * Search: Falk
 
 == Nicht zu testende Funktionalitäten
-z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
+z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel). +
 * Salespoint
 * Spring
 
