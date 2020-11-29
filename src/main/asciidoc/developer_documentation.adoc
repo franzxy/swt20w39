@@ -213,6 +213,15 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 |OrderController|Einen Spring MVC-Controller für den Warenkorb
 |===
 
+=== Search
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Model_Search.png[]
+[options="header"]
+|=== 
+|Klasse/Enumeration |Beschreibung 
+|SearchController|Spring-Controller für die Suche
+|SearchForm|Suchformular-Modell
+|===
+
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 _Die folgende Tabelle zeigt die Rückverfolgbarkeit zwischen Entwurfs- und Analysemodell. Falls eine Klasse aus einem externen Framework im Entwurfsmodell eine Klasse des Analysemodells ersetzt,
 wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwendung* mithilfe der folgenden Begriffe definiert:_
@@ -246,6 +255,9 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 
 === Order
 image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/seq_order.png[]
+
+=== Search
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Seq_Search.png[]
 
 == Technische Schulden
 * Auflistung der nicht erreichten Quality Gates und der zugehörigen SonarQube Issues zum Zeitpunkt der Abgabe
