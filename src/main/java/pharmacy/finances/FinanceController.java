@@ -1,4 +1,4 @@
-package kickstart.finances;
+package pharmacy.finances;
 
 import java.util.List;
 
