@@ -16,8 +16,8 @@ Nach welchem Schema sind die Tests benannt?
 == Test Gegenstände
 
 == Zu testende Funktionalitäten
-. Inventory: Clemens
-. Orders: Jonas
+* Inventory: Clemens
+* Orders: Jonas
 * Finances: Lukas 
 * Users, Counters: Timon
 * Search: Falk
