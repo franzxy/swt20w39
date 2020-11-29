@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import pharmacy.inventory.Medicine.IngredientType;
-import pharmacy.inventory.Medicine.MedicineType;
+import pharmacy.inventory.Medicine.PrescriptionType;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.
@@ -48,9 +48,9 @@ class InventoryDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default inventory entries.");
 
-		medicineCatalog.save(new Medicine("prescription only med a", "Bildpfad", Money.of(100, EURO),"Kopfschmerzen", IngredientType.LABOR, MedicineType.PRESCRIPTIONONLY));
+		medicineCatalog.save(new Medicine("prescription only med a", "Bildpfad", Money.of(100, EURO),"Kopfschmerzen", IngredientType.LABOR, PrescriptionType.PRESCRIPTIONONLY));
 
-		medicineCatalog.save(new Medicine("without prescription med b", "Bildpfad", Money.of(6.99, EURO),"Krebs", IngredientType.SHOP, MedicineType.WITHOUTPRESCRIPTION));
+		medicineCatalog.save(new Medicine("without prescription med b", "Bildpfad", Money.of(6.99, EURO),"Krebs", IngredientType.SHOP, PrescriptionType.WITHOUTPRESCRIPTION));
 
 	}
 }

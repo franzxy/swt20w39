@@ -3,7 +3,7 @@ package pharmacy.inventory;
 import org.salespointframework.catalog.Catalog;
 import org.springframework.data.domain.Sort;
 
-import pharmacy.inventory.Medicine.MedicineType;
+import pharmacy.inventory.Medicine.PrescriptionType;
 
 /**
  * An extension of {@link Catalog} to add video shop specific query methods.
@@ -21,7 +21,7 @@ public interface MedicineCatalog extends Catalog<Medicine> {
 	 * @param sort must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
-	Iterable<Medicine> findByType(MedicineType type, Sort sort);
+	Iterable<Medicine> findByType(PrescriptionType type, Sort sort);
 
 	/**
 	 * Returns all {@link Disc}s by type ordered by their identifier.
@@ -29,7 +29,7 @@ public interface MedicineCatalog extends Catalog<Medicine> {
 	 * @param type must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
-	default Iterable<Medicine> findByType(MedicineType type) {
+	default Iterable<Medicine> findByType(PrescriptionType type) {
 		return findByType(type, DEFAULT_SORT);
 	}
 }

@@ -5,16 +5,11 @@ import javax.persistence.Entity;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 
-// (｡◕‿◕｡)
-// Da der Shop DVD sowie BluRay verkaufen soll ist es sinnvoll eine gemeinsame Basisklasse zu erstellen.
-// Diese erbt von Product um die Catalog-Klasse aus Salespoint nutzen zu können.
-// Ein Primärschlüssel ist nicht notwendig, da dieser schon in Product definiert ist, alle anderen
-// JPA-Anforderungen müssen aber erfüllt werden.
 @Entity
 public class Medicine extends Product {
 
-	public static enum MedicineType {
-		PRESCRIPTIONONLY, WITHOUTPRESCRIPTION;
+	public static enum PrescriptionType {
+		PRESCRIPTIONONLY, WITHOUTPRESCRIPTION, BOTH;
 	}
 	
 	public static enum IngredientType {
@@ -24,13 +19,13 @@ public class Medicine extends Product {
 	// (｡◕‿◕｡)
 	// primitive Typen oder Strings müssen nicht extra für JPA annotiert werden
 	private String image, usage;
-	private MedicineType type;
+	private PrescriptionType type;
 	private IngredientType ingredients;
 
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String name, String image, Money price, String usage, IngredientType ingredients, MedicineType type) {
+	public Medicine(String name, String image, Money price, String usage, IngredientType ingredients, PrescriptionType type) {
 
 		super(name, price);
 
@@ -48,7 +43,7 @@ public class Medicine extends Product {
 		return usage;
 	}
 	
-	public MedicineType getType() {
+	public PrescriptionType getType() {
 		return type;
 	}
 	

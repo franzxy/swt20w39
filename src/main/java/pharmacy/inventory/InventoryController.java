@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import pharmacy.inventory.Medicine.MedicineType;
+import pharmacy.inventory.Medicine.PrescriptionType;
 
 @Controller
 class InventoryController {
@@ -30,7 +30,7 @@ class InventoryController {
 	@GetMapping("/prescriptiononly")
 	String prescriptiononlyCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(MedicineType.PRESCRIPTIONONLY));
+		model.addAttribute("catalog", catalog.findByType(PrescriptionType.PRESCRIPTIONONLY));
 		model.addAttribute("title", "catalog.prescriptiononly.title");
 
 		return "catalog";
@@ -39,7 +39,7 @@ class InventoryController {
 	@GetMapping("/withoutprescription")
 	String withoutprescriptionCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(MedicineType.WITHOUTPRESCRIPTION));
+		model.addAttribute("catalog", catalog.findByType(PrescriptionType.WITHOUTPRESCRIPTION));
 		model.addAttribute("title", "catalog.withoutprescription.title");
 
 		return "catalog";
