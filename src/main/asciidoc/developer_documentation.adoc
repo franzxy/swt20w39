@@ -1,40 +1,148 @@
-[options="header"]
-[cols="1, 3, 3"]
-|===
-|Version | Bearbeitungsdatum   | Autor 
-|...	| ... | ...
-|===
-
 = Entwicklerdokumentation
 
+[options="header"]
+|===
+| Version | Bearbeitungsdatum  
+| 1.0     | 29.11.2020    
+|===
+
+== Inhaltsverzeichnis
+
+. link:#einführung-und-ziele[Einführung und Ziele] +
+.. link:#aufgabenstellung[Aufgabenstellung] +
+.. link:#qualitätsziele[Qualitätsziele] +
+
 == Einführung und Ziele
-* Aufgabenstellung
-* Qualitätsziele
+
+=== Aufgabenstellung
+
+In so schwierigen Zeiten wird es immer wichtiger, dass essenzielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. Deshalb soll eine neue Webapp für die Apotheke des Unterbrunner Ärztehaus entstehen, welche unter anderem die Möglichkeit der Lieferung für bewegungseingeschränkte oder gefährdete Personen ermöglicht.
+
+Die Apotheke hat mehrere Benutzer mit verschiedenen Rechten. Jeder Besucher kann das Inventar einsehen, ohne sich anzumelden, um bequem den Bestand prüfen zu können. Im Inventar wird unterschieden zwischen Medikamenten und Zutaten für das Labor. Außerdem hat jeder Artikel einen Bestand, eine Nachbestellmenge und eine Information, ob der Artikel rezeptpflichtig ist.
+
+Nach einer kurzen Anmeldung können Nutzer auch Waren in die Apotheke bestellen lassen, bewegungseingeschränkte Nutzer können außerdem diese Waren zu sich nach Hause liefern lassen. Arzt Praxen bekommen ihren eigenen Account, welcher es einer Praxis ermöglicht auf den Medikamentenschrank zuzugreifen. In der Apotheke selbst gibt es die Möglichkeit Kassenaccounts zu erstellen, um in Zukunft mehrere Selbstbedienerkassen zu unterstützen. Mitarbeiter können neben dem abrechnen von rezeptpflichtigen Medikamenten auch eigene hinzufügen, welche im Labor hergestellt wurden. Zudem können Mitarbeiter sich Urlaub nehmen. Der Boss hat die Möglichkeit Artikel manuell nachzubestellen, Nutzer zu erstellen, Mitarbeiter einzustellen, zu feuern und deren Gehalt anzupassen, außerdem kann er die Finanzen der Apotheke verwalten.
+
+Wenn eine Bestellung ausgelöst wurde, werden Zeitpunkt, Betrag, Artikel und zugehörige Menge, Kunde und eventuelle Rezept-Nummern gespeichert. Wenn der Vorgang abgeschlossen wurde, wird bei regulären Kunden abhängig von der Krankenkasse abgerechnet. Bei Praxen wird am Ende des Monats abgerechnet. Zudem werden die Gehälter der Mitarbeiter so verwaltet, genau wie die monatliche Abrechnung mit den Krankenkassen.
+
+Wenn eine Praxis eine Anfrage an das Labor schickt, wird eine offene Bestellung erzeugt, der im Labor tätige Mitarbeiter kann diese dann erfüllen, indem er die benötigten Materialien aus dem Inventar entfernt und daraufhin die Bestellung als abgeschlossen kennzeichnet.
+
+Auch die Inventarverwaltung soll erleichtert werden, daher wird wöchentlich eine Liste mit Medikamenten erstellt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist.
+
+Zwar können Nutzer sich frei Registrieren, mithilfe einer E-Mail-Adresse und eines Passworts, allerdings muss die Akkreditierung der Bewegungseinschränkung vor Ort geschehen. Das Erstellen von Kassen, Praxen und Mitarbeiter Accounts wurde erleichtert, damit nicht jeder erst einen Account manuell erstellen muss.
+
+Das Ziel der Anwendung ist es, sehr zuverlässig und langwierig betrieben werden zu können, weshalb eine Webapp eine gute Wahl darstellt. Zudem bietet die modualre Nutzer-Struktur die Möglichkeit weitere Account-Typen ohne viel Aufwand hinzuzufügen.
+
+Der Aufbau der Seite sollte additiv sein, also niemals dem Nutzer Funktionalität entziehen, wenn seine Freigabe steigt. Das heißt, dass der Boss mindestens genau so viele Funktionen wie der Mitarbeiter hat. Dies hilft zusätzlich bei der Inbetriebnahme des Systems, da Nutzer sich gegenseitig besser unterstützen können.
+
+Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige Bilder verzichtet werden und statt dessen auf korrekte Kontrast verhätnisse und gut skalierende Schrift geachtet werden.
+
+=== Qualitätsziele
+
+Um die Qualität der Software zu messen, werden Qualitätsanforderungen bestimmt, welche vollfüllt werden müssen.
+_Notiz: Die folgenden Beschreibungen sind aus https://iso25000.com/index.php/en/iso-25000-standards/iso-25010[ISO/IEC 25010 Software Quality Model^] entnommen worden.
+
+Wartbarkeit::
+
+Diese Eigenschaft gibt den Grad an Effektivität und Effizienz an, mit dem ein Produkt oder System modifiziert werden kann, um es zu verbessern, zu korrigieren oder an Änderungen der Umgebung und der Anforderungen anzupassen.
+
+Benutzbarkeit::
+
+Grad, in dem ein Produkt oder System von bestimmten Benutzern verwendet werden kann, um bestimmte Ziele mit Effektivität, Effizienz und Zufriedenheit in einem bestimmten Anwendungskontext zu erreichen.
+
+Sicherheit::
+
+Grad, in dem ein Produkt oder System Informationen und Daten schützt, so dass Personen, andere Produkte oder Systeme den Grad des Datenzugriffs haben, der ihren Arten und Berechtigungsstufen entspricht.
+
+Die folgende Tabelle zeigt, welche Qualitätsanforderungen in welchem ​​Umfang erfüllt werden müssen.
+In der ersten Spalte werden die Qualitätsanforderungen aufgeführt, während in den folgenden Spalten ein "x" zum Markieren der Priorität verwendet wird.
+
+1 = nicht wichtig ..
+5 = sehr wichtig
+[options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
+|===
+|Qualitätsanforderung       | 1 | 2 | 3 | 4 | 5
+|Wartbarkeit   		        |   |   |   | x |
+|Benutzbarkeit              |   |   | x |   |
+|Sicherheit                 |   | x |   |   |
+|===
 
 == Randbedingungen
-* Hardware-Vorgaben
-* Software-Vorgaben
-* Vorgaben zum Betrieb des Software
+=== Hardware-Vorgaben
+Eine Liste der erforderlichen Geräte / Hardware zum Ausführen und Verwenden der Anwendung.
+
+* Server
+* Computer
+* Tastatur
+* Maus
+
+=== Software-Vorgaben
+Eine Liste der erforderlichen Software zum Ausführen und Verwenden der Anwendung.
+
+Die folgende (oder neuere) Java-Version ist erforderlich, um die Anwendung auszuführen:
+
+* Java 11
+
+Die folgenden (oder neueren) Browserversionen sind erforderlich, um die Anwendung zu verwenden:
+
+* Internet Explorer / Edge 10.0
+* Firefox 4.0
+* Google Chrome 4.0
+* Opera 9.6
+
+=== Vorgaben zum Betrieb der Software
+Dieser Abschnitt gibt einen Überblick darüber, wie und unter welchen Umständen das Produkt nach Fertigstellung verwendet werden soll.
+
+Das System wird von einer Apotheke sowohl als Webshop als auch Vorort Arbeitsumgebung verwendet, um ihre Medikamente an Kunden zu verkaufen. Die Software soll auf einem Server laufen und interessierten Kunden rund um die Uhr über das Internet (über einen Browser) zur Verfügung stehen.
+
+Die Hauptbenutzer der Software sind Kunden, Mitarbeiter, Laboranten und Ärzte die angeblich typische Website-Navigationsschemata kennen, sowie der Boss, der nicht unbedingt einen technischen Hintergrund hat.
+
+Das System muss nicht technisch gewartet werden, da die Mitarbeiter der Apotheke bereits alle Hände voll zu tun haben. Alle Daten müssen dauerhaft in einer Datenbank gespeichert sein und über die Anwendung zugänglich sein (z. B. sollten für einen Chef keine SQL-Kenntnisse erforderlich sein).
 
 == Kontextabgrenzung
-* Kontextdiagramm
+=== Kontextdiagramm
+[#img-Kontext]
+.Kontext
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Kontext.png[Kontext]
 
 == Lösungsstrategie
 === Erfüllung der Qualitätsziele
+_Hinweis: Die folgende Tabelle zeigt die zuvor definierten Qualitätsanforderungen und Lösungsansätze, um diese zu erfüllen._
 [options="header"]
 |=== 
 |Qualitätsziel |Lösungsansatz
-|... |...
+|Wartbarkeit a|
+* *Modularität* Stellen Sie die Anwendung aus diskreten Komponenten zusammen, sodass Änderungen einer Komponente weniger Auswirkungen auf andere Komponenten haben.
+* *Wiederverwendbarkeit* Stellen Sie sicher, dass Komponenten des Systems von anderen Komponenten oder Systemen wiederverwendet werden können.
+* *Modifizierbarkeit* Stellen Sie sicher, dass die Anwendung geändert oder erweitert werden kann, ohne dass Fehler auftreten oder die Produktqualität beeinträchtigt wird.
+|Benutzbarkeit a|
+* *Lernfähigkeit* Stellen Sie sicher, dass das System von seinen Benutzern leicht verwendet und verstanden werden kann. Dies kann z.B. Eindeutige Beschreibung des Inhalts von Eingaben mit Beschriftungen oder Tooltips.
+* *Benutzerfehlerschutz / Fehlerbehandlung* Schützen Sie den Benutzer vor Fehlern. Ungültige Eingaben dürfen nicht zu ungültigen Systemzuständen führen.
+* *Ästhetik der Benutzeroberfläche* Bieten Sie dem Benutzer eine angenehme und zufriedenstellende Interaktion.
+* *Barrierefreiheit* Stellen Sie sicher, dass Personen mit einer Vielzahl von Merkmalen das System vollständig nutzen können. Dies kann z.B. mit geeigneten Schriftgrößen und Farbkontrasten. 
+|Sicherheit a|
+* *Vertraulichkeit* Stellen Sie sicher, dass nur Personen auf Daten zugreifen können, die zum Zugriff darauf berechtigt sind.
+* *Integrität* Verhindern Sie unbefugte Änderungen von Daten.
+* *Verantwortlichkeit* Rückverfolgbarkeit von Handlungen oder Ereignissen auf eine eindeutige Entität oder Person. Für diese Anwendung sollte jede "Bestellung" mit einem "Kunden" verknüpft sein.
 |===
 
 === Softwarearchitektur
 * Beschreibung der Architektur anhand der Top-Level-Architektur oder eines Client-Server-Diagramms
 
 === Entwurfsentscheidungen
-* Verwendete Muster
-* Persistenz
-* Benutzeroberfläche
-* Verwendung externer Frameworks
+
+==== Verwendete Muster
+
+- Spring MVC
+
+==== Persistenz
+
+
+
+==== Benutzeroberfläche
+
+
+
+==== Verwendung externer Frameworks
 
 [options="header", cols="1,2"]
 |===

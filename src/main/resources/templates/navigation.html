@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+		<title>Welcome</title>
+	</head>
+	<body>
+		<nav th:fragment="navigation">   
+            <div class="row height">     
+                <a class="a pharmacy nav height center" href="/" th:href="@{/}" th:text="#{nav.pharmacy}">Apotheke</a>
+                <a class="a nav height center" href="/test" th:href="@{/test}" th:text="#{nav.test}">Beispiel</a>
+            </div>
+            <div class="row height">
+                <div class="height center">
+                    <a class="a button center" th:href="@{/account}" th:text="#{nav.account}">Account</a>
+                </div>
+                <div class="height center">
+                    <a class="a button center" th:href="@{/login}" th:text="#{nav.login}">Login</a>
+                </div>
+                <form class="height center" th:action="@{/logout}" method="post">
+                    <button type="button" class="a button center" th:text="#{nav.logout}">Logout</button>
+                </form>
+            </div>
+        </nav>
+	</body>
+</html>

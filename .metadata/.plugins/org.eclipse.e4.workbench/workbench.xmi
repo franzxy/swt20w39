@@ -347,7 +347,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_OVL7ECv6Eeup8_xr1HbtVQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_1FgxICv6EeudvJS4S2g5Gw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_NeHJKyv6Eeup8_xr1HbtVQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ks-38C51Eeu86oe8NF4uLA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_NeHJKyv6Eeup8_xr1HbtVQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_OVL7ESv6Eeup8_xr1HbtVQ" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -375,7 +375,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_OVMiJSv6Eeup8_xr1HbtVQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_1FkbgCv6EeudvJS4S2g5Gw" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_NeGiGyv6Eeup8_xr1HbtVQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ktCiUC51Eeu86oe8NF4uLA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_NeGiGyv6Eeup8_xr1HbtVQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_OVMiJiv6Eeup8_xr1HbtVQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -891,6 +891,18 @@
   <bindingTables xmi:id="_OgnH8yv6Eeup8_xr1HbtVQ" bindingContext="_OgnH8iv6Eeup8_xr1HbtVQ"/>
   <bindingTables xmi:id="_OgnH9Sv6Eeup8_xr1HbtVQ" bindingContext="_OgnH9Cv6Eeup8_xr1HbtVQ"/>
   <bindingTables xmi:id="_OgnH9yv6Eeup8_xr1HbtVQ" bindingContext="_OgnH9iv6Eeup8_xr1HbtVQ"/>
+  <bindingTables xmi:id="_j9-c4C51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editors.AsciiDoctorEditor.context" bindingContext="_j9f7wC51Eeu86oe8NF4uLA">
+    <bindings xmi:id="_j9-c4S51Eeu86oe8NF4uLA" keySequence="CTRL+CR" command="_j9c4eC51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j9-c4i51Eeu86oe8NF4uLA" keySequence="CTRL+SHIFT+P" command="_j9cRYi51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j9_D8C51Eeu86oe8NF4uLA" keySequence="CTRL+7" command="_j9c4dC51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j-A5IC51Eeu86oe8NF4uLA" keySequence="CTRL+SHIFT+G" command="_j9cRYS51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j-CHQC51Eeu86oe8NF4uLA" keySequence="CTRL+I" command="_j9c4di51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j-CHQS51Eeu86oe8NF4uLA" keySequence="CTRL+O" command="_j9c4dy51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j-CuUC51Eeu86oe8NF4uLA" keySequence="CTRL+B" command="_j9c4ei51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j-FKkC51Eeu86oe8NF4uLA" keySequence="F3" command="_j9c4cS51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j-FKkS51Eeu86oe8NF4uLA" keySequence="F5" command="_j9c4eS51Eeu86oe8NF4uLA"/>
+    <bindings xmi:id="_j-Hm0C51Eeu86oe8NF4uLA" keySequence="ALT+X" command="_j9c4cy51Eeu86oe8NF4uLA"/>
+  </bindingTables>
   <rootContext xmi:id="_Nb-bKyv6Eeup8_xr1HbtVQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" contributorURI="platform:/plugin/org.eclipse.platform" name="In Dialogs and Windows" description="Either a dialog or a window is open">
     <children xmi:id="_Nb-bLCv6Eeup8_xr1HbtVQ" elementId="org.eclipse.ui.contexts.window" contributorURI="platform:/plugin/org.eclipse.platform" name="In Windows" description="A window is open">
       <children xmi:id="_Nb-bLSv6Eeup8_xr1HbtVQ" elementId="org.eclipse.e4.ui.contexts.views" contributorURI="platform:/plugin/org.eclipse.platform" name="%bindingcontext.name.bindingView"/>
@@ -927,6 +939,7 @@
           <children xmi:id="_NeKzqiv6Eeup8_xr1HbtVQ" elementId="org.eclipse.mylyn.wikitext.tasks.ui.markupSourceContext" name="Task Markup Editor Source Context"/>
         </children>
         <children xmi:id="_NeKzrCv6Eeup8_xr1HbtVQ" elementId="org.eclipse.jdt.ui.propertiesEditorScope" name="Editing Properties Files" description="Editing Properties Files Context"/>
+        <children xmi:id="_j9f7wC51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editors.AsciiDoctorEditor.context" name="AsciiDoctor context" description="Editing asciidoctor files"/>
       </children>
       <children xmi:id="_NeKzgyv6Eeup8_xr1HbtVQ" elementId="org.eclipse.compare.compareEditorScope" name="Comparing in an Editor" description="Comparing in an Editor"/>
       <children xmi:id="_NeKzhSv6Eeup8_xr1HbtVQ" elementId="org.eclipse.debug.ui.memoryview" name="In Memory View" description="In memory view"/>
@@ -2491,6 +2504,20 @@
   <commands xmi:id="_OMNlRSv6Eeup8_xr1HbtVQ" elementId="AUTOGEN:::variableViewActions/org.eclipse.wst.jsdt.debug.ui.variableview.show.functions" commandName="Show function variables" description="Show or hide function variables" category="_Nd9YQCv6Eeup8_xr1HbtVQ"/>
   <commands xmi:id="_OMNlRiv6Eeup8_xr1HbtVQ" elementId="AUTOGEN:::variableViewActions/org.eclipse.wst.jsdt.debug.ui.variableview.show.this" commandName="Show 'this' variable" description="Show or hide the this variable" category="_Nd9YQCv6Eeup8_xr1HbtVQ"/>
   <commands xmi:id="_OMOMUCv6Eeup8_xr1HbtVQ" elementId="AUTOGEN:::variableViewActions/org.eclipse.wst.jsdt.debug.ui.variableview.show.prototypes" commandName="Show proto variables" description="Show or hide proto variables" category="_Nd9YQCv6Eeup8_xr1HbtVQ"/>
+  <commands xmi:id="_j9cRYC51Eeu86oe8NF4uLA" elementId="asciidoctor.converter.command.md2asciidoc" commandName="Convert markdown to asciidoc" description="Converts given markdown file to asciidoc file" category="_j9bqUC51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9cRYS51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.references.workspace" commandName="References in workspace" description="Search for references in workspace" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9cRYi51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.gotomatchingbracket" commandName="Goto matching bracket" description="Goto matching bracket inside gradle document" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4cC51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.source.validate" commandName="Validate asciidoc file" description="Validate asciidoc file" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4cS51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.openlink" commandName="Open link" description="Tries to idenify current cursorposition as link and open it" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4ci51Eeu86oe8NF4uLA" elementId="asciidoctor.converter.command.folder2asciidoc" commandName="Convert folder files to asciidoc" description="Converts given directory to asciidoc file where possible" category="_j9bqUC51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4cy51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.formattext.monospaced" commandName="Make text mono spaced" description="Make the selected text mono spaced" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4dC51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.source.toggleComment" commandName="Toggle comment" description="Toggle comment in selected line(s)" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4dS51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.command.openWithAsciiDoctorEditor" commandName="Open with Asciidoctor editor" description="Open file with asciidoctor editor" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4di51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.formattext.italic" commandName="Make text italic" description="Make the selected text italic" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4dy51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.quickoutline" commandName="Quick outline" description="Show quick outline dialog" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4eC51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.source.addlinebreak" commandName="Add linebreak" description="Adds a linebreak" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4eS51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.rebuild" commandName="Rebuild asciidoc output" description="Rebuilds / refreshes asciidoc output of editor" category="_j9bDQS51Eeu86oe8NF4uLA"/>
+  <commands xmi:id="_j9c4ei51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.editor.commands.formattext.bold" commandName="Make text bold" description="Make the selected text bold" category="_j9bDQS51Eeu86oe8NF4uLA"/>
   <addons xmi:id="_Nb-bLyv6Eeup8_xr1HbtVQ" elementId="org.eclipse.e4.core.commands.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_Nb-bMCv6Eeup8_xr1HbtVQ" elementId="org.eclipse.e4.ui.contexts.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_Nb-bMSv6Eeup8_xr1HbtVQ" elementId="org.eclipse.e4.ui.bindings.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -2502,7 +2529,7 @@
   <addons xmi:id="_Nb-bNyv6Eeup8_xr1HbtVQ" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_Nb-bOCv6Eeup8_xr1HbtVQ" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_NcMdkCv6Eeup8_xr1HbtVQ" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_03fjQCv6EeudvJS4S2g5Gw" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_Nd8xECv6Eeup8_xr1HbtVQ" elementId="org.eclipse.team.ui.category.team" name="Team" description="Actions that apply when working with a Team"/>
   <categories xmi:id="_Nd8xESv6Eeup8_xr1HbtVQ" elementId="org.eclipse.ui.category.views" name="Views" description="Commands for opening views"/>
@@ -2542,4 +2569,6 @@
   <categories xmi:id="_Nd9YPiv6Eeup8_xr1HbtVQ" elementId="org.eclipse.mylyn.commons.repositories.ui.category.Team" name="Team"/>
   <categories xmi:id="_Nd9YPyv6Eeup8_xr1HbtVQ" elementId="org.eclipse.oomph.commands" name="Oomph"/>
   <categories xmi:id="_Nd9YQCv6Eeup8_xr1HbtVQ" elementId="org.eclipse.core.commands.categories.autogenerated" name="Uncategorized" description="Commands that were either auto-generated or have no category"/>
+  <categories xmi:id="_j9bDQS51Eeu86oe8NF4uLA" elementId="asciidoctoreditor.commands.category" name="Asciidoctor editor" description="Asciidoctor editor"/>
+  <categories xmi:id="_j9bqUC51Eeu86oe8NF4uLA" elementId="asciidoctor.converter.commands.category" name="Asciidoctor converter" description="Asciidoctor editor"/>
 </application:Application>
