@@ -204,6 +204,15 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 |LoginForm|Interface zum überprüfen des Logins
 |===
 
+=== Order
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Baukastensicht_Order.png[]
+
+[options="header"]
+|=== 
+|Klasse/Enumeration |Beschreibung 
+|OrderController|Einen Spring MVC-Controller für den Warenkorb
+|===
+
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 _Die folgende Tabelle zeigt die Rückverfolgbarkeit zwischen Entwurfs- und Analysemodell. Falls eine Klasse aus einem externen Framework im Entwurfsmodell eine Klasse des Analysemodells ersetzt,
 wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwendung* mithilfe der folgenden Begriffe definiert:_
@@ -234,6 +243,9 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 
 === Customer
 image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/seq_customer.svg[]
+
+=== Order
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/seq_order.png[]
 
 == Technische Schulden
 * Auflistung der nicht erreichten Quality Gates und der zugehörigen SonarQube Issues zum Zeitpunkt der Abgabe
