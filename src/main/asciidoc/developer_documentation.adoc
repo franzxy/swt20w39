@@ -1,3 +1,4 @@
+:numbered:
 = Entwicklerdokumentation
 
 [options="header"]
