@@ -30,19 +30,28 @@ nav {
 	line-height: normal;
 }
 
+.active {
+	box-shadow: 0px 3px 0px 0px white;
+}
+
 .nav {
 	padding: 0 10px;
-	margin-left: 10px;
 }
 
 .pharmacy {
 	font-weight: bold;
-	font-size: large;
+}
+
+.left {
+	margin-left: 10px;
+}
+
+.right {
+	margin-right: 10px;
 }
 
 .button {
 	cursor: pointer;
-	margin-right: 10px;
 	padding: 0 15px;
 	height: 30px;
 	border: none;

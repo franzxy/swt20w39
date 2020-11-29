@@ -1,4 +1,4 @@
-package pharmacy.inventory;
+package pharmacy;
 
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.UniqueInventory;
@@ -9,16 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-class InventoryController {
+class PharmacyController {
 
-	private final UniqueInventory<UniqueInventoryItem> inventory;
-
-	InventoryController(UniqueInventory<UniqueInventoryItem> inventory) {
-		this.inventory = inventory;
-	}
-
-	@GetMapping("/inventory")
+	@GetMapping("/")
 	public String index() {
-		return "inventory";
+		return "pharmacy";
 	}
 }
