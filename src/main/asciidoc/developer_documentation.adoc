@@ -212,6 +212,19 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 
 == Bausteinsicht
 
+=== Inventory
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/InventoryUML.jpg[]
+
+[options="header"]
+|=== 
+|Klasse/Enumeration |Beschreibung
+|InventoryController |Ein Spring MVC Controller zur Bearbeitung von Anfragen zur Anzeige von ``Medicine``s
+|InventoryDataInitializer |Eine Implementierung des Dateninitialisierers zum Erstellen einer Dummy-prescriptiononly und withoutprescription beim Start der Anwendung
+|Medicine |Klasse zur Beschreibung von Medicine als Produkte der Apotheke
+|MedicineType |Enumeration zur Definition einer `Medicine` als withoutprescription oder prescriptiononly
+|MedicineCatalog |Eine Erweiterung von Salespoint.Catalog, um Apotheken-spezifische Abfragen hinzuzufügen
+|===
+
 === User
 
 image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/user.svg[]
@@ -288,6 +301,9 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 |===
 
 == Laufzeitsicht
+
+=== Inventory
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/seq_inventory.jpg[]
 
 === User
 image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/seq_user.svg[]
