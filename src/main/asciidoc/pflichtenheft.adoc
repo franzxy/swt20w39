@@ -32,6 +32,7 @@
 . link:#Akzeptanztestfälle[akzeptanztestfälle] +
 . link:#Glossar[glossar] +
 
+:numbered:
 == Zusammenfassung
 
 Dieses Dokument ist das Pflichtenheft für eine neue Webapp der Apotheke des Unterbrunner Ärztehauses. Es stellt eine Grundlage zur Entwicklung dar und füht detailliert die Anforderungen des Kunden auf.

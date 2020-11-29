@@ -12,6 +12,7 @@
 .. link:#aufgabenstellung[Aufgabenstellung] +
 .. link:#qualitätsziele[Qualitätsziele] +
 
+:numbered:
 == Einführung und Ziele
 
 === Aufgabenstellung
