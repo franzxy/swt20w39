@@ -41,6 +41,42 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="headers"]
 |===
+
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|…  |…              |…              |…       |…
+|I-1.1  
+|Bestellung wird in Buchhaltung aufgenommen 
+|Bestellung wurde Bezahlt 
+|Aufruf von /finances       
+|Bestellung erscheint in der Tabelle mit Datum, Betrag, Zahlungsverkehr und Identifikationsnummer
+
+|I-1.2
+|Variable- und Fixkosten werden korrekt abgebucht
+|Ende des Monats, es existieren Mitarbeiter, Fixkosten sind festgelegt
+|Aufruf von /finances  
+|In der Tabelle ist gelistet wieviel gehalt jeder Mitarbeiter bekommt und wieviel Miete, Strom, Wasser usw. abgebucht wird
+
+|I-1.3
+|Erwartete Zahlung von Arztpraxis
+|Ende des Monats, Arztpraxen haben Medikamente aus der Apotheke geholt
+|Aufruf von /finances
+|In der Tabelle ist, wenn bereits von den Praxen bezahlt, eine Gutschrift zu sehen von dem zu erwartenden Betrag, den die Praxen bazhalt haben
+
+|U-1.1
+|Benutzer nicht mit Rolle "Chef" hat kein zugang
+|Ein Benutzer der nicht die Rolle "Chef" besitzt das System
+|Aufruf von /finances (durch den Benutzer)
+|Der Server Verweigert den Zugang
+
+|U-1.2
+|Ein Falsche Transaktion führt zu Fehlermeldung
+|Ein Produkt ohne Preis oder mit negativem Preis liegt im Warenkorb
+|Der Benutzer clickt auf "Bezahlen"
+|Die Buchhaltung gibt eine Fehlermeldung aus.(NullPointerException bzw. IllegalArgumentException) Die Transaktion wird nicht durchgeführt.
+
+|U-1.3
+|Ein Falsche Transaktion führt zu Fehlermeldung
+|Ein Produkt "null" wird zum bezahlen an die Buchhaltung übergeben
+|Der Benutzer clickt auf "Bezahlen"
+|Die Buchhaltung wirft eine NullPointerException. Die Zahlung erfolgt nicht
+
 |===
