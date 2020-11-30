@@ -11,7 +11,8 @@ Nach welchem Schema sind die Tests benannt?
 
 *U - Unit Test, I - Integrationstest*
 
-*U-1, U-2, I-1*
+*U-1.X, I-1.X bezieht sich auf das Package Finances, 
+U-2, I-1*
 
 == Test Gegenstände
 
