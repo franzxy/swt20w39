@@ -57,7 +57,7 @@ public class SearchController {
 		}
 
 		model.addAttribute("catalog", result);
-		model.addAttribute("title", "Ergebnisse für " searchTerm);
+		model.addAttribute("title", "Ergebnisse für " + searchTerm);
 
 		return "catalog";
 
