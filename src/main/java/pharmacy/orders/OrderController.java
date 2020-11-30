@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import pharmacy.inventory.Medicine;
+import pharmacy.catalog.Medicine;
 
 import java.util.Optional;
 
