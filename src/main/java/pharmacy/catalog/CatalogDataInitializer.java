@@ -1,9 +1,8 @@
-package pharmacy.inventory;
-
-import java.util.ArrayList;
-import java.util.Date;
+package pharmacy.catalog;
 
 import static org.salespointframework.core.Currencies.*;
+
+import pharmacy.catalog.Medicine.PrescriptionType;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
@@ -12,10 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
-import pharmacy.inventory.Medicine.IngredientType;
-import pharmacy.inventory.Medicine.MedicineType;
-import pharmacy.inventory.Medicine.PrescriptionType;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application on application startup.
@@ -26,13 +21,13 @@ import pharmacy.inventory.Medicine.PrescriptionType;
  */
 @Component
 @Order(20)
-class InventoryDataInitializer implements DataInitializer {
+class CatalogDataInitializer implements DataInitializer {
 
-	private static final Logger LOG = LoggerFactory.getLogger(InventoryDataInitializer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CatalogDataInitializer.class);
 
 	private final MedicineCatalog medicineCatalog;
 
-	InventoryDataInitializer(MedicineCatalog medicineCatalog) {
+	CatalogDataInitializer(MedicineCatalog medicineCatalog) {
 
 		Assert.notNull(medicineCatalog, "MedicineCatalog must not be null!");
 
@@ -50,14 +45,13 @@ class InventoryDataInitializer implements DataInitializer {
 			return;
 		}
 
-		LOG.info("Creating default inventory entries.");
-		
-		ArrayList<Date> testmhd = null;
-		ArrayList<String> testingredients = null;
-		
-		medicineCatalog.save(new Medicine("id", "name", Money.of(100, EURO), "usage", "image", 10, 10, testmhd, testingredients, 
-				IngredientType.LABOR, PrescriptionType.PRESCRIPTIONONLY, MedicineType.CAPSULE));
+		LOG.info("Creating default catalog entries.");
 
+		medicineCatalog.save(new Medicine("Last Action Hero", "lac", Money.of(100, EURO), "Äktschn/Comedy", 
+				PrescriptionType.DVD));
+
+		medicineCatalog.save(new Medicine("Secretary", "secretary", Money.of(6.99, EURO), "Political Drama", 
+				PrescriptionType.BLURAY));
 
 	}
 }
