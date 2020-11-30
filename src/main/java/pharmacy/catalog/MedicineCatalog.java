@@ -1,9 +1,9 @@
-package pharmacy.inventory;
+package pharmacy.catalog;
+
+import pharmacy.catalog.Medicine.PrescriptionType;
 
 import org.salespointframework.catalog.Catalog;
 import org.springframework.data.domain.Sort;
-
-import pharmacy.inventory.Medicine.PrescriptionType;
 
 /**
  * An extension of {@link Catalog} to add video shop specific query methods.
