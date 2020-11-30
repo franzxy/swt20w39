@@ -2,11 +2,15 @@ package pharmacy.search;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pharmacy.catalog.Medicine;
+import pharmacy.catalog.MedicineCatalog;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 @Controller
@@ -27,7 +31,7 @@ public class SearchController {
 	}
 
 	@GetMapping("/search")
-	String searchCatalog(@RequestParam(name="searchTerm", required=true) String searchTerm, Model model) {
+	String searchCatalog(@RequestParam(name="searchTerm", required=true) String searchTerm, MedicineCatalog catalog, Model model) {
 
 		String[] search = searchTerm.split(" ");
 
@@ -66,4 +70,4 @@ public class SearchController {
 		//	return "search";
 		//}
 
-	}
+	}}
