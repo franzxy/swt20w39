@@ -116,4 +116,10 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |Der Nutzer kann sich keinen weiteren Account erstellen
 |Timon
 
+|U-3.1
+|Eingabe Leerer / Ungültiger String in Suchformular verbieten
+|Suchformular geöffnet
+|Suchanfrage mit Leerem / Ungültigem String
+|Suche mit Fehlermeldung abbrechen
+
 |===

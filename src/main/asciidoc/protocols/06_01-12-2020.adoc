@@ -1,0 +1,51 @@
+= Protokoll Gruppe 39
+
+Treffen am 01.12.2020
+
+Ort:      BBB +
+Beginn:   16.40 Uhr +
+Ende:     17:15 +
+
+__Schriftführer:__ Lukas Luger +
+
+*Nächstes Treffen:* +
+08.12.2020, 16:40 Uhr, BBB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Lennart Wittkowski: Tutor
+- Falk Natkowski
+- Lukas Luger
+- Jonas Kabelitz 
+- Timon Trettin
+- Clemens Rose
+
+== Bemerkungen
+
+- Testplan ist nicht ausreichend, mindestens das Doppelte an Content
+** Einführung fehlt
+- Coding Rules (insbesondere Critical Rules) beachten
+
+
+=== Aufgaben bis zum 03.12.2020
+- Testplan überarbeiten
+- In Dev-Doku Client-Server Modell einfügen
+
+
+=== Aufgaben bis zum 13.12.2020
+- Prototypen mit Basisfunktionalität erstellen
+
+=== Aufgabenverteilung
+
+- Inventar: Clemens
+- Lab: Jonas
+- Finanzen: Lukas 
+- Nutzerverwaltung: Timon
+- Counters: Falk
+
+
+
+== Aktueller Stand
+Prototypen, Devdoku und Testplan wurden erstellt.
+
