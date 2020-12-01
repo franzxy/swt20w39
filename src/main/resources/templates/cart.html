@@ -3,14 +3,20 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
-		<title>Inventar</title>
+		<title>Warenkorb</title>
 	</head>
-	<body>
+    <body>
         <nav th:include="navigation :: navigation"></nav>
         <ul>
             <li>
-                <a>Medizin</a><a>  3</a>
+                <a>Medizin</a>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
             </li>
         </ul>
-	</body>
+        <a class="button" th:href="@{/checkout}">Bezahlen</a>
+    </body>
 </html>

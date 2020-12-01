@@ -20,7 +20,6 @@ import pharmacy.catalog.Medicine;
 import java.util.Optional;
 
 @Controller
-@PreAuthorize("isAuthenticated()")
 @SessionAttributes("cart")
 public class OrderController {
 
@@ -48,7 +47,9 @@ public class OrderController {
 	}
 
 	@GetMapping("/cart")
-	String basket() {return "cart";}
+	String basket() {
+		return "cart";
+	}
 
 	@PostMapping("/checkout")
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
@@ -69,10 +70,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/orders")
-	@PreAuthorize("hasRole('BOSS')")
-	String orders(Model model) {
-
-		model.addAttribute("ordersCompleted", orderManagement.findBy(OrderStatus.COMPLETED));
+	String orders() {
 		return "orders";
 	}
 }

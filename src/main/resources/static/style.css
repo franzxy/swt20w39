@@ -22,7 +22,7 @@ nav {
 	align-items: center;
 	height: 40px;
 	width: 100%;
-	background: linear-gradient(90deg, rgba(16,162,0,1) 0%, rgba(0,93,82,1) 100%);
+	background: black;
 }
 
 .a {
@@ -40,20 +40,13 @@ nav {
 	color: lightgray;
 }
 
+.space {
+	justify-content: space-evenly;
+	flex-grow: 1;
+}
+
 .nav {
 	padding: 0 10px;
-}
-
-.pharmacy {
-	font-weight: bold;
-}
-
-.left {
-	margin-left: 10px;
-}
-
-.right {
-	margin-right: 10px;
 }
 
 .button {
@@ -65,8 +58,12 @@ nav {
 	border-radius: 15px;
 }
 
+.icon {
+	height: 30px;
+	width: 30px;
+}
+
 .row {
-	display: flex;
 	flex-direction: row;
 }
 
@@ -74,8 +71,19 @@ nav {
 	height: 100%;
 }
 
-.center {
+.flex{
 	display: flex;
+}
+
+.justify {
+	justify-content: center;
+}
+
+.align {
+	align-items: center;
+}
+
+.center {
 	justify-content: center;
 	align-items: center;
 }

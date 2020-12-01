@@ -66,4 +66,9 @@ class UserController {
 
 		return "users";
 	}
+
+	@GetMapping("/account")
+	String account() {
+		return "account";
+	}
 }

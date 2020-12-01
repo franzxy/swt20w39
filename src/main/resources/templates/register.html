@@ -2,36 +2,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
-		<title th:text="#{login.title}">Login - Apotheke</title>
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
+		<title>Registrieren</title>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/login}" th:object="${form}">
-
-            <h3 class="ui dividing header" th:text="#{login.userdata}">Anmelden</h3>
-
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${form}">
+    
             <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" th:field="*{email}" th:errorclass="fieldError" type="email" required="required"/><br/>
-                <div class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
-                    <p>Der Name darf nicht leer sein.</p>
-                </div>
+                <label for="name">E-Mail-Adresse</label>
+                <input id="name" name="name" th:field="*{name}" th:errorclass="fieldError" type="text" required="required"/><br/>
             </div>
-
+    
             <div class="field">
-                <label th:text="#{login.password}" for="password">Passwort</label>
+                <label for="password">Passwort</label>
                 <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
-                    required="required"/><br/>
-                <p class="ui negative message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Das Passwort darf
-                    nicht leer sein.</p>
+                       required="required"/>
             </div>
-
-            <div class="ui negative message" th:if="${#fields.hasErrors('*')}">
-                <p>Einige Angaben sind nicht korrekt.</p>
+            <div class="field">
+                <label for="address">Name</label>
+                <input id="address" name="address" th:field="*{address}" th:errorclass="fieldError" type="text"
+                       required="required"/>
             </div>
-            <button type="submit" class="ui button" th:text="#{login.submit}">Login</button>
+    
+            <button type="submit" class="ui button">Registrieren</button>
         </form>
     </body>
 </html>
