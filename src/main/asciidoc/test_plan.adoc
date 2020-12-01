@@ -100,4 +100,12 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |Aufruf von /register
 |Der Nutzer kann sich keinen weiteren Account erstellen
 
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+
+|U-3.1
+|Eingabe Leerer / Ungültiger String in Suchformular verbieten
+|Suchformular geöffnet
+|Suchanfrage mit Leerem / Ungültigem String
+|Suche mit Fehlermeldung abbrechen
+
 |===
