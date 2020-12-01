@@ -4,24 +4,31 @@ Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
 
 == Einführung
 
-Bei dem vorliegenden Dokument handelt es sich um einen Testplan für die neue Software der Apotheke des Unterbrunner Ärztehaus.
+Bei dem vorliegenden Dokument handelt es sich um einen Testplan für die neue Software der Apotheke des Unterbrunner Ärztehaus. Dieser soll bei der Planung und Umsetzung der Unit und Integrations Tests helfen, welche für die jeweiligen Systemkomponenten erstellt werden. Für jeden Test gibt es zusätzlich einen Ansprechpartner um Rückfragen zu klären.
 
 == Aufbau der Testbezeichner
 Nach welchem Schema sind die Tests benannt?
 
 *U - Unit Test, I - Integrationstest*
 
-*U-1.X, I-1.X bezieht sich auf das Package Finances, 
-U-2, I-1*
+* U-1.X, I-1.X bezieht sich auf das Package Finances
+* U-2.X, I-2.X bezieht sich auf das Package Users
+* U-3.X, I-3.X bezieht sich auf das Package Inventory
+* U-4.X, I-4.X bezieht sich auf das Package Catalog
+* U-5.X, I-5.X bezieht sich auf das Package Order
+* U-6.X, I-6.X bezieht sich auf das Package Search
+* U-7.X, I-7.X bezieht sich auf das Package Counters
 
 == Test Gegenstände
 
 == Zu testende Funktionalitäten
-* Inventory: Clemens
-* Orders: Jonas
-* Finances: Lukas 
-* Users, Counters: Timon
-* Search: Falk
+* Inventory
+* Catalog
+* Orders
+* Finances
+* Users
+* Counters
+* Search
 
 == Nicht zu testende Funktionalitäten
 * Salespoint
@@ -43,55 +50,63 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 [options="headers"]
 |===
 
-|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe |Ansprechpartner
 
 |I-1.1  
 |Bestellung wird in Buchhaltung aufgenommen 
 |Bestellung wurde Bezahlt 
 |Aufruf von /finances       
 |Bestellung erscheint in der Tabelle mit Datum, Betrag, Zahlungsverkehr und Identifikationsnummer
+|Lukas 
 
 |I-1.2
 |Variable- und Fixkosten werden korrekt abgebucht
 |Ende des Monats, es existieren Mitarbeiter, Fixkosten sind festgelegt
 |Aufruf von /finances  
 |In der Tabelle ist gelistet wieviel gehalt jeder Mitarbeiter bekommt und wieviel Miete, Strom, Wasser usw. abgebucht wird
+|Lukas 
 
 |I-1.3
 |Erwartete Zahlung von Arztpraxis
 |Ende des Monats, Arztpraxen haben Medikamente aus der Apotheke geholt
 |Aufruf von /finances
 |In der Tabelle ist, wenn bereits von den Praxen bezahlt, eine Gutschrift zu sehen von dem zu erwartenden Betrag, den die Praxen bazhalt haben
+|Lukas 
 
 |I-2.1  
 |Nutzer wird ins System aufgenommen
 |Nutzer nicht vorher Registriert
 |Aufruf von /register
 |Nutzer erscheint in /users
+|Timon
 
 |I-2.2 
 |Nutzer ändert Passwort
 |Nutzer vorher Registriert
 |Aufruf von /password
 |Nutzer kann sich mit neuem Passwort einloggen
+|Timon
 
 |U-1.1
 |Benutzer nicht mit Rolle "Chef" hat kein zugang
 |Ein Benutzer der nicht die Rolle "Chef" besitzt das System
 |Aufruf von /finances (durch den Benutzer)
 |Der Server Verweigert den Zugang
+|Lukas 
 
 |U-1.2
 |Ein Falsche Transaktion führt zu Fehlermeldung
 |Ein Produkt ohne Preis oder mit negativem Preis liegt im Warenkorb
 |Der Benutzer clickt auf "Bezahlen"
 |Die Buchhaltung gibt eine Fehlermeldung aus.(NullPointerException bzw. IllegalArgumentException) Die Transaktion wird nicht durchgeführt.
+|Lukas 
 
 |U-1.3
 |Ein Falsche Transaktion führt zu Fehlermeldung
 |Ein Produkt "null" wird zum bezahlen an die Buchhaltung übergeben
 |Der Benutzer clickt auf "Bezahlen"
 |Die Buchhaltung wirft eine NullPointerException. Die Zahlung erfolgt nicht
+|Lukas 
 
 
 |U-2.1
@@ -99,5 +114,6 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |Benutzer mit E-Mail gibt es bereits
 |Aufruf von /register
 |Der Nutzer kann sich keinen weiteren Account erstellen
+|Timon
 
 |===
