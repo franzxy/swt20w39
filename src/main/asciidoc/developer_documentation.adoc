@@ -158,7 +158,7 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 
 [#img-Client Server]
 .Client Server
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/clientserver.svg[]
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/client_server.png[]
 
 === Entwurfsentscheidungen
 
