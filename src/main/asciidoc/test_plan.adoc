@@ -116,42 +116,42 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |Der Nutzer kann sich keinen weiteren Account erstellen
 |Timon
 
-|U-3.1
+|U-6.1
 |Eingabe Leerer / Ungültiger String in Suchformular verbieten
 |Suchformular geöffnet
 |Suchanfrage mit Leerem / Ungültigem String
 |Suche mit Fehlermeldung abbrechen
 |Falk
 
-|U-3.2
+|U-6.2
 |Keine Objekte zu Suchanfrage gefunden
 |Suchformular geöffnet
 |Suchanfrage ohne gültiges Ergebniss
 |Leere Suchergebnissseite anzeigen
 |Falk
 
-|U-4.1
+|U-7.1
 |Einkauf ohne Waren im Warenkorb verbieten
 |Keine Ware im Warenkorb
 |Klick auf "Kaufen"
 |Fehlermeldung anzeigen
 |Falk
 
-|U-4.2
+|U-7.2
 |Maximalen Einkaufspreis Limitieren
 |Waren im Warenkorb überschreiten eine vorbestimmte Preisgrenze
 |Klick auf "Kaufen"
 |Einkauf mit Fehlermeldung abbrechen
 |Falk
 
-|U-4.3
+|U-7.3
 |Einkauf mit ungültigen Waren im Warenkorb
 |Fehlerhafte Ware im Warenkorb
 |Klick auf "Kaufen"
 |Einkauf mit Fehlermeldung abbrechen
 |Falk
 
-|U-4.4
+|U-7.4
 |Fehlerhafte Preisberechnung beim Kauf
 |Berechneter Gesamtpreis weißt Fehler auf (z.B. negativer Kaufpreis)
 |Klick auf "Kaufen"
