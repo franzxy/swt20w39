@@ -116,6 +116,27 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |Der Nutzer kann sich keinen weiteren Account erstellen
 |Timon
 
+|U-3.1
+|Benutzer nicht mit Rolle "Chef" hat kein zugang
+|Ein Benutzer der nicht die Rolle "Chef" besitzt das System
+|Aufruf von /inventory (durch den Benutzer)
+|Der Server Verweigert den Zugang
+|Clemens
+
+|U-3.2
+|Hinzufügen von neuen Medikamenten
+|Man muss die Rolle "Chef" besitzen
+|Aufruf von /new_medicine und Eingabe von Daten
+|solang alles orhanden ist nicht , sonst Fehlermeldung 
+|Clemens
+
+|U-4.1
+|Abrufen von speziellen Medikamentendaten
+|Ein Benutzer der Zugang zum Katalog hat
+|Aufruf von /getter_functions (durch den Benutzer)
+|Die Daten die man abrufen will
+|Clemens
+
 |U-5.1
 |Produkt Transaktion scheitert
 |Benutzer versucht ausverkaufte Ware zu bestellen
