@@ -27,6 +27,11 @@ Nach welchem Schema sind die Tests benannt?
 * Orders
 * Finances
 * Users
+** Controller
+** DataInitializer
+** Management
+** Forms
+** Repository
 * Counters
 * Search
 
@@ -104,7 +109,7 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |U-1.3
 |Ein Falsche Transaktion führt zu Fehlermeldung
 |Ein Produkt "null" wird zum bezahlen an die Buchhaltung übergeben
-|Der Benutzer clickt auf "Bezahlen"
+|Der Benutzer klickt auf "Bezahlen"
 |Die Buchhaltung wirft eine NullPointerException. Die Zahlung erfolgt nicht
 |Lukas 
 
@@ -117,9 +122,97 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |Timon
 
 |U-3.1
+|Benutzer nicht mit Rolle "Chef" hat kein zugang
+|Ein Benutzer der nicht die Rolle "Chef" besitzt das System
+|Aufruf von /inventory (durch den Benutzer)
+|Der Server Verweigert den Zugang
+|Clemens
+
+|U-3.2
+|Hinzufügen von neuen Medikamenten
+|Man muss die Rolle "Chef" besitzen
+|Aufruf von /new_medicine und Eingabe von Daten
+|solang alles orhanden ist nicht , sonst Fehlermeldung 
+|Clemens
+
+|U-4.1
+|Abrufen von speziellen Medikamentendaten
+|Ein Benutzer der Zugang zum Katalog hat
+|Aufruf von /getter_functions (durch den Benutzer)
+|Die Daten die man abrufen will
+|Clemens
+
+|U-5.1
+|Produkt Transaktion scheitert
+|Benutzer versucht ausverkaufte Ware zu bestellen
+|Klick auf "In den Warenkorb legen"
+|Fehlermeldung anzeigen + Nachbestellung wird um die Menge der Bestellung  
+|Jonas 
+
+|U-5.2
+|Produkt in den Warenkorb legen scheitert
+|Ein Produkt mit dem Preis null, oder einem negativen Preis soll in den Warenkorb gelegt werden 
+|Klick auf "In den Warenkorb legen"
+|Fehlermeldung anzeigen ( NullPointerException bzw. IllegalArgumentException)
+|Jonas 
+
+|U-5.3
+|Produkt in den Warenkorb legen scheitert
+|Der Nutzer ist noch nicht angemeldet und versucht ein Produkt in den Warenkorb zu legen 
+|Klick auf "In den Warenkorb legen"
+|Der Server bittet um Anmeldung 
+|Jonas 
+
+
+|U-5.4
+|Benutzer nicht mit Rolle „Chef“ versucht alle Aufträge anzuschauen 
+|Nutzer ist nicht als Chef angemeldet 
+|Klick auf „Lieferungen anzeigen“
+|der Server bittet um Anmeldung als „Chef“
+|Jonas
+
+
+
+|U-6.1
 |Eingabe Leerer / Ungültiger String in Suchformular verbieten
 |Suchformular geöffnet
 |Suchanfrage mit Leerem / Ungültigem String
 |Suche mit Fehlermeldung abbrechen
+|Falk
+
+|U-6.2
+|Keine Objekte zu Suchanfrage gefunden
+|Suchformular geöffnet
+|Suchanfrage ohne gültiges Ergebnis
+|Leere Suchergebnissseite anzeigen
+|Falk
+
+|U-7.1
+|Einkauf ohne Waren im Warenkorb verbieten
+|Keine Ware im Warenkorb
+|Klick auf "Kaufen"
+|Fehlermeldung anzeigen
+|Falk
+
+|U-7.2
+|Maximalen Einkaufspreis Limitieren
+|Waren im Warenkorb überschreiten eine vorbestimmte Preisgrenze
+|Klick auf "Kaufen"
+|Einkauf mit Fehlermeldung abbrechen
+|Falk
+
+|U-7.3
+|Einkauf mit ungültigen Waren im Warenkorb
+|Fehlerhafte Ware im Warenkorb
+|Klick auf "Kaufen"
+|Einkauf mit Fehlermeldung abbrechen
+|Falk
+
+|U-7.4
+|Fehlerhafte Preisberechnung beim Kauf
+|Berechneter Gesamtpreis weißt Fehler auf (z.B. negativer Kaufpreis)
+|Klick auf "Kaufen"
+|Einkauf mit Fehlermeldung abbrechen
+|Falk
 
 |===
