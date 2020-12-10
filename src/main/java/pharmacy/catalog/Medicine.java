@@ -29,6 +29,7 @@ public class Medicine extends Product {
 	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße 
 	private Money price; // 
 	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
 	private IngredientType ingType; // wofür wird es verwendet
 	private MedicineType medType; // definiert welche Form das Medikament hat und was die 'size' bedeutet (Anzahl, ml, g)
@@ -36,19 +37,19 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price, ArrayList<LocalDate> bbd, 
+	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price,
+			ArrayList<LocalDate> bbd, ArrayList<Medicine> ingredients, 
 			PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
 		
 		this.id = id;
-		//this.name = name;
 		this.image = image;
 		this.usage = usage;
 		this.restock = restock;
 		this.size = size;
-		//this.price = price;
 		this.bbd = bbd;
+		this.ingredients = ingredients;
 		this.presType = presType;
 		this.ingType = ingType;
 		this.medType = medType;
@@ -78,6 +79,9 @@ public class Medicine extends Product {
 	public ArrayList<LocalDate> getBBD() {
 		return bbd;
 	}
+	public ArrayList<Medicine> getIngredients() {
+		return ingredients;
+	}
 	public PrescriptionType getPresType() {
 		return presType;
 	}
@@ -102,10 +106,20 @@ public class Medicine extends Product {
 		for (int i = bbd.size(); i <= restock; i++) {
 			bbd.add(date);
 		}
-		
 	}
 	// entferne überfällige MHD Medikamente
-	public void deleteStock() {
+	public void deleteStockOverBBD() {
 		
+		LocalDate date = LocalDate.now();
+		for (int i = 0; i < bbd.size(); i++) {
+			bbd.remove(date);
+		}
+	}
+	// entfernt verkaufte Elemente
+	public void soldMedicine(int numberSold) {
+		
+		for (int i = 0; i < numberSold; i++) {
+			bbd.remove(i);
+		}
 	}
 }

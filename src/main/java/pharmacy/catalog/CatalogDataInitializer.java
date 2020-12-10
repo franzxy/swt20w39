@@ -53,11 +53,12 @@ class CatalogDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default catalog entries.");
 		ArrayList<LocalDate> bbd = null;
-		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), bbd, 
-				PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
+		ArrayList<Medicine> ingredients = null;
+		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), 
+				bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
 		
-		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), bbd, 
-				PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.CAPSULE));
+		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), 
+				bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.CAPSULE));
 
 	}
 }
