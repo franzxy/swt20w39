@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
+		<title>Login</title>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+        <form class="ui form" role="form" th:action="@{/login}" method="post">
+
+            <div class="field">
+                <label for="username">E-Mail-Adresse</label>
+                <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
+            </div>
+    
+            <div class="field">
+                <label for="password">Passwort</label>
+                <input type="password" id="password" name="password"/> <br/>
+            </div>
+    
+            <button type="submit" class="ui button">Login</button>
+        </form>
+    </body>
+</html>

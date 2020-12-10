@@ -1,0 +1,17 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
+		<title>Account</title>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+        <div class="row flex align">
+            <h1>Hallo, Boss</h1>
+            <a class="a nav height center" th:href="@{/logout}">
+                <img class="icon" th:src="@{logout.png}">
+            </a>
+        </div>
+    </body>
+</html>
