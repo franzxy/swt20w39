@@ -2,6 +2,7 @@ package pharmacy.catalog;
 
 import static org.salespointframework.core.Currencies.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -51,7 +52,7 @@ class CatalogDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default catalog entries.");
-		ArrayList<Date> bbd = null;
+		ArrayList<LocalDate> bbd = null;
 		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), bbd, 
 				PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
 

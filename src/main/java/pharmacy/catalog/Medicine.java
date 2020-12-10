@@ -1,5 +1,6 @@
 package pharmacy.catalog;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Medicine extends Product {
 	private String id, name, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
 	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße 
 	private Money price; // 
-	private ArrayList<Date> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
 	private IngredientType ingType; // wofür wird es verwendet
 	private MedicineType medType; // definiert welche Form das Medikament hat und was die 'size' bedeutet (Anzahl, ml, g)
@@ -35,7 +36,7 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price, ArrayList<Date> bbd, 
+	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price, ArrayList<LocalDate> bbd, 
 			PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		this.id = id;
@@ -72,7 +73,7 @@ public class Medicine extends Product {
 	public Money getMoney() {
 		return price;
 	}
-	public ArrayList<Date> getBBD() {
+	public ArrayList<LocalDate> getBBD() {
 		return bbd;
 	}
 	public PrescriptionType getPresType() {
@@ -92,9 +93,14 @@ public class Medicine extends Product {
 	public void setRestock(int restock) {
 		this.restock = restock;
 	}
-	// neue MHD's zur Liste hinzufügen und damit Menge an Medikamenten erhöhen
-	public void addNewStock(Date date) {
-		bbd.add(date);
+	// neue MHD's zur Liste hinzufügen und damit Menge an Medikamenten im Lager erhöhen
+	public void addNewStock() {
+		
+		LocalDate date = LocalDate.now().plusMonths(6);
+		for (int i = bbd.size(); i <= restock; i++) {
+			bbd.add(date);
+		}
+		
 	}
 	// entferne überfällige MHD Medikamente
 	public void deleteStock() {
