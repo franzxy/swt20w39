@@ -38,19 +38,19 @@ class CatalogController {
 		this.businessTime = businessTime;
 	}
 
-	@GetMapping("/dvds")
+	@GetMapping("/presonly")
 	String dvdCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(PrescriptionType.DVD));
+		model.addAttribute("catalog", catalog.findByType(PrescriptionType.PRESONLY));
 		model.addAttribute("title", "catalog.dvd.title");
 
 		return "catalog";
 	}
 
-	@GetMapping("/blurays")
+	@GetMapping("/withoutpres")
 	String blurayCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(PrescriptionType.BLURAY));
+		model.addAttribute("catalog", catalog.findByType(PrescriptionType.WITHOUTPRES));
 		model.addAttribute("title", "catalog.bluray.title");
 
 		return "catalog";
@@ -77,7 +77,7 @@ class CatalogController {
 
 			//Suche nach Genre
 			for(int i = 0; i < search.length; i++) {
-				if (d.getGenre().toLowerCase().contains(search[i].toLowerCase())) {
+				if (d.getUsage().toLowerCase().contains(search[i].toLowerCase())) {
 					if(!result.contains(d)) {
 						result.add(d);
 					}
