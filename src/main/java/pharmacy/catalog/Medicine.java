@@ -1,6 +1,7 @@
 package pharmacy.catalog;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,44 +11,93 @@ import javax.persistence.OneToMany;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 
-// (｡◕‿◕｡)
-// Da der Shop DVD sowie BluRay verkaufen soll ist es sinnvoll eine gemeinsame Basisklasse zu erstellen.
-// Diese erbt von Product um die Catalog-Klasse aus Salespoint nutzen zu können.
-// Ein Primärschlüssel ist nicht notwendig, da dieser schon in Product definiert ist, alle anderen
-// JPA-Anforderungen müssen aber erfüllt werden.
 @Entity
 public class Medicine extends Product {
 
 	public static enum PrescriptionType {
-		BLURAY, DVD;
+		PRESONLY, WITHOUTPRES;
+	}
+	public static enum IngredientType {
+		LABOR, SHOP, BOTH, MIXTURE;
+	}
+	public static enum MedicineType {
+		CAPSULE, TABLET, OINTMENT, LIQUID, POWDER;
 	}
 
-	// (｡◕‿◕｡)
-	// primitive Typen oder Strings müssen nicht extra für JPA annotiert werden
-	private String genre, image;
-	private PrescriptionType type;
+	private String id, name, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
+	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße 
+	private Money price; // 
+	private ArrayList<Date> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
+	private IngredientType ingType; // wofür wird es verwendet
+	private MedicineType medType; // definiert welche Form das Medikament hat und was die 'size' bedeutet (Anzahl, ml, g)
 
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String name, String image, Money price, String genre, PrescriptionType type) {
-
-		super(name, price);
-
+	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price, ArrayList<Date> bbd, 
+			PrescriptionType presType, IngredientType ingType, MedicineType medType) {
+		
+		this.id = id;
+		this.name = name;
 		this.image = image;
-		this.genre = genre;
-		this.type = type;
+		this.usage = usage;
+		this.restock = restock;
+		this.size = size;
+		this.price = price;
+		this.bbd = bbd;
+		this.presType = presType;
+		this.ingType = ingType;
+		this.medType = medType;
 	}
-
-	public String getGenre() {
-		return genre;
+	// getter Funktionen für alle Variablen
+	public String getID() {
+		return id;
 	}
-
+	public String getName() {
+		return name;
+	}
 	public String getImage() {
-		return image;
+	return image;
 	}
-
-	public PrescriptionType getType() {
-		return type;
+	public String getUsage() {
+		return usage;
+	}
+	public int getRestock() {
+		return restock;
+	}
+	public int getSize() {
+		return size;
+	}
+	public Money getMoney() {
+		return price;
+	}
+	public ArrayList<Date> getBBD() {
+		return bbd;
+	}
+	public PrescriptionType getPresType() {
+		return presType;
+	}
+	public IngredientType getIngType() {
+		return ingType;
+	}
+	public MedicineType getMedType() {
+		return medType;
+	}
+	// getter Funktion um die Anzahl der vorrätigen Medikamente zu bekommen
+	public int getStock() {
+		return bbd.size();
+	}
+	// ändern wie viele Medikamente vorhanden sein sollen
+	public void setRestock(int restock) {
+		this.restock = restock;
+	}
+	// neue MHD's zur Liste hinzufügen und damit Menge an Medikamenten erhöhen
+	public void addNewStock(Date date) {
+		bbd.add(date);
+	}
+	// entferne überfällige MHD Medikamente
+	public void deleteStock() {
+		
 	}
 }
