@@ -39,13 +39,15 @@ public class Medicine extends Product {
 	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price, ArrayList<LocalDate> bbd, 
 			PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
+		super(name, price);
+		
 		this.id = id;
-		this.name = name;
+		//this.name = name;
 		this.image = image;
 		this.usage = usage;
 		this.restock = restock;
 		this.size = size;
-		this.price = price;
+		//this.price = price;
 		this.bbd = bbd;
 		this.presType = presType;
 		this.ingType = ingType;

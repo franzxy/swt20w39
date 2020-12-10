@@ -26,6 +26,7 @@ class InventoryController {
 	 * @param model will never be {@literal null}.
 	 * @return the view name.
 	 */
+	/*
 	@GetMapping("/stock")
 	@PreAuthorize("hasRole('BOSS')")
 	String stock(Model model) {
@@ -34,5 +35,6 @@ class InventoryController {
 
 		return "stock";
 	}
+	*/
 }
 

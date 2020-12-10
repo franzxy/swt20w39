@@ -23,7 +23,7 @@ import java.util.Iterator;
 
 @Controller
 class CatalogController {
-
+/*
 	private static final Quantity NONE = Quantity.of(0);
 
 	private final MedicineCatalog catalog;
@@ -37,7 +37,8 @@ class CatalogController {
 		this.inventory = inventory;
 		this.businessTime = businessTime;
 	}
-
+*/	
+/*
 	@GetMapping("/presonly")
 	String dvdCatalog(Model model) {
 
@@ -97,18 +98,18 @@ class CatalogController {
 	// (｡◕‿◕｡)
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
 	// Lektüre: http://spring.io/blog/2009/03/08/rest-in-spring-3-mvc/
-	@GetMapping("/disc/{disc}")
+	@GetMapping("/medicine/{medicine}")
 	String detail(@PathVariable Medicine medicine, Model model) {
 
 		var quantity = inventory.findByProductIdentifier(medicine.getId()) //
 				.map(InventoryItem::getQuantity) //
 				.orElse(NONE);
 
-		model.addAttribute("disc", medicine);
+		model.addAttribute("medicine", medicine);
 		model.addAttribute("quantity", quantity);
 		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
 
 		return "detail";
 	}
-
+*/
 }
