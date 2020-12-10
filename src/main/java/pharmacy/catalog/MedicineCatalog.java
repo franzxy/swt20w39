@@ -11,25 +11,26 @@ import org.springframework.data.domain.Sort;
  * @author Oliver Gierke
  */
 public interface MedicineCatalog extends Catalog<Medicine> {
-
+	
 	static final Sort DEFAULT_SORT = Sort.by("productIdentifier").descending();
 
 	/**
-	 * Returns all {@link Disc}s by type ordered by the given {@link Sort}.
+	 * Returns all {@link Medicine}s by type ordered by the given {@link Sort}.
 	 *
 	 * @param type must not be {@literal null}.
 	 * @param sort must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
-	Iterable<Medicine> findByType(PrescriptionType type, Sort sort);
+	Iterable<Medicine> findByPresType(PrescriptionType type, Sort sort);
 
 	/**
-	 * Returns all {@link Disc}s by type ordered by their identifier.
+	 * Returns all {@link Medicine}s by type ordered by their identifier.
 	 *
 	 * @param type must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
-	default Iterable<Medicine> findByType(PrescriptionType type) {
-		return findByType(type, DEFAULT_SORT);
+	default Iterable<Medicine> findByPresType(PrescriptionType type) {
+		return findByPresType(type, DEFAULT_SORT);
 	}
+	
 }
