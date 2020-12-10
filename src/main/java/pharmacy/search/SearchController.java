@@ -29,45 +29,4 @@ public class SearchController {
 		return "redirect:/search?searchTerm=" + form.getSearchTerm();
 
 	}
-
-	@GetMapping("/search")
-	String searchCatalog(@RequestParam(name="searchTerm", required=true) String searchTerm, MedicineCatalog catalog, Model model) {
-
-		String[] search = searchTerm.split(" ");
-
-		ArrayList<Medicine> result = new ArrayList<Medicine>();
-		Iterator<Medicine> stock = catalog.findAll().iterator();
-
-		while(stock.hasNext()) {
-			Medicine d = stock.next();
-
-			//Titelsuche
-			for(int i = 0; i < search.length; i++) {
-				if (d.getName().toLowerCase().contains(search[i].toLowerCase())) {
-					if(!result.contains(d)) {
-						result.add(d);
-					}
-				}
-			}
-
-			//Suche nach Tag
-			for(int i = 0; i < search.length; i++) {
-				if (d.getGenre().toLowerCase().contains(search[i].toLowerCase())) {
-					if(!result.contains(d)) {
-						result.add(d);
-					}
-				}
-			}
-		}
-
-		model.addAttribute("catalog", result);
-		model.addAttribute("title", "Ergebnisse für " + searchTerm);
-
-		return "catalog";
-
-
-		//public String search(@RequestParam(value = "searchTerm", defaultValue = "") String searchTerm) {
-		//	return "search";
-		//}
-
-	}}
+}

@@ -23,7 +23,7 @@ import java.util.Iterator;
 
 @Controller
 class CatalogController {
-/*
+
 	private static final Quantity NONE = Quantity.of(0);
 
 	private final MedicineCatalog catalog;
@@ -37,12 +37,12 @@ class CatalogController {
 		this.inventory = inventory;
 		this.businessTime = businessTime;
 	}
-*/	
-/*
+
+
 	@GetMapping("/presonly")
 	String dvdCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(PrescriptionType.PRESONLY));
+		model.addAttribute("catalog", catalog.findByPresType(PrescriptionType.PRESONLY));
 		model.addAttribute("title", "catalog.dvd.title");
 
 		return "catalog";
@@ -51,35 +51,38 @@ class CatalogController {
 	@GetMapping("/withoutpres")
 	String blurayCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(PrescriptionType.WITHOUTPRES));
+		model.addAttribute("catalog", catalog.findByPresType(PrescriptionType.WITHOUTPRES));
 		model.addAttribute("title", "catalog.bluray.title");
 
 		return "catalog";
 	}
+
 	@GetMapping("/search")
-	String searchCatalog(@RequestParam(name="searchTerm", required=true) String searchTerm, Model model) {
+	String searchCatalog(@RequestParam(name="searchTerm", required=true) String searchTerm, MedicineCatalog catalog, Model model) {
 
 		String[] search = searchTerm.split(" ");
 
-		ArrayList<Medicine> result = new ArrayList<Medicine>();
-		Iterator<Medicine> stock = catalog.findAll().iterator();
+		boolean presonly = false;
 
-		while(stock.hasNext()) {
+		for(int i = 0; i < search.length; i++) {
+			if(search[i].equals("prescription")) {
+				presonly = true;
+			}
+		}
+
+		ArrayList<Medicine> result = new ArrayList<>();
+
+		Iterator<Medicine> stock = catalog.findByPresType(PrescriptionType.WITHOUTPRES).iterator();
+
+		if(presonly) stock = catalog.findByPresType(PrescriptionType.PRESONLY).iterator();
+
+		while (stock.hasNext()) {
 			Medicine d = stock.next();
 
 			//Titelsuche
-			for(int i = 0; i < search.length; i++) {
+			for (int i = 0; i < search.length; i++) {
 				if (d.getName().toLowerCase().contains(search[i].toLowerCase())) {
-					if(!result.contains(d)) {
-						result.add(d);
-					}
-				}
-			}
-
-			//Suche nach Genre
-			for(int i = 0; i < search.length; i++) {
-				if (d.getUsage().toLowerCase().contains(search[i].toLowerCase())) {
-					if(!result.contains(d)) {
+					if (!result.contains(d)) {
 						result.add(d);
 					}
 				}
@@ -87,12 +90,10 @@ class CatalogController {
 		}
 
 		model.addAttribute("catalog", result);
-		model.addAttribute("title", "catalog.search.title");
+		model.addAttribute("title", "Ergebnisse für " + searchTerm);
 
 		return "catalog";
 	}
-
-
 
 
 	// (｡◕‿◕｡)
@@ -111,5 +112,5 @@ class CatalogController {
 
 		return "detail";
 	}
-*/
+
 }
