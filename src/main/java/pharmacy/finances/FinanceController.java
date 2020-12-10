@@ -17,6 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -56,6 +60,13 @@ public class FinanceController {
 	public String finances(Model model) {
 		List<AccountancyEntry> ret=this.acc.findAll().toList();
 		model.addAttribute("entries", ret);
+		return "finances";
+	}
+	@PostMapping("/filter")
+	//@RequestMapping(value="/filter", method=RequestMethod.POST, params="number")
+	public String filter(@RequestParam("number") int number,Model model) {
+		System.out.println("---------------------");
+		System.out.println("---------------------"+number);
 		return "finances";
 	}
 }
