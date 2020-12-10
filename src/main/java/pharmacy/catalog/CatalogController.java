@@ -23,7 +23,7 @@ import java.util.Iterator;
 
 @Controller
 class CatalogController {
-/*
+
 	private static final Quantity NONE = Quantity.of(0);
 
 	private final MedicineCatalog catalog;
@@ -37,12 +37,12 @@ class CatalogController {
 		this.inventory = inventory;
 		this.businessTime = businessTime;
 	}
-*/	
-/*
+
+
 	@GetMapping("/presonly")
 	String dvdCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(PrescriptionType.PRESONLY));
+		model.addAttribute("catalog", catalog.findByPresType(PrescriptionType.PRESONLY));
 		model.addAttribute("title", "catalog.dvd.title");
 
 		return "catalog";
@@ -51,11 +51,12 @@ class CatalogController {
 	@GetMapping("/withoutpres")
 	String blurayCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(PrescriptionType.WITHOUTPRES));
+		model.addAttribute("catalog", catalog.findByPresType(PrescriptionType.WITHOUTPRES));
 		model.addAttribute("title", "catalog.bluray.title");
 
 		return "catalog";
 	}
+	/*
 	@GetMapping("/search")
 	String searchCatalog(@RequestParam(name="searchTerm", required=true) String searchTerm, Model model) {
 
@@ -91,7 +92,7 @@ class CatalogController {
 
 		return "catalog";
 	}
-
+	*/
 
 
 
@@ -111,5 +112,5 @@ class CatalogController {
 
 		return "detail";
 	}
-*/
+
 }
