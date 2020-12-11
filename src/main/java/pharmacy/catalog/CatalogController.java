@@ -57,44 +57,6 @@ class CatalogController {
 		return "catalog";
 	}
 
-	@GetMapping("/search")
-	String searchCatalog(@RequestParam(name="searchTerm", required=true) String searchTerm, MedicineCatalog catalog, Model model) {
-
-		String[] search = searchTerm.split(" ");
-
-		boolean presonly = false;
-
-		for(int i = 0; i < search.length; i++) {
-			if(search[i].equals("prescription")) {
-				presonly = true;
-			}
-		}
-
-		ArrayList<Medicine> result = new ArrayList<>();
-
-		Iterator<Medicine> stock = catalog.findByPresType(PrescriptionType.WITHOUTPRES).iterator();
-
-		if(presonly) stock = catalog.findByPresType(PrescriptionType.PRESONLY).iterator();
-
-		while (stock.hasNext()) {
-			Medicine d = stock.next();
-
-			//Titelsuche
-			for (int i = 0; i < search.length; i++) {
-				if (d.getName().toLowerCase().contains(search[i].toLowerCase())) {
-					if (!result.contains(d)) {
-						result.add(d);
-					}
-				}
-			}
-		}
-
-		model.addAttribute("catalog", result);
-		model.addAttribute("title", "Ergebnisse für " + searchTerm);
-
-		return "catalog";
-	}
-
 
 	// (｡◕‿◕｡)
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
