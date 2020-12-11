@@ -10,10 +10,6 @@ import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
 class PasswordForm {
 
-	@NotEmpty(message = "{PasswordForm.oldPassword.NotEmpty}")
-	// @MatchingPassword(SecurityContextHolder.getContext().getAuthentication().getCredentials(), message = "{PasswordForm.oldPassword.Correct}")
-	private final String oldPassword;
-
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
 	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
@@ -22,25 +18,11 @@ class PasswordForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String newPassword;
 
-	@NotEmpty(message = "{PasswordForm.confirmPassword.NotEmpty}")
-	// @MatchingPassword(newPassword, message = "{PasswordForm.confirmPassword.Match}")
-	private final String confirmPassword;
-
-	public PasswordForm(String oldPassword, String newPassword, String  confirmPassword) {
-		this.oldPassword = oldPassword;
+	public PasswordForm(String newPassword) {
 		this.newPassword = newPassword;
-		this.confirmPassword = confirmPassword;
-	}
-
-	public String getOldPassword() {
-		return oldPassword;
 	}
 
 	public String getNewPassword() {
 		return newPassword;
-	}
-
-	public String getconfirmPassword() {
-		return  confirmPassword;
 	}
 }

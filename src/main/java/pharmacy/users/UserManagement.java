@@ -1,5 +1,6 @@
 package pharmacy.users;
 
+import pharmacy.users.User.Insurance;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -15,8 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Transactional
 public class UserManagement {
 
-	public static final Role CUSTOMER_ROLE = Role.of("CUSTOMER");
-
+	public static final Role USER_ROLE = Role.of("USER");
 	private final UserRepository users;
 	private final UserAccountManagement userAccounts;
 
@@ -31,21 +31,18 @@ public class UserManagement {
 
 	public User createUser(RegistrationForm form) {
 
-		Assert.notNull(form, "Registration form must not be null!");
-
 		var password = UnencryptedPassword.of(form.getPassword());
-		var userAccount = userAccounts.create(form.getName(), password, CUSTOMER_ROLE);
+		var userAccount = userAccounts.create(form.getEmail(), password, USER_ROLE);
 		
-		return users.save(new User(userAccount, form.getAddress()));
+		return users.save(new User(userAccount, form.getName(), form.getInsuranceType(), form.getAddress(), form.getSalary(), form.getVacationRemaining()));
 	}
 
 	public String changePassword(PasswordForm form) {
-
-		Assert.notNull(form, "Registration form must not be null!");
-
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		var user = userAccounts.findByUsername(auth.getName());
 		userAccounts.changePassword(user.get(), UnencryptedPassword.of(form.getNewPassword()));
+		
 		return "password changed";
 	}
 
