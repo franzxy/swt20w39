@@ -1,5 +1,6 @@
 package pharmacy.users;
 
+import pharmacy.users.User.Insurance;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.AssertTrue;
@@ -10,9 +11,14 @@ import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
 class RegistrationForm {
 	
-	
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
 	private final String name;
+	
+	@NotEmpty(message = "{RegistrationForm.insurance.NotEmpty}")
+	private final Insurance insuranceType;
+
+	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
+	private final String email;
 
 	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
@@ -23,25 +29,38 @@ class RegistrationForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String password;
 
-	@NotEmpty(message = "{RegistrationForm.address.NotEmpty}")
-	private final String address;
-	
-
-	public RegistrationForm(String name, String password, String address) {
+	public RegistrationForm(String name, Insurance insuranceType, String email, String password) {
 		this.name = name;
+		this.insuranceType = insuranceType;
+		this.email = email;
 		this.password = password;
-		this.address = address;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public String getPassword() {
 		return password;
 	}
 
+	public Insurance getInsuranceType() {
+		return insuranceType;
+	}
+
 	public String getAddress() {
-		return address;
+		return null;
+	}
+
+	public String getSalary() {
+		return null;
+	}
+
+	public String getVacationRemaining() {
+		return null;
 	}
 }
