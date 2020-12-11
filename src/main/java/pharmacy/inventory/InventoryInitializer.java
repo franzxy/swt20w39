@@ -48,7 +48,7 @@ class InventoryInitializer implements DataInitializer {
 
 			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
 			if (inventory.findByProduct(medicine).isEmpty()) {
-				inventory.save(new UniqueInventoryItem(medicine, Quantity.of(10)));
+				inventory.save(new UniqueInventoryItem(medicine, Quantity.of(1)));
 			}
 		});
 	}

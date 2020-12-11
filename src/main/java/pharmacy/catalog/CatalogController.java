@@ -38,73 +38,37 @@ class CatalogController {
 		this.businessTime = businessTime;
 	}
 
-	@GetMapping("/dvds")
+
+	@GetMapping("/presonly")
 	String dvdCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(PrescriptionType.DVD));
+		model.addAttribute("catalog", catalog.findByPresType(PrescriptionType.PRESONLY));
 		model.addAttribute("title", "catalog.dvd.title");
 
 		return "catalog";
 	}
 
-	@GetMapping("/blurays")
+	@GetMapping("/withoutpres")
 	String blurayCatalog(Model model) {
 
-		model.addAttribute("catalog", catalog.findByType(PrescriptionType.BLURAY));
+		model.addAttribute("catalog", catalog.findByPresType(PrescriptionType.WITHOUTPRES));
 		model.addAttribute("title", "catalog.bluray.title");
 
 		return "catalog";
 	}
-	@GetMapping("/search")
-	String searchCatalog(@RequestParam(name="searchTerm", required=true) String searchTerm, Model model) {
-
-		String[] search = searchTerm.split(" ");
-
-		ArrayList<Medicine> result = new ArrayList<Medicine>();
-		Iterator<Medicine> stock = catalog.findAll().iterator();
-
-		while(stock.hasNext()) {
-			Medicine d = stock.next();
-
-			//Titelsuche
-			for(int i = 0; i < search.length; i++) {
-				if (d.getName().toLowerCase().contains(search[i].toLowerCase())) {
-					if(!result.contains(d)) {
-						result.add(d);
-					}
-				}
-			}
-
-			//Suche nach Genre
-			for(int i = 0; i < search.length; i++) {
-				if (d.getGenre().toLowerCase().contains(search[i].toLowerCase())) {
-					if(!result.contains(d)) {
-						result.add(d);
-					}
-				}
-			}
-		}
-
-		model.addAttribute("catalog", result);
-		model.addAttribute("title", "catalog.search.title");
-
-		return "catalog";
-	}
-
-
 
 
 	// (｡◕‿◕｡)
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
 	// Lektüre: http://spring.io/blog/2009/03/08/rest-in-spring-3-mvc/
-	@GetMapping("/disc/{disc}")
+	@GetMapping("/medicine/{medicine}")
 	String detail(@PathVariable Medicine medicine, Model model) {
 
 		var quantity = inventory.findByProductIdentifier(medicine.getId()) //
 				.map(InventoryItem::getQuantity) //
 				.orElse(NONE);
 
-		model.addAttribute("disc", medicine);
+		model.addAttribute("medicine", medicine);
 		model.addAttribute("quantity", quantity);
 		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
 

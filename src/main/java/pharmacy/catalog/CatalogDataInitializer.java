@@ -2,6 +2,12 @@ package pharmacy.catalog;
 
 import static org.salespointframework.core.Currencies.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+
+import pharmacy.catalog.Medicine.IngredientType;
+import pharmacy.catalog.Medicine.MedicineType;
 import pharmacy.catalog.Medicine.PrescriptionType;
 
 import org.javamoney.moneta.Money;
@@ -46,12 +52,13 @@ class CatalogDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default catalog entries.");
-
-		medicineCatalog.save(new Medicine("Last Action Hero", "lac", Money.of(100, EURO), "Äktschn/Comedy", 
-				PrescriptionType.DVD));
-
-		medicineCatalog.save(new Medicine("Secretary", "secretary", Money.of(6.99, EURO), "Political Drama", 
-				PrescriptionType.BLURAY));
+		ArrayList<LocalDate> bbd = null;
+		ArrayList<Medicine> ingredients = null;
+		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), 
+				bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
+		
+		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), 
+				bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.CAPSULE));
 
 	}
 }
