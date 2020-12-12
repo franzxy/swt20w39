@@ -10,15 +10,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
-class RegistrationForm {
+class SalaryForm {
 	
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
+	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final String name;
+	
+	private final Insurance insuranceType;
 
-	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
+	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
 	private final String email;
 
-	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
+	@NotEmpty(message = "{DeliveryForm.password.NotEmpty}")
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
 	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
@@ -27,10 +29,14 @@ class RegistrationForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String password;
 
-	public RegistrationForm(String name, String email, String password) {
+	private final String address;
+
+	public SalaryForm(String name, Insurance insuranceType, String email, String password, @Null String address) {
 		this.name = name;
+		this.insuranceType = insuranceType;
 		this.email = email;
 		this.password = password;
+		this.address = address;
 	}
 
 	public String getName() {
@@ -43,5 +49,13 @@ class RegistrationForm {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public Insurance getInsuranceType() {
+		return insuranceType;
+	}
+
+	public String getAddress() {
+		return address;
 	}
 }

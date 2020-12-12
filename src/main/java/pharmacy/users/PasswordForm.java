@@ -7,10 +7,17 @@ import javax.validation.constraints.Pattern;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
+import org.salespointframework.useraccount.UserAccountManagement;
 
 class PasswordForm {
+	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
+	private String oldPassword;
 
-	private final String oldPassword;
+	@AssertTrue(message="Old password incorrect")
+	private boolean isValid() {
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getCredentials());
+		return this.oldPassword.equals(SecurityContextHolder.getContext().getAuthentication().getCredentials());
+	}
 
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")

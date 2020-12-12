@@ -1,6 +1,6 @@
 package pharmacy.users;
 
-import pharmacy.users.User.Insurance;
+import pharmacy.users.Customer.Insurance;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
