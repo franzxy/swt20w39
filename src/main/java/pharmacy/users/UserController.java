@@ -10,7 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 class UserController {
@@ -24,20 +23,12 @@ class UserController {
 		this.userManagement = userManagement;
 	}
 
-	@PostMapping("/password")
-	String changePassword(@Valid @ModelAttribute("form")PasswordForm form, Errors result) {
-		if (result.hasErrors()) {
-			return "password";
-		}
-		userManagement.changePassword(form);
-		
-		return "redirect:/";
-	}
+	@GetMapping("/register")
+	String register(Model model, RegistrationForm form) {
 
-	@GetMapping("/password")
-	String changePassword(Model model, PasswordForm form) {
 		model.addAttribute("form", form);
-		return "password";
+		
+		return "register";
 	}
 
     @PostMapping("/register")
@@ -52,12 +43,6 @@ class UserController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/register")
-	String register(Model model, RegistrationForm form) {
-		model.addAttribute("form", form);
-		return "register";
-	}
-
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('BOSS')")
 	String users(Model model) {
@@ -68,7 +53,21 @@ class UserController {
 	}
 
 	@GetMapping("/account")
-	String account() {
+	@PreAuthorize("isAuthenticated()")
+	String changePassword(Model model, PasswordForm form) {
+		model.addAttribute("changePassword", form);
+		model.addAttribute("userName", userManagement.currentUserName());
+		return "account";
+	}
+
+	@PostMapping("/account")
+	@PreAuthorize("isAuthenticated()")
+	String changePassword(Model model, @Valid @ModelAttribute("changePassword") PasswordForm form, Errors result) {
+		model.addAttribute("userName", userManagement.currentUserName());
+		if (result.hasErrors()) {
+			return "account";
+		}
+		userManagement.changePassword(form);
 		return "account";
 	}
 }

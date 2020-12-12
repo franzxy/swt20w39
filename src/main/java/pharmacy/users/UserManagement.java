@@ -33,8 +33,9 @@ public class UserManagement {
 
 		var password = UnencryptedPassword.of(form.getPassword());
 		var userAccount = userAccounts.create(form.getEmail(), password, USER_ROLE);
-		
-		return users.save(new User(userAccount, form.getName(), form.getInsuranceType(), form.getAddress(), form.getSalary(), form.getVacationRemaining()));
+		userAccount.setFirstname(form.getName());
+
+		return users.save(new User(userAccount, form.getInsuranceType(), form.getAddress(), form.getSalary(), form.getVacationRemaining()));
 	}
 
 	public String changePassword(PasswordForm form) {
@@ -48,5 +49,11 @@ public class UserManagement {
 
 	public Streamable<User> findAll() {
 		return users.findAll();
+	}
+
+	public String currentUserName() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		var user = userAccounts.findByUsername(auth.getName());
+		return user.get().getFirstname();
 	}
 }

@@ -8,10 +8,38 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         <div class="row flex align">
-            <h1>Hallo, Boss</h1>
+            <h1 th:text="${userName}"></h1>
             <a class="a nav height center" th:href="@{/logout}">
                 <img class="icon" th:src="@{logout.png}">
             </a>
         </div>
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/account}" th:object="${changePassword}">
+
+            <h3 class="ui dividing header" th:text="#{password.change}">Passwort ändern</h3>
+    
+            <div class="ui negative message" th:if="${#fields.hasErrors('*')}">
+                <p>Einige Angaben sind nicht korrekt.</p>
+            </div>
+    
+            <div class="field">
+                <label th:text="#{password.oldPassword}" for="password">Altes Passwort</label>
+                <input id="oldPassword" name="oldPassword" th:field="*{oldPassword}" th:errorclass="fieldError" type="password"
+                       required="required"/><br/>
+                <p th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}">Das Passwort darf
+                    nicht leer sein.</p>
+            </div>
+    
+            <div class="field">
+                <label th:text="#{password.newPassword}" for="password">Neues Passwort</label>
+                <input id="newPassword" name="newPassword" th:field="*{newPassword}" th:errorclass="fieldError" type="password"
+                       required="required"/><br/>
+                
+                <p th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}">Das Passwort darf
+                    nicht leer sein.</p>
+                
+            </div>
+    
+            <button type="submit" class="ui button" th:text="#{password.submit}">Passwort ändern</button>
+        </form>
     </body>
 </html>

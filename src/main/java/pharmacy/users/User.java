@@ -11,7 +11,6 @@ import org.salespointframework.useraccount.UserAccount;
 public class User {
 
 	private @Id @GeneratedValue long id;
-	private String name;
 	public enum Insurance {
 		PUBLIC, PRIVATE
 	};
@@ -26,9 +25,8 @@ public class User {
 	@SuppressWarnings("unused")
 	private User() {}
 
-	public User(UserAccount userAccount, String name, Insurance insuranceType, String address, String salary, String vacationRemaining) {
+	public User(UserAccount userAccount, Insurance insuranceType, String address, String salary, String vacationRemaining) {
 		this.userAccount = userAccount;
-		this.name = name;
 		this.insuranceType = insuranceType;
 		this.address = address;
 		this.salary = salary;
@@ -41,10 +39,6 @@ public class User {
 
 	public UserAccount getUserAccount() {
 		return userAccount;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public Insurance getInsuranceType() {

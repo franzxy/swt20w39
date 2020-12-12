@@ -10,6 +10,8 @@ import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
 class PasswordForm {
 
+	private final String oldPassword;
+
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
 	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
@@ -18,8 +20,13 @@ class PasswordForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String newPassword;
 
-	public PasswordForm(String newPassword) {
+	public PasswordForm(String oldPassword, String newPassword) {
+		this.oldPassword = oldPassword;
 		this.newPassword = newPassword;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
 	}
 
 	public String getNewPassword() {

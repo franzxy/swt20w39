@@ -14,7 +14,6 @@ class RegistrationForm {
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
 	private final String name;
 	
-	@NotEmpty(message = "{RegistrationForm.insurance.NotEmpty}")
 	private final Insurance insuranceType;
 
 	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
