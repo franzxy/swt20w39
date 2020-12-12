@@ -25,32 +25,27 @@ class UserController {
 
 	@GetMapping("/customer")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String manageNewCustomer(
-		Model model, 
-		CustomerRegistrationForm customerRegistrationForm
-	) {
-		model.addAttribute("customerRegistrationForm", customerRegistrationForm);
+	String manageNewCustomer(Model model, CustomerForm customerForm) {
+		
+		model.addAttribute("customerForm", customerForm);
 		return "customer";
 	}
 
     @PostMapping("/customer")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String newCustomer(
-		@Valid @ModelAttribute("customerRegistrationForm")CustomerRegistrationForm customerRegistrationForm, 
-		Errors result
-	) {
+	String newCustomer(@Valid @ModelAttribute("customerForm")CustomerForm customerForm, Errors result) {
 
 		if (result.hasErrors()) {
 			return "customer";
 		}
-		userManagement.addCustomer(customerRegistrationForm);
+		userManagement.addCustomer(customerForm);
 
 		return "redirect:/users";
 	}
 
 	@GetMapping("/doctor")
 	@PreAuthorize("hasRole('BOSS')")
-	String doctor(Model model, UserRegistrationForm userRegistrationForm) {
+	String doctor(Model model, UserForm userRegistrationForm) {
 		model.addAttribute("userRegistrationForm", userRegistrationForm);
 		return "doctor";
 	}
@@ -58,7 +53,7 @@ class UserController {
     @PostMapping("/doctor")
 	@PreAuthorize("hasRole('BOSS')")
 	String newDoctor(
-		@Valid @ModelAttribute("userRegistrationForm")UserRegistrationForm userRegistrationForm, 
+		@Valid @ModelAttribute("userRegistrationForm")UserForm userRegistrationForm, 
 		Errors result
 	) {
 
@@ -74,8 +69,8 @@ class UserController {
 	@PreAuthorize("hasRole('BOSS')")
 	String employee(
 		Model model, 
-		UserRegistrationForm userRegistrationForm, 
-		EmployeeAddForm employeeAddForm
+		UserForm userRegistrationForm, 
+		EmployeeForm employeeAddForm
 	) {
 		model.addAttribute("userRegistrationForm", userRegistrationForm);
 		model.addAttribute("employeeAddForm", employeeAddForm);
@@ -85,8 +80,8 @@ class UserController {
     @PostMapping("/employee")
 	@PreAuthorize("hasRole('BOSS')")
 	String newEmployee(
-		@Valid @ModelAttribute("userRegistrationForm")UserRegistrationForm userRegistrationForm, 
-		@Valid @ModelAttribute("employeeAddForm")EmployeeAddForm employeeAddForm,
+		@Valid @ModelAttribute("userRegistrationForm")UserForm userRegistrationForm, 
+		@Valid @ModelAttribute("employeeAddForm")EmployeeForm employeeAddForm,
 		Errors result
 	) {
 

@@ -16,50 +16,31 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class UserManagement {
 
 	private final UserRepository users;
-	private final CustomerRepository customers;
-	private final DoctorRepository doctors;
-	private final EmployeeRepository empolyees;
 	private final UserAccountManagement userAccounts;
 
-	UserManagement(
-
-		UserRepository users, 
-		CustomerRepository customers, 
-		DoctorRepository doctors, 
-		EmployeeRepository empolyees,
-		UserAccountManagement userAccounts		
-	) {
-
+	UserManagement(UserRepository users, UserAccountManagement userAccounts) {
+		
 		this.users = users;
-		this.customers = customers;
-		this.doctors = doctors;
-		this.empolyees = empolyees;
 		this.userAccounts = userAccounts;
 	}
 
-	public User addUser(UserRegistrationForm userRegistrationForm) {
+	public User addUser(UserForm userForm) {
 
-		var password = UnencryptedPassword.of(userRegistrationForm.getPassword());
-		var userAccount = userAccounts.create(userRegistrationForm.getEmail(), password, "USER");
-		userAccount.setFirstname(userRegistrationForm.getName());
+		var password = UnencryptedPassword.of(userForm.getPassword());
+		var userAccount = userAccounts.create(userForm.getEmail(), password, "USER");
+		userAccount.setFirstname(userForm.getName());
 
 		return users.save(new User(userAccount));
 	}
 
-	public User addCustomer(CustomerRegistrationForm customerRegistrationForm) {
+	public User addCustomer(CustomerForm customerForm) {
 
-		var password = UnencryptedPassword.of(customerRegistrationForm.getPassword());
-		var userAccount = userAccounts.create(customerRegistrationForm.getEmail(), password, "CUSTOMER");
-		userAccount.setFirstname(customerRegistrationForm.getName());
-
-		return customers.save(new Customer(
-
-			userAccount, 
-			customerRegistrationForm.getStreet(), 
-			customerRegistrationForm.getHouseNumber(), 
-			customerRegistrationForm.getPostCode(), 
-			customerRegistrationForm.getCity(), 
-			customerRegistrationForm.getPrivateInsurance()
+		return 
+			customerForm.getStreet(), 
+			customerForm.getHouseNumber(), 
+			customerForm.getPostCode(), 
+			customerForm.getCity(), 
+			customerForm.getPrivateInsurance()
 		));
 	}
 
