@@ -46,20 +46,20 @@ public class UserManagement {
 		return users.save(new User(userAccount));
 	}
 
-	public User addCustomer(UserRegistrationForm userRegistrationForm, CustomerAddressForm customerAddressForm) {
+	public User addCustomer(CustomerRegistrationForm customerRegistrationForm) {
 
-		var password = UnencryptedPassword.of(userRegistrationForm.getPassword());
-		var userAccount = userAccounts.create(userRegistrationForm.getEmail(), password, "CUSTOMER");
-		userAccount.setFirstname(userRegistrationForm.getName());
+		var password = UnencryptedPassword.of(customerRegistrationForm.getPassword());
+		var userAccount = userAccounts.create(customerRegistrationForm.getEmail(), password, "CUSTOMER");
+		userAccount.setFirstname(customerRegistrationForm.getName());
 
 		return customers.save(new Customer(
 
 			userAccount, 
-			customerAddressForm.getStreet(), 
-			customerAddressForm.getHouseNumber(), 
-			customerAddressForm.getPostCode(), 
-			customerAddressForm.getCity(), 
-			customerAddressForm.getPrivateInsurance()
+			customerRegistrationForm.getStreet(), 
+			customerRegistrationForm.getHouseNumber(), 
+			customerRegistrationForm.getPostCode(), 
+			customerRegistrationForm.getCity(), 
+			customerRegistrationForm.getPrivateInsurance()
 		));
 	}
 

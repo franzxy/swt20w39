@@ -10,7 +10,22 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
-class CustomerAddressForm {
+class CustomerRegistrationForm {
+
+	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
+	private final String name;
+
+	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
+	private final String email;
+
+	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
+	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
+	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
+	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
+	@Pattern(regexp="^(?=.*[A-Z]).+$", message = "{PasswordForm.newPassword.Upper}")
+	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
+	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
+	private final String password;
 	
 	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final String street;
@@ -26,13 +41,27 @@ class CustomerAddressForm {
 	
 	private final Boolean privateInsurance;
 
-	public CustomerAddressForm(String street, String houseNumber, Number postCode, String city, Boolean privateInsurance) {
-		
+	public CustomerRegistrationForm(String name, String email, String password, String street, String houseNumber, Number postCode, String city, Boolean privateInsurance) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.postCode = postCode;
 		this.city = city;
 		this.privateInsurance = privateInsurance;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 	public String getStreet() {

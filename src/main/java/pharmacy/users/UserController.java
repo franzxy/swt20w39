@@ -24,29 +24,26 @@ class UserController {
 	}
 
 	@GetMapping("/customer")
-	@PreAuthorize("hasRole('BOSS'|'EMPLOYEE')")
+	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
 	String manageNewCustomer(
 		Model model, 
-		UserRegistrationForm userRegistrationForm, 
-		CustomerAddressForm customerAddressForm
+		CustomerRegistrationForm customerRegistrationForm
 	) {
-		model.addAttribute("userRegistrationForm", userRegistrationForm);
-		model.addAttribute("customerAddressForm", customerAddressForm);
+		model.addAttribute("customerRegistrationForm", customerRegistrationForm);
 		return "customer";
 	}
 
     @PostMapping("/customer")
-	@PreAuthorize("hasRole('BOSS'|'EMPLOYEE')")
+	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
 	String newCustomer(
-		@Valid @ModelAttribute("userRegistrationForm")UserRegistrationForm userRegistrationForm, 
-		@Valid @ModelAttribute("customerAddressForm")CustomerAddressForm customerAddressForm,
+		@Valid @ModelAttribute("customerRegistrationForm")CustomerRegistrationForm customerRegistrationForm, 
 		Errors result
 	) {
 
 		if (result.hasErrors()) {
 			return "customer";
 		}
-		userManagement.addCustomer(userRegistrationForm, customerAddressForm);
+		userManagement.addCustomer(customerRegistrationForm);
 
 		return "redirect:/users";
 	}
