@@ -53,11 +53,6 @@ public class FinanceController {
 		this.um=um;
 		this.filter=filter;
 		
-		//BSP:
-		
-		//Warum??? laut doku passiert das Automatisch!!
-		
-		
 	}
 
 	@GetMapping("/finances")
@@ -75,7 +70,7 @@ public class FinanceController {
 		return "finances";
 	}
 	
-	
+	//diese Methode wird nie Aufgerufen!!
 	@PostMapping("/filtern")
 	 public String filtern(@ModelAttribute Filter filter,Model model) {
 		 String result=filter.getFilterkriterium();
