@@ -47,13 +47,13 @@ public class CounterController {
 	public String doctorsStorage(Model model) {
 		model.addAttribute("DoctorsStorageForm", new DoctorsStorageForm());
 
-		return "doctorsstorage";
+		return "doctorsstorageform";
 	}
 
 	@PostMapping("/doctorsstorage")
-	public String submitDoctorsStorage(@ModelAttribute DoctorsStorageForm form, Model model) {
+	public String submitDoctorsStorageForm(@ModelAttribute DoctorsStorageForm form, Model model) {
 		model.addAttribute("DoctorsStorageForm", form);
-		return "redirect:/medicine/" + form.getID();
+		return "redirect:/medicine/" + form.getSearchID();
 
 	}
 }

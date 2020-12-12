@@ -1,13 +1,13 @@
 package pharmacy.counters;
 
 public class DoctorsStorageForm {
-	private String id;
+	private String searchID;
 
-	public String getID() {
-		return id;
+	public String getSearchID() {
+		return searchID;
 	}
 
-	public void setID(String s) {
-		this.id = s;
+	public void setSearchID(String s) {
+		this.searchID = s;
 	}
 }

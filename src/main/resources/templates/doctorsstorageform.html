@@ -14,7 +14,7 @@
           href="../static/resources/css/style.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" th:href="@{style.css}" />
 
-    <title>Suche</title>
+    <title>Medikamentenscanner</title>
 </head>
 
 <body>
@@ -22,10 +22,10 @@
     <header>
         <h1>Medikamentenscanner</h1>
     </header>
-    <form action="#" th:action="@{/doctorsstorage}" th:object="${doctorsstorageform}" method="post" class="ui form">
+    <form action="#" th:action="@{/doctorsstorage}" th:object="${DoctorsStorageForm}" method="post" class="ui form">
         <div>
             <label>ID:</label>
-            <input type="text" th:field="*{id}" />
+            <input type="text" th:field="*{searchID}" />
         </div>
         <input type="Submit" value="Senden" class="ui button" />
     </form>
