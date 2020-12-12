@@ -8,7 +8,7 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         <div class="row flex align">
-            <h1 th:text="${userName}"></h1>
+            <h1 th:text="Hallo, ${userName}"></h1>
             <a class="a nav height center" th:href="@{/logout}">
                 <img class="icon" th:src="@{logout.png}">
             </a>

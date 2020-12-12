@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.UserAccountManagement;
 
-class PasswordForm {
+class UserPasswordForm {
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	private String oldPassword;
 
@@ -27,7 +27,7 @@ class PasswordForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String newPassword;
 
-	public PasswordForm(String oldPassword, String newPassword) {
+	public UserPasswordForm(String oldPassword, String newPassword) {
 		this.oldPassword = oldPassword;
 		this.newPassword = newPassword;
 	}

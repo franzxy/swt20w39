@@ -1,6 +1,5 @@
 package pharmacy.users;
 
-import pharmacy.users.Customer.Insurance;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
@@ -10,12 +9,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
-class AddressForm {
+class EmployeeVacationForm {
 	
 	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final String name;
-	
-	private final Insurance insuranceType;
 
 	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
 	private final String email;
@@ -31,9 +28,8 @@ class AddressForm {
 
 	private final String address;
 
-	public AddressForm(String name, Insurance insuranceType, String email, String password, @Null String address) {
+	public EmployeeVacationForm(String name, String email, String password, @Null String address) {
 		this.name = name;
-		this.insuranceType = insuranceType;
 		this.email = email;
 		this.password = password;
 		this.address = address;
@@ -49,10 +45,6 @@ class AddressForm {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public Insurance getInsuranceType() {
-		return insuranceType;
 	}
 
 	public String getAddress() {

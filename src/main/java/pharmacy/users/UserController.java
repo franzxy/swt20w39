@@ -23,24 +23,91 @@ class UserController {
 		this.userManagement = userManagement;
 	}
 
-	@GetMapping("/register")
-	String register(Model model, RegistrationForm form) {
-
-		model.addAttribute("form", form);
-		
-		return "register";
+	@GetMapping("/customer")
+	@PreAuthorize("hasRole('BOSS'|'EMPLOYEE')")
+	String manageNewCustomer(
+		Model model, 
+		UserRegistrationForm userRegistrationForm, 
+		CustomerAddressForm customerAddressForm
+	) {
+		model.addAttribute("userRegistrationForm", userRegistrationForm);
+		model.addAttribute("customerAddressForm", customerAddressForm);
+		return "customer";
 	}
 
-    @PostMapping("/register")
-	String registerNew(@Valid @ModelAttribute("form")RegistrationForm form, Errors result) {
+    @PostMapping("/customer")
+	@PreAuthorize("hasRole('BOSS'|'EMPLOYEE')")
+	String newCustomer(
+		@Valid @ModelAttribute("userRegistrationForm")UserRegistrationForm userRegistrationForm, 
+		@Valid @ModelAttribute("customerAddressForm")CustomerAddressForm customerAddressForm,
+		Errors result
+	) {
 
 		if (result.hasErrors()) {
-			return "register";
+			return "customer";
 		}
-		
-		userManagement.createUser(form);
+		userManagement.addCustomer(userRegistrationForm, customerAddressForm);
 
-		return "redirect:/";
+		return "redirect:/users";
+	}
+
+	@GetMapping("/doctor")
+	@PreAuthorize("hasRole('BOSS')")
+	String doctor(Model model, UserRegistrationForm userRegistrationForm) {
+		model.addAttribute("userRegistrationForm", userRegistrationForm);
+		return "doctor";
+	}
+
+    @PostMapping("/doctor")
+	@PreAuthorize("hasRole('BOSS')")
+	String newDoctor(
+		@Valid @ModelAttribute("userRegistrationForm")UserRegistrationForm userRegistrationForm, 
+		Errors result
+	) {
+
+		if (result.hasErrors()) {
+			return "customer";
+		}
+		userManagement.addDoctor(userRegistrationForm);
+
+		return "redirect:/users";
+	}
+
+	@GetMapping("/employee")
+	@PreAuthorize("hasRole('BOSS')")
+	String employee(
+		Model model, 
+		UserRegistrationForm userRegistrationForm, 
+		EmployeeAddForm employeeAddForm
+	) {
+		model.addAttribute("userRegistrationForm", userRegistrationForm);
+		model.addAttribute("employeeAddForm", employeeAddForm);
+		return "employee";
+	}
+
+    @PostMapping("/employee")
+	@PreAuthorize("hasRole('BOSS')")
+	String newEmployee(
+		@Valid @ModelAttribute("userRegistrationForm")UserRegistrationForm userRegistrationForm, 
+		@Valid @ModelAttribute("employeeAddForm")EmployeeAddForm employeeAddForm,
+		Errors result
+	) {
+
+		if (result.hasErrors()) {
+			return "customer";
+		}
+		userManagement.addEmployee(userRegistrationForm, employeeAddForm);
+
+		return "redirect:/users";
+	}
+
+	@GetMapping("/customers")
+	@PreAuthorize("hasRole('Employee')")
+	String customers(Model model) {
+
+		model.addAttribute("userList", userManagement.findAll());
+
+		return "customer";
 	}
 
 	@GetMapping("/users")
@@ -54,20 +121,30 @@ class UserController {
 
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
-	String changePassword(Model model, PasswordForm form) {
-		model.addAttribute("changePassword", form);
+	String changePassword(Model model, UserPasswordForm changePassword) {
+		model.addAttribute("changePassword", changePassword);
 		model.addAttribute("userName", userManagement.currentUserName());
 		return "account";
 	}
 
 	@PostMapping("/account")
 	@PreAuthorize("isAuthenticated()")
-	String changePassword(Model model, @Valid @ModelAttribute("changePassword") PasswordForm form, Errors result) {
+	String changePassword(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
 		model.addAttribute("userName", userManagement.currentUserName());
 		if (result.hasErrors()) {
 			return "account";
 		}
-		userManagement.changePassword(form);
+		userManagement.changePassword(changePassword);
 		return "account";
 	}
+
+	/*
+	String example(@LoggedIn Optional<UserAccount> userAccount) {
+        // functional style using map and lambda expression:
+        return userAccount.map(account -> {
+            // things to be done if the user account is present
+            return "...";
+        }).orElse("redirect:/");  // if the user account is *not* present
+	}
+	*/
 }

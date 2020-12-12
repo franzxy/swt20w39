@@ -1,6 +1,5 @@
 package pharmacy.users;
 
-import pharmacy.users.Customer.Insurance;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -16,29 +15,73 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Transactional
 public class UserManagement {
 
-	public static final Role USER_ROLE = Role.of("USER");
 	private final UserRepository users;
+	private final CustomerRepository customers;
+	private final DoctorRepository doctors;
+	private final EmployeeRepository empolyees;
 	private final UserAccountManagement userAccounts;
 
-	UserManagement(UserRepository users, UserAccountManagement userAccounts) {
+	UserManagement(
 
-		Assert.notNull(users, "UserRepository must not be null!");
-		Assert.notNull(userAccounts, "UserAccountManagement must not be null!");
+		UserRepository users, 
+		CustomerRepository customers, 
+		DoctorRepository doctors, 
+		EmployeeRepository empolyees,
+		UserAccountManagement userAccounts		
+	) {
 
 		this.users = users;
+		this.customers = customers;
+		this.doctors = doctors;
+		this.empolyees = empolyees;
 		this.userAccounts = userAccounts;
 	}
 
-	public User createUser(RegistrationForm form) {
+	public User addUser(UserRegistrationForm userRegistrationForm) {
 
-		var password = UnencryptedPassword.of(form.getPassword());
-		var userAccount = userAccounts.create(form.getEmail(), password, USER_ROLE);
-		userAccount.setFirstname(form.getName());
+		var password = UnencryptedPassword.of(userRegistrationForm.getPassword());
+		var userAccount = userAccounts.create(userRegistrationForm.getEmail(), password, "USER");
+		userAccount.setFirstname(userRegistrationForm.getName());
 
-		return users.save(new User(userAccount, form.getInsuranceType(), form.getAddress(), form.getSalary(), form.getVacationRemaining()));
+		return users.save(new User(userAccount));
 	}
 
-	public String changePassword(PasswordForm form) {
+	public User addCustomer(UserRegistrationForm userRegistrationForm, CustomerAddressForm customerAddressForm) {
+
+		var password = UnencryptedPassword.of(userRegistrationForm.getPassword());
+		var userAccount = userAccounts.create(userRegistrationForm.getEmail(), password, "CUSTOMER");
+		userAccount.setFirstname(userRegistrationForm.getName());
+
+		return customers.save(new Customer(
+
+			userAccount, 
+			customerAddressForm.getStreet(), 
+			customerAddressForm.getHouseNumber(), 
+			customerAddressForm.getPostCode(), 
+			customerAddressForm.getCity(), 
+			customerAddressForm.getPrivateInsurance()
+		));
+	}
+
+	public User addDoctor(UserRegistrationForm userRegistrationForm) {
+
+		var password = UnencryptedPassword.of(userRegistrationForm.getPassword());
+		var userAccount = userAccounts.create(userRegistrationForm.getEmail(), password, "DOCTOR");
+		userAccount.setFirstname(userRegistrationForm.getName());
+
+		return doctors.save(new Doctor(userAccount));
+	}
+
+	public User addEmployee(UserRegistrationForm userRegistrationForm, EmployeeAddForm employeeAddForm) {
+
+		var password = UnencryptedPassword.of(userRegistrationForm.getPassword());
+		var userAccount = userAccounts.create(userRegistrationForm.getEmail(), password, "EMPLOYEE");
+		userAccount.setFirstname(userRegistrationForm.getName());
+
+		return empolyees.save(new Employee(userAccount, employeeAddForm.getSalary(), employeeAddForm.getVacation()));
+	}
+
+	public String changePassword(UserPasswordForm form) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		var user = userAccounts.findByUsername(auth.getName());
