@@ -15,7 +15,7 @@ public class User {
 	private @Id @GeneratedValue long id;
 
 	@OneToOne
-	private UserAccount userAccount;
+	public UserAccount userAccount;
 
 	// Customer
 	private String street;
@@ -28,6 +28,9 @@ public class User {
 	private Money salary;
 	private Integer vacation;
 	private Integer vacationRemaining;
+
+	@SuppressWarnings("unused")
+	private User() {}
 
 	public User(UserAccount userAccount) {
 		

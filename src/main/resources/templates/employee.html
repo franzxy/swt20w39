@@ -7,7 +7,7 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/customer}" th:object="${customerForm}">
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/employee}" th:object="${employeeForm}">
     
             <div class="field">
                 <label for="address">Name</label>
@@ -27,36 +27,16 @@
             </div>
 
             <div class="field">
-                <label for="address">Straße</label>
-                <input id="address" name="address" th:field="*{street}" th:errorclass="fieldError" type="text"
+                <label for="address">Gehalt</label>
+                <input id="address" name="address" th:field="*{salary}" th:errorclass="fieldError" type="text"
                        required="required"/>
             </div>
 
             <div class="field">
-                <label for="address">Hausnummer</label>
-                <input id="name" name="name" th:field="*{houseNumber}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <label for="address">Urlaub</label>
+                <input id="name" name="name" th:field="*{vacation}" th:errorclass="fieldError" type="number" required="required"/><br/>
             </div>
 
-            <div class="field">
-                <label for="name">Postleitzahl</label>
-                <input id="name" name="name" th:field="*{postCode}" th:errorclass="fieldError" type="number" required="required"/><br/>
-            </div>
-    
-            <div class="field">
-                <label for="password">Stadt</label>
-                <input id="password" name="password" th:field="*{city}" th:errorclass="fieldError" type="text"
-                       required="required"/>
-            </div>
-    
-            <div class="field">
-                <label for="password">Private Krankenkasse</label>
-                <select id="password" name="password" th:field="*{privateInsurance}" th:errorclass="fieldError"
-                       required="required">
-                    <option value="false">Nein</option>
-                    <option value="true">Ja</option>
-                </select>
-            </div>
-            
             <button type="submit" class="ui button">Registrieren</button>
         </form>
     </body>

@@ -26,7 +26,7 @@ public class UserManagement {
 	public User addUser(UserForm userForm) {
 		
 		var password = UnencryptedPassword.of(userForm.getPassword());
-		var userAccount = userAccounts.create(userForm.getEmail(), password, "USER");
+		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("USER"));
 		userAccount.setFirstname(userForm.getName());
 
 		return users.save(new User(userAccount));
@@ -44,7 +44,7 @@ public class UserManagement {
 	public User addCustomer(CustomerForm customerForm) {
 		
 		var password = UnencryptedPassword.of(customerForm.getPassword());
-		var userAccount = userAccounts.create(customerForm.getEmail(), password, "CUSTOMER");
+		var userAccount = userAccounts.create(customerForm.getEmail(), password, Role.of("CUSTOMER"));
 		userAccount.setFirstname(customerForm.getName());
 		var user = new User(userAccount);
 		user.setAddress(customerForm.getStreet(), customerForm.getHouseNumber(), customerForm.getPostCode(), customerForm.getCity());
@@ -56,7 +56,7 @@ public class UserManagement {
 	public User addDoctor(UserForm userForm) {
 		
 		var password = UnencryptedPassword.of(userForm.getPassword());
-		var userAccount = userAccounts.create(userForm.getEmail(), password, "DOCTOR");
+		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("DOCTOR"));
 		userAccount.setFirstname(userForm.getName());
 		var user = new User(userAccount);
 
@@ -66,7 +66,7 @@ public class UserManagement {
 	public User addEmployee(EmployeeForm employeeForm) {
 		
 		var password = UnencryptedPassword.of(employeeForm.getPassword());
-		var userAccount = userAccounts.create(employeeForm.getEmail(), password, "EMPLOYEE");
+		var userAccount = userAccounts.create(employeeForm.getEmail(), password, Role.of("EMPLOYEE"));
 		userAccount.setFirstname(employeeForm.getName());
 		var user = new User(userAccount);
 		user.setSalary(employeeForm.getSalary());
