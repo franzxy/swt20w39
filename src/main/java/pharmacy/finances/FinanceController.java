@@ -43,7 +43,7 @@ public class FinanceController {
 	@Autowired
 	private final BusinessTime time;
 	
-	public FilterBase filter;
+	
 	FinanceController(Accountancy acc, OrderManagement<Order> orderManagement, UserAccountManagement um, BusinessTime time) {
 		this.time = time;
 		Assert.notNull(um, "OrderManagement must not be null!");
@@ -52,7 +52,7 @@ public class FinanceController {
 		this.orderManagement = orderManagement;
 		this.acc=acc;
 		this.um=um;
-		this.filter=new FilterBase();
+		
 	}
 	 private List<AccountancyEntry> getEntriesOfRole(String role){
 		 List<AccountancyEntry> working=this.acc.findAll().toList();
@@ -127,20 +127,21 @@ public class FinanceController {
 	//@RequestMapping(value = "/finances", method = RequestMethod.GET)
 	public String finances(Model model) {
 		List<AccountancyEntry> ret=this.acc.findAll().toList();
-		model.addAttribute("filterB",this.filter);
+		model.addAttribute("filterB",new FilterBase());
 		model.addAttribute("tab", ret);
 		return "finances";
 	}
 	
 	
 	//diese Methode wird nie Aufgerufen!!
-	@GetMapping("/filtern")
-	 public String filtern(@ModelAttribute FilterBase filterB, Model model) {
-		model.addAttribute("filterB", this.filter);
+	@PostMapping("/filtern")
+	 public String filterN(@ModelAttribute FilterBase filterB, Model model) {
+		 model.addAttribute("filterB", filterB);
 		 Filter filter1=filterB.getFilter();
-		 System.out.println(filter1);
+		 System.out.println(filter1.toString());
 		 List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
-		 
+		Filter f=Filter.ALLE;
+		
 		 switch(filter1){
 		 case OBEST			: ret = this.getEntriesOfRole("CUSTOMER");			break;
 		 case VERK			: ret = this.getEntriesOfRole("EMPLOYEE");			break;
