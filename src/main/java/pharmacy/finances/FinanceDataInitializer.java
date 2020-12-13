@@ -42,7 +42,7 @@ public class FinanceDataInitializer  implements DataInitializer{
 	public void initialize() {
 		
 		// TODO Auto-generated method stub
-		UserAccount u1 = this.um.create("Hans", Password.UnencryptedPassword.of("123"), Role.of("normalo"));
+		UserAccount u1 = this.um.create("Hans", Password.UnencryptedPassword.of("123"), Role.of("CUSTOMER"));
 		
 		this.um.save(u1);
 		this.um.enable(u1.getId());

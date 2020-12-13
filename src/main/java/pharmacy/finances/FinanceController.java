@@ -89,16 +89,10 @@ public class FinanceController {
 		 List<UserAccount> working=this.um.findAll().toList();
 		 if(this.time.getTime().getDayOfMonth()>29) {
 		 for(UserAccount u:working) {
-			 if(u.hasRole(Role.of("worker"))) {
-				 Order order= new Order(u,Cash.CASH);
-				 order.addChargeLine(Money.of(-900, "EUR"), "Gehalt für "+u.getLastname());
-				 this.orderManagement.payOrder(order);
-				 this.orderManagement.save(order);
-				 for(AccountancyEntry a:this.acc.findAll().toList()) {
-					 if(a.getDescription().contains(order.getId().toString())) {
-						 ret.add(a);
-					 }
-				 }
+			 if(u.hasRole(Role.of("EMPLOYEE"))) {
+				 AccountancyEntry sal= new AccountancyEntry(u.getSalery(), "Gehalt von "+u.getLastname());
+				 ret.add(sal);
+				 this.acc.add(sal);
 			 }
 		 }}
 		 return ret;
@@ -109,14 +103,9 @@ public class FinanceController {
 			 List<UserAccount> working=this.um.findAll().toList();
 			 for(UserAccount u:working) {
 				 if(u.hasRole(Role.of("BOSS"))) {
-					 Order order= new Order(u,Cash.CASH);
-					 order.addChargeLine(Money.of(betr, "EUR"), bez);
-					 this.acc.add(ProductPaymentEntry.of(order, bez));
-					 for(AccountancyEntry a:this.acc.findAll().toList()) {
-						 if(a.getDescription().contains(order.getId().toString())) {
-							 ret.add(a);
-						 }
-					 }
+					 AccountancyEntry sal= new AccountancyEntry(Money.of(betr, "EUR"), bez);
+					 ret.add(sal);
+					 this.acc.add(sal);
 				 }
 			 }
 		 }
@@ -124,7 +113,6 @@ public class FinanceController {
 	 }
 
 	@GetMapping("/finances")
-	//@RequestMapping(value = "/finances", method = RequestMethod.GET)
 	public String finances(Model model) {
 		List<AccountancyEntry> ret=this.acc.findAll().toList();
 		model.addAttribute("filterB",new FilterBase());

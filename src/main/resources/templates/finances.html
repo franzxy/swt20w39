@@ -104,7 +104,7 @@
             </thead>
              <tbody>
         <tr th:if="${tab.empty}">
-            <td colspan="2"> No Accountancies Available </td>
+            <td style="text-align: center;"colspan="3"> No Accountancies Available </td>
         </tr>
         <tr th:each="entry : ${tab}"> 
             <td th:text="${#temporals.format(entry.getDate().get(),'dd.MM.yyyy HH:mm')}">Time</td>
