@@ -77,7 +77,7 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="border bar1"><p>Kontostand: </p></div>
+        <div class="border bar1" ><p >Kontostand: <span th:text="${total}"/> €</p></div>
         <div class="sidenav border">
        
   			<p >Filter</p>
@@ -99,7 +99,7 @@
             <tr>
                 <th >Datum</th>
                 <th >Beschreibung</th>
-                <th >Betrag in EUR</th>
+                <th >Betrag in €</th>
             </tr>
             </thead>
              <tbody>
