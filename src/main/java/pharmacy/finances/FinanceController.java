@@ -90,7 +90,7 @@ public class FinanceController {
 		 if(this.time.getTime().getDayOfMonth()>29) {
 		 for(UserAccount u:working) {
 			 if(u.hasRole(Role.of("EMPLOYEE"))) {
-				 AccountancyEntry sal= new AccountancyEntry(u.getSalery(), "Gehalt von "+u.getLastname());
+				 AccountancyEntry sal= new AccountancyEntry(u.getSalary(), "Gehalt von "+u.getLastname());
 				 ret.add(sal);
 				 this.acc.add(sal);
 			 }
