@@ -20,7 +20,7 @@ public class User {
 	// Customer
 	private String street;
 	private String houseNumber;
-	private Number postCode;
+	private Long postCode;
 	private String city;
 	private Boolean privateInsurance;
 
@@ -54,7 +54,7 @@ public class User {
 	}
 
 	// Customer
-	public void setAddress(String street, String houseNumber, Number postCode, String city) {
+	public void setAddress(String street, String houseNumber, Long postCode, String city) {
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.postCode = postCode;
@@ -69,7 +69,7 @@ public class User {
 		return houseNumber;
 	}
 
-	public Number getPostCode() {
+	public Long getPostCode() {
 		return postCode;
 	}
 

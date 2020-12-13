@@ -31,15 +31,14 @@ class CustomerForm {
 	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
 	private final String houseNumber;
 
-	@NotNull(message = "{DeliveryForm.email.NotEmpty}")
-	private final Number postCode;
+	private final Long postCode;
 
 	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
 	private final String city;
 	
 	private final Boolean privateInsurance;
 
-	public CustomerForm(String name, String lastName, String email, String password, String street, String houseNumber, Number postCode, String city, Boolean privateInsurance) {
+	public CustomerForm(String name, String lastName, String email, String password, String street, String houseNumber, Long postCode, String city, Boolean privateInsurance) {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
@@ -75,7 +74,7 @@ class CustomerForm {
 		return houseNumber;
 	}
 
-	public Number getPostCode() {
+	public Long getPostCode() {
 		return postCode;
 	}
 
