@@ -1,33 +1,26 @@
 package pharmacy.finances;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.accountancy.Accountancy;
 import org.salespointframework.accountancy.AccountancyEntry;
-import org.salespointframework.accountancy.ProductPaymentEntry;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
-import org.salespointframework.payment.Cash;
 import org.salespointframework.time.BusinessTime;
-import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import pharmacy.users.User;
+import pharmacy.users.UserManagement;
 
 
 
@@ -39,12 +32,12 @@ public class FinanceController {
 	@Autowired
 	private final OrderManagement<Order> orderManagement;
 	@Autowired
-	private final UserAccountManagement um;
+	private final UserManagement um;
 	@Autowired
 	private final BusinessTime time;
 	
-	
-	FinanceController(Accountancy acc, OrderManagement<Order> orderManagement, UserAccountManagement um, BusinessTime time) {
+	private Money ist;
+	FinanceController(Accountancy acc, OrderManagement<Order> orderManagement, UserManagement um, BusinessTime time) {
 		this.time = time;
 		Assert.notNull(um, "OrderManagement must not be null!");
 		Assert.notNull(orderManagement, "OrderManagement must not be null!");
@@ -52,6 +45,7 @@ public class FinanceController {
 		this.orderManagement = orderManagement;
 		this.acc=acc;
 		this.um=um;
+		this.ist=Money.of(0.0, "EUR");
 		
 	}
 	 private List<AccountancyEntry> getEntriesOfRole(String role){
@@ -86,11 +80,11 @@ public class FinanceController {
 	 }
 	 private List<AccountancyEntry> createGehalt(){
 		 List<AccountancyEntry> ret =new ArrayList<AccountancyEntry>();
-		 List<UserAccount> working=this.um.findAll().toList();
+		 List<User> working=this.um.findAll().toList();
 		 if(this.time.getTime().getDayOfMonth()>29) {
-		 for(UserAccount u:working) {
-			 if(u.hasRole(Role.of("EMPLOYEE"))) {
-				 AccountancyEntry sal= new AccountancyEntry(u.getSalary(), "Gehalt von "+u.getLastname());
+		 for(User u:working) {
+			 if(u.getUserAccount().hasRole(Role.of("EMPLOYEE"))) {
+				 AccountancyEntry sal= new AccountancyEntry(u.getSalary(), "Gehalt von "+u.getUserAccount().getLastname());
 				 ret.add(sal);
 				 this.acc.add(sal);
 			 }
@@ -100,9 +94,9 @@ public class FinanceController {
 	 private List<AccountancyEntry> createKosten(String bez, double betr){
 		 List<AccountancyEntry> ret =new ArrayList<AccountancyEntry>();
 		 if(this.time.getTime().getDayOfMonth()>29) {
-			 List<UserAccount> working=this.um.findAll().toList();
-			 for(UserAccount u:working) {
-				 if(u.hasRole(Role.of("BOSS"))) {
+			 List<User> working=this.um.findAll().toList();
+			 for(User u:working) {
+				 if(u.getUserAccount().hasRole(Role.of("BOSS"))) {
 					 AccountancyEntry sal= new AccountancyEntry(Money.of(betr, "EUR"), bez);
 					 ret.add(sal);
 					 this.acc.add(sal);
@@ -117,6 +111,11 @@ public class FinanceController {
 		List<AccountancyEntry> ret=this.acc.findAll().toList();
 		model.addAttribute("filterB",new FilterBase());
 		model.addAttribute("tab", ret);
+		for(AccountancyEntry a: ret) {
+			this.ist=this.ist.add(a.getValue());
+			System.out.println(this.ist.getNumber().doubleValue());
+		}
+		model.addAttribute("total", this.ist.getNumber().doubleValue());
 		return "finances";
 	}
 	
@@ -125,8 +124,8 @@ public class FinanceController {
 	@PostMapping("/filtern")
 	 public String filterN(@ModelAttribute FilterBase filterB, Model model) {
 		 model.addAttribute("filterB", filterB);
+		 model.addAttribute("total", this.ist.getNumber().doubleValue());
 		 Filter filter1=filterB.getFilter();
-		 System.out.println(filter1.toString());
 		 List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
 		Filter f=Filter.ALLE;
 		
