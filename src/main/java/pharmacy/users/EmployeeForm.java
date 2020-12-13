@@ -28,18 +28,16 @@ class EmployeeForm {
 	private final String password;
 	
 	// Employee
-	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final Money salary;
 	
-	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final Integer vacation;
 
-	public EmployeeForm(String name, String lastName, String email, String password, Money salary, Integer vacation) {
+	public EmployeeForm(String name, String lastName, String email, String password, Number salary, Integer vacation) {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.salary = salary;
+		this.salary = Money.of(salary, "EUR");
 		this.vacation = vacation;
 	}
 
