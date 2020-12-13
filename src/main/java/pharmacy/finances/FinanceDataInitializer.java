@@ -32,10 +32,6 @@ public class FinanceDataInitializer  implements DataInitializer{
 	@Override
 	public void initialize() {
 		
-		// TODO Auto-generated method stub
-		this.acc.add(new AccountancyEntry(Money.of(30, "EUR"), "Default test"));
-		
-		//System.out.println(this.acc.);
 	}
 
 }
