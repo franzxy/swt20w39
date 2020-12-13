@@ -111,9 +111,9 @@ public class FinanceController {
 		List<AccountancyEntry> ret=this.acc.findAll().toList();
 		model.addAttribute("filterB",new FilterBase());
 		model.addAttribute("tab", ret);
+		this.ist=Money.of(0.0, "EUR");
 		for(AccountancyEntry a: ret) {
 			this.ist=this.ist.add(a.getValue());
-			System.out.println(this.ist.getNumber().doubleValue());
 		}
 		model.addAttribute("total", this.ist.getNumber().doubleValue());
 		return "finances";
@@ -127,8 +127,6 @@ public class FinanceController {
 		 model.addAttribute("total", this.ist.getNumber().doubleValue());
 		 Filter filter1=filterB.getFilter();
 		 List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
-		Filter f=Filter.ALLE;
-		
 		 switch(filter1){
 		 case OBEST			: ret = this.getEntriesOfRole("CUSTOMER");			break;
 		 case VERK			: ret = this.getEntriesOfRole("EMPLOYEE");			break;
