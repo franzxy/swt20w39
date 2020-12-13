@@ -7,11 +7,17 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${form}">
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/employee}" th:object="${employeeForm}">
     
             <div class="field">
+                <label for="address">Name</label>
+                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <div class="field">
                 <label for="name">E-Mail-Adresse</label>
-                <input id="name" name="name" th:field="*{name}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <input id="name" name="name" th:field="*{email}" th:errorclass="fieldError" type="text" required="required"/><br/>
             </div>
     
             <div class="field">
@@ -19,12 +25,18 @@
                 <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
                        required="required"/>
             </div>
+
             <div class="field">
-                <label for="address">Name</label>
-                <input id="address" name="address" th:field="*{address}" th:errorclass="fieldError" type="text"
+                <label for="address">Gehalt</label>
+                <input id="address" name="address" th:field="*{salary}" th:errorclass="fieldError" type="text"
                        required="required"/>
             </div>
-    
+
+            <div class="field">
+                <label for="address">Urlaub</label>
+                <input id="name" name="name" th:field="*{vacation}" th:errorclass="fieldError" type="number" required="required"/><br/>
+            </div>
+
             <button type="submit" class="ui button">Registrieren</button>
         </form>
     </body>

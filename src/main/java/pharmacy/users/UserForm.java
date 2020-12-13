@@ -1,21 +1,13 @@
 package pharmacy.users;
 
-import pharmacy.users.User.Insurance;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
-class RegistrationForm {
+class UserForm {
 	
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
 	private final String name;
-	
-	@NotEmpty(message = "{RegistrationForm.insurance.NotEmpty}")
-	private final Insurance insuranceType;
 
 	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
 	private final String email;
@@ -29,9 +21,8 @@ class RegistrationForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String password;
 
-	public RegistrationForm(String name, Insurance insuranceType, String email, String password) {
+	public UserForm(String name, String email, String password) {
 		this.name = name;
-		this.insuranceType = insuranceType;
 		this.email = email;
 		this.password = password;
 	}
@@ -46,21 +37,5 @@ class RegistrationForm {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public Insurance getInsuranceType() {
-		return insuranceType;
-	}
-
-	public String getAddress() {
-		return null;
-	}
-
-	public String getSalary() {
-		return null;
-	}
-
-	public String getVacationRemaining() {
-		return null;
 	}
 }

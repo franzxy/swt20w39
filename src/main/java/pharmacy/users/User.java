@@ -5,34 +5,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.javamoney.moneta.Money;
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 
 @Entity
 public class User {
 
 	private @Id @GeneratedValue long id;
-	private String name;
-	public enum Insurance {
-		PUBLIC, PRIVATE
-	};
-	private Insurance insuranceType;
-	private String address;
-	private String salary;
-	private String vacationRemaining;
 
 	@OneToOne
-	private UserAccount userAccount;
+	public UserAccount userAccount;
+
+	// Customer
+	private String street;
+	private String houseNumber;
+	private Number postCode;
+	private String city;
+	private Boolean privateInsurance;
+
+	// Employee
+	private Money salary;
+	private Integer vacation;
+	private Integer vacationRemaining;
 
 	@SuppressWarnings("unused")
 	private User() {}
 
-	public User(UserAccount userAccount, String name, Insurance insuranceType, String address, String salary, String vacationRemaining) {
+	public User(UserAccount userAccount) {
+		
 		this.userAccount = userAccount;
-		this.name = name;
-		this.insuranceType = insuranceType;
-		this.address = address;
-		this.salary = salary;
-		this.vacationRemaining = vacationRemaining;
 	}
 
 	public long getId() {
@@ -43,27 +45,68 @@ public class User {
 		return userAccount;
 	}
 
-	public String getName() {
-		return name;
+	public void addRole(Role role) {
+		userAccount.add(role);
 	}
 
-	public Insurance getInsuranceType() {
-		return insuranceType;
+	public void removeRole(Role role) {
+		userAccount.remove(role);
 	}
 
-	public String getAddress() {
-		return address;
+	// Customer
+	public void setAddress(String street, String houseNumber, Number postCode, String city) {
+		this.street = street;
+		this.houseNumber = houseNumber;
+		this.postCode = postCode;
+		this.city = city;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public String getStreet() {
+		return street;
 	}
 
-	public String getSalary() {
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public Number getPostCode() {
+		return postCode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public Boolean getPrivateInsurance() {
+		return privateInsurance;
+	}
+
+	public void setPrivateInsurance(Boolean newInsurance) {
+		this.privateInsurance = newInsurance;
+	}
+
+	// Employee
+	public Money getSalary() {
 		return salary;
 	}
 
-	public String getVacationRemaining() {
+	public void setSalary(Money newSalary) {
+		this.salary = newSalary;
+	}
+
+	public Integer getVacation() {
+		return vacation;
+	}
+
+	public void setVacation(Integer newVacation) {
+		this.vacation = newVacation;
+	}
+
+	public Integer getVacationRemaining() {
 		return vacationRemaining;
+	}
+
+	public void takeVacation(Integer duration) {
+		this.vacationRemaining -= duration;
 	}
 }
