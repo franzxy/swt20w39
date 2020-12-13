@@ -3,7 +3,7 @@ package pharmacy.users;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Pattern;	
 import org.springframework.security.core.context.SecurityContextHolder;
 
 class UserPasswordForm {
