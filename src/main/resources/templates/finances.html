@@ -4,18 +4,116 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
 		<title>Finanzen</title>
+		<style>
+
+      
+      table {
+      	margin-top: 1%;
+      	margin-right: 1%;
+      	margin-bottom: 1%;
+        width: 98%;
+        float: right;
+        padding: 5px;
+        border-collapse: collapse;
+        text-align: left;
+        overflow: hidden;
+        }
+      tr {
+       border: 1px solid white; 
+       color: white; 
+      }
+      th{
+      	color: white;
+      }
+      p{
+      	color:white;
+      	font-size:30px;
+      }
+      ul{
+      	list-style-type: none;
+      	color: white;
+      	padding: 1%
+      }
+      
+      .border{
+      	border: 5px solid red;
+      	border-radius: 10px;
+      }
+      .block{
+ 		 width: 72%; 
+ 		 position: fixed;
+  		 top: 17%;
+ 		 right: 2%;
+ 		 background-color: #111;
+ 		
+      
+      }
+      .bar1{
+      	margin:2% auto 0 auto;
+      	padding: 10px;
+  		width: 95%;
+  		overflow: hidden;
+  		position: absolute;
+  		position: relative;
+  		font-size:30px;
+  		background-color: #111;
+      }
+      .sidenav {
+ 		 height: 75%; 
+ 		 width: 22%; 
+ 		 position: fixed;
+  		 top: 17%;
+ 		 left: 2%;
+ 		 background-color: #111;
+ 		 padding-top: 20px;
+ 		 padding-left: 7px;
+	  }
+      .button{
+      	color:white;
+      }
+      
+
+    </style>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <a>+ 3500€</a>
-        <table class="ui celled table">
+        <div class="border bar1"><p>Kontostand: </p></div>
+        <div class="sidenav border">
+       
+  			<p >Filter</p>
+  			<form action="#" th:action="@{/filtern}"  th:object="${filterB}" method="POST">
+  			<ul >
+  				<li th:each="ty : ${T(pharmacy.finances.Filter).values()}">
+    				<input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
+    				<label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
+  				</li>
+            </ul>
+           <input type="submit" value="Filtern" />
+         </form> 
+         
+         
+		</div>
+		<div class="block border">
+       <table class="ui table">
             <thead>
             <tr>
                 <th >Datum</th>
                 <th >Beschreibung</th>
-                <th >Betrag</th>
+                <th >Betrag in EUR</th>
             </tr>
             </thead>
+             <tbody>
+        <tr th:if="${tab.empty}">
+            <td style="text-align: center;"colspan="3"> No Accountancies Available </td>
+        </tr>
+        <tr th:each="entry : ${tab}"> 
+            <td th:text="${#temporals.format(entry.getDate().get(),'dd.MM.yyyy HH:mm')}">Time</td>
+            <td  th:text="${entry.getDescription()}">Beschreibung</td>
+             <td  th:text="${entry.getValue().getNumber().doubleValue()}">Betrag</td>
+            
+            </tr>
+        </tbody>
         </table>
+        </div>
     </body>
 </html>
