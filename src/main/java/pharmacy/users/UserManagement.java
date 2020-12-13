@@ -28,6 +28,7 @@ public class UserManagement {
 		var password = UnencryptedPassword.of(userForm.getPassword());
 		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("USER"));
 		userAccount.setFirstname(userForm.getName());
+		userAccount.setLastname(userForm.getLastName());
 
 		return users.save(new User(userAccount));
 	}
@@ -46,6 +47,7 @@ public class UserManagement {
 		var password = UnencryptedPassword.of(customerForm.getPassword());
 		var userAccount = userAccounts.create(customerForm.getEmail(), password, Role.of("CUSTOMER"));
 		userAccount.setFirstname(customerForm.getName());
+		userAccount.setLastname(customerForm.getLastName());
 		var user = new User(userAccount);
 		user.setAddress(customerForm.getStreet(), customerForm.getHouseNumber(), customerForm.getPostCode(), customerForm.getCity());
 		user.setPrivateInsurance(customerForm.getPrivateInsurance());
@@ -58,6 +60,7 @@ public class UserManagement {
 		var password = UnencryptedPassword.of(userForm.getPassword());
 		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("DOCTOR"));
 		userAccount.setFirstname(userForm.getName());
+		userAccount.setLastname(userForm.getLastName());
 		var user = new User(userAccount);
 
 		return users.save(user);
@@ -68,6 +71,7 @@ public class UserManagement {
 		var password = UnencryptedPassword.of(employeeForm.getPassword());
 		var userAccount = userAccounts.create(employeeForm.getEmail(), password, Role.of("EMPLOYEE"));
 		userAccount.setFirstname(employeeForm.getName());
+		userAccount.setLastname(employeeForm.getLastName());
 		var user = new User(userAccount);
 		user.setSalary(employeeForm.getSalary());
 		user.setVacation(employeeForm.getVacation());

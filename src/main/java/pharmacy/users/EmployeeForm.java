@@ -11,6 +11,9 @@ class EmployeeForm {
 	// User
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
 	private final String name;
+	
+	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
+	private final String lastName;
 
 	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
 	private final String email;
@@ -31,8 +34,9 @@ class EmployeeForm {
 	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final Integer vacation;
 
-	public EmployeeForm(String name, String email, String password, Money salary, Integer vacation) {
+	public EmployeeForm(String name, String lastName, String email, String password, Money salary, Integer vacation) {
 		this.name = name;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.salary = salary;
@@ -42,6 +46,10 @@ class EmployeeForm {
 	// User
 	public String getName() {
 		return name;
+	}
+
+	public String getLastName() {
+		return lastName;
 	}
 
 	public String getEmail() {
