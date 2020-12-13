@@ -42,52 +42,36 @@ public class User {
 		return userAccount;
 	}
 
+	public void addRole(Role role) {
+		userAccount.add(role);
+	}
+
+	public void removeRole(Role role) {
+		userAccount.remove(role);
+	}
+
 	// Customer
-	public void addCustomer(String street, String houseNumber, Number postCode, String city, Boolean privateInsurance) {
-		
+	public void setAddress(String street, String houseNumber, Number postCode, String city) {
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.postCode = postCode;
 		this.city = city;
-		this.privateInsurance = privateInsurance;
-		userAccount.add(Role.of("CUSTOMER"));
-	}
-
-	public void removeCustomer() {
-
-		userAccount.remove(Role.of("CUSTOMER"));
 	}
 
 	public String getStreet() {
 		return street;
 	}
 
-	public void setStreet(String newStreet) {
-		this.street = newStreet;
-	}
-
 	public String getHouseNumber() {
 		return houseNumber;
-	}
-
-	public void setHouseNumber(String newHouseNumber) {
-		this.houseNumber = newHouseNumber;
 	}
 
 	public Number getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(Number newPostCode) {
-		this.postCode = newPostCode;
-	}
-
 	public String getCity() {
 		return city;
-	}
-
-	public void setCity(String newCity) {
-		this.city = newCity;
 	}
 
 	public Boolean getPrivateInsurance() {
@@ -98,30 +82,7 @@ public class User {
 		this.privateInsurance = newInsurance;
 	}
 
-	// Doctor
-	public void addDoctor() {
-
-		userAccount.add(Role.of("DOCTOR"));
-	}
-
-	public void removeDoctor() {
-
-		userAccount.remove(Role.of("DOCTOR"));
-	}
-
 	// Employee
-	public void addEmployee(Money salary, Integer vacation) {
-
-		this.salary = salary;
-		this.vacation = vacation;
-		this.vacationRemaining = vacation;
-		userAccount.add(Role.of("EMPLOYEE"));
-	}
-
-	public void removeEmployee() {
-
-		userAccount.remove(Role.of("EMPLOYEE"));
-	}
 	public Money getSalary() {
 		return salary;
 	}
@@ -142,7 +103,7 @@ public class User {
 		return vacationRemaining;
 	}
 
-	public void vacation(Integer duration) {
+	public void takeVacation(Integer duration) {
 		this.vacationRemaining -= duration;
 	}
 }

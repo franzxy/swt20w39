@@ -1,13 +1,12 @@
 package pharmacy.users;
 
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
+import org.javamoney.moneta.Money;
 import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -25,41 +24,12 @@ public class UserManagement {
 	}
 
 	public User addUser(UserForm userForm) {
-
+		
 		var password = UnencryptedPassword.of(userForm.getPassword());
 		var userAccount = userAccounts.create(userForm.getEmail(), password, "USER");
 		userAccount.setFirstname(userForm.getName());
 
 		return users.save(new User(userAccount));
-	}
-
-	public User addCustomer(CustomerForm customerForm) {
-
-		return 
-			customerForm.getStreet(), 
-			customerForm.getHouseNumber(), 
-			customerForm.getPostCode(), 
-			customerForm.getCity(), 
-			customerForm.getPrivateInsurance()
-		));
-	}
-
-	public User addDoctor(UserRegistrationForm userRegistrationForm) {
-
-		var password = UnencryptedPassword.of(userRegistrationForm.getPassword());
-		var userAccount = userAccounts.create(userRegistrationForm.getEmail(), password, "DOCTOR");
-		userAccount.setFirstname(userRegistrationForm.getName());
-
-		return doctors.save(new Doctor(userAccount));
-	}
-
-	public User addEmployee(UserRegistrationForm userRegistrationForm, EmployeeAddForm employeeAddForm) {
-
-		var password = UnencryptedPassword.of(userRegistrationForm.getPassword());
-		var userAccount = userAccounts.create(userRegistrationForm.getEmail(), password, "EMPLOYEE");
-		userAccount.setFirstname(userRegistrationForm.getName());
-
-		return empolyees.save(new Employee(userAccount, employeeAddForm.getSalary(), employeeAddForm.getVacation()));
 	}
 
 	public String changePassword(UserPasswordForm form) {
@@ -69,6 +39,68 @@ public class UserManagement {
 		userAccounts.changePassword(user.get(), UnencryptedPassword.of(form.getNewPassword()));
 		
 		return "password changed";
+	}
+
+	public User addCustomer(CustomerForm customerForm) {
+		
+		var password = UnencryptedPassword.of(customerForm.getPassword());
+		var userAccount = userAccounts.create(customerForm.getEmail(), password, "CUSTOMER");
+		userAccount.setFirstname(customerForm.getName());
+		var user = new User(userAccount);
+		user.setAddress(customerForm.getStreet(), customerForm.getHouseNumber(), customerForm.getPostCode(), customerForm.getCity());
+		user.setPrivateInsurance(customerForm.getPrivateInsurance());
+
+		return users.save(user);
+	}
+
+	public User addDoctor(UserForm userForm) {
+		
+		var password = UnencryptedPassword.of(userForm.getPassword());
+		var userAccount = userAccounts.create(userForm.getEmail(), password, "DOCTOR");
+		userAccount.setFirstname(userForm.getName());
+		var user = new User(userAccount);
+
+		return users.save(user);
+	}
+
+	public User addEmployee(EmployeeForm employeeForm) {
+		
+		var password = UnencryptedPassword.of(employeeForm.getPassword());
+		var userAccount = userAccounts.create(employeeForm.getEmail(), password, "EMPLOYEE");
+		userAccount.setFirstname(employeeForm.getName());
+		var user = new User(userAccount);
+		user.setSalary(employeeForm.getSalary());
+		user.setVacation(employeeForm.getVacation());
+
+		return users.save(user);
+	}
+
+	public String addRole(User user, Role role) {
+		
+		user.addRole(role);
+
+		return "role added";
+	}
+
+	public String removeRole(User user, Role role) {
+		
+		user.removeRole(role);
+
+		return "role removed";
+	}
+
+	public String setCustomerInsurance(User user, Boolean newPrivateInsurance) {
+
+		user.setPrivateInsurance(newPrivateInsurance);
+
+		return "new insurance";
+	}
+
+	public String setEmployeeSalary(User user, Money newSalary) {
+
+		user.setSalary(newSalary);
+
+		return "new salary";
 	}
 
 	public Streamable<User> findAll() {

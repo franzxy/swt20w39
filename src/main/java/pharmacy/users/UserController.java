@@ -25,9 +25,10 @@ class UserController {
 
 	@GetMapping("/customer")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String manageNewCustomer(Model model, CustomerForm customerForm) {
-		
+	String customer(Model model, CustomerForm customerForm) {
+
 		model.addAttribute("customerForm", customerForm);
+		
 		return "customer";
 	}
 
@@ -38,6 +39,7 @@ class UserController {
 		if (result.hasErrors()) {
 			return "customer";
 		}
+
 		userManagement.addCustomer(customerForm);
 
 		return "redirect:/users";
@@ -45,65 +47,50 @@ class UserController {
 
 	@GetMapping("/doctor")
 	@PreAuthorize("hasRole('BOSS')")
-	String doctor(Model model, UserForm userRegistrationForm) {
-		model.addAttribute("userRegistrationForm", userRegistrationForm);
+	String doctor(Model model, UserForm userForm) {
+
+		model.addAttribute("userForm", userForm);
+
 		return "doctor";
 	}
 
     @PostMapping("/doctor")
 	@PreAuthorize("hasRole('BOSS')")
-	String newDoctor(
-		@Valid @ModelAttribute("userRegistrationForm")UserForm userRegistrationForm, 
-		Errors result
-	) {
+	String newDoctor(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
 
 		if (result.hasErrors()) {
-			return "customer";
+			return "doctor";
 		}
-		userManagement.addDoctor(userRegistrationForm);
+
+		userManagement.addDoctor(userForm);
 
 		return "redirect:/users";
 	}
 
 	@GetMapping("/employee")
 	@PreAuthorize("hasRole('BOSS')")
-	String employee(
-		Model model, 
-		UserForm userRegistrationForm, 
-		EmployeeForm employeeAddForm
-	) {
-		model.addAttribute("userRegistrationForm", userRegistrationForm);
-		model.addAttribute("employeeAddForm", employeeAddForm);
+	String employee(Model model, EmployeeForm employeeForm) {
+		
+		model.addAttribute("employeeForm", employeeForm);
+		
 		return "employee";
 	}
 
     @PostMapping("/employee")
 	@PreAuthorize("hasRole('BOSS')")
-	String newEmployee(
-		@Valid @ModelAttribute("userRegistrationForm")UserForm userRegistrationForm, 
-		@Valid @ModelAttribute("employeeAddForm")EmployeeForm employeeAddForm,
-		Errors result
-	) {
+	String newEmployee(@Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
 
 		if (result.hasErrors()) {
-			return "customer";
+			return "employee";
 		}
-		userManagement.addEmployee(userRegistrationForm, employeeAddForm);
+
+		userManagement.addEmployee(employeeForm);
 
 		return "redirect:/users";
 	}
 
-	@GetMapping("/customers")
-	@PreAuthorize("hasRole('Employee')")
-	String customers(Model model) {
-
-		model.addAttribute("userList", userManagement.findAll());
-
-		return "customer";
-	}
-
 	@GetMapping("/users")
-	@PreAuthorize("hasRole('BOSS')")
+	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
 	String users(Model model) {
 
 		model.addAttribute("userList", userManagement.findAll());
@@ -114,19 +101,25 @@ class UserController {
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
 	String changePassword(Model model, UserPasswordForm changePassword) {
+		
 		model.addAttribute("changePassword", changePassword);
 		model.addAttribute("userName", userManagement.currentUserName());
+		
 		return "account";
 	}
 
 	@PostMapping("/account")
 	@PreAuthorize("isAuthenticated()")
 	String changePassword(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
+		
 		model.addAttribute("userName", userManagement.currentUserName());
+		
 		if (result.hasErrors()) {
 			return "account";
 		}
+		
 		userManagement.changePassword(changePassword);
+		
 		return "account";
 	}
 

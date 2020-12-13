@@ -7,7 +7,7 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/customer}" th:object="${customerRegistrationForm}">
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/customer}" th:object="${customerForm}">
     
             <div class="field">
                 <label for="address">Name</label>

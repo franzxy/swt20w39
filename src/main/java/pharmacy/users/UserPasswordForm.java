@@ -4,10 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.salespointframework.useraccount.Password.UnencryptedPassword;
-import org.salespointframework.useraccount.UserAccountManagement;
 
 class UserPasswordForm {
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
