@@ -10,8 +10,14 @@
         <form method="post" role="form" class="ui form" id="form" th:action="@{/customer}" th:object="${customerForm}">
     
             <div class="field">
-                <label for="address">Name</label>
+                <label for="address">Vorname</label>
                 <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <div class="field">
+                <label for="address">Nachname</label>
+                <input id="address" name="address" th:field="*{lastName}" th:errorclass="fieldError" type="text"
                        required="required"/>
             </div>
 
@@ -56,7 +62,7 @@
                     <option value="true">Ja</option>
                 </select>
             </div>
-            
+
             <button type="submit" class="ui button">Registrieren</button>
         </form>
     </body>
