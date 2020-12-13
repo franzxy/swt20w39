@@ -34,7 +34,7 @@ public class CounterController {
 	}
 
 	@GetMapping("/selfservicecounter")
-	@PreAuthorize("hasRole('BOSS')")
+	@PreAuthorize("hasRole('EMPLOYEE')")
 	public String selfServiceCounter(MedicineCatalog catalog, Model model) {
 
 		model.addAttribute("catalog", catalog.findByPresType(Medicine.PrescriptionType.WITHOUTPRES));
@@ -43,7 +43,7 @@ public class CounterController {
 	}
 
 	@GetMapping("/doctorsstorage")
-	//@PreAuthorize("hasRole('BOSS')")
+	@PreAuthorize("hasRole('DOCTOR')")
 	public String doctorsStorage(Model model) {
 		model.addAttribute("DoctorsStorageForm", new DoctorsStorageForm());
 
