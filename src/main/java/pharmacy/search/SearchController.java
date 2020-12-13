@@ -1,6 +1,7 @@
 package pharmacy.search;
 
 import org.javamoney.moneta.Money;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,9 @@ import static org.salespointframework.core.Currencies.EURO;
 
 public class SearchController {
 
+
 	@GetMapping("/searchform")
+	@PreAuthorize("hasRole('USER')")
 	public String searchForm(Model model) {
 		model.addAttribute("searchform", new SearchForm());
 		return "searchform";
