@@ -81,18 +81,20 @@
         <div class="sidenav border">
        
   			<p >Filter</p>
-  			<form action="/filtern"  method="POST">
+  			<form th:action="@{/filtern}"  th:object="${filterB}" method="post">
   			<ul >
-  				<li th:each="ty : ${allTypes}">
-    				<input type="radio" th:field="${filter.filterkriterium}" th:value="${ty}" />
-    				<label th:text="${ty}">Wireframe</label>
+  				<li th:each="ty : ${T(pharmacy.finances.Filter).values()}">
+    				<input type="radio" th:field="*{filter}" th:value="${ty}" />
+    				<label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
     		   <!---<input type="radio" th:field="*{type}" th:value="${ty}" />
     				<label th:for="${#ids.prev('type')}" >Wireframe</label>--->
     				
   				</li>
   				 
             </ul>
-         </form>
+         </form> 
+         
+         
 		</div>
 		<div class="block border">
        <table class="ui table">

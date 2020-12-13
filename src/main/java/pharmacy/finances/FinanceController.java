@@ -30,8 +30,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@Controller
 
+
+@Controller
 public class FinanceController {
 	@Autowired
 	private final Accountancy acc;
@@ -40,10 +41,10 @@ public class FinanceController {
 	@Autowired
 	private final UserAccountManagement um;
 	@Autowired
-	private final Filter filter;
-	@Autowired
 	private final BusinessTime time;
-	FinanceController(Filter filter,Accountancy acc, OrderManagement<Order> orderManagement, UserAccountManagement um,Filter f, BusinessTime time) {
+	
+	public FilterBase filter;
+	FinanceController(Accountancy acc, OrderManagement<Order> orderManagement, UserAccountManagement um, BusinessTime time) {
 		this.time = time;
 		Assert.notNull(um, "OrderManagement must not be null!");
 		Assert.notNull(orderManagement, "OrderManagement must not be null!");
@@ -51,48 +52,8 @@ public class FinanceController {
 		this.orderManagement = orderManagement;
 		this.acc=acc;
 		this.um=um;
-		this.filter=filter;
-		
+		this.filter=new FilterBase();
 	}
-
-	@GetMapping("/finances")
-	//@RequestMapping(value = "/finances", method = RequestMethod.GET)
-	public String finances(Model model) {
-		List<AccountancyEntry> ret=this.acc.findAll().toList();
-		
-		List<String> ret2=Arrays.asList("Online Bestellungen","Verkäufe","Praxis A","Praxis B","Praxis C","Gehälter","Strom","Miete","Wasser","Heizkosten");
-		
-		model.addAttribute("allTypes", ret2);
-		model.addAttribute("filter", this.filter);
-		model.addAttribute("tab", ret);
-		
-		System.out.println(this.filter.getFilterkriterium());
-		return "finances";
-	}
-	
-	//diese Methode wird nie Aufgerufen!!
-	@PostMapping("/filtern")
-	 public String filtern(@ModelAttribute Filter filter,Model model) {
-		 String result=filter.getFilterkriterium();
-		 System.out.println(filter.getFilterkriterium());
-		 List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
-		 
-		 switch(result){
-		 case "Online Bestellungen"	: ret = this.getEntriesOfRole("CUSTOMER");			break;
-		 case "Verkäufe"			: ret = this.getEntriesOfRole("EMPLOYEE");			break;
-		 case "Praxis A"			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "A");break;
-		 case "Praxis B"			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "B");break;
-		 case "Praxis C"			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "C");break;
-		 case "Gehälter"			: ret = this.createGehalt();						break;
-		 case "Strom"				: ret = this.createKosten("Strom", 50);				break;
-		 case "Miete"				: ret = this.createKosten("Miete",500);				break;
-		 case "Wasser"				: ret = this.createKosten("Wasser", 20);			break;
-		 case "Heizkosten"			: ret = this.createKosten("Heizkosten", 20);		break;
-		 default					: ret = this.acc.findAll().toList();				break;
-		 }
-		 model.addAttribute("tab", ret);
-		 return "finances";
-	 }
 	 private List<AccountancyEntry> getEntriesOfRole(String role){
 		 List<AccountancyEntry> working=this.acc.findAll().toList();
 		 List<AccountancyEntry> ret =new ArrayList<AccountancyEntry>();
@@ -161,6 +122,42 @@ public class FinanceController {
 		 }
 		 return ret;
 	 }
+
+	@GetMapping("/finances")
+	//@RequestMapping(value = "/finances", method = RequestMethod.GET)
+	public String finances(Model model) {
+		List<AccountancyEntry> ret=this.acc.findAll().toList();
+		model.addAttribute("filterB",this.filter);
+		model.addAttribute("tab", ret);
+		return "finances";
+	}
+	
+	
+	//diese Methode wird nie Aufgerufen!!
+	@GetMapping("/filtern")
+	 public String filtern(@ModelAttribute FilterBase filterB, Model model) {
+		model.addAttribute("filterB", this.filter);
+		 Filter filter1=filterB.getFilter();
+		 System.out.println(filter1);
+		 List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
+		 
+		 switch(filter1){
+		 case OBEST			: ret = this.getEntriesOfRole("CUSTOMER");			break;
+		 case VERK			: ret = this.getEntriesOfRole("EMPLOYEE");			break;
+		 case PRAXA			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "A");break;
+		 case PRAXB			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "B");break;
+		 case PRAXC			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "C");break;
+		 case GEHÄLTER		: ret = this.createGehalt();						break;
+		 case STROM			: ret = this.createKosten("Strom", 50);				break;
+		 case MIETE			: ret = this.createKosten("Miete",500);				break;
+		 case WASSER		: ret = this.createKosten("Wasser", 20);			break;
+		 case HEIZ			: ret = this.createKosten("Heizkosten", 20);		break;
+		 default			: ret = this.acc.findAll().toList();				break;
+		 }
+		 model.addAttribute("tab", ret);
+		 return "finances";
+	 }
+
 	 
 	
 }
