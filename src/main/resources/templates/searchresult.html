@@ -16,10 +16,6 @@
     <title th:text="#{${title}}">Katalog</title>
 </head>
 <body>
-<div class="ui container">
-    <header>
-        <h1>Suchergebnisse</h1>
-    </header>
     <nav th:include="navigation :: navigation"></nav>
     <div class="ui link cards" th:remove="all-but-first">
         <div class="ui card" th:each="medicine : ${catalog}">
@@ -38,6 +34,5 @@
             <div class="extra content" th:text="${medicine.presType}"> Action</div>
         </div>
     </div>
-</div>
 </body>
 </html>

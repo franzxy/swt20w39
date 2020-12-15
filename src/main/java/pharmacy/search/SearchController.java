@@ -41,10 +41,8 @@ public class SearchController {
 	@GetMapping("/search")
 	String searchCatalog(@RequestParam(name="searchTerm", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean nopres, MedicineCatalog catalog, Model model) {
 
-		if (searchTerm.equals("")) {
-			model.addAttribute("title", "Bitte geben Sie einen Suchbegriff ein!");
-			return "catalog";
-		}
+		if(searchTerm.equals("")) return "redirect:/searchform";
+
 
 		String[] search = searchTerm.split(" ");
 
@@ -84,6 +82,6 @@ public class SearchController {
 		model.addAttribute("catalog", result);
 		model.addAttribute("title", "Ergebnisse für " + searchTerm);
 
-		return "catalog";
+		return "searchresult";
 	}
 }

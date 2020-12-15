@@ -18,10 +18,6 @@
 </head>
 
 <body>
-<div class="ui container">
-    <header>
-        <h1>Suche</h1>
-    </header>
     <nav th:include="navigation :: navigation"></nav>
     <form action="#" th:action="@{/searchform}" th:object="${searchform}" method="post" class="ui form">
         <div>
@@ -33,7 +29,6 @@
         </div>
         <input type="Submit" value="Suchen" class="ui button" />
     </form>
-</div>
 </body>
 
 </html>
