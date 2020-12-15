@@ -41,7 +41,7 @@ public class SearchController {
 	@GetMapping("/search")
 	String searchCatalog(@RequestParam(name="searchTerm", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean nopres, MedicineCatalog catalog, Model model) {
 
-		if(searchTerm.equals("")) {
+		if (searchTerm.equals("")) {
 			model.addAttribute("title", "Bitte geben Sie einen Suchbegriff ein!");
 			return "catalog";
 		}
@@ -52,8 +52,22 @@ public class SearchController {
 
 		Iterator<Medicine> stock;
 
+
+		//Temporär
+		ArrayList<LocalDate> bbd = null;
+		ArrayList<Medicine> ingredients = null;
+		ArrayList<Medicine> tempstock = new ArrayList<>();
+		if (!nopres) {
+			tempstock.add(new Medicine("123", "Medikament 1", "medikamente", "usage", 10, 10, Money.of(5, EURO), bbd, ingredients, Medicine.PrescriptionType.PRESONLY, Medicine.IngredientType.BOTH, Medicine.MedicineType.CAPSULE));
+			tempstock.add(new Medicine("456", "Medikament 2", "image", "usage", 10, 10, Money.of(8, EURO), bbd, ingredients, Medicine.PrescriptionType.PRESONLY, Medicine.IngredientType.BOTH, Medicine.MedicineType.CAPSULE));
+		}
+		tempstock.add(new Medicine("789", "Medikament 3", "image", "usage", 10, 10, Money.of(10, EURO), bbd, ingredients, Medicine.PrescriptionType.WITHOUTPRES, Medicine.IngredientType.BOTH, Medicine.MedicineType.CAPSULE));
+		stock = tempstock.iterator();
+
+		/* Suchfunktion wenn Katalog-Integration funktioniert
 		if(nopres) stock = catalog.findByPresType(Medicine.PrescriptionType.WITHOUTPRES).iterator();
 		else stock = catalog.findAll().iterator();
+		*/
 
 		while (stock.hasNext()) {
 			Medicine d = stock.next();

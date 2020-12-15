@@ -55,14 +55,10 @@ public class Medicine extends Product {
 		this.medType = medType;
 	}
 	// getter Funktionen für alle Variablen
-	public String getID() {
-		return id;
-	}
-	public String getName() {
-		return name;
-	}
+	// Suche/Falk: getter für name und id entfernt, damit getter aus superklasse aufgerufen werden (returnt sonst null)
+
 	public String getImage() {
-	return image;
+		return image;
 	}
 	public String getUsage() {
 		return usage;

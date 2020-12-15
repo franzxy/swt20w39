@@ -18,24 +18,24 @@
 <body>
 <div class="ui container">
     <header>
-        <h1 th:text="#{${title}}">Katalog</h1>
+        <h1>Suchergebnisse</h1>
     </header>
     <nav th:include="navigation :: navigation"></nav>
     <div class="ui link cards" th:remove="all-but-first">
         <div class="ui card" th:each="medicine : ${catalog}">
             <div class="content">
-                <a class="header" th:href="@{/medicine/{id}(id=${medicine.id})}" th:text="${medicine.name}">Last Action Hero</a>
+                <a class="header" th:href="@{/medicine/{id}(id=${medicine.id})}" th:text="${{medicine.name}}">Last Action Hero</a>
             </div>
             <div class="image">
                 <a th:href="@{/medicine/{id}(id=${medicine.id})}">
-                    <img class="thumbnail" th:src="@{/resources/img/cover/{image}.jpg(image=${medicine.image})}"
+                    <img class="thumbnail" th:src="@{../resources/static/{image}.jpg(image=${medicine.image})}"
                          src="../static/resources/img/cover/lac.jpg"/>
                 </a>
             </div>
             <div class="content">
                 <div class="description" th:text="${{medicine.price}}">9.99 €</div>
             </div>
-            <div class="extra content" th:text="${medicine.medType}"> Action</div>
+            <div class="extra content" th:text="${medicine.presType}"> Action</div>
         </div>
     </div>
 </div>
