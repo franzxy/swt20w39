@@ -24,36 +24,36 @@
         	<tr>
             	<th >ID</th>
             	<th >Name</th>
-            	<th >Lager</th>
-            	<th >Lagermenge ändern</th>
-            	<th></th>
             	<th >Art der Medizin</th>
             	<th >Packungsgröße</th>
             	<th >Rezept</th>
-            	<th >Auffüllhöhe</th>
-            	<th >Neue Maximalanzahl</th>
-            	<th ></th>            	
+            	<th >MHD</th>
+            	<th >Benutzung</th>
+            	<th >Lagermenge</th>
+            	<th >Auffüllhöhe</th>   
+            	<th ></th>
+            	<th ></th>      	
         	</tr>
         </thead>
         <tbody th:remove="all-but-first">
         	<tr th:each=" item : ${inventory}">
             	<td th:text="${item.product.getID()}">ID</td>
             	<td th:text="${item.product.name}">Name</td>
-            	<td th:text="${item.product.getStock()}">Lager</td>
-            	<td ><input id="number" type="number" name="number" min="0" th:max="${quantity}" step="1" value="0"/><br/></td>
-            	<td >
-            		<button type="submit" >
-                            <span th:text="#{detail.addToBasket}"> Ändern</span>
-                    </button>
-                </td>
             	<td th:text="${item.product.getMedType()}">Art</td>
             	<td th:text="${item.product.getPackageSize()}">Größe</td>
             	<td th:text="${item.product.getPresType()}">Rezerpt</td>
-            	<td th:text="${item.product.getRestock()}">Auffüllmenge</td>
-            	<td ><input id="number" type="number" name="number" min="0" th:max="${quantity}" step="1" value="0"/><br/></td>
+            	<td th:text="${item.product.getBBD()}">MHD</td>
+            	<td></td>    
+            	<td></td>
+            	<td></td>	
             	<td >
             		<button type="submit" >
-                            <span th:text="#{detail.addToBasket}"> Ändern</span>
+                            <span> Ändern</span>
+                    </button>
+                </td>
+                <td >
+            		<button type="submit" >
+                            <span> Entfernen</span>
                     </button>
                 </td>
         	</tr>
