@@ -25,10 +25,10 @@ public class Medicine extends Product {
 		CAPSULE, TABLET, OINTMENT, LIQUID, POWDER;
 	}
 
-	private String id, name, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
+	private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
 	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße 
-	private Money price;
-	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	//private Money price;
+	private ArrayList<LocalDate> bbd = new ArrayList<LocalDate>(); // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
 	private IngredientType ingType; // wofür wird es verwendet
@@ -38,17 +38,18 @@ public class Medicine extends Product {
 	private Medicine() {}
 
 	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price,
-			ArrayList<LocalDate> bbd, ArrayList<Medicine> ingredients, 
-			PrescriptionType presType, IngredientType ingType, MedicineType medType) {
+			ArrayList<Medicine> ingredients, PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
 		
 		this.id = id;
+		//this.name = name;
 		this.image = image;
 		this.usage = usage;
 		this.restock = restock;
 		this.size = size;
-		this.bbd = bbd;
+		//this.price = price;
+		addNewStock();
 		this.ingredients = ingredients;
 		this.presType = presType;
 		this.ingType = ingType;
@@ -58,11 +59,8 @@ public class Medicine extends Product {
 	public String getID() {
 		return id;
 	}
-	public String getName() {
-		return name;
-	}
 	public String getImage() {
-	return image;
+		return image;
 	}
 	public String getUsage() {
 		return usage;
@@ -73,8 +71,12 @@ public class Medicine extends Product {
 	public int getSize() {
 		return size;
 	}
-	public Money getMoney() {
-		return price;
+	public String getPackageSize() {
+		if (medType.equals(MedicineType.CAPSULE) || medType.equals(MedicineType.TABLET))
+			return size + " Stück";
+		else if(medType.equals(MedicineType.OINTMENT) || medType.equals(MedicineType.LIQUID))
+			return size + " ml";
+		else return size + " g";
 	}
 	public ArrayList<LocalDate> getBBD() {
 		return bbd;
@@ -82,18 +84,29 @@ public class Medicine extends Product {
 	public ArrayList<Medicine> getIngredients() {
 		return ingredients;
 	}
-	public PrescriptionType getPresType() {
-		return presType;
+	public String getPresType() {
+		if (presType.equals(PrescriptionType.PRESONLY))
+			return "Verschreibungspflichtig";
+		else return "Frei Verkäuflich";
+		
 	}
 	public IngredientType getIngType() {
 		return ingType;
 	}
-	public MedicineType getMedType() {
-		return medType;
+	public String getMedType() {
+		if (medType.equals(MedicineType.CAPSULE))
+			return "Kapsel";
+		else if(medType.equals(MedicineType.TABLET))
+			return "Tablette";
+		else if(medType.equals(MedicineType.OINTMENT))
+			return "Salbe";
+		else if(medType.equals(MedicineType.LIQUID))
+			return "Flüssigkeit";
+		else return "Pulver";
 	}
 	// getter Funktion um die Anzahl der vorrätigen Medikamente zu bekommen
 	public int getStock() {
-		return bbd.size();
+		return bbd.size()-1;
 	}
 	// ändern wie viele Medikamente vorhanden sein sollen
 	public void setRestock(int restock) {
