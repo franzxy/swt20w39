@@ -2,15 +2,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    	<script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    	<link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    	<link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
 		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
 		<title>Inventar</title>
 	</head>
 	<body>
-        <nav th:include="navigation :: navigation"></nav>
-        <ul>
-            <li>
-                <a>Medizin</a><a>  3</a>
-            </li>
-        </ul>
+        <div class="ui container">
+    <header>
+        
+    </header>
+    <nav th:include="navigation :: navigation"></nav>
+    <form method="dialog" role="application" class="ui form" id="form" th:action="@{/inventory}" th:object="${inventoryController}">
+		<h1 th:text="#{inventory.title}">Bestand</h1>
+    	<table class="ui celled table">
+        	<thead>
+        	<tr>
+            	<th th:text="#{inventory.movieTitle}">Titel</th>
+            	<th th:text="#{inventory.count}">Anzahl</th>
+            	
+        	</tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+        	<tr th:each=" item : ${inventory}">
+            	<td th:text="${item.product.getName()}">Name</td>
+            	<td th:text="${{item.quantity}}">Anzahl</td>
+        	</tr>
+        	<tr>
+            	<td>Last Action Hero</td>
+            	<td>9000</td>
+        	</tr>
+     	 	<tr>
+            	<td>Last Action Hero</td>
+            	<td>9000</td>
+            </tr>
+   	     </tbody>
+  		 </table>
+		</div>
+	</form> 
 	</body>
 </html>

@@ -27,7 +27,7 @@ public class Medicine extends Product {
 
 	private String id, name, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
 	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße 
-	private Money price; // 
+	private Money price;
 	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht

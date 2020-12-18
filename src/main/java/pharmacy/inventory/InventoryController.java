@@ -29,7 +29,7 @@ class InventoryController {
 	
 	@GetMapping("/inventory")
 	@PreAuthorize("hasRole('BOSS')")
-	String stock(Model model) {
+	String inventory(Model model) {
 
 		model.addAttribute("inventory", inventory.findAll());
 
