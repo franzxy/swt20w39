@@ -15,7 +15,7 @@ public class User {
 	private @Id @GeneratedValue long id;
 
 	@OneToOne
-	public UserAccount userAccount;
+	private UserAccount userAccount;
 
 	// Customer
 	private String street;
