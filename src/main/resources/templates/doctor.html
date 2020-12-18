@@ -31,6 +31,16 @@
                 <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
                        required="required"/>
             </div>
+    
+            <div class="field">
+                <label for="password">Passwort Bestätigen</label>
+                <input id="newPassword" name="newPassword" th:field="*{confirmPassword}" th:errorclass="fieldError" type="password"
+                       required="required"/><br/>
+                
+                       <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Das Passwort darf
+                           nicht leer sein.</p>
+                
+            </div>
 
             <button type="submit" class="ui button">Registrieren</button>
         </form>

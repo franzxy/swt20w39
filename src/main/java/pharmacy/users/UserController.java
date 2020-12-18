@@ -24,7 +24,6 @@ class UserController {
 	}
 
 	@GetMapping("/register")
-	@PreAuthorize("hasRole('BOSS')")
 	String user(Model model, UserForm userForm) {
 
 		model.addAttribute("userForm", userForm);
