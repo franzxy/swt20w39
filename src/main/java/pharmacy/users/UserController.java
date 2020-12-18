@@ -23,6 +23,27 @@ class UserController {
 		this.userManagement = userManagement;
 	}
 
+	@GetMapping("/register")
+	@PreAuthorize("hasRole('BOSS')")
+	String user(Model model, UserForm userForm) {
+
+		model.addAttribute("userForm", userForm);
+
+		return "register";
+	}
+
+    @PostMapping("/register")
+	String newUser(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
+
+		if (result.hasErrors()) {
+			return "register";
+		}
+
+		userManagement.addUser(userForm);
+
+		return "redirect:/login";
+	}
+
 	@GetMapping("/customer")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
 	String customer(Model model, CustomerForm customerForm) {
