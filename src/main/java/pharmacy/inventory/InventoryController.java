@@ -26,15 +26,15 @@ class InventoryController {
 	 * @param model will never be {@literal null}.
 	 * @return the view name.
 	 */
-	/*
-	@GetMapping("/stock")
+	
+	@GetMapping("/inventory")
 	@PreAuthorize("hasRole('BOSS')")
 	String stock(Model model) {
 
-		model.addAttribute("stock", inventory.findAll());
+		model.addAttribute("inventory", inventory.findAll());
 
-		return "stock";
+		return "inventory";
 	}
-	*/
+	
 }
 

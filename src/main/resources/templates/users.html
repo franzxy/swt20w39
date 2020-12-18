@@ -8,9 +8,9 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
 		<div class="row flex space align">
-			<a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/customer}">Neuer Kunde</a>
-			<a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/doctor}">Neue Praxis</a>
-			<a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/employee}">Neuer Mitarbeiter</a>
+			<a class="a nav height flex center button" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/customer}">Neuer Kunde</a>
+			<a class="a nav height flex center button" sec:authorize="hasRole('BOSS')" th:href="@{/doctor}">Neue Praxis</a>
+			<a class="a nav height flex center button" sec:authorize="hasRole('BOSS')" th:href="@{/employee}">Neuer Mitarbeiter</a>
 		</div>
 		<div>
 			<div class="ui card" th:each="user : ${userList}">

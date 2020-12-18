@@ -38,7 +38,6 @@ class CatalogController {
 		this.businessTime = businessTime;
 	}
 
-
 	@GetMapping("/presonly")
 	String dvdCatalog(Model model) {
 
@@ -56,7 +55,6 @@ class CatalogController {
 
 		return "catalog";
 	}
-
 
 	// (｡◕‿◕｡)
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
