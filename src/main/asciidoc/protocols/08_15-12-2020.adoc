@@ -29,8 +29,7 @@ __Schriftführer:__ Timon Trettin +
 * Order: Jonas
 ** Counters: Falk
 * Finances: Lukas
-* User: Timon
-* Time: Timon
+* User, Time, CSS: Timon
 
 === Catalog
 * Search package auflösen und in Catalog integrieren
@@ -97,3 +96,6 @@ __Schriftführer:__ Timon Trettin +
 
 === Time
 * Systemzeit Verändern und Anwendung reagiert korrekt (nur vorspulen, kein rückspulen)
+
+=== CSS
+* Einheitliches Design
