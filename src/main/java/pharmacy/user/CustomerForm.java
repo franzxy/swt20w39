@@ -1,17 +1,15 @@
-package pharmacy.users;
+package pharmacy.user;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.javamoney.moneta.Money;
+class CustomerForm {
 
-class EmployeeForm {
-	
-	// User
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
 	private final String name;
-	
+
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
 	private final String lastName;
 
@@ -27,21 +25,31 @@ class EmployeeForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String password;
 	
-	// Employee
-	private final Money salary;
-	
-	private final Integer vacation;
+	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
+	private final String street;
 
-	public EmployeeForm(String name, String lastName, String email, String password, Number salary, Integer vacation) {
+	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
+	private final String houseNumber;
+
+	private final Long postCode;
+
+	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
+	private final String city;
+	
+	private final Boolean privateInsurance;
+
+	public CustomerForm(String name, String lastName, String email, String password, String street, String houseNumber, Long postCode, String city, Boolean privateInsurance) {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.salary = Money.of(salary, "EUR");
-		this.vacation = vacation;
+		this.street = street;
+		this.houseNumber = houseNumber;
+		this.postCode = postCode;
+		this.city = city;
+		this.privateInsurance = privateInsurance;
 	}
 
-	// User
 	public String getName() {
 		return name;
 	}
@@ -58,12 +66,23 @@ class EmployeeForm {
 		return password;
 	}
 
-	// Employee
-	public Money getSalary() {
-		return salary;
+	public String getStreet() {
+		return street;
 	}
 
-	public Integer getVacation() {
-		return vacation;
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public Long getPostCode() {
+		return postCode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public Boolean getPrivateInsurance() {
+		return privateInsurance;
 	}
 }

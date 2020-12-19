@@ -9,7 +9,7 @@ import org.salespointframework.order.OrderManagement;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Component;
 
-import pharmacy.users.UserManagement;
+import pharmacy.user.UserManagement;
 
 
 

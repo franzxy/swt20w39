@@ -2,8 +2,8 @@ package pharmacy.catalog;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.inventory.InventoryItem;
-import org.salespointframework.inventory.UniqueInventory;
-import org.salespointframework.inventory.UniqueInventoryItem;
+import org.salespointframework.inventory.MultiInventory;
+import org.salespointframework.inventory.MultiInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Controller;
@@ -24,10 +24,10 @@ class CatalogController {
 	private static final Quantity NONE = Quantity.of(0);
 
 	private final MedicineCatalog catalog;
-	private final UniqueInventory<UniqueInventoryItem> inventory;
+	private final MultiInventory<MultiInventoryItem> inventory;
 	private final BusinessTime businessTime;
 
-	CatalogController(MedicineCatalog medicineCatalog, UniqueInventory<UniqueInventoryItem> inventory,
+	CatalogController(MedicineCatalog medicineCatalog, MultiInventory<MultiInventoryItem> inventory,
 			BusinessTime businessTime) {
 
 		this.catalog = medicineCatalog;
@@ -90,9 +90,6 @@ class CatalogController {
 							}
 						}
 
-
-
-
 					}
 				}
 			}
@@ -109,6 +106,10 @@ class CatalogController {
 	}
 
 
+/*
+	// (｡◕‿◕｡)
+	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
+	// Lektüre: http://spring.io/blog/2009/03/08/rest-in-spring-3-mvc/
 	@GetMapping("/medicine/{medicine}")
 	String detail(@PathVariable Medicine medicine, Model model) {
 
@@ -122,5 +123,6 @@ class CatalogController {
 
 		return "detail";
 	}
+*/
 
 }
