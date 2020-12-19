@@ -1,6 +1,6 @@
 package pharmacy.catalog;
 
-//import org.hibernate.validator.constraints.Range;
+import org.javamoney.moneta.Money;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
@@ -8,18 +8,15 @@ import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import pharmacy.catalog.Medicine.PrescriptionType;
+import org.springframework.web.bind.annotation.*;
 
-//import javax.validation.Valid;
-//import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
+import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
+import static org.salespointframework.core.Currencies.EURO;
 
 @Controller
 class CatalogController {
@@ -39,28 +36,80 @@ class CatalogController {
 	}
 
 
-	@GetMapping("/presonly")
-	String dvdCatalog(Model model) {
-
-		model.addAttribute("catalog", catalog.findByPresType(PrescriptionType.PRESONLY));
-		model.addAttribute("title", "catalog.dvd.title");
-
-		return "catalog";
+	@GetMapping("/")
+	public String catalog(Model model) {
+		model.addAttribute("searchform", new SearchForm());
+		model.addAttribute("catalog", catalog.findAll());
+		return "index";
 	}
 
-	@GetMapping("/withoutpres")
-	String blurayCatalog(Model model) {
+	@PostMapping("/")
+	public String submitSearchInCatalog(@ModelAttribute SearchForm form, Model model) {
+		model.addAttribute("SearchForm", form);
+		return "redirect:/search?searchTerm=" + form.getSearchTerm();
+	}
 
-		model.addAttribute("catalog", catalog.findByPresType(PrescriptionType.WITHOUTPRES));
-		model.addAttribute("title", "catalog.bluray.title");
+	@GetMapping("/searchform")
+	//TODO @PreAuthorize("hasRole('USER')")
+	public String searchForm(Model model) {
+		model.addAttribute("searchform", new SearchForm());
+		return "searchform";
+	}
 
-		return "catalog";
+	@PostMapping("/searchform")
+	public String submitSearchForm(@ModelAttribute SearchForm form, Model model) {
+		model.addAttribute("SearchForm", form);
+		//p=rezeptpflichtig, m=typ, i=zutaten
+		return "redirect:/search?searchTerm=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&m=" + form.getMedType();
+
+	}
+
+	@GetMapping("/search")
+	public String searchCatalog(@RequestParam(name="searchTerm", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean nopres, @RequestParam(name="i", defaultValue = "all") String ingredient, @RequestParam(name="m", defaultValue = "all") String type, Model model) {
+
+		String[] search = searchTerm.toLowerCase().split(" ");
+		ArrayList<Medicine> result = new ArrayList<>();
+		Iterator<Medicine> stock = catalog.findAll().iterator();
+
+		while (stock.hasNext()) {
+			Medicine d = stock.next();
+
+			for (int i = 0; i < search.length; i++) {
+				//Name des Medikaments enthält Suchbegriff
+				if (searchTerm.equals("") || d.getName().toLowerCase().contains(search[i])) {
+
+					//Rezeptpflichtigkeit egal oder Medikament rezeptfrei
+					if(!nopres || d.getPresType() == Medicine.PrescriptionType.WITHOUTPRES) {
+
+						if(type.equals("all") || type.equals(d.getMedType().toString().toLowerCase())) {
+
+
+							if (!result.contains(d)) {
+								result.add(d);
+							}
+						}
+
+
+
+
+					}
+				}
+			}
+		}
+
+
+		model.addAttribute("catalog", result);
+
+		if(result.size() == 0) model.addAttribute("Suchbegriff", "Keine Ergebnisse");
+		else if(searchTerm.equals("")) model.addAttribute("Suchbegriff", "Alle Medikamente");
+		else model.addAttribute("Suchbegriff", "Ergebnisse für \"" + searchTerm + "\":");
+
+		return "searchresult";
 	}
 
 
-	// (｡◕‿◕｡)
-	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
-	// Lektüre: http://spring.io/blog/2009/03/08/rest-in-spring-3-mvc/
+
+
 	@GetMapping("/medicine/{medicine}")
 	String detail(@PathVariable Medicine medicine, Model model) {
 

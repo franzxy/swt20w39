@@ -24,10 +24,9 @@ public class Medicine extends Product {
 	public static enum MedicineType {
 		CAPSULE, TABLET, OINTMENT, LIQUID, POWDER;
 	}
-
-	private String id, name, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
-	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße 
-	private Money price; // 
+	//private variable name, price entfernt --> name, price aus superklasse wird verwendet
+	private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
+	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße
 	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
@@ -42,7 +41,7 @@ public class Medicine extends Product {
 			PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
-		
+
 		this.id = id;
 		this.image = image;
 		this.usage = usage;
@@ -55,7 +54,7 @@ public class Medicine extends Product {
 		this.medType = medType;
 	}
 	// getter Funktionen für alle Variablen
-	// Suche/Falk: getter für name und id entfernt, damit getter aus superklasse aufgerufen werden (returnt sonst null)
+	// Suche/Falk: getter für name und price entfernt, damit getter aus superklasse aufgerufen werden (returnt sonst null)
 
 	public String getImage() {
 		return image;
@@ -68,9 +67,6 @@ public class Medicine extends Product {
 	}
 	public int getSize() {
 		return size;
-	}
-	public Money getMoney() {
-		return price;
 	}
 	public ArrayList<LocalDate> getBBD() {
 		return bbd;
