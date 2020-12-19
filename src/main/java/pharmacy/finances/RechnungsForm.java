@@ -3,6 +3,7 @@ package pharmacy.finances;
 public class RechnungsForm {
     private String id;
     private String username;
+    private String lastname;
     private String uemail;
     private String date;
     private double betrag;
@@ -52,7 +53,16 @@ public class RechnungsForm {
         username="";
         uemail="";
         date="";
+        lastname="";
         betrag=0.0;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
      
 

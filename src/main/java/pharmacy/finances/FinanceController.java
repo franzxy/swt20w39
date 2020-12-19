@@ -13,6 +13,7 @@ import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -26,22 +27,26 @@ import pharmacy.users.User;
 import pharmacy.users.UserManagement;
 
 @Controller
+@org.springframework.core.annotation.Order(20)
 public class FinanceController {
 	@Autowired
 	private final Accountancy acc;
 	@Autowired
 	private final OrderManagement<Order> orderManagement;
-	@Autowired
+
 	private final UserManagement um;
 	@Autowired
 	private final BusinessTime time;
-
+	@Autowired
+	private final UserAccountManagement userAccount;
 	private Money ist;
 	private Money plus;
 	private Money minus;
 	private Fixkosten fixk;
 	private final RechnungsForm rf;
-	FinanceController(Accountancy acc, OrderManagement<Order> orderManagement, UserManagement um, BusinessTime time){
+	FinanceController(Accountancy acc, OrderManagement<Order> orderManagement, UserManagement um, BusinessTime time, 
+			UserAccountManagement userAccount) {
+		this.userAccount=userAccount;
 		this.time = time;
 		Assert.notNull(um, "OrderManagement must not be null!");
 		Assert.notNull(orderManagement, "OrderManagement must not be null!");
@@ -53,9 +58,7 @@ public class FinanceController {
 		this.minus=Money.of(0.0, "EUR");
 		this.plus=Money.of(0.0, "EUR");
 		this.fixk=new Fixkosten();
-		this.rf=new RechnungsForm();
-		
-		
+		this.rf=new RechnungsForm();		
 	}
 	//Filter Stuff #1
 	private List<AccountancyEntry> getEntriesOfRole(String role){
@@ -167,6 +170,7 @@ public class FinanceController {
 		model.addAttribute("fixk",this.fixk);
 		model.addAttribute("total", this.ist.getNumber().doubleValue());
 		model.addAttribute("rf", this.rf);
+		
 		return "finances";
 	}
 	
@@ -193,33 +197,52 @@ public class FinanceController {
 		return "redirect:/finances";
 	}
 	@GetMapping("/rechnungsform")
-	public String rechnung(@ModelAttribute RechnungsForm rf,Model model) {
-		
-		Order o1=null;
-		for(Order o : this.orderManagement.findBy(OrderStatus.OPEN)){
-			if(o.getId().toString().equals(rf.getId())){
-				o1=o;
-			}
-		}
-		
-		//this.rf.setId(rf.getId());
-		//rf.setDate(o1.getDateCreated().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-		//rf.setBetrag(o1.getTotal().getNumber().doubleValue());
-		//rf.setUemail(o1.getUserAccount().getEmail());
-		//rf.setUsername(o1.getUserAccount().getLastname());
-		this.rf.setId("12334");
-		this.rf.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-		this.rf.setBetrag(10.00);
-		this.rf.setUemail("eine email");
-		this.rf.setUsername("Egal");
-		model.addAttribute("rf",this.rf);
-		return "redirect:/finances#rechnungsform";
+	public String rechnung(Model model) {
+		return "redirect:/finances#rechnungen";
 	}
 	@PostMapping("/rechnungsform")
 	public String rechnungclose(@ModelAttribute RechnungsForm rf, Model model) {
 		System.out.println(rf.getId());
+		this.rf.setId(rf.getId());
+		this.rf.setDate("XXXXXXX");
+		this.rf.setBetrag(0.0);
+		this.rf.setUemail("Keine Angaben");
+		this.rf.setUsername("Unbekannt");
+		this.rf.setLastname("Unbekannt");
+		for(Order o : this.orderManagement.findBy(OrderStatus.OPEN)){
+			if(o.getId().toString().equals(rf.getId())){
+				this.rf.setBetrag(o.getTotal().getNumber().doubleValue());
+				this.rf.setUemail(o.getUserAccount().getEmail());
+				this.rf.setUsername(o.getUserAccount().getFirstname());
+				this.rf.setLastname(o.getUserAccount().getLastname());
+				this.rf.setId(o.getId().toString());
+				this.rf.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+			}
+		}
+		model.addAttribute("rf",this.rf);
+		
+		return "redirect:/finances#rechnungsform";
+	}
+	@GetMapping("/create")
+	public String hallo(Model model) {
 		return "redirect:/finances";
 	}
+	@PostMapping("/create")
+	public String createdefaultenties( Model model) {
+		if(!this.userAccount.findAll().isEmpty()){
+			//System.out.println(this.userAccount.findByUsername("boss").get());
+			Order o1=new Order(this.userAccount.findByUsername("boss").get());
+			o1.addChargeLine(Money.of(20,"EUR"), "default");
+			this.orderManagement.save(o1);
+			this.orderManagement.payOrder(o1);
+			//this.orderManagement.completeOrder(o1);
+		}
+		this.acc.add(new AccountancyEntry(Money.of(23,"EUR")," Test"));
+		this.autopay();
+		this.createGehalt();
+		return "redirect:/finances";
+	}
+
 
 	
 

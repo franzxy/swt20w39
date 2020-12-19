@@ -123,6 +123,18 @@
         padding: 10px;
         background-color:  #45A29E;
       }
+      .popup2{
+        position: fixed;
+        left:0;
+        right: 0;
+        top:0;
+        bottom: 0;
+        margin: auto;
+        width: 20%;
+        height: 27%;
+        padding: 10px;
+        background-color:  #45A29E;
+      }
       .input-fileds{
         left:0px;
         padding:5px;
@@ -151,16 +163,19 @@
         <form action="#editfix">
           <input style="margin:5px" class="button"type="submit" value="Fixkosten bearbeiten"></input>
         </form>
-        <div></div>
+        
         <form action="#rechnungen" >
           <input style="margin:5px" class="button"type="submit" value="Rechnungen"></input>
         </form>
         <form th:action="@{/finances}">
           <input style="margin:5px" class="button"type="submit" value="Buchhaltung"></input>
         </form>
+        <form th:action="@{/create}" method="POST">
+          <input style="margin:5px" class="button"type="submit" value="Beispieleinträge generieren"></input>
+        </form>
         
       </div>
-    </div>
+   
     
 
 		<div class="block border">
@@ -174,7 +189,7 @@
             </thead>
              <tbody>
         <tr th:if="${tab.empty}">
-            <td style="text-align: center;"colspan="3"> No Accountancies Available </td>
+            <td style="text-align: center;"colspan="3"> Keine Buchhaltungseinträge Verfügbar</td>
         </tr>
         <tr th:each="entry : ${tab}"> 
             <td th:text="${#temporals.format(entry.getDate().get(),'dd.MM.yyyy HH:mm')}">Time</td>
@@ -202,12 +217,12 @@
                 <td style="text-align: center;"colspan="4"> Keine offenen Rechnungen </td>
             </tr>
             <tr th:each="sec : ${rech}"> 
-                <td th:text="${#temporals.format(sec.getDateCreated().get(),'dd.MM.yyyy HH:mm')}">Time</td>
+                <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
                 <td  th:text="${sec.getId().getIdentifier()}">ID</td>
                 <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
                 <td>
-                  <form action="#rechnungsform" th:action="@{/rechnungsform}" th:object="${rf}"  >
-                    <input  type="hidden"th:field="*{id}"  th:value="sec.getId().getIdentifier()"/>
+                  <form action="#rechnungsform" th:action="@{/rechnungsform}" th:object="${rf}" method="post" >
+                    <input  type="hidden"id="id" name="id" value="ID" th:value="${sec.getId().getIdentifier()}"/>
                     <input style="margin:5px" class="button"type="submit" value="Rechnung ansehen"></input>
                   </form>
                 </td>
@@ -249,7 +264,7 @@
           </div>
         </div>
         <div id="rechnungsform" class="rechnung-prev">
-          <div class="popup border">
+          <div class="popup2 border">
             <div class="input-fileds">
               <h1 style="color:white">Rechnung Nr. <span th:text="${rf.getId()}"></span></h1>
             </div>
@@ -257,15 +272,18 @@
               <label style="color:white">Datum: <span th:text="${rf.getDate()}"></span></label>
               </div>
               <div class="input-fileds">
-              <label style="color:white">Benutzer: <span th:text="${rf.getUsername()}"></span></label>
+              <label style="color:white">Vorname: <span th:text="${rf.getUsername()}"></span></label>
               </div>
+              <div class="input-fileds">
+                <label style="color:white">Nachname: <span th:text="${rf.getLastname()}"></span></label>
+                </div>
               <div class="input-fileds">
               <label style="color:white">Email: <span th:text="${rf.getUemail()}"></span></label>
               </div>
               <div class="input-fileds">
               <label style="color:white">Betrag: <span th:text="${rf.getBetrag()}"></span> €</label>
               </div>
-              <form action="#" th:action="@{/editfix}" method="POST">
+              <form action="#" th:action="@{/rechnungsform}">
                 <input class="button" style="margin:5px"type="submit" value="Schließen" />
               </form>
           </div>
