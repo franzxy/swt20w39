@@ -1,4 +1,4 @@
-package pharmacy.users;
+package pharmacy.user;
 
 public class CustomerAddress {
 

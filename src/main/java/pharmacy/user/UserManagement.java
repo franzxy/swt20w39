@@ -1,12 +1,22 @@
-package pharmacy.users;
+package pharmacy.user;
 
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
+
+import java.sql.Time;
+import java.time.Duration;
+import java.time.Month;
+
 import org.javamoney.moneta.Money;
+import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import pharmacy.Pharmacy;
+import pharmacy.catalog.MedicineCatalog;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -24,7 +34,6 @@ public class UserManagement {
 	}
 
 	public User addUser(UserForm userForm) {
-		
 		var password = UnencryptedPassword.of(userForm.getPassword());
 		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("USER"));
 		userAccount.setFirstname(userForm.getName());

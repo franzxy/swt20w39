@@ -4,31 +4,98 @@ Treffen am 08.12.2020
 
 Ort:      BBB +
 Beginn:   18:00 +
-Ende:     17:15 +
+Ende:     20:30 +
 
 __Schriftführer:__ Timon Trettin +
 
-*Nächstes Treffen:* +
+== Nächstes Treffen
 22.12.2020, 16:40 Uhr, BBB
 
-__Teilnehmer:__
-- Lennart Wittkowski: Tutor
-- Emelie Radziwill: Tutor
-- Falk Natkowski
-- Lukas Luger
-- Jonas Kabelitz 
-- Timon Trettin
-- Clemens Rose
+== Teilnehmer
+* Lennart Wittkowski: Tutor
+* Emelie Radziwill: Tutor
+* Falk Natkowski
+* Lukas Luger
+* Jonas Kabelitz 
+* Timon Trettin
+* Clemens Rose
 
 == Bemerkungen
-- Testplan zu testende Funktionalitäten ergänzen
+* Präsentation nicht vorhanden
 
-=== Aufgaben bis zum 13.12.2020
-- Prototypen mit Basisfunktionalität fertigstellen
+== Aufgaben bis zum 20.12.2020
+* Catalog: Falk
+* Inventory: Clemens
+* Order: Jonas
+** Counters: Falk
+* Finances: Lukas
+* User, Time, CSS: Timon
 
-=== Aufgabenverteilung
-- Inventar: Clemens
-- Lab: Jonas
-- Finanzen: Lukas 
-- Nutzerverwaltung: Timon
-- Counters: Falk
+=== Catalog
+* Search package auflösen und in Catalog integrieren
+* Katalog "/"
+** Filter nach Kategorien
+** Suche nach Schlagwort
+** "CUSTOMER" kann Artikel zum Warenkorb hinzufügen
+** "Doctor" kann Tinkturen sehen
+* Detail Ansicht "/id"
+
+=== Inventory
+* Inventar "/inventory" 
+** Artikel hinzufügen Button "/add"
+** Artikel Liste
+*** Löschen, Artikelmenge erhöhen/reduzieren, Mindestbestand pro Artikel Festlegen, Beschreibung, Kategorien
+* Neuer Artikel "/add"
+** Artikel Hinzufügen Formular
+* Ablaufende Medikamente "/expiring"
+** "EMPLOYEE" kann ablaufende Medikamente aus Inventar entfernen
+
+=== Order
+* Bestellung
+** Auslieferung der Ware abwarten
+** Tinktur
+*** Statt Tinktur im Inventory abzuziehen nur die Ingredients
+*** Bei Bezahlung "PAYED"
+*** Nach 2h "COMPLETE"
+* Bestellungen "/orders"
+** Anzeigen von Bestellugen
+** "BOSS" sieht alle
+** "EMPLOYEEE" sieht offene
+** "CUSTOMER" sieht eigene
+** Bestellung abholen Button für "CUSTOMER"
+** Bestellung ausliefern Button für "EMPLOYEE"
+* Warenkorb "/cart"
+** Artikel hinzufügen, entfernen
+** leeren
+* Kassen
+** Counters package auflösen und in Catalog integrieren
+** Kasse "/counter"
+*** "EMPLOYEE" Barcodes eingeben und per Button Bestellung auslösen
+** Selbstbedienerkasse "/selfservicecounter"
+*** Als "EMPLOYEE" aufrufen, dann Barcodes eingeben und per Button Bestellung auslösen
+** Medizinschrank "/storage"
+*** "DOCTOR" Barcodes eingeben und per Button Bestellung auslösen
+
+=== Finances
+* Finanzübersicht "/finances"
+** "BOSS" sieht alles
+** "EMPLOYEE" sieht nur eigene Gehälter
+* Finanz Detail "/finances/id"
+** Bei Bestellung Rechnung Layout
+** Bei Lohnabrechnung Lohnzettle Layout
+* "DOCTOR" monatlich berechnen
+* Krankenkasse monatlich berechnen
+
+=== User
+* Nutzerübersicht "/users"
+** "BOSS" kann "EMPLOYEE", "DOCTOR" und "CUSTOMER" erstellen und entfernen
+** "EMPLOYEE" kann "CUSTOMER" erstellen und entfernen
+* Urlaub "/vacation"
+** "BOSS" Anträge zustimmen und ablehnen
+** "EMPLYOEE" Urlaubsantrag stellen
+
+=== Time
+* Systemzeit Verändern und Anwendung reagiert korrekt (nur vorspulen, kein rückspulen)
+
+=== CSS
+* Einheitliches Design
