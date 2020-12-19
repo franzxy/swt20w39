@@ -26,9 +26,9 @@ public class Medicine extends Product {
 	}
 
 	private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
-	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße 
+	private int size; // wie viele vorrätig sein sollen, Packungsgröße 
 	//private Money price;
-	private ArrayList<LocalDate> bbd = new ArrayList<LocalDate>(); // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	private LocalDate bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
 	private IngredientType ingType; // wofür wird es verwendet
@@ -37,7 +37,7 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price,
+	public Medicine(String id, String name, String image, String usage, int size, Money price, LocalDate bbd,
 			ArrayList<Medicine> ingredients, PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
@@ -46,10 +46,9 @@ public class Medicine extends Product {
 		//this.name = name;
 		this.image = image;
 		this.usage = usage;
-		this.restock = restock;
 		this.size = size;
+		this.bbd = bbd;
 		//this.price = price;
-		addNewStock();
 		this.ingredients = ingredients;
 		this.presType = presType;
 		this.ingType = ingType;
@@ -65,9 +64,6 @@ public class Medicine extends Product {
 	public String getUsage() {
 		return usage;
 	}
-	public int getRestock() {
-		return restock;
-	}
 	public int getSize() {
 		return size;
 	}
@@ -78,7 +74,7 @@ public class Medicine extends Product {
 			return size + " ml";
 		else return size + " g";
 	}
-	public ArrayList<LocalDate> getBBD() {
+	public LocalDate getBBD() {
 		return bbd;
 	}
 	public ArrayList<Medicine> getIngredients() {
@@ -104,35 +100,7 @@ public class Medicine extends Product {
 			return "Flüssigkeit";
 		else return "Pulver";
 	}
-	// getter Funktion um die Anzahl der vorrätigen Medikamente zu bekommen
-	public int getStock() {
-		return bbd.size()-1;
-	}
-	// ändern wie viele Medikamente vorhanden sein sollen
-	public void setRestock(int restock) {
-		this.restock = restock;
-	}
-	// neue MHD's zur Liste hinzufügen und damit Menge an Medikamenten im Lager erhöhen
-	public void addNewStock() {
-		
-		LocalDate date = LocalDate.now().plusMonths(6);
-		for (int i = bbd.size(); i <= restock; i++) {
-			bbd.add(date);
-		}
-	}
-	// entferne überfällige MHD Medikamente
-	public void deleteStockOverBBD() {
-		
-		LocalDate date = LocalDate.now();
-		for (int i = 0; i < bbd.size(); i++) {
-			bbd.remove(date);
-		}
-	}
-	// entfernt verkaufte Elemente
-	public void soldMedicine(int numberSold) {
-		
-		for (int i = 0; i < numberSold; i++) {
-			bbd.remove(0);
-		}
+	public void setUsage(String usage) {
+		this.usage = usage;
 	}
 }
