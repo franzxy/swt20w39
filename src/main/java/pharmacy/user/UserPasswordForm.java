@@ -5,6 +5,9 @@ import javax.validation.constraints.Size;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.hibernate.type.TrueFalseType;
+import org.salespointframework.useraccount.UserAccountManagement;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -12,13 +15,13 @@ class UserPasswordForm {
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	private String oldPassword;
 
+	public final UserAccountManagement userAccounts;
+
 	@AssertTrue(message="Old password incorrect")
 	public boolean isValid() {
-		var password = SecurityContextHolder.getContext().getAuthentication().getCredentials();
-		System.out.println(password);
-		System.out.println(password.toString());
-		System.out.println(UnencryptedPassword.of(password.toString()));
-		return this.oldPassword.equals(UnencryptedPassword.of(password.toString());
+		var name = SecurityContextHolder.getContext().getAuthentication().getName();
+		var account = userAccounts.findByUsername(name);
+		return this.oldPassword.equals(UnencryptedPassword.of(account.get().getPassword().toString()));
 	}
 
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")

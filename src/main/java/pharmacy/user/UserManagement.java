@@ -14,7 +14,6 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pharmacy.Pharmacy;
 import pharmacy.catalog.MedicineCatalog;
 
 import org.springframework.security.core.Authentication;
@@ -125,4 +124,6 @@ public class UserManagement {
 		var user = userAccounts.findByUsername(auth.getName());
 		return user.get().getFirstname();
 	}
+
+	// public Boolean comparePasswords (one, two)
 }
