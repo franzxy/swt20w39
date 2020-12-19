@@ -2,17 +2,18 @@ package pharmacy.users;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
-class RegistrationForm {
-	
+class UserForm {
 	
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
 	private final String name;
+	
+	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
+	private final String lastName;
+
+	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
+	private final String email;
 
 	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
@@ -23,25 +24,26 @@ class RegistrationForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String password;
 
-	@NotEmpty(message = "{RegistrationForm.address.NotEmpty}")
-	private final String address;
-	
-
-	public RegistrationForm(String name, String password, String address) {
+	public UserForm(String name, String lastName, String email, String password) {
 		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
 		this.password = password;
-		this.address = address;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 }

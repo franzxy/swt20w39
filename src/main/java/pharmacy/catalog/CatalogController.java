@@ -43,6 +43,7 @@ class CatalogController {
 		return "index";
 	}
 
+
 	@PostMapping("/")
 	public String submitSearchInCatalog(@ModelAttribute SearchForm form, Model model) {
 		model.addAttribute("SearchForm", form);
@@ -106,8 +107,6 @@ class CatalogController {
 
 		return "searchresult";
 	}
-
-
 
 
 	@GetMapping("/medicine/{medicine}")

@@ -39,15 +39,17 @@ class UserDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default users and users.");
 
-		userAccountManagement.create("boss", UnencryptedPassword.of("123"), Role.of("BOSS"));
+		var userAccount = userAccountManagement.create("boss", UnencryptedPassword.of("123"), Role.of("BOSS"));
+		userAccount.setFirstname("Boss");
 
 		var password = "123";
-
+		/*
 		List.of(//
 				new RegistrationForm("hans", password, "wurst"),
 				new RegistrationForm("dextermorgan", password, "Miami-Dade County"),
 				new RegistrationForm("earlhickey", password, "Camden County - Motel"),
 				new RegistrationForm("mclovinfogell", password, "Los Angeles")//
 		).forEach(userManagement::createUser);
+		*/
 	}
 }

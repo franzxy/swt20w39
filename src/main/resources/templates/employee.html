@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
+		<title>Registrieren</title>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/employee}" th:object="${employeeForm}">
+    
+            <div class="field">
+                <label for="address">Vorname</label>
+                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <div class="field">
+                <label for="address">Nachname</label>
+                <input id="address" name="address" th:field="*{lastName}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <div class="field">
+                <label for="name">E-Mail-Adresse</label>
+                <input id="name" name="name" th:field="*{email}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            </div>
+    
+            <div class="field">
+                <label for="password">Passwort</label>
+                <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
+                       required="required"/>
+            </div>
+
+            <div class="field">
+                <label for="address">Gehalt</label>
+                <input type="number" min="1" step="any" id="address" name="address" th:field="*{salary}" th:errorclass="fieldError" required="required"/>
+            </div>
+
+            <div class="field">
+                <label for="address">Urlaub</label>
+                <input id="name" name="name" th:field="*{vacation}" th:errorclass="fieldError" type="number" required="required"/><br/>
+            </div>
+
+            <button type="submit" class="ui button">Registrieren</button>
+        </form>
+    </body>
+</html>

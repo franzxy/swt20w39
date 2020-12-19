@@ -10,7 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 class UserController {
@@ -24,42 +23,74 @@ class UserController {
 		this.userManagement = userManagement;
 	}
 
-	@PostMapping("/password")
-	String changePassword(@Valid @ModelAttribute("form")PasswordForm form, Errors result) {
-		if (result.hasErrors()) {
-			return "password";
-		}
-		userManagement.changePassword(form);
+	@GetMapping("/customer")
+	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
+	String customer(Model model, CustomerForm customerForm) {
+
+		model.addAttribute("customerForm", customerForm);
 		
-		return "redirect:/";
+		return "customer";
 	}
 
-	@GetMapping("/password")
-	String changePassword(Model model, PasswordForm form) {
-		model.addAttribute("form", form);
-		return "password";
-	}
-
-    @PostMapping("/register")
-	String registerNew(@Valid @ModelAttribute("form")RegistrationForm form, Errors result) {
+    @PostMapping("/customer")
+	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
+	String newCustomer(@Valid @ModelAttribute("customerForm")CustomerForm customerForm, Errors result) {
 
 		if (result.hasErrors()) {
-			return "register";
+			return "customer";
 		}
-		
-		userManagement.createUser(form);
 
-		return "redirect:/";
+		userManagement.addCustomer(customerForm);
+
+		return "redirect:/users";
 	}
 
-	@GetMapping("/register")
-	String register(Model model, RegistrationForm form) {
-		model.addAttribute("form", form);
-		return "register";
+	@GetMapping("/doctor")
+	@PreAuthorize("hasRole('BOSS')")
+	String doctor(Model model, UserForm userForm) {
+
+		model.addAttribute("userForm", userForm);
+
+		return "doctor";
+	}
+
+    @PostMapping("/doctor")
+	@PreAuthorize("hasRole('BOSS')")
+	String newDoctor(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
+
+		if (result.hasErrors()) {
+			return "doctor";
+		}
+
+		userManagement.addDoctor(userForm);
+
+		return "redirect:/users";
+	}
+
+	@GetMapping("/employee")
+	@PreAuthorize("hasRole('BOSS')")
+	String employee(Model model, EmployeeForm employeeForm) {
+		
+		model.addAttribute("employeeForm", employeeForm);
+		
+		return "employee";
+	}
+
+    @PostMapping("/employee")
+	@PreAuthorize("hasRole('BOSS')")
+	String newEmployee(@Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
+
+		if (result.hasErrors()) {
+			return "employee";
+		}
+
+		userManagement.addEmployee(employeeForm);
+
+		return "redirect:/users";
 	}
 
 	@GetMapping("/users")
-	@PreAuthorize("hasRole('BOSS')")
+	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
 	String users(Model model) {
 
 		model.addAttribute("userList", userManagement.findAll());
@@ -68,7 +99,37 @@ class UserController {
 	}
 
 	@GetMapping("/account")
-	String account() {
+	@PreAuthorize("isAuthenticated()")
+	String changePassword(Model model, UserPasswordForm changePassword) {
+		
+		model.addAttribute("changePassword", changePassword);
+		model.addAttribute("userName", userManagement.currentUserName());
+		
 		return "account";
 	}
+
+	@PostMapping("/account")
+	@PreAuthorize("isAuthenticated()")
+	String changePassword(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
+		
+		model.addAttribute("userName", userManagement.currentUserName());
+		
+		if (result.hasErrors()) {
+			return "account";
+		}
+		
+		userManagement.changePassword(changePassword);
+		
+		return "account";
+	}
+
+	/*
+	String example(@LoggedIn Optional<UserAccount> userAccount) {
+        // functional style using map and lambda expression:
+        return userAccount.map(account -> {
+            // things to be done if the user account is present
+            return "...";
+        }).orElse("redirect:/");  // if the user account is *not* present
+	}
+	*/
 }

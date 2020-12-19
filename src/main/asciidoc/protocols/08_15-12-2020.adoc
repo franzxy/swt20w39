@@ -1,0 +1,34 @@
+= Protokoll Gruppe 39
+
+Treffen am 08.12.2020
+
+Ort:      BBB +
+Beginn:   18:00 +
+Ende:     17:15 +
+
+__Schriftführer:__ Timon Trettin +
+
+*Nächstes Treffen:* +
+22.12.2020, 16:40 Uhr, BBB
+
+__Teilnehmer:__
+- Lennart Wittkowski: Tutor
+- Emelie Radziwill: Tutor
+- Falk Natkowski
+- Lukas Luger
+- Jonas Kabelitz 
+- Timon Trettin
+- Clemens Rose
+
+== Bemerkungen
+- Testplan zu testende Funktionalitäten ergänzen
+
+=== Aufgaben bis zum 13.12.2020
+- Prototypen mit Basisfunktionalität fertigstellen
+
+=== Aufgabenverteilung
+- Inventar: Clemens
+- Lab: Jonas
+- Finanzen: Lukas 
+- Nutzerverwaltung: Timon
+- Counters: Falk

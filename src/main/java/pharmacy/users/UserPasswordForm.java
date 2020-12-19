@@ -3,16 +3,18 @@ package pharmacy.users;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Pattern;
-import org.springframework.security.core.Authentication;
+import javax.validation.constraints.Pattern;	
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
-class PasswordForm {
+class UserPasswordForm {
+	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
+	private String oldPassword;
 
-	@NotEmpty(message = "{PasswordForm.oldPassword.NotEmpty}")
-	// @MatchingPassword(SecurityContextHolder.getContext().getAuthentication().getCredentials(), message = "{PasswordForm.oldPassword.Correct}")
-	private final String oldPassword;
+	@AssertTrue(message="Old password incorrect")
+	private boolean isValid() {
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getCredentials());
+		return this.oldPassword.equals(SecurityContextHolder.getContext().getAuthentication().getCredentials());
+	}
 
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
@@ -22,14 +24,9 @@ class PasswordForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String newPassword;
 
-	@NotEmpty(message = "{PasswordForm.confirmPassword.NotEmpty}")
-	// @MatchingPassword(newPassword, message = "{PasswordForm.confirmPassword.Match}")
-	private final String confirmPassword;
-
-	public PasswordForm(String oldPassword, String newPassword, String  confirmPassword) {
+	public UserPasswordForm(String oldPassword, String newPassword) {
 		this.oldPassword = oldPassword;
 		this.newPassword = newPassword;
-		this.confirmPassword = confirmPassword;
 	}
 
 	public String getOldPassword() {
@@ -38,9 +35,5 @@ class PasswordForm {
 
 	public String getNewPassword() {
 		return newPassword;
-	}
-
-	public String getconfirmPassword() {
-		return  confirmPassword;
 	}
 }

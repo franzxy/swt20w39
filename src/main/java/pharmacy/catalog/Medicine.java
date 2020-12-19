@@ -111,7 +111,7 @@ public class Medicine extends Product {
 	public void soldMedicine(int numberSold) {
 		
 		for (int i = 0; i < numberSold; i++) {
-			bbd.remove(i);
+			bbd.remove(0);
 		}
 	}
 }

@@ -61,5 +61,6 @@ class CatalogDataInitializer implements DataInitializer {
 		medicineCatalog.save(new Medicine("3", "Medikament 3", "med3", "usage3", 3, 30, Money.of(300, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.POWDER));
 		medicineCatalog.save(new Medicine("4", "Medikament 4", "med4", "usage4", 4, 40, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.TABLET));
 
+
 	}
 }
