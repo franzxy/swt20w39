@@ -250,11 +250,21 @@
         </div>
         <div id="rechnungsform" class="rechnung-prev">
           <div class="popup border">
+            <div class="input-fileds">
               <h1 style="color:white">Rechnung Nr. <span th:text="${rf.getId()}"></span></h1>
+            </div>
+              <div class="input-fileds">
               <label style="color:white">Datum: <span th:text="${rf.getDate()}"></span></label>
+              </div>
+              <div class="input-fileds">
               <label style="color:white">Benutzer: <span th:text="${rf.getUsername()}"></span></label>
+              </div>
+              <div class="input-fileds">
               <label style="color:white">Email: <span th:text="${rf.getUemail()}"></span></label>
-              <label style="color:white">Betrag: <span th:text="${rf.getBetrag()}"></span></label>
+              </div>
+              <div class="input-fileds">
+              <label style="color:white">Betrag: <span th:text="${rf.getBetrag()}"></span> €</label>
+              </div>
               <form action="#" th:action="@{/editfix}" method="POST">
                 <input class="button" style="margin:5px"type="submit" value="Schließen" />
               </form>
