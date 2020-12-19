@@ -11,6 +11,8 @@ import org.salespointframework.accountancy.AccountancyEntry;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
+import org.salespointframework.payment.Cash;
+import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManagement;
@@ -233,9 +235,13 @@ public class FinanceController {
 			//System.out.println(this.userAccount.findByUsername("boss").get());
 			Order o1=new Order(this.userAccount.findByUsername("boss").get());
 			o1.addChargeLine(Money.of(20,"EUR"), "default");
+			o1.setPaymentMethod(Cash.CASH);
+			Order o2=new Order(this.userAccount.findByUsername("boss").get());
+			o2.addChargeLine(Money.of(20,"EUR"), "default");
+			o2.setPaymentMethod(Cash.CASH);
 			this.orderManagement.save(o1);
 			this.orderManagement.payOrder(o1);
-			//this.orderManagement.completeOrder(o1);
+			this.orderManagement.save(o2);
 		}
 		this.acc.add(new AccountancyEntry(Money.of(23,"EUR")," Test"));
 		this.autopay();
