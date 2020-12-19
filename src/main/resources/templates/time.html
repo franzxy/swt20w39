@@ -8,7 +8,7 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         <form method="post" role="form" class="ui form" id="form" th:action="@{/time}" th:object="${durationForm}">
-    
+            <p th:text="${time}"></p>
             <div class="field">
                 <label for="duration">Stunden</label>
                 <input th:field="*{duration}" type="number"

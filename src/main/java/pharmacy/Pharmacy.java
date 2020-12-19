@@ -6,12 +6,13 @@ import org.salespointframework.time.BusinessTime;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableSalespoint
 public class Pharmacy {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Pharmacy.class, args);
 	}

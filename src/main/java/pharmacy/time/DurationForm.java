@@ -1,4 +1,4 @@
-package pharmacy;
+package pharmacy.time;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

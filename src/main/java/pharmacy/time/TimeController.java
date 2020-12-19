@@ -1,4 +1,4 @@
-package pharmacy;
+package pharmacy.time;
 
 import java.time.Duration;
 
@@ -27,6 +27,7 @@ class TimeController {
 	@PreAuthorize("hasRole('BOSS')")
 	String time(Model model, DurationForm durationForm) {
 
+		model.addAttribute("time", businessTime.getTime());
 		model.addAttribute("durationForm", durationForm);
 		
 		return "time";
@@ -34,7 +35,9 @@ class TimeController {
 
     @PostMapping("/time")
 	@PreAuthorize("hasRole('BOSS')")
-	String changeTime(@Valid @ModelAttribute("durationForm")DurationForm durationForm, Errors result) {
+	String changeTime(Model model, @Valid @ModelAttribute("durationForm")DurationForm durationForm, Errors result) {
+
+		model.addAttribute("time", businessTime.getTime());
 
 		if (result.hasErrors()) {
 			return "time";
@@ -42,6 +45,6 @@ class TimeController {
 
 		businessTime.forward(Duration.ofHours(durationForm.getDuration()));
 
-		return "index";
+		return "time";
 	}
 }
