@@ -8,7 +8,6 @@ import org.salespointframework.core.DataInitializer;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.time.BusinessTime;
-
 import org.springframework.stereotype.Component;
 
 

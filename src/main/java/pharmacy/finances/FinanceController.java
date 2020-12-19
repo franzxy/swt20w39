@@ -1,13 +1,9 @@
 package pharmacy.finances;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.itextpdf.text.DocumentException;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.accountancy.Accountancy;
