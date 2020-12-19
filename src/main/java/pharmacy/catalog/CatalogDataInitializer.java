@@ -56,10 +56,10 @@ class CatalogDataInitializer implements DataInitializer {
 		ArrayList<Medicine> ingredients = null;
 
 
-		medicineCatalog.save(new Medicine("1", "Medikament 1", "med1", "usage1", 1, 10, Money.of(100, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.LABOR, MedicineType.LIQUID));
-		medicineCatalog.save(new Medicine("2", "Medikament 2", "med2", "usage2", 2, 20, Money.of(200, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.MIXTURE, MedicineType.CAPSULE));
-		medicineCatalog.save(new Medicine("3", "Medikament 3", "med3", "usage3", 3, 30, Money.of(300, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.POWDER));
-		medicineCatalog.save(new Medicine("4", "Medikament 4", "med4", "usage4", 4, 40, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.TABLET));
+		medicineCatalog.save(new Medicine("1", "Medikament 1", "med1", "usage1", 1, Money.of(100, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.LABOR, MedicineType.LIQUID));
+		medicineCatalog.save(new Medicine("2", "Medikament 2", "med2", "usage2", 2, Money.of(200, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.MIXTURE, MedicineType.CAPSULE));
+		medicineCatalog.save(new Medicine("3", "Medikament 3", "med3", "usage3", 3, Money.of(300, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.POWDER));
+		medicineCatalog.save(new Medicine("4", "Medikament 4", "med4", "usage4", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.TABLET));
 
 	}
 }

@@ -24,15 +24,15 @@ public class Medicine extends Product {
 	public static enum MedicineType {
 		CAPSULE, TABLET, OINTMENT, LIQUID, POWDER;
 	}
-<<<<<<< HEAD
+
 	//private variable name, price entfernt --> name, price aus superklasse wird verwendet
 	private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
 	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße
-	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	//private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 
-	private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
+	//private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
 	//private Money price;
-	//private LocalDate bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
 	private IngredientType ingType; // wofür wird es verwendet
@@ -41,7 +41,7 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String id, String name, String image, String usage, int size, Money price, LocalDate bbd,
+	public Medicine(String id, String name, String image, String usage, int size, Money price, ArrayList<LocalDate> bbd,
 			ArrayList<Medicine> ingredients, PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
@@ -105,7 +105,7 @@ public class Medicine extends Product {
 		else if(medType.equals(MedicineType.OINTMENT))
 			return "Salbe";
 		else if(medType.equals(MedicineType.LIQUID))
-			return "Flüssigkeit";
+			return "Fluessigkeit";
 		else return "Pulver";
 	}
 	public void setUsage(String usage) {

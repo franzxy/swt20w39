@@ -20,11 +20,11 @@
             <br><br>
             <select th:field="*{medType}" name="Typ" id="type">
                 <option th:value="all">Alle Arten von Medikamenten</option>
-                <option th:value="capsule">Kapseln</option>
-                <option th:value="tablet">Tabletten</option>
-                <option th:value="ointment">Salbe</option>
-                <option th:value="liquid">Flüssigkeit</option>
-                <option th:value="powder">Pulver</option>
+                <option th:value="Kapsel">Kapseln</option>
+                <option th:value="Tablette">Tabletten</option>
+                <option th:value="Salbe">Salben</option>
+                <option th:value="Fluessigkeit">Flüssigkeiten</option>
+                <option th:value="Pulver">Pulver</option>
             </select>
             <br>
             <input type="checkbox" name="nopres" th:checked="${nopres}"> Nur rezeptfreie Medikamente anzeigen</input>

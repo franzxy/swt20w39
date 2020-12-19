@@ -2,10 +2,14 @@ package pharmacy.catalog;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.inventory.InventoryItem;
+import org.salespointframework.inventory.InventoryItems;
 import org.salespointframework.inventory.MultiInventory;
 import org.salespointframework.inventory.MultiInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +24,7 @@ import static org.salespointframework.core.Currencies.EURO;
 
 @Controller
 class CatalogController {
+	private static final Logger LOG = LoggerFactory.getLogger(CatalogDataInitializer.class);
 
 	private static final Quantity NONE = Quantity.of(0);
 
@@ -80,9 +85,9 @@ class CatalogController {
 				if (searchTerm.equals("") || d.getName().toLowerCase().contains(search[i])) {
 
 					//Rezeptpflichtigkeit egal oder Medikament rezeptfrei
-					if(!nopres || d.getPresType() == Medicine.PrescriptionType.WITHOUTPRES) {
+					if(!nopres || d.getPresType().equals("Frei Verkäuflich")) {
 
-						if(type.equals("all") || type.equals(d.getMedType().toString().toLowerCase())) {
+						if(type.equals("all") || d.getMedType().equals(type)) {
 
 
 							if (!result.contains(d)) {
@@ -106,23 +111,26 @@ class CatalogController {
 	}
 
 
-/*
+
 	// (｡◕‿◕｡)
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
 	// Lektüre: http://spring.io/blog/2009/03/08/rest-in-spring-3-mvc/
 	@GetMapping("/medicine/{medicine}")
 	String detail(@PathVariable Medicine medicine, Model model) {
 
-		var quantity = inventory.findByProductIdentifier(medicine.getId()) //
+
+
+		/*var quantity = inventory.findByProductIdentifier(medicine.getId()) //
 				.map(InventoryItem::getQuantity) //
 				.orElse(NONE);
 
-		model.addAttribute("medicine", medicine);
+
 		model.addAttribute("quantity", quantity);
 		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
-
-		return "detail";
-	}
 */
+
+		return "index";
+	}
+
 
 }
