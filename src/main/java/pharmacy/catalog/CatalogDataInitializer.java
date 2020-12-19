@@ -57,6 +57,7 @@ class CatalogDataInitializer implements DataInitializer {
 		LocalDate date = LocalDate.now();
 		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, Money.of(100, EURO), date,
 				ingredients, PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
+		
 		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, Money.of(100, EURO), date, 
 				ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.CAPSULE));
 

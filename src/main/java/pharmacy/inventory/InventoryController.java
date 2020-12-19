@@ -4,8 +4,8 @@ package pharmacy.inventory;
 import javax.validation.Valid;
 
 import org.salespointframework.inventory.InventoryItem;
-import org.salespointframework.inventory.UniqueInventory;
-import org.salespointframework.inventory.UniqueInventoryItem;
+import org.salespointframework.inventory.MultiInventory;
+import org.salespointframework.inventory.MultiInventoryItem;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +21,9 @@ import pharmacy.inventory.InventoryForm;
 @Controller
 class InventoryController {
 
-	private final UniqueInventory<UniqueInventoryItem> inventory;
+	private final MultiInventory<MultiInventoryItem> inventory;
 
-	InventoryController(UniqueInventory<UniqueInventoryItem> inventory) {
+	InventoryController(MultiInventory<MultiInventoryItem> inventory) {
 		this.inventory = inventory;
 	}
 
