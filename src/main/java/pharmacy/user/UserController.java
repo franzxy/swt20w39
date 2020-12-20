@@ -17,9 +17,6 @@ class UserController {
 	private final UserManagement userManagement;
 
 	UserController(UserManagement userManagement) {
-
-		Assert.notNull(userManagement, "UserManagement must not be null!");
-
 		this.userManagement = userManagement;
 	}
 

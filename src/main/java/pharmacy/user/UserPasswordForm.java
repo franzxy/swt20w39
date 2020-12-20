@@ -10,8 +10,10 @@ import org.hibernate.type.TrueFalseType;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.springframework.security.core.context.SecurityContextHolder;
+import javax.validation.constraints.Pattern;	
 
 class UserPasswordForm {
+	
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	private String oldPassword;
 
@@ -22,8 +24,15 @@ class UserPasswordForm {
 		var name = SecurityContextHolder.getContext().getAuthentication().getName();
 		var account = userAccounts.findByUsername(name);
 		return this.oldPassword.equals(UnencryptedPassword.of(account.get().getPassword().toString()));
+/*
+	@AssertTrue(message="Old password incorrect")
+	private boolean isValid() {
+		System.out.println(oldPassword);
+		System.out.println(UserManagement.getPassword);
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getCredentials());
+		return oldPassword.equals(SecurityContextHolder.getContext().getAuthentication().getCredentials());
 	}
-
+*/
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
 	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
@@ -40,11 +49,9 @@ class UserPasswordForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String confirmPassword;
 
-	@AssertTrue(message="Old password incorrect")
-	public boolean confirmValid() {
-		System.out.println(UnencryptedPassword.of(newPassword));
-		System.out.println(UnencryptedPassword.of(confirmPassword));
-		return this.newPassword.equals(confirmPassword);
+	@AssertTrue(message="Passwörter stimmen nicht überein.")
+	private boolean isConfirm() {
+		return newPassword.equals(confirmPassword);
 	}
 
 	public UserPasswordForm(String oldPassword, String newPassword, String confirmPassword) {

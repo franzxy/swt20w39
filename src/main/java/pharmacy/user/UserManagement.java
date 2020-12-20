@@ -31,7 +31,13 @@ public class UserManagement {
 		this.users = users;
 		this.userAccounts = userAccounts;
 	}
-
+/*
+	public String getPassword() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		var user = userAccounts.findByUsername(auth.getName()).get();
+		return UnencryptedPassword.of(user.getPassword().toString()).toString();
+	}
+*/
 	public User addUser(UserForm userForm) {
 		var password = UnencryptedPassword.of(userForm.getPassword());
 		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("USER"));
@@ -82,7 +88,7 @@ public class UserManagement {
 		userAccount.setLastname(employeeForm.getLastName());
 		var user = new User(userAccount);
 		user.setSalary(employeeForm.getSalary());
-		user.setVacation(employeeForm.getVacation());
+		user.setVacationRemaining(Long.valueOf(employeeForm.getVacation()));
 
 		return users.save(user);
 	}
