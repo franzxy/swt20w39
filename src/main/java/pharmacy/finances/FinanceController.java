@@ -18,6 +18,7 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -160,8 +161,9 @@ public class FinanceController {
 		createGehalt();
 
 	}
-
+	
 	@GetMapping("/finances")
+	@PreAuthorize("hasRole('BOSS')")
 	public String finances(Model model) {
 		this.updateMoney();
 		model.addAttribute("filterB",new FilterBase());
@@ -177,6 +179,7 @@ public class FinanceController {
 	}
 	
 	@PostMapping("/finances")
+	@PreAuthorize("hasRole('BOSS')")
 	public String financesupdate(@ModelAttribute FilterBase filterB, Model model) {
 		model.addAttribute("filterB", filterB);
 		model.addAttribute("rech", this.orderManagement.findBy(OrderStatus.OPEN).toList());
