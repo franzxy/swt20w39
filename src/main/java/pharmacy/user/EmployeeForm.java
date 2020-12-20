@@ -1,5 +1,7 @@
 package pharmacy.user;
 
+import java.util.function.LongFunction;
+
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -36,23 +38,23 @@ class EmployeeForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String confirmPassword;
 
-	@AssertTrue(message="Old password incorrect")
-	private boolean confirmValid() {
-		return this.password.equals(confirmPassword);
+	@AssertTrue(message="Passwörter stimmen nicht überein.")
+	private boolean isConfirm() {
+		return password.equals(confirmPassword);
 	}
 	
 	// Employee
-	private final Money salary;
+	private final Long salary;
 	
-	private final Integer vacation;
+	private final Long vacation;
 
-	public EmployeeForm(String name, String lastName, String email, String password, String confirmPassword, Number salary, Integer vacation) {
+	public EmployeeForm(String name, String lastName, String email, String password, String confirmPassword, Long salary, Long vacation) {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
-		this.salary = Money.of(salary, "EUR");
+		this.salary = salary;
 		this.vacation = vacation;
 	}
 
@@ -78,11 +80,11 @@ class EmployeeForm {
 	}
 
 	// Employee
-	public Money getSalary() {
+	public Long getSalary() {
 		return salary;
 	}
 
-	public Integer getVacation() {
+	public Long getVacation() {
 		return vacation;
 	}
 }

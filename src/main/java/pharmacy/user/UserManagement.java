@@ -5,6 +5,8 @@ import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import java.sql.Time;
 import java.time.Duration;
 import java.time.Month;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.time.BusinessTime;
@@ -87,8 +89,8 @@ public class UserManagement {
 		userAccount.setFirstname(employeeForm.getName());
 		userAccount.setLastname(employeeForm.getLastName());
 		var user = new User(userAccount);
-		user.setSalary(employeeForm.getSalary());
-		user.setVacationRemaining(Long.valueOf(employeeForm.getVacation()));
+		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
+		user.setVacationRemaining(employeeForm.getVacation());
 
 		return users.save(user);
 	}
@@ -123,6 +125,10 @@ public class UserManagement {
 
 	public Streamable<User> findAll() {
 		return users.findAll();
+	}
+
+	public Optional<User> findUser(Long id) {
+		return users.findById(id);
 	}
 
 	public String currentUserName() {

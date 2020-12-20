@@ -33,9 +33,9 @@ class UserForm {
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String confirmPassword;
 
-	@AssertTrue(message="Old password incorrect")
-	private boolean confirmValid() {
-		return this.password.equals(confirmPassword);
+	@AssertTrue(message="Passwörter stimmen nicht überein.")
+	private boolean isConfirm() {
+		return password.equals(confirmPassword);
 	}
 
 	public UserForm(String name, String lastName, String email, String password, String confirmPassword) {

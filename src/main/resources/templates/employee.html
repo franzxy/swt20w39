@@ -37,8 +37,8 @@
                 <input id="newPassword" name="newPassword" th:field="*{confirmPassword}" th:errorclass="fieldError" type="password"
                        required="required"/><br/>
                 
-                       <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Das Passwort darf
-                           nicht leer sein.</p>
+                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Das Passwort darf
+                    nicht leer sein.</p>
                 
             </div>
 
@@ -48,7 +48,7 @@
             </div>
 
             <div class="field">
-                <label for="address">Urlaub</label>
+                <label for="address">Urlaubstage</label>
                 <input id="name" name="name" th:field="*{vacation}" th:errorclass="fieldError" type="number" required="required"/><br/>
             </div>
 

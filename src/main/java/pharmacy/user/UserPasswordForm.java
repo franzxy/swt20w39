@@ -16,8 +16,6 @@ class UserPasswordForm {
 	
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	private String oldPassword;
-
-	public final UserAccountManagement userAccounts;
 /*
 	@AssertTrue(message="Old password incorrect")
 	private boolean isValid() {

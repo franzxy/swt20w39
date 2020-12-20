@@ -24,7 +24,6 @@ public class User {
 
 	// private CustomerAddress address;
 
-
 	// Customer idea
 	private String street;
 	private String houseNumber;
