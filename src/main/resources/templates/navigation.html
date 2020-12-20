@@ -7,6 +7,7 @@
         <a class="a nav height flex center" th:href="@{/orders}">Bestellungen</a>
         <a class="a nav height flex center" th:href="@{/inventory}">Inventar</a>
         <a class="a nav height flex center" th:href="@{/finances}">Finanzen</a>
+        <a class="a nav height flex center" th:href="@{/searchform}">Suche</a>
         <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
     </div>
     <div class="row height flex align">
