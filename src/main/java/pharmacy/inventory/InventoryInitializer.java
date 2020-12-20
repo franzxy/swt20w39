@@ -1,8 +1,7 @@
 package pharmacy.inventory;
 
 import org.salespointframework.core.DataInitializer;
-import org.salespointframework.inventory.UniqueInventory;
-import org.salespointframework.inventory.UniqueInventoryItem;
+import org.salespointframework.inventory.*;
 import org.salespointframework.quantity.Quantity;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -48,7 +47,7 @@ class InventoryInitializer implements DataInitializer {
 
 			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
 			if (inventory.findByProduct(medicine).isEmpty()) {
-				inventory.save(new UniqueInventoryItem(medicine, Quantity.of(1)));
+				inventory.save(new UniqueInventoryItem(medicine, Quantity.of(10)));
 			}
 		});
 	}
