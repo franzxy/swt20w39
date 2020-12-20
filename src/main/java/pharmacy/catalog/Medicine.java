@@ -25,10 +25,10 @@ public class Medicine extends Product {
 		CAPSULE, TABLET, OINTMENT, LIQUID, POWDER;
 	}
 
-	private String id, name, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
-	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße 
-	private Money price; // 
-	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
+	private int size; // wie viele vorrätig sein sollen, Packungsgröße 
+	//private Money price;
+	private LocalDate bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
 	private IngredientType ingType; // wofür wird es verwendet
@@ -37,18 +37,18 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String id, String name, String image, String usage, int restock, int size, Money price,
-			ArrayList<LocalDate> bbd, ArrayList<Medicine> ingredients, 
-			PrescriptionType presType, IngredientType ingType, MedicineType medType) {
+	public Medicine(String id, String name, String image, String usage, int size, Money price, LocalDate bbd,
+			ArrayList<Medicine> ingredients, PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
 		
 		this.id = id;
+		//this.name = name;
 		this.image = image;
 		this.usage = usage;
-		this.restock = restock;
 		this.size = size;
 		this.bbd = bbd;
+		//this.price = price;
 		this.ingredients = ingredients;
 		this.presType = presType;
 		this.ingType = ingType;
@@ -58,68 +58,49 @@ public class Medicine extends Product {
 	public String getID() {
 		return id;
 	}
-	public String getName() {
-		return name;
-	}
 	public String getImage() {
-	return image;
+		return image;
 	}
 	public String getUsage() {
 		return usage;
 	}
-	public int getRestock() {
-		return restock;
-	}
 	public int getSize() {
 		return size;
 	}
-	public Money getMoney() {
-		return price;
+	public String getPackageSize() {
+		if (medType.equals(MedicineType.CAPSULE) || medType.equals(MedicineType.TABLET))
+			return size + " Stück";
+		else if(medType.equals(MedicineType.OINTMENT) || medType.equals(MedicineType.LIQUID))
+			return size + " ml";
+		else return size + " g";
 	}
-	public ArrayList<LocalDate> getBBD() {
+	public LocalDate getBBD() {
 		return bbd;
 	}
 	public ArrayList<Medicine> getIngredients() {
 		return ingredients;
 	}
-	public PrescriptionType getPresType() {
-		return presType;
+	public String getPresType() {
+		if (presType.equals(PrescriptionType.PRESONLY))
+			return "Verschreibungspflichtig";
+		else return "Frei Verkäuflich";
+		
 	}
 	public IngredientType getIngType() {
 		return ingType;
 	}
-	public MedicineType getMedType() {
-		return medType;
+	public String getMedType() {
+		if (medType.equals(MedicineType.CAPSULE))
+			return "Kapsel";
+		else if(medType.equals(MedicineType.TABLET))
+			return "Tablette";
+		else if(medType.equals(MedicineType.OINTMENT))
+			return "Salbe";
+		else if(medType.equals(MedicineType.LIQUID))
+			return "Flüssigkeit";
+		else return "Pulver";
 	}
-	// getter Funktion um die Anzahl der vorrätigen Medikamente zu bekommen
-	public int getStock() {
-		return bbd.size();
-	}
-	// ändern wie viele Medikamente vorhanden sein sollen
-	public void setRestock(int restock) {
-		this.restock = restock;
-	}
-	// neue MHD's zur Liste hinzufügen und damit Menge an Medikamenten im Lager erhöhen
-	public void addNewStock() {
-		
-		LocalDate date = LocalDate.now().plusMonths(6);
-		for (int i = bbd.size(); i <= restock; i++) {
-			bbd.add(date);
-		}
-	}
-	// entferne überfällige MHD Medikamente
-	public void deleteStockOverBBD() {
-		
-		LocalDate date = LocalDate.now();
-		for (int i = 0; i < bbd.size(); i++) {
-			bbd.remove(date);
-		}
-	}
-	// entfernt verkaufte Elemente
-	public void soldMedicine(int numberSold) {
-		
-		for (int i = 0; i < numberSold; i++) {
-			bbd.remove(0);
-		}
+	public void setUsage(String usage) {
+		this.usage = usage;
 	}
 }

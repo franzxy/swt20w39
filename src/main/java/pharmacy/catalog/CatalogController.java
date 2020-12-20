@@ -2,8 +2,7 @@ package pharmacy.catalog;
 
 //import org.hibernate.validator.constraints.Range;
 import org.salespointframework.inventory.InventoryItem;
-import org.salespointframework.inventory.UniqueInventory;
-import org.salespointframework.inventory.UniqueInventoryItem;
+import org.salespointframework.inventory.*;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Controller;
@@ -55,22 +54,19 @@ class CatalogController {
 
 		return "catalog";
 	}
-
+/*
 	// (｡◕‿◕｡)
 	// Befindet sich die angesurfte Url in der Form /foo/5 statt /foo?bar=5 so muss man @PathVariable benutzen
 	// Lektüre: http://spring.io/blog/2009/03/08/rest-in-spring-3-mvc/
 	@GetMapping("/medicine/{medicine}")
 	String detail(@PathVariable Medicine medicine, Model model) {
-
 		var quantity = inventory.findByProductIdentifier(medicine.getId()) //
 				.map(InventoryItem::getQuantity) //
 				.orElse(NONE);
-
 		model.addAttribute("medicine", medicine);
 		model.addAttribute("quantity", quantity);
 		model.addAttribute("orderable", quantity.isGreaterThan(NONE));
-
 		return "detail";
 	}
-
+*/
 }

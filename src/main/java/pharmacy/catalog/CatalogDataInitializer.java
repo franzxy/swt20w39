@@ -1,3 +1,4 @@
+  
 package pharmacy.catalog;
 
 import static org.salespointframework.core.Currencies.*;
@@ -51,14 +52,16 @@ class CatalogDataInitializer implements DataInitializer {
 			return;
 		}
 
-		LOG.info("Creating default catalog entries.");
-		ArrayList<LocalDate> bbd = null;
-		ArrayList<Medicine> ingredients = null;
-		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), 
-				bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
+		LOG.info("Creating default catalog entries.");		
 		
-		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, 10, Money.of(100, EURO), 
-				bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.CAPSULE));
+		ArrayList<Medicine> ingredients = new ArrayList<Medicine>();
+		LocalDate date = LocalDate.now();
+		
+		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, Money.of(100, EURO), date,
+				ingredients, PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
+		
+		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, Money.of(100, EURO), date, 
+				ingredients, PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
 
 
 	}
