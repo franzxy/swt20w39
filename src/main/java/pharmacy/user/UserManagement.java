@@ -5,6 +5,8 @@ import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import java.sql.Time;
 import java.time.Duration;
 import java.time.Month;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.time.BusinessTime;
@@ -14,7 +16,6 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pharmacy.Pharmacy;
 import pharmacy.catalog.MedicineCatalog;
 
 import org.springframework.security.core.Authentication;
@@ -32,7 +33,13 @@ public class UserManagement {
 		this.users = users;
 		this.userAccounts = userAccounts;
 	}
-
+/*
+	public String getPassword() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		var user = userAccounts.findByUsername(auth.getName()).get();
+		return UnencryptedPassword.of(user.getPassword().toString()).toString();
+	}
+*/
 	public User addUser(UserForm userForm) {
 		var password = UnencryptedPassword.of(userForm.getPassword());
 		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("USER"));
@@ -82,8 +89,8 @@ public class UserManagement {
 		userAccount.setFirstname(employeeForm.getName());
 		userAccount.setLastname(employeeForm.getLastName());
 		var user = new User(userAccount);
-		user.setSalary(employeeForm.getSalary());
-		user.setVacation(employeeForm.getVacation());
+		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
+		user.setVacationRemaining(employeeForm.getVacation());
 
 		return users.save(user);
 	}
@@ -120,9 +127,15 @@ public class UserManagement {
 		return users.findAll();
 	}
 
+	public Optional<User> findUser(Long id) {
+		return users.findById(id);
+	}
+
 	public String currentUserName() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		var user = userAccounts.findByUsername(auth.getName());
 		return user.get().getFirstname();
 	}
+
+	// public Boolean comparePasswords (one, two)
 }
