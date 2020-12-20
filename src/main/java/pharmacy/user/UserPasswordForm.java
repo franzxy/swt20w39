@@ -18,12 +18,6 @@ class UserPasswordForm {
 	private String oldPassword;
 
 	public final UserAccountManagement userAccounts;
-
-	@AssertTrue(message="Old password incorrect")
-	public boolean isValid() {
-		var name = SecurityContextHolder.getContext().getAuthentication().getName();
-		var account = userAccounts.findByUsername(name);
-		return this.oldPassword.equals(UnencryptedPassword.of(account.get().getPassword().toString()));
 /*
 	@AssertTrue(message="Old password incorrect")
 	private boolean isValid() {
