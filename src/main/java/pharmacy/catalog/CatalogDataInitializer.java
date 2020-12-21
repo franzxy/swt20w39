@@ -52,7 +52,7 @@ class CatalogDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default catalog entries.");
-		ArrayList<LocalDate> bbd = null;
+		LocalDate bbd = null;
 		ArrayList<Medicine> ingredients = null;
 
 
