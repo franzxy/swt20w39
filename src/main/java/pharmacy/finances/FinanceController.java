@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import pharmacy.users.User;
-import pharmacy.users.UserManagement;
+import pharmacy.user.User;
+import pharmacy.user.UserManagement;
 
 @Controller
 @org.springframework.core.annotation.Order(20)

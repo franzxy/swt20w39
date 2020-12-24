@@ -25,8 +25,12 @@ public class Medicine extends Product {
 		CAPSULE, TABLET, OINTMENT, LIQUID, POWDER;
 	}
 
+	//private variable name, price entfernt --> name, price aus superklasse wird verwendet
 	private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
-	private int size; // wie viele vorrätig sein sollen, Packungsgröße 
+	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße
+	//private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+
+	//private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
 	//private Money price;
 	private LocalDate bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
@@ -41,7 +45,7 @@ public class Medicine extends Product {
 			ArrayList<Medicine> ingredients, PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
-		
+
 		this.id = id;
 		//this.name = name;
 		this.image = image;
@@ -55,6 +59,8 @@ public class Medicine extends Product {
 		this.medType = medType;
 	}
 	// getter Funktionen für alle Variablen
+	// Suche/Falk: getter für name und price entfernt, damit getter aus superklasse aufgerufen werden (returnt sonst null)
+
 	public String getID() {
 		return id;
 	}
@@ -67,6 +73,7 @@ public class Medicine extends Product {
 	public int getSize() {
 		return size;
 	}
+	
 	public String getPackageSize() {
 		if (medType.equals(MedicineType.CAPSULE) || medType.equals(MedicineType.TABLET))
 			return size + " Stück";
@@ -74,6 +81,7 @@ public class Medicine extends Product {
 			return size + " ml";
 		else return size + " g";
 	}
+	//public LocalDate getBBD() {
 	public LocalDate getBBD() {
 		return bbd;
 	}
@@ -97,7 +105,7 @@ public class Medicine extends Product {
 		else if(medType.equals(MedicineType.OINTMENT))
 			return "Salbe";
 		else if(medType.equals(MedicineType.LIQUID))
-			return "Flüssigkeit";
+			return "Fluessigkeit";
 		else return "Pulver";
 	}
 	public void setUsage(String usage) {

@@ -1,24 +1,42 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
-		<title>Apotheke</title>
-	</head>
-    <body>
-		<nav th:include="navigation :: navigation"></nav>
-		<form action="#" method="post" class="ui form">
-            <div class="field">
-                <label for="name">Suchbegriff</label>
-                <input type="text" />
-			</div>
-		</form>
-        <button type="submit" class="ui button">Suchen</button>		
-		<div id="catalog">
-			<div class="card">
-				<img class="img" />
-				test
-			</div>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<script th:src="@{/webjars/jquery/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script th:src="@{/webjars/Semantic-UI/semantic.min.js}" src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+	<link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet" href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+	<link th:href="@{/resources/css/style.css}" rel="stylesheet" href="../static/resources/css/style.css" type="text/css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
+
+	<title>Apotheke</title>
+</head>
+
+<body>
+	<nav th:include="navigation :: navigation"></nav>
+	<br>
+	<form action="#" th:action="@{/}" th:object=${searchform} method="post" class="ui form">
+		<div class="field">
+			<input type="text" th:field="*{searchTerm}" placeholder="Suchbegriff eingeben" />
+			<br><br>
+			<input type="submit"  value="Suchen" class="ui button" />
 		</div>
-	</body>
+	</form>
+	<br>
+	<div class="ui link cards" th:remove="all-but-first">
+		<div class="ui card" th:each="medicine : ${catalog}">
+			<div class="content">
+				<a class="header" th:href="@{/medicine/{id}(id=${medicine.id})}" th:text="${medicine.name}">Medicine</a>
+			</div>
+			<div class="image">
+				<a th:href="@{/medicine/{id}(id=${medicine.id})}">
+					<img class="thumbnail" th:src="@{/img/{image}.png(image=${medicine.image})}" src="../static/img/med1.png"/>
+				</a>
+			</div>
+			<div class="content">
+				<div class="description" th:text="${medicine.usage}">Usage</div>
+			</div>
+			<div class="extra content" th:text="${{medicine.price}}">Preis in €</div>
+		</div>
+	</div>
+</body>
 </html>

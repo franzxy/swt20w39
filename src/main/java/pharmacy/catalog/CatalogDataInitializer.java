@@ -52,17 +52,15 @@ class CatalogDataInitializer implements DataInitializer {
 			return;
 		}
 
-		LOG.info("Creating default catalog entries.");		
-		
-		ArrayList<Medicine> ingredients = new ArrayList<Medicine>();
-		LocalDate date = LocalDate.now();
-		
-		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, Money.of(100, EURO), date,
-				ingredients, PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
-		
-		medicineCatalog.save(new Medicine("id", "name", "image", "usage", 10, Money.of(100, EURO), date, 
-				ingredients, PrescriptionType.PRESONLY, IngredientType.BOTH, MedicineType.CAPSULE));
+		LOG.info("Creating default catalog entries.");
+		LocalDate bbd = null;
+		ArrayList<Medicine> ingredients = null;
 
+
+		medicineCatalog.save(new Medicine("1", "Medikament 1", "med1", "usage1", 1, Money.of(100, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.LABOR, MedicineType.LIQUID));
+		medicineCatalog.save(new Medicine("2", "Medikament 2", "med2", "usage2", 2, Money.of(200, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.MIXTURE, MedicineType.CAPSULE));
+		medicineCatalog.save(new Medicine("3", "Medikament 3", "med3", "usage3", 3, Money.of(300, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.POWDER));
+		medicineCatalog.save(new Medicine("4", "Medikament 4", "med4", "usage4", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.TABLET));
 
 	}
 }

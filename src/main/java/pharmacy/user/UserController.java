@@ -1,4 +1,4 @@
-package pharmacy.users;
+package pharmacy.user;
 
 import javax.validation.Valid;
 
@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -17,10 +18,27 @@ class UserController {
 	private final UserManagement userManagement;
 
 	UserController(UserManagement userManagement) {
-
-		Assert.notNull(userManagement, "UserManagement must not be null!");
-
 		this.userManagement = userManagement;
+	}
+
+	@GetMapping("/register")
+	String user(Model model, UserForm userForm) {
+
+		model.addAttribute("userForm", userForm);
+
+		return "register";
+	}
+
+    @PostMapping("/register")
+	String newUser(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
+
+		if (result.hasErrors()) {
+			return "register";
+		}
+
+		userManagement.addUser(userForm);
+
+		return "redirect:/login";
 	}
 
 	@GetMapping("/customer")
@@ -96,6 +114,30 @@ class UserController {
 		model.addAttribute("userList", userManagement.findAll());
 
 		return "users";
+	}
+
+	@GetMapping("/user/{userId}")
+	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
+	String user(@PathVariable Long userId, Model model) {
+
+		model.addAttribute("user", userManagement.findUser(userId).get());
+
+		return "user";
+	}
+
+	@PostMapping("/user/{userId}")
+	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
+	String changeUser(@PathVariable Long userId, Model model) {
+		
+		model.addAttribute("user", userManagement.findUser(userId).get());
+		/*
+		if (result.hasErrors()) {
+			return "account";
+		}
+		
+		userManagement.changePassword(changePassword);
+		*/
+		return "user";
 	}
 
 	@GetMapping("/account")

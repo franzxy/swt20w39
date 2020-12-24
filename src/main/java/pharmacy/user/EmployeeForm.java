@@ -1,5 +1,8 @@
-package pharmacy.users;
+package pharmacy.user;
 
+import java.util.function.LongFunction;
+
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -26,18 +29,32 @@ class EmployeeForm {
 	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String password;
+
+	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
+	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
+	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
+	@Pattern(regexp="^(?=.*[A-Z]).+$", message = "{PasswordForm.newPassword.Upper}")
+	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
+	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
+	private final String confirmPassword;
+
+	@AssertTrue(message="Passwörter stimmen nicht überein.")
+	private boolean isConfirm() {
+		return password.equals(confirmPassword);
+	}
 	
 	// Employee
-	private final Money salary;
+	private final Long salary;
 	
-	private final Integer vacation;
+	private final Long vacation;
 
-	public EmployeeForm(String name, String lastName, String email, String password, Number salary, Integer vacation) {
+	public EmployeeForm(String name, String lastName, String email, String password, String confirmPassword, Long salary, Long vacation) {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.salary = Money.of(salary, "EUR");
+		this.confirmPassword = confirmPassword;
+		this.salary = salary;
 		this.vacation = vacation;
 	}
 
@@ -58,12 +75,16 @@ class EmployeeForm {
 		return password;
 	}
 
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
 	// Employee
-	public Money getSalary() {
+	public Long getSalary() {
 		return salary;
 	}
 
-	public Integer getVacation() {
+	public Long getVacation() {
 		return vacation;
 	}
 }

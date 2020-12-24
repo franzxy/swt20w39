@@ -1,8 +1,13 @@
-package pharmacy.users;
+package pharmacy.user;
 
+import java.util.Collection;
+import java.util.stream.Stream;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import org.javamoney.moneta.Money;
@@ -15,19 +20,22 @@ public class User {
 	private @Id @GeneratedValue long id;
 
 	@OneToOne
-	public UserAccount userAccount;
+	private UserAccount userAccount;
 
-	// Customer
+	// private CustomerAddress address;
+
+	// Customer idea
 	private String street;
 	private String houseNumber;
 	private Long postCode;
 	private String city;
 	private Boolean privateInsurance;
 
+
 	// Employee
 	private Money salary;
-	private Integer vacation;
-	private Integer vacationRemaining;
+	// private Collection<Vacation> vacation;
+	private Long vacationRemaining;
 
 	@SuppressWarnings("unused")
 	private User() {}
@@ -52,8 +60,17 @@ public class User {
 	public void removeRole(Role role) {
 		userAccount.remove(role);
 	}
+/*
+	public CustomerAddress getAddress() {
+		return address;
+	}
 
-	// Customer
+	public void setAddress(CustomerAddress newAddress) {
+		address = newAddress;
+	}
+*/
+
+	// Customer idea
 	public void setAddress(String street, String houseNumber, Long postCode, String city) {
 		this.street = street;
 		this.houseNumber = houseNumber;
@@ -82,7 +99,7 @@ public class User {
 	}
 
 	public void setPrivateInsurance(Boolean newInsurance) {
-		this.privateInsurance = newInsurance;
+		privateInsurance = newInsurance;
 	}
 
 	// Employee
@@ -91,22 +108,22 @@ public class User {
 	}
 
 	public void setSalary(Money newSalary) {
-		this.salary = newSalary;
+		salary = newSalary;
 	}
-
-	public Integer getVacation() {
+/*
+	public Collection<Vacation> getVacation() {
 		return vacation;
 	}
 
-	public void setVacation(Integer newVacation) {
-		this.vacation = newVacation;
+	public void setVacation(Vacation newVacation) {
+		vacation.add(newVacation);
 	}
-
-	public Integer getVacationRemaining() {
+*/
+	public Long getVacationRemaining() {
 		return vacationRemaining;
 	}
 
-	public void takeVacation(Integer duration) {
-		this.vacationRemaining -= duration;
+	public void setVacationRemaining(Long newVacationRemaining) {
+		vacationRemaining = newVacationRemaining;
 	}
 }

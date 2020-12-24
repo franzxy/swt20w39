@@ -1,4 +1,4 @@
-package pharmacy.users;
+package pharmacy.user;
 
 import java.util.List;
 
