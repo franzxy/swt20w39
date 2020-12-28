@@ -93,9 +93,8 @@ __Schriftführer:__ Timon Trettin +
 *** Funktionen: Bestellen
 *** Daten: Krankenkasse, Adresse, Bezahlmethode (Kreditkarte/Paydirect), Gehalt, Bankverbindung(IBAN)
 ** "BOSS"
-*** "EMPLOYEE", "DOCTOR" und "CUSTOMER" erstellen und entfernen
+*** "EMPLOYEE" hinzufügen und entfernen
 *** Gehälter ändern
-** "EMPLOYEE" kann "CUSTOMER" erstellen und entfernen
 * Muss Kriterien
 ** Urlaub "/vacation"
 *** "BOSS" Anträge zustimmen und ablehnen
