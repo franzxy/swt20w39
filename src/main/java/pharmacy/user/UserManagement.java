@@ -2,21 +2,14 @@ package pharmacy.user;
 
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
-import java.sql.Time;
-import java.time.Duration;
-import java.time.Month;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import org.javamoney.moneta.Money;
-import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import pharmacy.catalog.MedicineCatalog;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

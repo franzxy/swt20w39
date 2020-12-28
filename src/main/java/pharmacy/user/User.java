@@ -1,13 +1,8 @@
 package pharmacy.user;
 
-import java.util.Collection;
-import java.util.stream.Stream;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import org.javamoney.moneta.Money;
