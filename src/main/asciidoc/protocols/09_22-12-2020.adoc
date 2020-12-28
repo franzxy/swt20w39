@@ -97,11 +97,11 @@ __Schriftführer:__ Timon Trettin +
 *** Gehälter ändern
 ** "EMPLOYEE" kann "CUSTOMER" erstellen und entfernen
 * Muss Kriterien
-* Urlaub "/vacation"
-** "BOSS" Anträge zustimmen und ablehnen
-** "EMPLYOEE" Urlaubsantrag stellen
-* User Löschen
-* Gehalt anpassen
+** Urlaub "/vacation"
+*** "BOSS" Anträge zustimmen und ablehnen
+*** "EMPLYOEE" Urlaubsantrag stellen
+** User Löschen
+** Gehalt anpassen
 
 === Time
 * "BOSS" kann Zeit vorsuplen
