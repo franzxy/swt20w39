@@ -1,7 +1,5 @@
 package pharmacy.catalog;
 
-import pharmacy.catalog.Medicine.PrescriptionType;
-
 import org.salespointframework.catalog.Catalog;
 import org.springframework.data.domain.Sort;
 
@@ -21,7 +19,7 @@ public interface MedicineCatalog extends Catalog<Medicine> {
 	 * @param sort must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
-	Iterable<Medicine> findByPresType(PrescriptionType type, Sort sort);
+	Iterable<Medicine> findByPresonly(boolean presonly, Sort sort);
 
 	/**
 	 * Returns all {@link Medicine}s by type ordered by their identifier.
@@ -29,8 +27,8 @@ public interface MedicineCatalog extends Catalog<Medicine> {
 	 * @param type must not be {@literal null}.
 	 * @return the discs of the given type, never {@literal null}.
 	 */
-	default Iterable<Medicine> findByPresType(PrescriptionType type) {
-		return findByPresType(type, DEFAULT_SORT);
+	default Iterable<Medicine> findByPresonly(boolean presonly) {
+		return findByPresonly(presonly, DEFAULT_SORT);
 	}
 	
 }

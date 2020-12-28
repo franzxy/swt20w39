@@ -26,13 +26,11 @@
                 </a>
             </div>
             <div class="content">
-                <div class="description" th:text="${{medicine.usage}}"></div>
+                <div class="description" th:text="${{medicine.description}}"></div>
             </div>
             <div class="content">
-                <div class="description" th:text="${{medicine.presType}}"></div>
-            </div>
-            <div class="content">
-                <div class="description" th:text="${{medicine.medType}}"></div>
+                <div class="description" th:if="${{medicine.rezeptpflichtig}}" th:text=" ' Rezeptpflichtig' "></div>
+                <div class="description" th:unless="${{medicine.rezeptpflichtig}}" th:text=" 'Rezeptfrei' "></div>
             </div>
             <div class="extra content" th:text="${medicine.price}"> Preis in €</div>
         </div>

@@ -1,43 +1,30 @@
 package pharmacy.catalog;
 
-import org.javamoney.moneta.Money;
-import org.salespointframework.inventory.InventoryItem;
-import org.salespointframework.inventory.InventoryItems;
-import org.salespointframework.inventory.MultiInventory;
-import org.salespointframework.inventory.MultiInventoryItem;
-import org.salespointframework.quantity.Quantity;
-import org.salespointframework.time.BusinessTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.util.Streamable;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.lang.reflect.Array;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-import static org.salespointframework.core.Currencies.EURO;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 class CatalogController {
-	private static final Logger LOG = LoggerFactory.getLogger(CatalogDataInitializer.class);
-
-	private static final Quantity NONE = Quantity.of(0);
+	
+	
 
 	private final MedicineCatalog catalog;
-	private final MultiInventory<MultiInventoryItem> inventory;
-	private final BusinessTime businessTime;
+	//private final MultiInventory<MultiInventoryItem> inventory;
+	//private final BusinessTime businessTime;
 
-	CatalogController(MedicineCatalog medicineCatalog, MultiInventory<MultiInventoryItem> inventory,
-			BusinessTime businessTime) {
+	CatalogController(MedicineCatalog medicineCatalog ){//MultiInventory<MultiInventoryItem> inventory,BusinessTime businessTime) {
 
 		this.catalog = medicineCatalog;
-		this.inventory = inventory;
-		this.businessTime = businessTime;
+		//this.inventory = inventory;
+		//this.businessTime = businessTime;
 	}
 
 
@@ -85,9 +72,9 @@ class CatalogController {
 				if (searchTerm.equals("") || d.getName().toLowerCase().contains(search[i])) {
 
 					//Rezeptpflichtigkeit egal oder Medikament rezeptfrei
-					if(!nopres || d.getPresType().equals("Frei Verkäuflich")) {
+					if(!nopres || !d.isPresonly()) {
 
-						if(type.equals("all") || d.getMedType().equals(type)) {
+						if(type.equals("all") || d.getDescription().contains(type) || d.getName().contains(type)) {
 
 
 							if (!result.contains(d)) {

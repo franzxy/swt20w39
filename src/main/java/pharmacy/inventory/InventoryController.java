@@ -1,24 +1,16 @@
 package pharmacy.inventory;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
-
-import org.javamoney.moneta.Money;
-
-import org.salespointframework.inventory.*;
+import org.salespointframework.inventory.InventoryItem;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import pharmacy.catalog.Medicine;
 
 
 
@@ -68,24 +60,10 @@ class InventoryController {
 	@PostMapping("/addmed")
 	@PreAuthorize("hasRole('BOSS')")
 	String addingMedicine(@ModelAttribute MedicineForm formular, Model model) {
-		//ArrayList<Medicine>  ingredients =new ArrayList<Medicine>();
-		//for( UniqueInventoryItem p : this.inventory.findAll().toList()){
-		//	if(p.getProduct().getId().toString().equals(formular.getIngredient1())){
-		//		ingredients.add((Medicine)p.getProduct());
-		//	}
-		//	if(p.getProduct().getId().toString().equals(formular.getIngredient2())){
-		//		ingredients.add((Medicine)p.getProduct());
-		//	}
-		//	if(p.getProduct().getId().toString().equals(formular.getIngredient3())){
-		//		ingredients.add((Medicine)p.getProduct());
-		//	}
-		//}
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		//Medicine med = new Medicine("asd", formular.getName(), "asd", formular.getUsage(), formular.getSize(),
-		//		Money.of(formular.getPrice(), "EUR"), LocalDate.parse(formular.getBbd(), formatter), ingredients,
-		//		formular.getPresType(), formular.getIngType(), formular.getMedType());
-		//UniqueInventoryItem in=new UniqueInventoryItem(med, Quantity.of(formular.getAmount()));
-		//this.inventory.save(in);
+	
+		
+		UniqueInventoryItem in=new UniqueInventoryItem(formular.toMedicine(), Quantity.of(formular.getQuantity()));
+		this.inventory.save(in);
 		model.addAttribute("inventory", inventory.findAll().toList());
 		model.addAttribute("formular", new MedicineForm());
 
