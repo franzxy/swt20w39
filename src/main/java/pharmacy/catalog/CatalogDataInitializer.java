@@ -55,11 +55,12 @@ class CatalogDataInitializer implements DataInitializer {
 		ArrayList<LocalDate> bbd = null;
 		ArrayList<Medicine> ingredients = null;
 
-
-		medicineCatalog.save(new Medicine("1", "Medikament 1", "med1", "usage1", 1, Money.of(100, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.LABOR, MedicineType.LIQUID));
-		medicineCatalog.save(new Medicine("2", "Medikament 2", "med2", "usage2", 2, Money.of(200, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.MIXTURE, MedicineType.CAPSULE));
-		medicineCatalog.save(new Medicine("3", "Medikament 3", "med3", "usage3", 3, Money.of(300, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.POWDER));
-		medicineCatalog.save(new Medicine("4", "Medikament 4", "med4", "usage4", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.TABLET));
+		medicineCatalog.save(new Medicine("Medikament 1", "med1", "Für schnelles Vergessen", 1, Money.of(100, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.LIQUID));
+		medicineCatalog.save(new Medicine("Medikament 2", "med2", "Gegen Durchfall", 2, Money.of(200, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.SHOP, MedicineType.CAPSULE));
+		medicineCatalog.save(new Medicine("Medikament 3", "med3", "Für guten Schlaf", 3, Money.of(300, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.POWDER));
+		medicineCatalog.save(new Medicine("Medikament 4", "med4", "Zur völligen eskalation", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.SHOP, MedicineType.TABLET));
+		medicineCatalog.save(new Medicine("Tinktur 5", "med5", "Tinktur", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.MIXTURE, MedicineType.TABLET));
+		medicineCatalog.save(new Medicine("Zutat 6", "med6", "Zutat", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.LABOR, MedicineType.TABLET));
 
 	}
 }

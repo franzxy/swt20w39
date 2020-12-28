@@ -26,7 +26,7 @@ public class Medicine extends Product {
 	}
 
 	//private variable name, price entfernt --> name, price aus superklasse wird verwendet
-	private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
+	private String image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
 	private int restock, size; // wie viele vorrätig sein sollen, Packungsgröße
 	//private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 
@@ -41,12 +41,11 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String id, String name, String image, String usage, int size, Money price, ArrayList<LocalDate> bbd,
+	public Medicine(String name, String image, String usage, int size, Money price, ArrayList<LocalDate> bbd,
 			ArrayList<Medicine> ingredients, PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
 
-		this.id = id;
 		//this.name = name;
 		this.image = image;
 		this.usage = usage;
@@ -61,9 +60,6 @@ public class Medicine extends Product {
 	// getter Funktionen für alle Variablen
 	// Suche/Falk: getter für name und price entfernt, damit getter aus superklasse aufgerufen werden (returnt sonst null)
 
-	public String getID() {
-		return id;
-	}
 	public String getImage() {
 		return image;
 	}
