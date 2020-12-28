@@ -185,7 +185,7 @@
         </tr>
         <tr th:each="entry : ${inventory}"> 
             <td th:text="${#temporals.format(entry.getProduct().getBBD(),'dd.MM.yyyy HH:mm')}">Time</td>
-            <td  th:text="${entry.getProduct().getUsage()}">Beschreibung</td>
+            <td  th:text="${entry.getProduct().getDescription())}">Beschreibung</td>
              
             
             </tr>
@@ -204,65 +204,48 @@
 				  </div>
 				  <div class="input-fileds">
 					<label>Beschreibung:</label>
-					<input type="text"th:field="*{usage}" />
+					<input type="text"th:field="*{description}" />
 				  </div>
 				  <div class="input-fileds">
-					<label>Größe:</label>
-					<input type="text"th:field="*{size}" />
-				  </div>
-				  <div class="input-fileds">
-					<label>Vorhandene Anzahl:</label>
-					<input type="text"th:field="*{amount}" />
-				  </div>
-				  <div class="input-fileds">
-					<label>MHD:</label>
-					<input type="date"th:field="*{bbd}" />
+					<label>Tags (mit Komma trennen):</label>
+					<input type="text"th:field="*{tags}" />
           </div>
           <div class="input-fileds">
-            <label>Preis:</label>
+            <label>Pfad zum Bild:</label>
+            <input type="text"th:field="*{image}" />
+            </div>
+				  <div class="input-fileds">
+					<label>Gewicht/ Volumen:</label>
+					<input type="number"th:field="*{amount}" />
+          </div>
+          <div class="input-fileds">
+            <label>Einheit:</label>
+           <select th:field="*{metric}">
+            <option th:each="ty : ${T(org.salespointframework.quantity.Metric).values()}" th:value="${ty.name()}" th:utext="${ty}"/>
+           </select>
+        </div>
+				  <div class="input-fileds">
+					<label>Menge:</label>
+					<input type="number"th:field="*{quantity}" />
+          </div>
+          <div class="input-fileds">
+            <label>Verkaufspreis:</label>
             <input type="number"th:field="*{price}" />
             <label>€</label>
             </div>
-          <div class="input-fileds">
-            <label>Verschreibungspflichtig:</label>
-           <select th:field="*{presType}">
-            <option th:each="ty : ${T(pharmacy.catalog.Medicine.PrescriptionType).values()}" th:value="${ty.name()}" th:utext="${ty}"/>
-           </select>
-        </div>
-        <div class="input-fileds">
-          <label>Medikamenten Typ:</label>
-         <select th:field="*{ingType}">
-          <option th:each="ty : ${T(pharmacy.catalog.Medicine.IngredientType).values()}" th:value="${ty.name()}" th:utext="${ty}"/>
-         </select>
-      </div>
-      <div class="input-fileds">
-        <label>Medikamenten Typ:</label>
-       <select th:field="*{medType}">
-        <option th:each="ty : ${T(pharmacy.catalog.Medicine.MedicineType).values()}" th:value="${ty.name()}" th:utext="${ty}"/>
-       </select>
-    </div>
-    <div th:if="${ingType==T(pharmacy.catalog.Medicine.IngredientType).MIXTURE}"></div>
-				  <div class="input-fileds">
-            <label>Erstes Medikament</label>
-            <select th:field="*{ingredient1}">
-						  <option value=""> -- </option>
-						  <option th:each="entry : ${inventory}"  th:value="${entry.getId()}" th:utext="${entry.getProduct().getName()}"/>
-             </select>
-            </div>
             <div class="input-fileds">
-              <label>Zweites Medikament</label>
-             <select th:field="*{ingredient2}">
-						  <option value=""> -- </option>
-						  <option th:each="entry : ${inventory}"  th:value="${entry.getId().toString()}" th:utext="${entry.getProduct().getName()}"/>
-             </select>
-            </div>
-            <div class="input-fileds">
-              <label>Drittes Medikament</label>
-             <select th:field="*{ingredient3}">
-						  <option value=""> -- </option>
-						  <option th:each="entry : ${inventory}"  th:value="${entry.getId()}" th:utext="${entry.getProduct().getName()}"/>
-					   </select>
-				  </div>
+              <label>Einkaufspreis:</label>
+              <input type="number"th:field="*{purchasingprice}" />
+              <label>€</label>
+              </div>
+              <div class="input-fileds">
+                <label>Rezeptpflichtig:</label>
+                <input type="checkbox" name ="presonly" th:field="*{presonly}" />
+                </div>
+            
+        
+      
+    
           
 				  </ul>
 					 <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
