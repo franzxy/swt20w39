@@ -63,7 +63,7 @@ class InventoryController {
 	
 		
 		UniqueInventoryItem in=new UniqueInventoryItem(formular.toMedicine(), Quantity.of(formular.getQuantity()));
-		this.inventory.save(in);
+		//this.inventory.save(in);
 		model.addAttribute("inventory", inventory.findAll().toList());
 		model.addAttribute("formular", new MedicineForm());
 
