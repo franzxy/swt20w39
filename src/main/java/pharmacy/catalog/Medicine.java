@@ -2,13 +2,12 @@ package pharmacy.catalog;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
-import org.salespointframework.quantity.Metric;
-import org.salespointframework.quantity.Quantity;
-import org.springframework.util.Assert;
 
 @Entity
 public class Medicine extends Product {
@@ -20,16 +19,16 @@ public class Medicine extends Product {
 		
 	}
 
-	public Medicine(String name, String description, Money price, Money purchasingprice,  List<String> categories, double amount, boolean presonly, String image){
+	public Medicine(String name, String description, Money price, Money purchasingprice, List<String> categories, double amount, boolean presonly, String image){
 		super(name, price);
 		//System.out.println(metric);
 		this.presonly=presonly;
 		this.description=description;
 		this.purchaseprice=purchasingprice;
 		this.image=image;
-		for(String cat : categories){
+		categories.forEach(cat->{
 			super.addCategory(cat);
-		}
+		});
 		super.createQuantity(amount);
 	}
 
