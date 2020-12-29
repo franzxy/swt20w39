@@ -57,8 +57,8 @@ public class UserManagement {
 		
 		return "password changed";
 	}
-
-	public User addCustomer(CustomerForm customerForm) {
+/*
+	public String addCustomer(User user, CustomerForm customerForm) {
 		
 		var password = UnencryptedPassword.of(customerForm.getPassword());
 		var userAccount = userAccounts.create(customerForm.getEmail(), password, Role.of("CUSTOMER"));
@@ -68,33 +68,44 @@ public class UserManagement {
 		user.setAddress(customerForm.getStreet(), customerForm.getHouseNumber(), customerForm.getPostCode(), customerForm.getCity());
 		user.setPrivateInsurance(customerForm.getPrivateInsurance());
 
-		return users.save(user);
+		return "customer added";
 	}
 
-	public User addDoctor(UserForm userForm) {
+	public String changeCustomer(User user, CustomerDetailForm customerDetailForm) {
 		
-		var password = UnencryptedPassword.of(userForm.getPassword());
-		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("DOCTOR"));
-		userAccount.setFirstname(userForm.getName());
-		userAccount.setLastname(userForm.getLastName());
+		var password = UnencryptedPassword.of(customerForm.getPassword());
+		var userAccount = userAccounts.create(customerForm.getEmail(), password, Role.of("CUSTOMER"));
+		userAccount.setFirstname(customerForm.getName());
+		userAccount.setLastname(customerForm.getLastName());
 		var user = new User(userAccount);
+		user.setAddress(customerForm.getStreet(), customerForm.getHouseNumber(), customerForm.getPostCode(), customerForm.getCity());
+		user.setPrivateInsurance(customerForm.getPrivateInsurance());
 
-		return users.save(user);
+		return "customer changed";
 	}
-
-	public User addEmployee(EmployeeForm employeeForm) {
+*/
+	public String addEmployee(User user, EmployeeForm employeeForm) {
 		
-		var password = UnencryptedPassword.of(employeeForm.getPassword());
-		var userAccount = userAccounts.create(employeeForm.getEmail(), password, Role.of("EMPLOYEE"));
-		userAccount.setFirstname(employeeForm.getName());
-		userAccount.setLastname(employeeForm.getLastName());
-		var user = new User(userAccount);
+		user.addAddress(new Address(employeeForm.getStreet(), employeeForm.getHouseNumber(), employeeForm.getPostCode(), employeeForm.getCity()));
+		user.setIban(employeeForm.getIban());
 		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
 		user.setVacationRemaining(employeeForm.getVacation());
-
-		return users.save(user);
+		return "employee added";
 	}
+/*
+	public String changeEmployee(User user, EmployeeDetailForm employeeDetailForm) {
+		
+		var password = UnencryptedPassword.of(customerForm.getPassword());
+		var userAccount = userAccounts.create(customerForm.getEmail(), password, Role.of("CUSTOMER"));
+		userAccount.setFirstname(customerForm.getName());
+		userAccount.setLastname(customerForm.getLastName());
+		var user = new User(userAccount);
+		user.setAddress(customerForm.getStreet(), customerForm.getHouseNumber(), customerForm.getPostCode(), customerForm.getCity());
+		user.setPrivateInsurance(customerForm.getPrivateInsurance());
 
+		return "employee changed";
+	}
+*/
 	public String addRole(User user, Role role) {
 		
 		user.addRole(role);

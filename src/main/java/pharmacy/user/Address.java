@@ -1,13 +1,25 @@
 package pharmacy.user;
 
-public class CustomerAddress {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ADDRESSES")
+public class Address implements Serializable{
+
+	private static final long serialVersionUID = -7114101035786254953L;
+	private @Id @GeneratedValue long id;
 
 	private String street;
 	private String houseNumber;
 	private Number postCode;
 	private String city;
 	
-	public CustomerAddress(String street, String houseNumber, Number postCode, String city) {
+	public Address(String street, String houseNumber, Number postCode, String city) {
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.postCode = postCode;

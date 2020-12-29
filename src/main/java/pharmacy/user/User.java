@@ -1,16 +1,22 @@
 package pharmacy.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.javamoney.moneta.Money;
+import org.salespointframework.payment.PaymentCard;
+import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 
@@ -22,17 +28,19 @@ public class User {
 	@OneToOne
 	private UserAccount userAccount;
 
-	// private CustomerAddress address;
+	@OneToMany(cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
 
-	// Customer idea
-	private String street;
-	private String houseNumber;
-	private Long postCode;
-	private String city;
+	// Customer
+
+	// private Address customerAddress;
+	private PaymentMethod payment;
 	private Boolean privateInsurance;
 
-
 	// Employee
+
+	// private Address employeeAddress;
+	private Long iban;
 	private Money salary;
 	// private Collection<Vacation> vacation;
 	private Long vacationRemaining;
@@ -41,7 +49,6 @@ public class User {
 	private User() {}
 
 	public User(UserAccount userAccount) {
-		
 		this.userAccount = userAccount;
 	}
 
@@ -60,38 +67,27 @@ public class User {
 	public void removeRole(Role role) {
 		userAccount.remove(role);
 	}
-/*
-	public CustomerAddress getAddress() {
-		return address;
+
+	public void addAddress(Address newAddress) {
+		addresses.add(newAddress);
 	}
 
-	public void setAddress(CustomerAddress newAddress) {
-		address = newAddress;
+	// Customer
+/*
+	public Address getCustomerAddress() {
+		return customerAddress;
+	}
+
+	public void setCustomerAddress(Address newCustomerAddress) {
+		customerAddress = newCustomerAddress;
 	}
 */
-
-	// Customer idea
-	public void setAddress(String street, String houseNumber, Long postCode, String city) {
-		this.street = street;
-		this.houseNumber = houseNumber;
-		this.postCode = postCode;
-		this.city = city;
+	public PaymentMethod getPayment() {
+		return payment;
 	}
 
-	public String getStreet() {
-		return street;
-	}
-
-	public String getHouseNumber() {
-		return houseNumber;
-	}
-
-	public Long getPostCode() {
-		return postCode;
-	}
-
-	public String getCity() {
-		return city;
+	public void setPayment(PaymentMethod newPayment) {
+		payment = newPayment;
 	}
 
 	public Boolean getPrivateInsurance() {
@@ -103,12 +99,37 @@ public class User {
 	}
 
 	// Employee
+/*
+	public Address getEmployeeAddress() {
+		return employeeAddress;
+	}
+
+	public void setEmployeeAddress(Address newEmployeeAddress) {
+		employeeAddress = newEmployeeAddress;
+	}
+*/
+	public Long getIban() {
+		return iban;
+	}
+
+	public void setIban(Long newIban) {
+		iban = newIban;
+	}
+
 	public Money getSalary() {
 		return salary;
 	}
 
 	public void setSalary(Money newSalary) {
 		salary = newSalary;
+	}
+
+	public Long getVacationRemaining() {
+		return vacationRemaining;
+	}
+
+	public void setVacationRemaining(Long newVacationRemaining) {
+		vacationRemaining = newVacationRemaining;
 	}
 /*
 	public Collection<Vacation> getVacation() {
@@ -119,11 +140,4 @@ public class User {
 		vacation.add(newVacation);
 	}
 */
-	public Long getVacationRemaining() {
-		return vacationRemaining;
-	}
-
-	public void setVacationRemaining(Long newVacationRemaining) {
-		vacationRemaining = newVacationRemaining;
-	}
 }

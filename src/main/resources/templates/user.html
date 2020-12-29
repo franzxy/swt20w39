@@ -12,9 +12,11 @@
 		<p th:text="${'Vorname: '+user.userAccount.getFirstname()}">Vorname</p>
 		<p th:text="${'Nachname: '+user.userAccount.getLastname()}">Nachname</p>
 		<p th:text="${'E-Mail-Adresse: '+user.userAccount.getUsername()}">E-Mail-Adresse</p>
-
-		<!--
-		<form th:if="${}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${customerAddForm}">
+        <p th:if="${customer && !employee}">Kunde</p>
+        <p th:if="${!customer && employee}">Mitarbeiter</p>
+        <p th:if="${customer && employee}">Kunde, Mitarbeiter</p>
+        <!--
+		<form th:if="${userRole}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${customerAddForm}">
             <div class="field">
                 <label for="address">Straße</label>
                 <input id="address" name="address" th:field="*{street}" th:errorclass="fieldError" type="text"
@@ -47,7 +49,7 @@
             </div>
 
             <button type="submit" class="ui button">Zum Kunden machen</button>
-		</form>
-		-->
+        </form>
+        -->
 	</body>
 </html>

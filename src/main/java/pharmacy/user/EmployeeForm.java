@@ -11,75 +11,53 @@ import org.javamoney.moneta.Money;
 
 class EmployeeForm {
 	
-	// User
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
-	private final String name;
+	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
+	private final String street;
+
+	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
+	private final String houseNumber;
+
+	private final Long postCode;
+
+	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
+	private final String city;
 	
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
-	private final String lastName;
-
-	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
-	private final String email;
-
-	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
-	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
-	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
-	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
-	@Pattern(regexp="^(?=.*[A-Z]).+$", message = "{PasswordForm.newPassword.Upper}")
-	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
-	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
-	private final String password;
-
-	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
-	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
-	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
-	@Pattern(regexp="^(?=.*[A-Z]).+$", message = "{PasswordForm.newPassword.Upper}")
-	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
-	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
-	private final String confirmPassword;
-
-	@AssertTrue(message="Passwörter stimmen nicht überein.")
-	private boolean isConfirm() {
-		return password.equals(confirmPassword);
-	}
+	private final Long iban;
 	
-	// Employee
 	private final Long salary;
 	
 	private final Long vacation;
 
-	public EmployeeForm(String name, String lastName, String email, String password, String confirmPassword, Long salary, Long vacation) {
-		this.name = name;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.confirmPassword = confirmPassword;
+	public EmployeeForm(String street, String houseNumber, Long postCode, String city, Long iban, Long salary, Long vacation) {
+		this.street = street;
+		this.houseNumber = houseNumber;
+		this.postCode = postCode;
+		this.city = city;
+		this.iban = iban;
 		this.salary = salary;
 		this.vacation = vacation;
 	}
-
-	// User
-	public String getName() {
-		return name;
+	
+	public String getStreet() {
+		return street;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getHouseNumber() {
+		return houseNumber;
 	}
 
-	public String getEmail() {
-		return email;
+	public Long getPostCode() {
+		return postCode;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getCity() {
+		return city;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
+	public Long getIban() {
+		return iban;
 	}
 
-	// Employee
 	public Long getSalary() {
 		return salary;
 	}

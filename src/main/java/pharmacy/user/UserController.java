@@ -2,6 +2,7 @@ package pharmacy.user;
 
 import javax.validation.Valid;
 
+import org.salespointframework.useraccount.Role;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,105 +42,47 @@ class UserController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/customer")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String customer(Model model, CustomerForm customerForm) {
-
-		model.addAttribute("customerForm", customerForm);
-		
-		return "customer";
-	}
-
-    @PostMapping("/customer")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String newCustomer(@Valid @ModelAttribute("customerForm")CustomerForm customerForm, Errors result) {
-
-		if (result.hasErrors()) {
-			return "customer";
-		}
-
-		userManagement.addCustomer(customerForm);
-
-		return "redirect:/users";
-	}
-
-	@GetMapping("/doctor")
-	@PreAuthorize("hasRole('BOSS')")
-	String doctor(Model model, UserForm userForm) {
-
-		model.addAttribute("userForm", userForm);
-
-		return "doctor";
-	}
-
-    @PostMapping("/doctor")
-	@PreAuthorize("hasRole('BOSS')")
-	String newDoctor(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
-
-		if (result.hasErrors()) {
-			return "doctor";
-		}
-
-		userManagement.addDoctor(userForm);
-
-		return "redirect:/users";
-	}
-
-	@GetMapping("/employee")
-	@PreAuthorize("hasRole('BOSS')")
-	String employee(Model model, EmployeeForm employeeForm) {
-		
-		model.addAttribute("employeeForm", employeeForm);
-		
-		return "employee";
-	}
-
-    @PostMapping("/employee")
-	@PreAuthorize("hasRole('BOSS')")
-	String newEmployee(@Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
-
-		if (result.hasErrors()) {
-			return "employee";
-		}
-
-		userManagement.addEmployee(employeeForm);
-
-		return "redirect:/users";
-	}
-
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
 	String users(Model model) {
 
 		model.addAttribute("userList", userManagement.findAll());
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
 
 		return "users";
 	}
 
 	@GetMapping("/user/{userId}")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String user(@PathVariable Long userId, Model model) {
-
-		model.addAttribute("user", userManagement.findUser(userId).get());
+	String user(@PathVariable Long userId, Model model/*, EmployeeForm employeeForm*/) {
+		
+		var user = userManagement.findUser(userId).get();
+		//model.addAttribute("employeeForm", employeeForm);
+		model.addAttribute("user", user);
+		model.addAttribute("customer", user.getUserAccount().hasRole(Role.of("CUSTOMER")));
+		model.addAttribute("employee", user.getUserAccount().hasRole(Role.of("EMPLOYEE")));
 
 		return "user";
 	}
-
+/*
 	@PostMapping("/user/{userId}")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String changeUser(@PathVariable Long userId, Model model) {
+	String changeUser(@Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result, @PathVariable Long userId, Model model) {
 		
-		model.addAttribute("user", userManagement.findUser(userId).get());
-		/*
+		var user = userManagement.findUser(userId).get();
+		model.addAttribute("user", user);
+		model.addAttribute("userRole", user.getUserAccount().hasRole(Role.of("USER")));
+
 		if (result.hasErrors()) {
-			return "account";
+			return "user";
 		}
 		
-		userManagement.changePassword(changePassword);
-		*/
+		userManagement.addEmployee(userManagement.findUser(userId).get(), employeeForm);
+
 		return "user";
 	}
-
+*/
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
 	String changePassword(Model model, UserPasswordForm changePassword) {
