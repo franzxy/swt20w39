@@ -13,7 +13,6 @@ public class MedicineForm {
     private String description, name, tags, image; 
     private double amount; 
     private  int quantity;
-    private Metric metric;
 	private boolean presonly; 
     private double price;
     private double purchasingprice;
@@ -24,7 +23,6 @@ public class MedicineForm {
         this.tags="";
         this.image="";
         this.amount=0.0;
-        this.metric=Metric.UNIT;
         this.presonly=false;
         this.price=0.0;
         this.purchasingprice=0.0;
@@ -32,7 +30,7 @@ public class MedicineForm {
     }
 
     public Medicine toMedicine(){
-        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.split(",")), this.amount, this.metric, this.presonly, this.image);
+        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.split(",")), this.amount,  this.presonly, this.image);
     }
 
     public String getDescription() {
@@ -73,14 +71,6 @@ public class MedicineForm {
 
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public Metric getMetric() {
-        return metric;
-    }
-
-    public void setMetric(Metric metric) {
-        this.metric = metric;
     }
 
     public boolean isPresonly() {
