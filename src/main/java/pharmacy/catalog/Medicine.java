@@ -7,26 +7,26 @@ import javax.persistence.Entity;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.quantity.Metric;
+import org.salespointframework.quantity.Quantity;
+import org.springframework.util.Assert;
 
 @Entity
 public class Medicine extends Product {
 	private String description, image;
 	private Money purchaseprice;
 	private boolean presonly;
-	private Metric metric;
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {
 		
 	}
 
-	public Medicine(String name, String description, Money price, Money purchasingprice,  List<String> categories, double amount, Metric metric, boolean presonly, String image){
-		super(name, price, metric);
+	public Medicine(String name, String description, Money price, Money purchasingprice,  List<String> categories, double amount, boolean presonly, String image){
+		super(name, price);
 		//System.out.println(metric);
 		this.presonly=presonly;
 		this.description=description;
 		this.purchaseprice=purchasingprice;
 		this.image=image;
-		this.metric=metric;
 		for(String cat : categories){
 			super.addCategory(cat);
 		}
@@ -59,10 +59,6 @@ public class Medicine extends Product {
 
 	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public Metric getMetric() {
-		return metric;
 	}
 
 }

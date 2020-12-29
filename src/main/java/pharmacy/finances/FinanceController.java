@@ -207,7 +207,7 @@ public class FinanceController {
 	}
 	@PostMapping("/rechnungsform")
 	public String rechnungclose(@ModelAttribute RechnungsForm rf, Model model) {
-		System.out.println(rf.getId());
+		//System.out.println(rf.getId());
 		this.rf.setId(rf.getId());
 		this.rf.setDate("XXXXXXX");
 		this.rf.setBetrag(0.0);

@@ -184,8 +184,8 @@
             <td style="text-align: center;"colspan="3"> Keine Medikamente vorhanden</td>
         </tr>
         <tr th:each="entry : ${inventory}"> 
-            <td th:text="${#temporals.format(entry.getProduct().getBBD(),'dd.MM.yyyy HH:mm')}">Time</td>
-            <td  th:text="${entry.getProduct().getDescription())}">Beschreibung</td>
+         
+          <td  th:text="${entry.getProduct().getDescription()}">Beschreibung</td>
              
             
             </tr>
@@ -215,15 +215,10 @@
             <input type="text"th:field="*{image}" />
             </div>
 				  <div class="input-fileds">
-					<label>Gewicht/ Volumen:</label>
-					<input type="number"th:field="*{amount}" />
+					<label>Gewicht:</label>
+          <input type="number"th:field="*{amount}" />
+          <label>Milligramm</label>
           </div>
-          <div class="input-fileds">
-            <label>Einheit:</label>
-           <select th:field="*{metric}">
-            <option th:each="ty : ${T(org.salespointframework.quantity.Metric).values()}" th:value="${ty.name()}" th:utext="${ty}"/>
-           </select>
-        </div>
 				  <div class="input-fileds">
 					<label>Menge:</label>
 					<input type="number"th:field="*{quantity}" />
