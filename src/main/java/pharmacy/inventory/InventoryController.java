@@ -1,5 +1,12 @@
 package pharmacy.inventory;
 
+import java.util.Arrays;
+
+import javax.persistence.CascadeType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
+import org.javamoney.moneta.Money;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
@@ -12,6 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import pharmacy.catalog.Medicine;
+import pharmacy.catalog.MedicineCatalog;
+
 
 
 
@@ -20,10 +30,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 class InventoryController {
 	@Autowired
+	//@OneToOne(cascade = CascadeType.ALL)
+	//@ManyToMany(cascade = CascadeType.PERSIST)
 	private UniqueInventory<UniqueInventoryItem> inventory;
-
-	InventoryController(UniqueInventory<UniqueInventoryItem> inventory) {
+	@Autowired
+	private MedicineCatalog medicineCatalog;
+	InventoryController(UniqueInventory<UniqueInventoryItem> inventory, MedicineCatalog medicineCatalog) {
 		this.inventory = inventory;
+		this.medicineCatalog=medicineCatalog;
 	}
 
 	/**
@@ -62,8 +76,11 @@ class InventoryController {
 	String addingMedicine(@ModelAttribute MedicineForm formular, Model model) {
 	
 		
-		UniqueInventoryItem in=new UniqueInventoryItem(formular.toMedicine(), Quantity.of(formular.getQuantity(), formular.getMetric()));
-		//this.inventory.save(in);
+		
+		medicineCatalog.save(formular.toMedicine());//new UniqueInventoryItem((Medicine)formular.toMedicine(), Quantity.of(formular.getQuantity())));
+		Medicine med= new Medicine("1111",				"richtig gutes zeug", Money.of(23, "EUR"), Money.of(10, "EUR"), Arrays.asList("tablette", "kopfschmerzen", "fiber"), 0.03,  false, "");
+		UniqueInventoryItem uni = new UniqueInventoryItem((Medicine)med, Quantity.of(10));
+		//inventory.save(uni);
 		model.addAttribute("inventory", inventory.findAll().toList());
 		model.addAttribute("formular", new MedicineForm());
 
