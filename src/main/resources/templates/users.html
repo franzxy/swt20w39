@@ -12,13 +12,29 @@
 			<a class="a nav height flex center button" sec:authorize="hasRole('BOSS')" th:href="@{/doctor}">Neue Praxis</a>
 			<a class="a nav height flex center button" sec:authorize="hasRole('BOSS')" th:href="@{/employee}">Neuer Mitarbeiter</a>
 		</div>
-		<div>
-			<div class="ui card" th:each="user : ${userList}">
-				<div th:text="${user.userAccount.getFirstname()}"></div>
-				<form method="post" role="form" class="ui form" id="form">
-					<button type="submit" class="ui button">Löschen</button>
-				</form>	
-			</div>
+		<h1>Benutzer</h1>
+    	<table class="ui celled table">
+        	<thead>
+				<tr>
+					<th>ID</th>
+					<th>Vorname</th>
+					<th>Nachname</th>
+					<th>E-Mail-Adresse</th>
+					<th>Rolle</th>
+					<th>Details</th>
+				</tr>
+        	</thead>
+			<tbody>
+				<tr class="ui card" th:each="user : ${userList}">
+					<td th:text="${user.getId()}">ID</td>
+					<td th:text="${user.userAccount.getFirstname()}">Vorname</td>
+					<td th:text="${user.userAccount.getLastname()}">Nachname</td>
+					<td th:text="${user.userAccount.getUsername()}">E-Mail-Adresse</td>
+					<td><a th:each="role : ${user.userAccount.getRoles()}" th:text="${role}"></a></td>
+					<td><a class="a nav height flex center button" th:href="@{/user/{id}(id=${user.getId()})}">Details</a></td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
     </body>
 </html>

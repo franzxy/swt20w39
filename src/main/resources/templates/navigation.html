@@ -13,6 +13,7 @@
     </div>
     <div class="row height flex align">
         <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/register}">Registrieren</a>
         <a class="a nav height flex center" sec:authorize="isAuthenticated()" th:href="@{/account}">Account</a>
     </div>
 </nav>

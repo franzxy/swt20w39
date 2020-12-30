@@ -2,72 +2,331 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    	<script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    	<link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    	<link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
 		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
-		<title>Inventar</title>
-	</head>
-	<body>
-        <div class="ui container">
+		<title>Inevntar</title>
+		<style>
 
-    <nav th:include="navigation :: navigation"></nav>
-    <form method="dialog" role="application" class="ui form" id="form" th:action="@{/inventory}" th:object="${inventoryController}">
-		<h1>Bestand</h1>
-    	<table class="ui celled table">
-        	<thead>
-        	<tr>
-            	<th >ID</th>
-            	<th >Name</th>
-            	<th >Art der Medizin</th>
-            	<th >Packungsgröße</th>
-            	<th >Rezept</th>
-            	<th >MHD</th>
-            	<th >Benutzung</th>
-            	<th >Lagermenge</th>
-            	<th >Auffüllhöhe</th>   
-            	<th ></th>
-            	<th ></th>      	
-        	</tr>
-        </thead>
-        <tbody th:remove="all-but-first">
-        	<tr th:each=" item : ${inventory}">
-            	<td th:text="${item.product.getID()}">ID</td>
-            	<td th:text="${item.product.name}">Name</td>
-            	<td th:text="${item.product.getMedType()}">Art</td>
-            	<td th:text="${item.product.getPackageSize()}">Größe</td>
-            	<td th:text="${item.product.getPresType()}">Rezerpt</td>
-            	<td th:text="${item.product.getBBD()}">MHD</td>
-            	<td th:text="${item.quantity}">Anzahl</td>    
-            	<td>Auffüllmenge</td>
-            	<td></td>	
-            	<td >
-            		<button type="submit" >
-                            <span> Ändern</span>
-                    </button>
-                </td>
-                <td >
-            		<button type="submit" >
-                            <span> Entfernen</span>
-                    </button>
-                </td>
-        	</tr>
-        	<tr>
-            	<td>Last Action Hero</td>
-            	<td>9000</td>
-        	</tr>
-     	 	<tr>
-            	<td>Last Action Hero</td>
-            	<td>9000</td>
+      html{
+        /*background-image: linear-gradient(to top,#1F2833 0%, black 70%);*/
+        background-color: #1F2833;
+      }
+      table {
+      	margin-top: 1%;
+      	margin-right: 1%;
+      	margin-bottom: 1%;
+        width: 98%;
+        float: right;
+        padding: 5px;
+        border-collapse: collapse;
+        text-align: left;
+        overflow: hidden;
+        }
+      tr {
+       border: 1px solid white; 
+       color: white; 
+      }
+      th{
+      	color: white;
+      }
+      p{
+      	color:white;
+      	font-size:30px;
+      }
+      ul{
+      	list-style-type: none;
+      	color: white;
+      	padding: 1%
+      }
+      
+      .border{
+      	border: 1px solid #66FCF1;
+      	border-radius: 3px;
+      }
+      .block{
+ 		 width: 72%; 
+ 		 position: fixed;
+  		 top: 17%;
+ 		 right: 2%;
+ 		 background-color: #45A29E;
+ 		
+      
+      }
+      .bar1{
+      	margin:2% auto 0 auto;
+      	padding: 10px;
+  		width: 95%;
+  		overflow: hidden;
+  		position: absolute;
+  		position: relative;
+  		font-size:30px;
+  		background-color: #45A29E;
+      }
+      .sidenav {
+ 		 height: 75%; 
+ 		 width: 22%; 
+ 		 position: fixed;
+  		 top: 17%;
+ 		 left: 2%;
+ 		 background-color: #45A29E;
+ 		 padding-top: 20px;
+ 		 padding-left: 7px;
+	  }
+    
+      .overlay{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+
+      }
+      .overlay:target {
+         visibility: visible;
+        opacity: 1;
+      }
+      .rechnung{
+        
+        visibility: hidden;
+      
+      }
+      .rechnung:target {
+        visibility: visible;
+      }
+      .rechnung-prev{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+      }
+      .rechnung-prev:target{
+        visibility: visible;
+        opacity: 1;
+      }
+      .popup{
+        position: fixed;
+        left:0;
+        right: 0;
+        top:0;
+        bottom: 0;
+        margin: auto;
+        width: 20%;
+        height: 60%;
+        padding: 10px;
+        background-color:  #45A29E;
+      }
+      .popup2{
+        position: fixed;
+        left:0;
+        right: 0;
+        top:0;
+        bottom: 0;
+        margin: auto;
+        width: 20%;
+        height: 27%;
+        padding: 10px;
+        background-color:  #45A29E;
+      }
+      .input-fileds{
+        left:0px;
+        padding:5px;
+      }
+
+    </style>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+        <div class="border bar1" ><p style="text-align: center;">INVENTAR</p></div>
+        <div class="sidenav border">
+       
+  			 <h1 style="color:white">Unimplemented Features</h1>
+  			<!--<form action="#" th:action="@{/finances}"  th:object="${filterI}" method="POST">
+  			<ul >
+          
+  				<li th:each="ty : ${T(pharmacy.inventory.FilterI.).values()}">
+           
+    				<input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
+    				<label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
+  				</li>
+            </ul>
+           <input  style="margin:5px" class="button"type="submit" value="Filtern" />
+		 </form> -->
+		 <form action="#newmed" >
+			<input style="margin:5px" class="button"type="submit" value="Medikament hinzufügen"></input>
+		  </form>
+        
+      </div>
+   
+    
+
+		<div class="block border">
+       <table class="ui table">
+            <thead>
+            <tr>
+                <th >Name</th>
+                <th >Prdouktbeschreibung</th>
+				<th >Vorrätig</th>
+				<th >Menge ändern</th>
+				<th >Atrikel entfernen</th>
+				<th >Mindestbestand einstellen</th>
             </tr>
-   	     </tbody>
-  		 </table>
-		</div>
-	</form> 
-	</body>
+            </thead>
+             <tbody>
+        <tr th:if="${inventory.empty}">
+            <td style="text-align: center;"colspan="3"> Keine Medikamente vorhanden</td>
+        </tr>
+        <tr th:each="entry : ${inventory}"> 
+            <td th:text="${#temporals.format(entry.getProduct().getBBD(),'dd.MM.yyyy HH:mm')}">Time</td>
+            <td  th:text="${entry.getProduct().getUsage()}">Beschreibung</td>
+             
+            
+            </tr>
+        </tbody>
+        </table>
+        </div>
+      
+        <div id="newmed" class="overlay">
+			<div class="popup border">
+			  <form action="#newmed" th:action="@{/addmed}"  th:object="${formular}" method="POST">
+				  <ul >
+				  <h1 style="margin: 5px;">Neues Medikament hinzufügen</h1>
+				  <div class="input-fileds">
+					<label>Name:</label>
+					<input type="text"th:field="*{name}" />
+				  </div>
+				  <div class="input-fileds">
+					<label>Beschreibung:</label>
+					<input type="text"th:field="*{usage}" />
+				  </div>
+				  <div class="input-fileds">
+					<label>Größe:</label>
+					<input type="text"th:field="*{size}" />
+				  </div>
+				  <div class="input-fileds">
+					<label>Vorhandene Anzahl:</label>
+					<input type="text"th:field="*{amount}" />
+				  </div>
+				  <div class="input-fileds">
+					<label>MHD:</label>
+					<input type="date"th:field="*{bbd}" />
+          </div>
+          <div class="input-fileds">
+            <label>Preis:</label>
+            <input type="number"th:field="*{price}" />
+            <label>€</label>
+            </div>
+          <div class="input-fileds">
+            <label>Verschreibungspflichtig:</label>
+           <select th:field="*{presType}">
+            <option th:each="ty : ${T(pharmacy.catalog.Medicine.PrescriptionType).values()}" th:value="${ty.name()}" th:utext="${ty}"/>
+           </select>
+        </div>
+        <div class="input-fileds">
+          <label>Medikamenten Typ:</label>
+         <select th:field="*{ingType}">
+          <option th:each="ty : ${T(pharmacy.catalog.Medicine.IngredientType).values()}" th:value="${ty.name()}" th:utext="${ty}"/>
+         </select>
+      </div>
+      <div class="input-fileds">
+        <label>Medikamenten Typ:</label>
+       <select th:field="*{medType}">
+        <option th:each="ty : ${T(pharmacy.catalog.Medicine.MedicineType).values()}" th:value="${ty.name()}" th:utext="${ty}"/>
+       </select>
+    </div>
+    <div th:if="${ingType==T(pharmacy.catalog.Medicine.IngredientType).MIXTURE}"></div>
+				  <div class="input-fileds">
+            <label>Erstes Medikament</label>
+            <select th:field="*{ingredient1}">
+						  <option value=""> -- </option>
+						  <option th:each="entry : ${inventory}"  th:value="${entry.getId()}" th:utext="${entry.getProduct().getName()}"/>
+             </select>
+            </div>
+            <div class="input-fileds">
+              <label>Zweites Medikament</label>
+             <select th:field="*{ingredient2}">
+						  <option value=""> -- </option>
+						  <option th:each="entry : ${inventory}"  th:value="${entry.getId().toString()}" th:utext="${entry.getProduct().getName()}"/>
+             </select>
+            </div>
+            <div class="input-fileds">
+              <label>Drittes Medikament</label>
+             <select th:field="*{ingredient3}">
+						  <option value=""> -- </option>
+						  <option th:each="entry : ${inventory}"  th:value="${entry.getId()}" th:utext="${entry.getProduct().getName()}"/>
+					   </select>
+				  </div>
+          
+				  </ul>
+					 <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
+				</form> 
+				
+				
+			</div>
+		  </div>
+        <!--Popup for changing fix
+        <div id="editfix" class="overlay">
+          <div class="popup border">
+            <form action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
+                <ul >
+                <h1 style="margin: 5px;">Fixkosten Ändern</h1>
+                <div class="input-fileds">
+                  <label>Miete: </label>
+                  <input type="number"th:field="*{Miete}" />
+                  <label>€</label>
+                </div>
+                <div class="input-fileds">
+                  <label>Strom:</label>
+                  <input type="number"th:field="*{Strom}" />
+                  <label>€</label>
+                </div>
+                <div class="input-fileds">
+                  <label>Wasser:</label>
+                  <input type="number"th:field="*{Wasser}" />
+                  <label>€</label>
+                </div>
+                <div class="input-fileds">
+                  <label>Heizkosten:</label>
+                  <input type="number"th:field="*{Heizkosten}" />
+                  <label>€</label>
+                </div>
+                </ul>
+                   <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
+              </form> 
+              
+          </div>
+        </div>
+        <div id="rechnungsform" class="rechnung-prev">
+          <div class="popup2 border">
+            <div class="input-fileds">
+              <h1 style="color:white">Rechnung Nr. <span th:text="${rf.getId()}"></span></h1>
+            </div>
+              <div class="input-fileds">
+              <label style="color:white">Datum: <span th:text="${rf.getDate()}"></span></label>
+              </div>
+              <div class="input-fileds">
+              <label style="color:white">Vorname: <span th:text="${rf.getUsername()}"></span></label>
+              </div>
+              <div class="input-fileds">
+                <label style="color:white">Nachname: <span th:text="${rf.getLastname()}"></span></label>
+                </div>
+              <div class="input-fileds">
+              <label style="color:white">Email: <span th:text="${rf.getUemail()}"></span></label>
+              </div>
+              <div class="input-fileds">
+              <label style="color:white">Betrag: <span th:text="${rf.getBetrag()}"></span> €</label>
+              </div>
+              <form action="#" th:action="@{/rechnungsform}">
+                <input class="button" style="margin:5px"type="submit" value="Schließen" />
+              </form>
+          </div>
+        </div>-->
+    </body>
 </html>

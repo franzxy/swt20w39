@@ -36,7 +36,7 @@ class CatalogDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default catalog entries.");
-		ArrayList<LocalDate> bbd = null;
+		LocalDate bbd = null;
 		ArrayList<Medicine> ingredients = null;
 
 		medicineCatalog.save(new Medicine("Medikament 1", "med1", "usage1", 1, Money.of(100, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.LABOR, MedicineType.LIQUID));

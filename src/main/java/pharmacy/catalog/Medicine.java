@@ -68,6 +68,7 @@ public class Medicine extends Product {
 	}
 
 	public ArrayList<LocalDate> getBBD() {
+	//public LocalDate getBBD() {
 		return bbd;
 	}
 
