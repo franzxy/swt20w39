@@ -49,13 +49,13 @@ class CatalogDataInitializer implements DataInitializer {
 
 		medicineCatalog.save(new Medicine("Zentiva Ibuflam 800mg", "ibu800", "Schmerzmittel, 50 Stück, Wirkstoff Ibuprofen",
 				20, Money.of(7.99, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.TABLET));
-
+		/*
 		medicineCatalog.save(new Medicine("Ratiopharm Nasenspray Erwachsene", "nse", "Nasenspray für Erwachsene, 10ml, Wirkstoff Xylometazolin",
 				10, Money.of(1.99, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.SHOP, MedicineType.LIQUID));
 
 		medicineCatalog.save(new Medicine("Ratiopharm Nasenspray Kinder", "nsk", "Nasenspray für Kinder, 10ml, Wirkstoff Xylometazolin",
 				10, Money.of(1.99, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.SHOP, MedicineType.LIQUID));
-
+		*/
 		medicineCatalog.save(new Medicine("Bepanthen Wund- und Heilsalbe", "bep", "Wundheilsalbe für Haut, 50ml, Wirkstoff Dexpanthenol",
 				50, Money.of(2.59, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.OINTMENT));
 

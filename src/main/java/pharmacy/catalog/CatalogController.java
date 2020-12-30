@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 
 @Controller
 class CatalogController {
@@ -65,6 +66,8 @@ class CatalogController {
 
 		model.addAttribute("searchform", new SearchForm());
 
+		if(ingredient.equals("null")) ingredient = "all";
+
 		if(empty == true) {
 			model.addAttribute("Titel", "Erweiterte Suche");
 			return "search";
@@ -80,8 +83,8 @@ class CatalogController {
 					if(!nopres || d.getPresType().equals("Frei Verkäuflich")) {
 
 						if(type.equals("all") || d.getMedType().equals(type)) {
-
-							if(ingredient.equals("all") || d.getIngType().toString().toLowerCase().equals(ingredient) || d.getIngType() == Medicine.IngredientType.BOTH) {
+//BOTH?
+							if(ingredient.equals("all") || d.getIngType().toString().toLowerCase().equals(ingredient)) {
 
 								if (!result.contains(d)) {
 									result.add(d);
@@ -115,7 +118,7 @@ class CatalogController {
 	@PostMapping("/search")
 	public String submitSearch(@ModelAttribute SearchForm form, Model model) {
 		model.addAttribute("SearchForm", form);
-		return "redirect:/search?s=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&m=" + form.getMedType() + "&i=shop";
+		return "redirect:/search?s=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&m=" + form.getMedType() + "&i=" + form.getIngType();
 	}
 
 	@GetMapping("/medicine/{medicine}")

@@ -1,5 +1,7 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<script th:src="@{/webjars/jquery/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -19,21 +21,25 @@
 
 	<form action="#" th:action="@{/}" th:object=${searchform} method="post" class="ui form">
 		<div class="field">
+
 			<input type="text" th:field="*{searchTerm}" placeholder="Suchbegriff eingeben" />
+
+			<br><br>
+
+			<button type="submit" class="ui labeled icon button">
+				<i class="search icon"></i><span> Suchen</span>
+			</button>
 		</div>
 
-		<button type="submit" class="ui labeled icon button">
-			<i class="search icon"></i><span>Suchen</span>
-		</button>
 	</form>
 
 	<br>
 
 	<div class="ui link cards" th:remove="all-but-first">
-
 		<div class="ui card" th:each="medicine : ${catalog}">
+
 			<div class="content">
-				<a class="header" th:href="@{/medicine/{id}(id=${medicine.id})}" th:text="${medicine.name}">Medicine</a>
+				<a class="header" th:href="@{/medicine/{id}(id=${medicine.id})}" th:text="${medicine.name}">Medikament</a>
 			</div>
 
 			<div class="image">
@@ -43,20 +49,16 @@
 			</div>
 
 			<div class="content">
-				<div class="description" th:text="${medicine.usage}">Usage</div>
+				<div class="description" th:text="${medicine.usage}">Verwendung</div>
 			</div>
 
-			<div class="content">
 
-				<div class="extra content" th:text="${{medicine.price}}">Preis in €</div>
-				<br>
+			<div class="extra content" th:text="${{medicine.price}}">Preis</div>
 
-					<button type="submit" class="ui labeled icon button">
-					<i class="add to cart icon"></i><span>Hinzufügen</span>
-				</button>
+			<button type="submit" class="ui labeled icon button">
+				<i class="add to cart icon"></i><span>In den Warenkorb</span>
+			</button>
 
-
-			</div>
 		</div>
 	</div>
 </body>

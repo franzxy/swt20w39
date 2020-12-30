@@ -1,61 +1,78 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <script th:src="@{/webjars/jquery/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script th:src="@{/webjars/Semantic-UI/semantic.min.js}" src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
     <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet" href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{/resources/css/style.css}" rel="stylesheet" href="../static/resources/css/style.css" type="text/css"/>
-    <link rel="stylesheet" type="text/css" th:href="@{style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}" />
     <link rel="shortcut icon" type="image/png" th:href="@{pharmacy.png}"/>
 
-    <title th:text="${medicine.name}">Name</title>
+    <title th:text="${medicine.name}">Titel</title>
 </head>
 
 <body>
     <nav th:include="navigation :: navigation"></nav>
+
     <header>
-        <h1 th:text="${medicine.name}">Last Action Hero</h1>
+        <h1 th:text="${medicine.name}">Medikament</h1>
     </header>
 
+    <div class="ui items">
+        <div class="item">
 
-<div class="ui items">
-    <div class="item">
-        <div class="image">
-            <img th:src="@{/img/{name}.png(name=${medicine.image})}" src="../static/resources/img/cover/med2.png"/>
-        </div>
-        <div class="content">
-            <a class="header" th:text="${medicine.name}">Name</a>
-            <div class="meta">
-                <span th:text="${medicine.medType}">medType</span>
-                <span th:text="${{medicine.price}}">Preis in €</span>
+            <div class="image">
+                <img th:src="@{/img/{name}.png(name=${medicine.image})}" src="../static/img/med2.png"/>
             </div>
-            <div class="description">
-                <p>Vorrat:</p>
-                <p th:text="${quantity}">10</p><br/>
-                <form sec:authorize="hasRole('CUSTOMER')" class="ui form" method="post" th:action="@{/cartBuy}" th:if="${orderable}">
-                    <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
-                    <div class="field">
-                        <label for="number">Anzahl</label>
-                        <input id="number" type="number" name="number" min="1" th:max="${quantity}" step="1" value="1"/><br/>
-                    </div>
-                    <button type="submit" class="ui labeled icon button">
-                        <i class="add to cart icon"></i><span th:text="#{detail.addToBasket}"> Hinzufügen</span>
-                    </button>
-                </form>
-                <form sec:authorize="hasRole('BOSS')" class="ui form" method="post" th:action="@{/cartRestock}" th:if="${orderable}">
-                    <input type="hidden" name="pid" value="0" th:value="${disc.id}"/>
-                    <div class="field">
-                        <label for="number">Anzahl</label>
-                        <input id="number" type="number" name="number" step="1" value="1"/><br/>
-                    </div>
-                    <button type="submit" class="ui labeled icon button">
-                        <i class="add to cart icon"></i><span th:text="#{detail.addToRestock}"> Hinzufügen</span>
-                    </button>
-                </form>
+
+            <div class="content">
+                <a class="header" th:text="${medicine.name}">Name</a>
+
+                <div class="meta">
+                    <span th:text="${medicine.usage}">Verwendung</span>
+                    <span th:text="${{medicine.medType}}">Typ</span>
+                    <span th:text="${{medicine.presType}}">Verschreibungsart</span>
+                    <span th:text="${{medicine.price}}">Preis</span>
+                </div>
+
+                <div class="description">
+
+                    <p>Vorrat:</p>
+                    <p th:text="${quantity}">10</p><br/>
+
+
+
+
+                    <form class="ui form" method="post" th:action="@{/cart?pid=${medicine.id}}">
+                        <input name="pid" value="0" th:value="${medicine.id}"/>
+                        <div class="field">
+                            <label for="number">Anzahl</label>
+                            <input id="number" type="number" name="number" min="1" th:max="${quantity}" step="1" value="1"/><br/>
+                        </div>
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="add to cart icon"></i><span th:text="#{detail.addToBasket}"> Hinzufügen</span>
+                        </button>
+                    </form>
+
+
+
+
+                    <form sec:authorize="hasRole('BOSS')" class="ui form" method="post" th:action="@{/cartRestock}" th:if="${orderable}">
+                        <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
+                        <div class="field">
+                            <label for="number">Anzahl</label>
+                            <input id="number" type="number" name="number" step="1" value="1"/><br/>
+                        </div>
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="add to cart icon"></i><span th:text="#{detail.addToRestock}"> Hinzufügen</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

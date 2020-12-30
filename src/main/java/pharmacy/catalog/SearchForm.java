@@ -1,7 +1,7 @@
 package pharmacy.catalog;
 
 public class SearchForm {
-	private String searchTerm, medType;
+	private String searchTerm, medType, ingType;
 	private boolean nopres;
 
 	public String getSearchTerm() {
@@ -12,12 +12,20 @@ public class SearchForm {
 		return this.medType;
 	}
 
+	public String getIngType() {
+		return this.ingType;
+	}
+
 	public boolean getNoPres() {
 		return this.nopres;
 	}
 
 	public void setSearchTerm(String s) {
 		this.searchTerm = s;
+	}
+
+	public void setIngType(String s) {
+		this.ingType = s;
 	}
 
 	public void setMedType(String s) {

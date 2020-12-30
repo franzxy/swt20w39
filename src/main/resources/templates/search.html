@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -37,6 +37,15 @@
 
             <br>
 
+            <select sec:authorize="hasRole('EMPLOYEE')" th:field="*{ingType}" name="Zutaten" id="ingredient">
+                <option th:value="all">Alle Arten von Medikamenten</option>
+                <option th:value="labor">Labor</option>
+                <option th:value="mixture">Mixtur</option>
+                <option th:value="shop">Shop</option>
+            </select>
+
+            <br>
+
             <input type="checkbox" name="nopres" th:checked="${nopres}"> Nur rezeptfreie Medikamente anzeigen</input>
 
             <br><br>
@@ -44,6 +53,7 @@
             <button type="submit" class="ui labeled icon button">
                 <i class="search icon"></i><span> Suchen</span>
             </button>
+
         </div>
     </form>
 
@@ -73,14 +83,18 @@
             </div>
 
             <div class="content">
-                <div class="description" th:text="${{medicine.presType}}">Zutat</div>
-            </div>
-
-            <div class="content">
                 <div class="description" th:text="${{medicine.medType}}">Typ</div>
             </div>
 
+            <div class="content">
+                <div class="description" th:text="${{medicine.presType}}">Verschreibungsart</div>
+            </div>
+
             <div class="extra content" th:text="${medicine.price}">Preis</div>
+
+            <button type="submit" class="ui labeled icon button">
+                <i class="add to cart icon"></i><span>In den Warenkorb</span>
+            </button>
         </div>
     </div>
 </body>
