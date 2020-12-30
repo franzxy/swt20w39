@@ -5,7 +5,7 @@
     <div class="row height flex space align">
         <a class="a nav height flex center" th:href="@{/cart}">Warenkorb</a>
         <a class="a nav height flex center" th:href="@{/counter}">Kasse</a>
-        <a class="a nav height flex center" th:href="@{/searchform}">Erweiterte Suche</a>
+        <a class="a nav height flex center" th:href="@{/search?e=true}">Erweiterte Suche</a>
         <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
         <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
         <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>

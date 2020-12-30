@@ -52,44 +52,37 @@ class CatalogController {
 	@PostMapping("/")
 	public String submitSearchInCatalog(@ModelAttribute SearchForm form, Model model) {
 		model.addAttribute("SearchForm", form);
-		return "redirect:/search?searchTerm=" + form.getSearchTerm()  + "&i=shop";
-	}
-
-
-	@GetMapping("/searchform")
-	public String searchForm(Model model) {
-		model.addAttribute("searchform", new SearchForm());
-		return "searchform";
-	}
-
-	@PostMapping("/searchform")
-	public String submitSearchForm(@ModelAttribute SearchForm form, Model model) {
-		model.addAttribute("SearchForm", form);
-		return "redirect:/search?searchTerm=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&m=" + form.getMedType() + "&i=shop";
+		return "redirect:/search?s=" + form.getSearchTerm() + "&i=shop";
 	}
 
 	@GetMapping("/search")
 	//p=rezeptpflichtig, m=typ, i=zutaten
-	public String searchCatalog(@RequestParam(name="searchTerm", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean nopres, @RequestParam(name="i", defaultValue = "all") String ingredient, @RequestParam(name="m", defaultValue = "all") String type, Model model) {
+	public String searchCatalog(@RequestParam(name="e", defaultValue = "false") boolean empty, @RequestParam(name="s", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean nopres, @RequestParam(name="i", defaultValue = "all") String ingredient, @RequestParam(name="m", defaultValue = "all") String type, Model model) {
 
 		String[] search = searchTerm.toLowerCase().split(" ");
 		ArrayList<Medicine> result = new ArrayList<>();
 		Iterator<Medicine> stock = catalog.findAll().iterator();
+
+		model.addAttribute("searchform", new SearchForm());
+
+		if(empty == true) {
+			model.addAttribute("Titel", "Erweiterte Suche");
+			return "search";
+		}
 
 		while (stock.hasNext()) {
 			Medicine d = stock.next();
 
 			for (int i = 0; i < search.length; i++) {
 
-				//Name des Medikaments enthält Suchbegriff
 				if (searchTerm.equals("") || d.getName().toLowerCase().contains(search[i])) {
 
-					//Rezeptpflichtigkeit egal oder Medikament rezeptfrei
 					if(!nopres || d.getPresType().equals("Frei Verkäuflich")) {
 
 						if(type.equals("all") || d.getMedType().equals(type)) {
 
-							if(ingredient.equals("all") || d.getIngType().toString().toLowerCase().equals(ingredient)) {
+							if(ingredient.equals("all") || d.getIngType().toString().toLowerCase().equals(ingredient) || d.getIngType() == Medicine.IngredientType.BOTH) {
+
 								if (!result.contains(d)) {
 									result.add(d);
 								}
@@ -102,11 +95,27 @@ class CatalogController {
 
 		model.addAttribute("catalog", result);
 
-		if(result.size() == 0) model.addAttribute("Suchbegriff", "Keine Ergebnisse");
-		else if(searchTerm.equals("")) model.addAttribute("Suchbegriff", "Alle Medikamente");
-		else model.addAttribute("Suchbegriff", "Ergebnisse für \"" + searchTerm + "\":");
+		if(result.size() == 0) {
+			model.addAttribute("Suchbegriff", "Keine Ergebnisse");
+			model.addAttribute("Titel", "Keine Ergebnisse");
+		}
+		else if(searchTerm.equals("")) {
+			model.addAttribute("Suchbegriff", "Alle Medikamente");
+			model.addAttribute("Titel", "Alle Medikamente");
+		}
 
-		return "searchresult";
+		else {
+			model.addAttribute("Suchbegriff", "Ergebnisse für \"" + searchTerm + "\":");
+			model.addAttribute("Titel", "Ergebnisse für \"" + searchTerm);
+		}
+
+		return "search";
+	}
+
+	@PostMapping("/search")
+	public String submitSearch(@ModelAttribute SearchForm form, Model model) {
+		model.addAttribute("SearchForm", form);
+		return "redirect:/search?s=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&m=" + form.getMedType() + "&i=shop";
 	}
 
 	@GetMapping("/medicine/{medicine}")
@@ -116,7 +125,7 @@ class CatalogController {
 		//var quantity = inventory.findByProductIdentifier(medicine.getId()).map(InventoryItem::getQuantity).orElse(NONE);
 
 		model.addAttribute("medicine" , medicine);
-		model.addAttribute("quantity", i.toString());
+		//model.addAttribute("quantity", i.toString()); in videoshop nachsehen!
 		//model.addAttribute("orderable", quantity.isGreaterThan(NONE));
 
 		return "detail";

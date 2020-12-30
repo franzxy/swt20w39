@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <script th:src="@{/webjars/jquery/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -9,16 +11,21 @@
     <link rel="stylesheet" type="text/css" th:href="@{style.css}" />
     <link rel="shortcut icon" type="image/png" th:href="@{pharmacy.png}"/>
 
-    <title>Suche</title>
+    <title th:text="${Titel}">Titel</title>
 </head>
 
 <body>
     <nav th:include="navigation :: navigation"></nav>
+
     <br>
-    <form action="#" th:action="@{/searchform}" th:object="${searchform}" method="post" class="ui form">
+
+    <form action="#" th:action="@{/search}" th:object="${searchform}" method="post" class="ui form">
         <div class="field">
+
             <input type="text" th:field="*{searchTerm}" placeholder="Suchbegriff eingeben" />
+
             <br><br>
+
             <select th:field="*{medType}" name="Typ" id="type">
                 <option th:value="all">Alle Arten von Medikamenten</option>
                 <option th:value="Kapsel">Kapseln</option>
@@ -27,11 +34,54 @@
                 <option th:value="Fluessigkeit">Flüssigkeiten</option>
                 <option th:value="Pulver">Pulver</option>
             </select>
+
             <br>
+
             <input type="checkbox" name="nopres" th:checked="${nopres}"> Nur rezeptfreie Medikamente anzeigen</input>
+
             <br><br>
-            <input type="Submit" value="Suchen" class="ui button" />
+
+            <button type="submit" class="ui labeled icon button">
+                <i class="search icon"></i><span> Suchen</span>
+            </button>
         </div>
     </form>
+
+    <br>
+
+    <header>
+        <h1 th:text="${Suchbegriff}">Suchbegriff</h1>
+    </header>
+
+    <br>
+
+    <div class="ui link cards" th:remove="all-but-first">
+        <div class="ui card" th:each="medicine : ${catalog}">
+
+            <div class="content">
+                <a class="header" th:href="@{/medicine/{id}(id=${medicine.id})}" th:text="${{medicine.name}}">Medikament</a>
+            </div>
+
+            <div class="image">
+                <a th:href="@{/medicine/{id}(id=${medicine.id})}">
+                    <img class="thumbnail" th:src="@{/img/{image}.png(image=${medicine.image})}" src="../static/img/med1.png"/>
+                </a>
+            </div>
+
+            <div class="content">
+                <div class="description" th:text="${{medicine.usage}}">Verwendung</div>
+            </div>
+
+            <div class="content">
+                <div class="description" th:text="${{medicine.presType}}">Zutat</div>
+            </div>
+
+            <div class="content">
+                <div class="description" th:text="${{medicine.medType}}">Typ</div>
+            </div>
+
+            <div class="extra content" th:text="${medicine.price}">Preis</div>
+        </div>
+    </div>
 </body>
 </html>
