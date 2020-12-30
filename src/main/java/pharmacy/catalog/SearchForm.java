@@ -1,11 +1,8 @@
 package pharmacy.catalog;
 
 public class SearchForm {
-
-
 	private String searchTerm, medType;
 	private boolean nopres;
-
 
 	public String getSearchTerm() {
 		return this.searchTerm;
