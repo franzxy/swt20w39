@@ -42,11 +42,11 @@
                 </div>
 
                 <div class="description" sec:authorize="!isAuthenticated()">
-                    <p >Sie müssen eingeloggt sein um Produkte zum Warenkorb hinzufügen zu können!</p>
+                    <p style="color:#FF0000";>Sie müssen eingeloggt sein um Produkte zum Warenkorb hinzufügen zu können!</p>
                 </div>
 
                 <div class="description" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-                    <p>Vorrat:</p> <p th:text="${quantity}">Vorrat (funktioniert noch nicht!)</p>
+                    <p>Vorrat: (funktioniert noch nicht!)</p> <p th:text="${quantity}">Vorrat</p>
                 </div>
 
                 <br>

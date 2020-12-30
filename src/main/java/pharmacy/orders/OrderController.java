@@ -46,8 +46,6 @@ public class OrderController {
 
 		cart.addOrUpdateItem(item, Quantity.of(amount));
 
-		LOG.info(number + " " + item.toString());
-
 		return "redirect:/";
 	}
 

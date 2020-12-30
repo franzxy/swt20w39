@@ -39,7 +39,7 @@ class CatalogController {
 		while(stock.hasNext()) {
 			Medicine d = stock.next();
 
-			if(d.getIngType().toString().toLowerCase().equals("shop")) {
+			if(d.getIngType() == Medicine.IngredientType.SHOP || d.getIngType() == Medicine.IngredientType.BOTH) {
 				result.add(d);
 			}
 		}
@@ -57,21 +57,19 @@ class CatalogController {
 	}
 
 	@GetMapping("/search")
-	//p=rezeptpflichtig, m=typ, i=zutaten
-	public String searchCatalog(@RequestParam(name="e", defaultValue = "false") boolean empty, @RequestParam(name="s", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean nopres, @RequestParam(name="i", defaultValue = "all") String ingredient, @RequestParam(name="m", defaultValue = "all") String type, Model model) {
+	//p=presType, m=medType, i=ingType
+	public String searchCatalog(@RequestParam(name="e", defaultValue = "false") boolean empty, @RequestParam(name="s", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean noPres, @RequestParam(name="i", defaultValue = "shop") String ingType, @RequestParam(name="m", defaultValue = "all") String medType, Model model) {
+		model.addAttribute("searchform", new SearchForm());
+
+		if(empty) {
+			model.addAttribute("Titel", "Erweiterte Suche");
+			return "search";
+		}
 
 		String[] search = searchTerm.toLowerCase().split(" ");
 		ArrayList<Medicine> result = new ArrayList<>();
 		Iterator<Medicine> stock = catalog.findAll().iterator();
 
-		model.addAttribute("searchform", new SearchForm());
-
-		if(ingredient.equals("null")) ingredient = "all";
-
-		if(empty == true) {
-			model.addAttribute("Titel", "Erweiterte Suche");
-			return "search";
-		}
 
 		while (stock.hasNext()) {
 			Medicine d = stock.next();
@@ -80,11 +78,11 @@ class CatalogController {
 
 				if (searchTerm.equals("") || d.getName().toLowerCase().contains(search[i])) {
 
-					if(!nopres || d.getPresType().equals("Frei Verkäuflich")) {
+					if(!noPres || d.getPresType().equals("Frei Verkäuflich")) {
 
-						if(type.equals("all") || d.getMedType().equals(type)) {
-//TODO: BOTH
-							if(ingredient.equals("all") || d.getIngType().toString().toLowerCase().equals(ingredient)) {
+						if(medType.equals("all") || d.getMedType().equals(medType)) {
+
+							if(ingType.equals("all") || d.getIngType().toString().toLowerCase().equals(ingType) || (  (ingType.equals("shop")||ingType.equals("labor"))   &&   d.getIngType() == Medicine.IngredientType.BOTH  )) {
 
 								if (!result.contains(d)) {
 									result.add(d);
@@ -119,6 +117,7 @@ class CatalogController {
 	@PostMapping("/search")
 	public String submitSearch(@ModelAttribute SearchForm form, Model model) {
 		model.addAttribute("SearchForm", form);
+		if(form.getIngType() == null) form.setIngType("shop");
 		return "redirect:/search?s=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&m=" + form.getMedType() + "&i=" + form.getIngType();
 	}
 

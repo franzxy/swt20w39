@@ -44,20 +44,22 @@ class CatalogDataInitializer implements DataInitializer {
 		medicineCatalog.save(new Medicine("Medikament 3", "med3", "usage3", 3, Money.of(300, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.POWDER));
 		medicineCatalog.save(new Medicine("Medikament 4", "med4", "usage4", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.BOTH, MedicineType.TABLET));
 
+		/*
 		medicineCatalog.save(new Medicine("Zentiva Ibuflam 400mg", "ibu400", "Schmerzmittel, 10 Stück, Wirkstoff Ibuprofen",
 				10, Money.of(4.99, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.SHOP, MedicineType.TABLET));
 
 		medicineCatalog.save(new Medicine("Zentiva Ibuflam 800mg", "ibu800", "Schmerzmittel, 50 Stück, Wirkstoff Ibuprofen",
 				20, Money.of(7.99, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.TABLET));
-		/*
+
 		medicineCatalog.save(new Medicine("Ratiopharm Nasenspray Erwachsene", "nse", "Nasenspray für Erwachsene, 10ml, Wirkstoff Xylometazolin",
 				10, Money.of(1.99, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.SHOP, MedicineType.LIQUID));
 
 		medicineCatalog.save(new Medicine("Ratiopharm Nasenspray Kinder", "nsk", "Nasenspray für Kinder, 10ml, Wirkstoff Xylometazolin",
 				10, Money.of(1.99, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.SHOP, MedicineType.LIQUID));
-		*/
+
 		medicineCatalog.save(new Medicine("Bepanthen Wund- und Heilsalbe", "bep", "Wundheilsalbe für Haut, 50ml, Wirkstoff Dexpanthenol",
 				50, Money.of(2.59, EURO), bbd, ingredients, PrescriptionType.PRESONLY, IngredientType.SHOP, MedicineType.OINTMENT));
+		*/
 
 		medicineCatalog.save(new Medicine("Tinktur 5", "med5", "Tinktur", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.MIXTURE, MedicineType.TABLET));
 		medicineCatalog.save(new Medicine("Zutat 6", "med6", "Zutat", 4, Money.of(400, EURO), bbd, ingredients, PrescriptionType.WITHOUTPRES, IngredientType.LABOR, MedicineType.TABLET));
