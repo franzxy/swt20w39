@@ -55,9 +55,16 @@
 
 			<div class="extra content" th:text="${{medicine.price}}">Preis</div>
 
-			<button type="submit" class="ui labeled icon button">
-				<i class="add to cart icon"></i><span>In den Warenkorb</span>
-			</button>
+			<div sec:authorize="isAuthenticated()" class="content">
+				<form  class="ui form" method="post" th:action="@{/cart}">
+					<input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
+					<input type="hidden" name="number" value="1"/>
+
+					<button type="submit" class="ui labeled icon button">
+						<i class="add to cart icon"></i><span>In den Warenkorb</span>
+					</button>
+				</form>
+			</div>
 
 		</div>
 	</div>

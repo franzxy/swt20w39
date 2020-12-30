@@ -26,8 +26,9 @@
 
             <br><br>
 
-            <select th:field="*{medType}" name="Typ" id="type">
-                <option th:value="all">Alle Arten von Medikamenten</option>
+            <label for="medType">Art:</label>
+            <select id="medType" th:field="*{medType}" name="Typ">
+                <option th:value="all">Alle</option>
                 <option th:value="Kapsel">Kapseln</option>
                 <option th:value="Tablette">Tabletten</option>
                 <option th:value="Salbe">Salben</option>
@@ -37,8 +38,9 @@
 
             <br>
 
-            <select sec:authorize="hasRole('EMPLOYEE')" th:field="*{ingType}" name="Zutaten" id="ingredient">
-                <option th:value="all">Alle Arten von Medikamenten</option>
+            <label sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" for="ingType">Verwendung:</label>
+            <select id="ingType" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:field="*{ingType}" name="Zutaten">
+                <option th:value="all">Alle</option>
                 <option th:value="labor">Labor</option>
                 <option th:value="mixture">Mixtur</option>
                 <option th:value="shop">Shop</option>
@@ -46,9 +48,10 @@
 
             <br>
 
-            <input type="checkbox" name="nopres" th:checked="${nopres}"> Nur rezeptfreie Medikamente anzeigen</input>
+            <input type="checkbox" id="nopres" name="nopres" th:checked="${nopres}"/>
+            <label for="nopres">Nur rezeptfreie Medikamente anzeigen</label>
 
-            <br><br>
+            <br>
 
             <button type="submit" class="ui labeled icon button">
                 <i class="search icon"></i><span> Suchen</span>
@@ -92,9 +95,18 @@
 
             <div class="extra content" th:text="${medicine.price}">Preis</div>
 
-            <button type="submit" class="ui labeled icon button">
-                <i class="add to cart icon"></i><span>In den Warenkorb</span>
-            </button>
+            <div sec:authorize="isAuthenticated()" class="content">
+                <form  class="ui form" method="post" th:action="@{/cart}">
+                    <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
+                    <input type="hidden" name="number" value="1"/>
+
+                    <button type="submit" class="ui labeled icon button">
+                        <i class="add to cart icon"></i><span>In den Warenkorb</span>
+                    </button>
+                </form>
+            </div>
+
+
         </div>
     </div>
 </body>

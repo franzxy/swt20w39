@@ -33,44 +33,46 @@
 
                 <div class="meta">
                     <span th:text="${medicine.usage}">Verwendung</span>
+                    <br><br>
                     <span th:text="${{medicine.medType}}">Typ</span>
+                    <br><br>
                     <span th:text="${{medicine.presType}}">Verschreibungsart</span>
+                    <br><br>
                     <span th:text="${{medicine.price}}">Preis</span>
                 </div>
 
-                <div class="description">
-
-                    <p>Vorrat:</p>
-                    <p th:text="${quantity}">10</p><br/>
-
-
-
-
-                    <form class="ui form" method="post" th:action="@{/cart?pid=${medicine.id}}">
-                        <input name="pid" value="0" th:value="${medicine.id}"/>
-                        <div class="field">
-                            <label for="number">Anzahl</label>
-                            <input id="number" type="number" name="number" min="1" th:max="${quantity}" step="1" value="1"/><br/>
-                        </div>
-                        <button type="submit" class="ui labeled icon button">
-                            <i class="add to cart icon"></i><span th:text="#{detail.addToBasket}"> Hinzufügen</span>
-                        </button>
-                    </form>
-
-
-
-
-                    <form sec:authorize="hasRole('BOSS')" class="ui form" method="post" th:action="@{/cartRestock}" th:if="${orderable}">
-                        <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
-                        <div class="field">
-                            <label for="number">Anzahl</label>
-                            <input id="number" type="number" name="number" step="1" value="1"/><br/>
-                        </div>
-                        <button type="submit" class="ui labeled icon button">
-                            <i class="add to cart icon"></i><span th:text="#{detail.addToRestock}"> Hinzufügen</span>
-                        </button>
-                    </form>
+                <div class="description" sec:authorize="!isAuthenticated()">
+                    <p >Sie müssen eingeloggt sein um Produkte zum Warenkorb hinzufügen zu können!</p>
                 </div>
+
+                <div class="description" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
+                    <p>Vorrat:</p> <p th:text="${quantity}">Vorrat (funktioniert noch nicht!)</p>
+                </div>
+
+                <br>
+
+                <form sec:authorize="isAuthenticated()" class="ui form" method="post" th:action="@{/cart}" th:if="${orderable}">
+                    <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
+                    <div class="field">
+                        <label for="number">Anzahl</label>
+                        <input id="number" type="number" name="number" step="1" value="1"/><br/>
+                    </div>
+                    <button type="submit" class="ui labeled icon button">
+                        <i class="add to cart icon"></i><span>In den Warenkorb</span>
+                    </button>
+                </form>
+
+                <form sec:authorize="hasRole('BOSS')" class="ui form" method="post" th:action="@{/cartstock}">
+                    <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
+                    <div class="field">
+                        <label for="number">Anzahl</label>
+                        <input id="number" type="number" name="number" step="1" value="1"/><br/>
+                    </div>
+                    <button type="submit" class="ui labeled icon button">
+                        <i class="add to cart icon"></i><span>Zum Inventar hinzufügen (funktioniert noch nicht)</span>
+                    </button>
+                </form>
+
             </div>
         </div>
     </div>

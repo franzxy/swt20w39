@@ -83,7 +83,7 @@ class CatalogController {
 					if(!nopres || d.getPresType().equals("Frei Verkäuflich")) {
 
 						if(type.equals("all") || d.getMedType().equals(type)) {
-//BOTH?
+//TODO: BOTH
 							if(ingredient.equals("all") || d.getIngType().toString().toLowerCase().equals(ingredient)) {
 
 								if (!result.contains(d)) {
@@ -102,6 +102,7 @@ class CatalogController {
 			model.addAttribute("Suchbegriff", "Keine Ergebnisse");
 			model.addAttribute("Titel", "Keine Ergebnisse");
 		}
+
 		else if(searchTerm.equals("")) {
 			model.addAttribute("Suchbegriff", "Alle Medikamente");
 			model.addAttribute("Titel", "Alle Medikamente");
@@ -109,7 +110,7 @@ class CatalogController {
 
 		else {
 			model.addAttribute("Suchbegriff", "Ergebnisse für \"" + searchTerm + "\":");
-			model.addAttribute("Titel", "Ergebnisse für \"" + searchTerm);
+			model.addAttribute("Titel", "Ergebnisse für \"" + searchTerm + "\"");
 		}
 
 		return "search";
@@ -124,12 +125,12 @@ class CatalogController {
 	@GetMapping("/medicine/{medicine}")
 	public String detail(@PathVariable Medicine medicine, Model model) {
 
-		var quantity = inventory.findByProductIdentifier(medicine.getId()).map(InventoryItem::getQuantity);
-		//var quantity = inventory.findByProductIdentifier(medicine.getId()).map(InventoryItem::getQuantity).orElse(NONE);
+		Quantity q = inventory.findByProductIdentifier(medicine.getId()).getTotalQuantity();
 
 		model.addAttribute("medicine" , medicine);
-		//model.addAttribute("quantity", i.toString()); in videoshop nachsehen!
-		//model.addAttribute("orderable", quantity.isGreaterThan(NONE));
+		model.addAttribute("quantity", q); //TODO geht noch nicht
+		//model.addAttribute("orderable", q.isGreaterThan(NONE));
+		model.addAttribute("orderable", true);
 
 		return "detail";
 	}
