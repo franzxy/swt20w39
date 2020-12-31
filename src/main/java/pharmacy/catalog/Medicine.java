@@ -2,9 +2,7 @@ package pharmacy.catalog;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
@@ -14,14 +12,15 @@ public class Medicine extends Product {
 	private String description, image;
 	private Money purchaseprice;
 	private boolean presonly;
+	private double amount;
+	private int quantity;
+
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {
-		
 	}
-
-	public Medicine(String name, String description, Money price, Money purchasingprice, List<String> categories, double amount, boolean presonly, String image){
+	
+	public Medicine(String name, String description, Money price, Money purchasingprice, List<String> categories, double amount, boolean presonly, String image, int quantity){
 		super(name, price);
-		//System.out.println(metric);
 		this.presonly=presonly;
 		this.description=description;
 		this.purchaseprice=purchasingprice;
@@ -30,6 +29,8 @@ public class Medicine extends Product {
 			super.addCategory(cat);
 		});
 		super.createQuantity(amount);
+		this.amount=amount;
+		this.quantity=quantity;
 	}
 
 	public String getDescription() {
@@ -60,4 +61,21 @@ public class Medicine extends Product {
 		this.image = image;
 	}
 
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	
 }
