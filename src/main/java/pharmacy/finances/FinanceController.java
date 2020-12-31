@@ -106,8 +106,8 @@ public class FinanceController {
 		return ret;
 	}
 	//Main Filter Thing
-	private List<AccountancyEntry> filter(FilterBase filterB){
-		Filter filter1=filterB.getFilter();
+	private List<AccountancyEntry> filter(FilterForm filterB){
+		FilterForm.Filter filter1=filterB.getFilter();
 		List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
 		switch(filter1) {
 		case OBEST			: ret = this.getEntriesOfRole("CUSTOMER");			break;
@@ -153,10 +153,10 @@ public class FinanceController {
 	@Scheduled(cron="0 0 0 1 * ? *")
 	private void autopay(){
 		//Fixkosten
-		createKosten("Strom", this.fixk.getStrom());
-		createKosten("Miete", this.fixk.getMiete());
-		createKosten("Wasser", this.fixk.getWasser());
-		createKosten("Heizkosten", this.fixk.getHeizkosten());
+		createKosten("Strom", -1*this.fixk.getStrom());
+		createKosten("Miete", -1*this.fixk.getMiete());
+		createKosten("Wasser", -1*this.fixk.getWasser());
+		createKosten("Heizkosten", -1*this.fixk.getHeizkosten());
 		//Gehälter
 		createGehalt();
 
@@ -166,7 +166,7 @@ public class FinanceController {
 	@PreAuthorize("hasRole('BOSS')")
 	public String finances(Model model) {
 		this.updateMoney();
-		model.addAttribute("filterB",new FilterBase());
+		model.addAttribute("filterB",new FilterForm());
 		model.addAttribute("tab", this.acc.findAll().toList());
 		model.addAttribute("rech", this.orderManagement.findBy(OrderStatus.OPEN).toList());
 		model.addAttribute("plus",this.plus.getNumber().doubleValue());
@@ -180,7 +180,7 @@ public class FinanceController {
 	
 	@PostMapping("/finances")
 	@PreAuthorize("hasRole('BOSS')")
-	public String financesupdate(@ModelAttribute FilterBase filterB, Model model) {
+	public String financesupdate(@ModelAttribute FilterForm filterB, Model model) {
 		model.addAttribute("filterB", filterB);
 		model.addAttribute("rech", this.orderManagement.findBy(OrderStatus.OPEN).toList());
 		model.addAttribute("plus",this.plus.getNumber().doubleValue());
@@ -201,33 +201,7 @@ public class FinanceController {
 		model.addAttribute("fixk",fixk);
 		return "redirect:/finances";
 	}
-	@GetMapping("/rechnungsform")
-	public String rechnung(Model model) {
-		return "redirect:/finances#rechnungen";
-	}
-	@PostMapping("/rechnungsform")
-	public String rechnungclose(@ModelAttribute RechnungsForm rf, Model model) {
-		//System.out.println(rf.getId());
-		this.rf.setId(rf.getId());
-		this.rf.setDate("XXXXXXX");
-		this.rf.setBetrag(0.0);
-		this.rf.setUemail("Keine Angaben");
-		this.rf.setUsername("Unbekannt");
-		this.rf.setLastname("Unbekannt");
-		for(Order o : this.orderManagement.findBy(OrderStatus.OPEN)){
-			if(o.getId().toString().equals(rf.getId())){
-				this.rf.setBetrag(o.getTotal().getNumber().doubleValue());
-				this.rf.setUemail(o.getUserAccount().getEmail());
-				this.rf.setUsername(o.getUserAccount().getFirstname());
-				this.rf.setLastname(o.getUserAccount().getLastname());
-				this.rf.setId(o.getId().toString());
-				this.rf.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-			}
-		}
-		model.addAttribute("rf",this.rf);
-		
-		return "redirect:/finances#rechnungsform";
-	}
+	
 	@GetMapping("/create")
 	public String hallo(Model model) {
 		return "redirect:/finances";
