@@ -1,18 +1,16 @@
 package pharmacy.inventory;
 
-import org.salespointframework.quantity.Metric;
-
-import pharmacy.catalog.Medicine;
-
 import java.util.Arrays;
 
 import org.javamoney.moneta.Money;
 
-public class MedicineForm {
+import pharmacy.catalog.Medicine;
 
-    private String description, name, tags, image; 
+public class MedicineForm {
+    
+    private String description, name, tags, image, id; 
     private double amount; 
-    private  int quantity;
+    private int quantity;
 	private boolean presonly; 
     private double price;
     private double purchasingprice;
@@ -27,10 +25,11 @@ public class MedicineForm {
         this.price=0.0;
         this.purchasingprice=0.0;
         this.quantity=0;
+        this.id="";
     }
 
     public Medicine toMedicine(){
-        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.split(",")), this.amount,  this.presonly, this.image);
+        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.split(",")), this.amount,  this.presonly, this.image, this.quantity);
     }
 
     public String getDescription() {
@@ -104,7 +103,14 @@ public class MedicineForm {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
    
     

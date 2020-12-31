@@ -58,19 +58,9 @@ class InventoryInitializer implements DataInitializer {
 
 			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
 			if (inventory.findByProduct(medicine).isEmpty()) {
-				//try{
-					
-				//	System.out.println(medicine.supports(Quantity.of(10,medicine.getMetric())));
-					inventory.save(new UniqueInventoryItem((Medicine)medicine, Quantity.of(10)));
-				/** }
-				catch(IllegalArgumentException e){
-					System.out.println("--------FAIL: "+e.getMessage());
-				}*/
-				
+					inventory.save(new UniqueInventoryItem((Medicine)medicine, Quantity.of(((Medicine)medicine).getQuantity())));
 			}
 		});
-		//Medicine med= new Medicine("BLUBBLUBBLUB", "BLALALALA", Money.of(23,"EUR"), Money.of(20,"EUR"),  Arrays.asList("bla", "blub"), 0.03, Metric.KILOGRAM, false, "dsfdsafdsa");
-		//inventory.save( new UniqueInventoryItem(med, Quantity.of(10, med.getMetric())));
 		
 	}
 }
