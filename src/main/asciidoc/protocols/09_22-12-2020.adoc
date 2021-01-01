@@ -1,0 +1,116 @@
+= Protokoll Gruppe 39
+
+Treffen am 22.12.2020
+
+Ort:      BBB +
+Beginn:   16:40 +
+Ende:     20:00 +
+
+__Schriftführer:__ Timon Trettin +
+
+== Nächstes Treffen
+05.01.2021, 16:40 Uhr, BBB
+
+== Teilnehmer
+* Lennart Wittkowski: Tutor
+* Falk Natkowski
+* Lukas Luger
+* Jonas Kabelitz 
+* Timon Trettin
+* Clemens Rose
+
+== Bemerkungen
+* Clemens Rose und Jonas Kabelitz verlassen die Gruppe
+
+== Aufgaben bis zum 03.01.2021
+* Falk Natkowski: Catalog, Inventory, Order, UI
+* Lukas Luger: Finances, Inventory, Order, UI
+* Timon Trettin: User, Order, Time, UX, UI
+
+=== Pflichtenheft
+* Ergänzung zum Pflichtenheft "online_pharmacy.adoc"
+
+=== Anwendung Allgemein
+* .properties wieder nutzen
+* Umbau zur Online Apotheke
+** Kasse, Seiteneingang, Labor, Praxen entfällt
+** Im gebrauch mit der ePA
+
+=== Inventory
+* DataInitializer (20-30 Einträge)
+* Produkt
+** Beschreibung
+** Einkaufspreis und Verkaufspreis
+** Kategorien
+* Inventar "/inventory" 
+** Artikel Liste
+** Löschen, Artikelmenge erhöhen/reduzieren, Mindestbestand pro Artikel Festlegen, Beschreibung, Kategorien
+* Muss Kriterium
+** Automatisch auffüllen
+
+=== Catalog
+* Katalog "/"
+** Filter nach Kategorien
+** Suche nach Schlagwort
+** "CUSTOMER" kann Artikel zum Warenkorb hinzufügen
+* Detail Ansicht "/id"
+* Nicht mehr als im Lager vorhanden nachbestellen entfällt durch Muss Kriterium "Automatisch nachfüllen" im Inventar
+* Warenkorb "/cart"
+** Artikel hinzufügen, entfernen
+** leeren
+
+=== Order
+* Bestellung
+** Auslieferung der Ware abwarten
+** Nur innerhalb von Deutschland
+* Bestellungen "/orders"
+** Anzeigen von Bestellugen
+** "BOSS" sieht alle
+** "EMPLOYEEE" sieht offene
+** "CUSTOMER" sieht eigene
+** Bestellung abfertigen Button für "EMPLOYEE"
+*** Arbeitszeit nur zwsichen 6:00-20:00 Mo-Sa.
+
+=== Finances
+* Filter (Mitarbeiter, Einkauf/Verkauf etc.)
+* Fixkosten bearbeiten
+* Rechnungen einsehen -> Verweis auf Bestellungen /order/orderId
+* Muss Kriterien
+** Monatsübersicht
+** Bessere Filter
+
+=== User
+* DataInitializer
+* Benutzerübersicht "/users"
+* Benutzertypen
+** Standard Benutzer "USER"
+*** Funktionen: Warenkorb hinzufügen, Persönliche Daten ändern
+*** Daten: Name, Vorname, E-Mail, Passwort
+** Kunde "CUSTOMER"
+*** Funktionen: Bestellen, Persönliche daten ändern, Bestellung/Rechnung einsehen
+*** Daten: Krankenkasse, Adresse, Bezahlmethode (Kreditkarte/Paydirect)
+** Angestellter "EMPLOYEE" 
+*** Funktionen: Bestellen
+*** Daten: Krankenkasse, Adresse, Bezahlmethode (Kreditkarte/Paydirect), Gehalt, Bankverbindung(IBAN)
+** "BOSS"
+*** "EMPLOYEE", "DOCTOR" und "CUSTOMER" erstellen und entfernen
+*** Gehälter ändern
+** "EMPLOYEE" kann "CUSTOMER" erstellen und entfernen
+* Muss Kriterien
+** Urlaub "/vacation"
+*** "BOSS" Anträge zustimmen und ablehnen
+*** "EMPLYOEE" Urlaubsantrag stellen
+** User Löschen
+** Gehalt anpassen
+
+=== Time
+* "BOSS" kann Zeit vorsuplen
+
+=== UX
+* Flowchart mit Figma
+
+=== UI
+* Prototyp mit Figma
+* Google Material Design
+** Einarbeiten
+** Prototyp umsetzen

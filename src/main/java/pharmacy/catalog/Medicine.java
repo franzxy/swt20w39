@@ -32,7 +32,7 @@ public class Medicine extends Product {
 
 	//private String id, image, usage; // Identifikationsnummer, Name des Medikaments, Bild zum Medikament, Benutzt für ...
 	//private Money price;
-	private ArrayList<LocalDate> bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
+	private LocalDate bbd; // Mindesthaltbarkeitsdatum und Listenlänge sagt wie viele Medikamente da sind
 	private ArrayList<Medicine> ingredients; // Falls es eine Mixtur unseres Labors ist muss etwas in der Liste stehen
 	private PrescriptionType presType; // Brauch man ein Rezept oder nicht
 	private IngredientType ingType; // wofür wird es verwendet
@@ -41,7 +41,7 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {}
 
-	public Medicine(String id, String name, String image, String usage, int size, Money price, ArrayList<LocalDate> bbd,
+	public Medicine(String id, String name, String image, String usage, int size, Money price, LocalDate bbd,
 			ArrayList<Medicine> ingredients, PrescriptionType presType, IngredientType ingType, MedicineType medType) {
 		
 		super(name, price);
@@ -82,7 +82,7 @@ public class Medicine extends Product {
 		else return size + " g";
 	}
 	//public LocalDate getBBD() {
-	public ArrayList<LocalDate> getBBD() {
+	public LocalDate getBBD() {
 		return bbd;
 	}
 	public ArrayList<Medicine> getIngredients() {
