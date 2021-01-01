@@ -11,17 +11,15 @@ import javax.persistence.Table;
 @Table(name = "ADDRESSES")
 public class Address implements Serializable{
 
-	private static final long serialVersionUID = -7114101035786254953L;
 	private @Id @GeneratedValue long id;
 
+	private String name;
 	private String street;
-	private String houseNumber;
-	private Number postCode;
+	private Long postCode;
 	private String city;
 	
-	public Address(String street, String houseNumber, Number postCode, String city) {
+	public Address(String name, String street, Long postCode, String city) {
 		this.street = street;
-		this.houseNumber = houseNumber;
 		this.postCode = postCode;
 		this.city = city;
 	}
@@ -34,19 +32,11 @@ public class Address implements Serializable{
 		this.street = newStreet;
 	}
 
-	public String getHouseNumber() {
-		return houseNumber;
-	}
-
-	public void setHouseNumber(String newHouseNumber) {
-		this.houseNumber = newHouseNumber;
-	}
-
-	public Number getPostCode() {
+	public Long getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(Number newPostCode) {
+	public void setPostCode(Long newPostCode) {
 		this.postCode = newPostCode;
 	}
 

@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.javamoney.moneta.Money;
+import org.salespointframework.accountancy.ProductPaymentEntry;
+import org.salespointframework.payment.CreditCard;
 import org.salespointframework.payment.PaymentCard;
 import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.useraccount.Role;
@@ -27,29 +29,31 @@ public class User {
 
 	@OneToOne
 	private UserAccount userAccount;
+	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
-
-	// Customer
-
-	// private Address customerAddress;
-	private PaymentMethod payment;
-	private Boolean privateInsurance;
+/*
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<PaymentMethod> payments = new ArrayList<>();
+*/
+	private String insurance;
 
 	// Employee
 
-	// private Address employeeAddress;
-	private Long iban;
 	private Money salary;
-	// private Collection<Vacation> vacation;
-	private Long vacationRemaining;
+/*
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Vacation> vacations = new ArrayList<>();
 
+	private Long vacationRemaining;
+*/
 	@SuppressWarnings("unused")
 	private User() {}
 
-	public User(UserAccount userAccount) {
+	public User(UserAccount userAccount, String name) {
 		this.userAccount = userAccount;
+		this.name = name;
 	}
 
 	public long getId() {
@@ -60,6 +64,14 @@ public class User {
 		return userAccount;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String newName) {
+		name = newName;
+	}
+
 	public void addRole(Role role) {
 		userAccount.add(role);
 	}
@@ -68,53 +80,31 @@ public class User {
 		userAccount.remove(role);
 	}
 
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
 	public void addAddress(Address newAddress) {
 		addresses.add(newAddress);
 	}
-
-	// Customer
 /*
-	public Address getCustomerAddress() {
-		return customerAddress;
+	public List<PaymentMethod> getPayments() {
+		return payments;
 	}
 
-	public void setCustomerAddress(Address newCustomerAddress) {
-		customerAddress = newCustomerAddress;
+	public void addPayment(PaymentMethod newPayment) {
+		payments.add(newPayment);
 	}
 */
-	public PaymentMethod getPayment() {
-		return payment;
+	public String getInsurance() {
+		return insurance;
 	}
 
-	public void setPayment(PaymentMethod newPayment) {
-		payment = newPayment;
-	}
-
-	public Boolean getPrivateInsurance() {
-		return privateInsurance;
-	}
-
-	public void setPrivateInsurance(Boolean newInsurance) {
-		privateInsurance = newInsurance;
+	public void setInsurance(String newInsurance) {
+		insurance = newInsurance;
 	}
 
 	// Employee
-/*
-	public Address getEmployeeAddress() {
-		return employeeAddress;
-	}
-
-	public void setEmployeeAddress(Address newEmployeeAddress) {
-		employeeAddress = newEmployeeAddress;
-	}
-*/
-	public Long getIban() {
-		return iban;
-	}
-
-	public void setIban(Long newIban) {
-		iban = newIban;
-	}
 
 	public Money getSalary() {
 		return salary;
@@ -123,7 +113,7 @@ public class User {
 	public void setSalary(Money newSalary) {
 		salary = newSalary;
 	}
-
+/*
 	public Long getVacationRemaining() {
 		return vacationRemaining;
 	}
@@ -131,13 +121,13 @@ public class User {
 	public void setVacationRemaining(Long newVacationRemaining) {
 		vacationRemaining = newVacationRemaining;
 	}
-/*
-	public Collection<Vacation> getVacation() {
-		return vacation;
+
+	public List<Vacation> getVacations() {
+		return vacations;
 	}
 
-	public void setVacation(Vacation newVacation) {
-		vacation.add(newVacation);
+	public void addVacation(Vacation newVacation) {
+		vacations.add(newVacation);
 	}
 */
 }

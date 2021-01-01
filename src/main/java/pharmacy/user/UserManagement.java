@@ -43,10 +43,8 @@ public class UserManagement {
 	public User addUser(UserForm userForm) {
 		var password = UnencryptedPassword.of(userForm.getPassword());
 		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("USER"));
-		userAccount.setFirstname(userForm.getName());
-		userAccount.setLastname(userForm.getLastName());
 
-		return users.save(new User(userAccount));
+		return users.save(new User(userAccount, userForm.getName()));
 	}
 
 	public String changePassword(UserPasswordForm form) {
@@ -87,9 +85,7 @@ public class UserManagement {
 	public String addEmployee(User user, EmployeeForm employeeForm) {
 		
 		user.addAddress(new Address(employeeForm.getStreet(), employeeForm.getHouseNumber(), employeeForm.getPostCode(), employeeForm.getCity()));
-		user.setIban(employeeForm.getIban());
 		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
-		user.setVacationRemaining(employeeForm.getVacation());
 		return "employee added";
 	}
 /*
@@ -120,9 +116,9 @@ public class UserManagement {
 		return "role removed";
 	}
 
-	public String setCustomerInsurance(User user, Boolean newPrivateInsurance) {
+	public String setInsurance(User user, String newInsurance) {
 
-		user.setPrivateInsurance(newPrivateInsurance);
+		user.setInsurance(newInsurance);
 
 		return "new insurance";
 	}

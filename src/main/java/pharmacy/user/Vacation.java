@@ -1,11 +1,19 @@
 package pharmacy.user;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Vacation {
+@Entity
+@Table(name = "VACATIONS")
+public class Vacation implements Serializable {
+
+	private @Id @GeneratedValue long id;
 
 	private Date startDate;
 	private Date endDate;

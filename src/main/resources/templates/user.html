@@ -9,9 +9,8 @@
 		<nav th:include="navigation :: navigation"></nav>
 		
 		<p th:text="${'ID: '+user.getId()}">ID</p>
-		<p th:text="${'Vorname: '+user.userAccount.getFirstname()}">Vorname</p>
-		<p th:text="${'Nachname: '+user.userAccount.getLastname()}">Nachname</p>
-		<p th:text="${'E-Mail-Adresse: '+user.userAccount.getUsername()}">E-Mail-Adresse</p>
+		<p th:text="${'Name: '+user.getName()}">Name</p>
+		<p th:text="${'E-Mail: '+user.userAccount.getUsername()}">E-Mail</p>
         <p th:if="${customer && !employee}">Kunde</p>
         <p th:if="${!customer && employee}">Mitarbeiter</p>
         <p th:if="${customer && employee}">Kunde, Mitarbeiter</p>

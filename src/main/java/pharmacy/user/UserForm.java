@@ -9,9 +9,6 @@ class UserForm {
 	
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
 	private final String name;
-	
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
-	private final String lastName;
 
 	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
 	private final String email;
@@ -38,9 +35,8 @@ class UserForm {
 		return password.equals(confirmPassword);
 	}
 
-	public UserForm(String name, String lastName, String email, String password, String confirmPassword) {
+	public UserForm(String name, String email, String password, String confirmPassword) {
 		this.name = name;
-		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
@@ -48,10 +44,6 @@ class UserForm {
 
 	public String getName() {
 		return name;
-	}
-
-	public String getLastName() {
-		return lastName;
 	}
 
 	public String getEmail() {
