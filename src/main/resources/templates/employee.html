@@ -3,56 +3,50 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
-		<title>Registrieren</title>
+		<title>Account</title>
 	</head>
     <body>
-        <nav th:include="navigation :: navigation"></nav>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/employee}" th:object="${employeeForm}">
-    
+		<nav th:include="navigation :: navigation"></nav>
+		
+		<p th:text="${'ID: '+user.getId()}">ID</p>
+		<p th:text="${'Name: '+user.userAccount.getFirstname()}">Vorname</p>
+		<p th:text="${'Name: '+user.userAccount.getLastname()}">Nachname</p>
+		<p th:text="${'E-Mail: '+user.userAccount.getUsername()}">E-Mail</p>
+        <!--
+		<form th:if="${userRole}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${customerAddForm}">
             <div class="field">
-                <label for="address">Vorname</label>
-                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
+                <label for="address">Straße</label>
+                <input id="address" name="address" th:field="*{street}" th:errorclass="fieldError" type="text"
                        required="required"/>
             </div>
 
             <div class="field">
-                <label for="address">Nachname</label>
-                <input id="address" name="address" th:field="*{lastName}" th:errorclass="fieldError" type="text"
-                       required="required"/>
+                <label for="address">Hausnummer</label>
+                <input id="name" name="name" th:field="*{houseNumber}" th:errorclass="fieldError" type="text" required="required"/><br/>
             </div>
 
             <div class="field">
-                <label for="name">E-Mail-Adresse</label>
-                <input id="name" name="name" th:field="*{email}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <label for="name">Postleitzahl</label>
+                <input id="name" name="name" th:field="*{postCode}" th:errorclass="fieldError" type="number" required="required"/><br/>
             </div>
     
             <div class="field">
-                <label for="password">Passwort</label>
-                <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
+                <label for="password">Stadt</label>
+                <input id="password" name="password" th:field="*{city}" th:errorclass="fieldError" type="text"
                        required="required"/>
             </div>
     
             <div class="field">
-                <label for="password">Passwort Bestätigen</label>
-                <input id="newPassword" name="newPassword" th:field="*{confirmPassword}" th:errorclass="fieldError" type="password"
-                       required="required"/><br/>
-                
-                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Das Passwort darf
-                    nicht leer sein.</p>
-                
+                <label for="password">Private Krankenkasse</label>
+                <select id="password" name="password" th:field="*{privateInsurance}" th:errorclass="fieldError"
+                       required="required">
+                    <option value="false">Nein</option>
+                    <option value="true">Ja</option>
+                </select>
             </div>
 
-            <div class="field">
-                <label for="address">Gehalt</label>
-                <input type="number" min="1" step="any" id="address" name="address" th:field="*{salary}" th:errorclass="fieldError" required="required"/>
-            </div>
-
-            <div class="field">
-                <label for="address">Urlaubstage</label>
-                <input id="name" name="name" th:field="*{vacation}" th:errorclass="fieldError" type="number" required="required"/><br/>
-            </div>
-
-            <button type="submit" class="ui button">Registrieren</button>
+            <button type="submit" class="ui button">Zum Kunden machen</button>
         </form>
-    </body>
+        -->
+	</body>
 </html>

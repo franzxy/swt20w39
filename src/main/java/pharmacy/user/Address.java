@@ -24,6 +24,18 @@ public class Address implements Serializable{
 		this.city = city;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String newName) {
+		name = newName;
+	}
+
 	public String getStreet() {
 		return street;
 	}

@@ -35,9 +35,11 @@ public class UserManagement {
 */
 	public User addUser(UserForm userForm) {
 		var password = UnencryptedPassword.of(userForm.getPassword());
-		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("USER"));
+		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("CUSTOMER"));
+		userAccount.setFirstname(userForm.getFirstname());
+		userAccount.setLastname(userForm.getLastname());
 
-		return users.save(new User(userAccount, userForm.getName()));
+		return users.save(new User(userAccount));
 	}
 
 	public String changePassword(UserPasswordForm form) {
@@ -75,10 +77,9 @@ public class UserManagement {
 		return "customer changed";
 	}
 */
-	public String addEmployee(User user, EmployeeForm employeeForm) {
+	public String addEmployee(User user) {
 		
-		user.addAddress(new Address(employeeForm.getStreet(), employeeForm.getHouseNumber(), employeeForm.getPostCode(), employeeForm.getCity()));
-		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
+		
 		return "employee added";
 	}
 /*

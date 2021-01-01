@@ -10,7 +10,13 @@
         <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${userForm}">
     
             <div class="field">
-                <label for="address">Wie heißt du?</label>
+                <label for="address">Vorname</label>
+                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+    
+            <div class="field">
+                <label for="address">Nachname</label>
                 <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
                        required="required"/>
             </div>

@@ -1,6 +1,7 @@
 package pharmacy.user;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Pattern;
@@ -8,9 +9,13 @@ import javax.validation.constraints.Pattern;
 class UserForm {
 	
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
-	private final String name;
+	private final String fname;
+	
+	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
+	private final String lname;
 
 	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
+	@Email
 	private final String email;
 
 	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
@@ -35,15 +40,20 @@ class UserForm {
 		return password.equals(confirmPassword);
 	}
 
-	public UserForm(String name, String email, String password, String confirmPassword) {
-		this.name = name;
+	public UserForm(String fname, String lname, String email, String password, String confirmPassword) {
+		this.fname = fname;
+		this.lname = lname;
 		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstname() {
+		return fname;
+	}
+
+	public String getLastname() {
+		return lname;
 	}
 
 	public String getEmail() {
