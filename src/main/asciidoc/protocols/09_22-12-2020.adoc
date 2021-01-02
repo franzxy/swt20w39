@@ -52,7 +52,6 @@ __Schriftführer:__ Timon Trettin +
 * Katalog "/"
 ** Filter nach Kategorien
 ** Suche nach Schlagwort
-** "CUSTOMER" kann Artikel zum Warenkorb hinzufügen
 * Detail Ansicht "/id"
 * Nicht mehr als im Lager vorhanden nachbestellen entfällt durch Muss Kriterium "Automatisch nachfüllen" im Inventar
 * Warenkorb "/cart"
@@ -62,14 +61,15 @@ __Schriftführer:__ Timon Trettin +
 === Order
 * Bestellung
 ** Auslieferung der Ware abwarten
-** Nur innerhalb von Deutschland
 * Bestellungen "/orders"
 ** Anzeigen von Bestellugen
 ** "BOSS" sieht alle
 ** "EMPLOYEEE" sieht offene
-** "CUSTOMER" sieht eigene
 ** Bestellung abfertigen Button für "EMPLOYEE"
 *** Arbeitszeit nur zwsichen 6:00-20:00 Mo-Sa.
+* Bestellung Detail "/order/orderid"
+* Muss Kriterium
+** Meine Bestellungen "/myorders"
 
 === Finances
 * Filter (Mitarbeiter, Einkauf/Verkauf etc.)
@@ -78,24 +78,27 @@ __Schriftführer:__ Timon Trettin +
 * Muss Kriterien
 ** Monatsübersicht
 ** Bessere Filter
+** Meine Finanzen "/myfinances"
 
 === User
 * DataInitializer
 * Benutzerübersicht "/users"
+* Adressen Klasse
 * Benutzertypen
-** Standard Benutzer "USER"
-*** Funktionen: Warenkorb hinzufügen, Persönliche Daten ändern
-*** Daten: Name, Vorname, E-Mail, Passwort
 ** Kunde "CUSTOMER"
 *** Funktionen: Bestellen, Persönliche daten ändern, Bestellung/Rechnung einsehen
 *** Daten: Krankenkasse, Adresse, Bezahlmethode (Kreditkarte/Paydirect)
 ** Angestellter "EMPLOYEE" 
-*** Funktionen: Bestellen
+*** Funktionen: Bestellen, Persönliche daten ändern, Bestellung/Rechnung einsehen, Bestellungen abfertigen
 *** Daten: Krankenkasse, Adresse, Bezahlmethode (Kreditkarte/Paydirect), Gehalt, Bankverbindung(IBAN)
 ** "BOSS"
+*** Funktionen: Bestellen, Persönliche daten ändern, Bestellung/Rechnung einsehen, Inventar und Finanzen verwalten
 *** "EMPLOYEE" hinzufügen und entfernen
 *** Gehälter ändern
 * Muss Kriterien
+** Salespoint Payment implementieren
+*** Bankeinzug hinzufügen
+*** Paydirekt hinzufügen
 ** Urlaub "/vacation"
 *** "BOSS" Anträge zustimmen und ablehnen
 *** "EMPLYOEE" Urlaubsantrag stellen
@@ -106,10 +109,8 @@ __Schriftführer:__ Timon Trettin +
 * "BOSS" kann Zeit vorsuplen
 
 === UX
-* Flowchart mit Figma
+* Adobe XD Prototyp
 
 === UI
-* Prototyp mit Figma
-* Google Material Design
-** Einarbeiten
-** Prototyp umsetzen
+* Adobe XD Prototyp
+* Prototyp umsetzen
