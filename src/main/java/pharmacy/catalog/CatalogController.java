@@ -39,9 +39,9 @@ class CatalogController {
 		while(stock.hasNext()) {
 			Medicine d = stock.next();
 
-			if(d.getIngType() == Medicine.IngredientType.SHOP || d.getIngType() == Medicine.IngredientType.BOTH) {
+			//if(d.getIngType() == Medicine.IngredientType.SHOP || d.getIngType() == Medicine.IngredientType.BOTH) {
 				result.add(d);
-			}
+			//}
 		}
 
 		model.addAttribute("catalog", result);
@@ -78,18 +78,18 @@ class CatalogController {
 
 				if (searchTerm.equals("") || d.getName().toLowerCase().contains(search[i])) {
 
-					if(!noPres || d.getPresType().equals("Frei Verkäuflich")) {
+					//if(!noPres || d.getPresType().equals("Frei Verkäuflich")) {
 
-						if(medType.equals("all") || d.getMedType().equals(medType)) {
+						//if(medType.equals("all") || d.getMedType().equals(medType)) {
 
-							if(ingType.equals("all") || d.getIngType().toString().toLowerCase().equals(ingType) || (  (ingType.equals("shop")||ingType.equals("labor"))   &&   d.getIngType() == Medicine.IngredientType.BOTH  )) {
+							//if(ingType.equals("all") || d.getIngType().toString().toLowerCase().equals(ingType) || (  (ingType.equals("shop")||ingType.equals("labor"))   &&   d.getIngType() == Medicine.IngredientType.BOTH  )) {
 
 								if (!result.contains(d)) {
 									result.add(d);
 								}
-							}
-						}
-					}
+							//}
+						//}
+					//}
 				}
 			}
 		}
