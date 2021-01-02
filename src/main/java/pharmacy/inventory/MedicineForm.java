@@ -2,13 +2,15 @@ package pharmacy.inventory;
 
 import java.util.Arrays;
 
+import javax.validation.constraints.NotEmpty;
 import org.javamoney.moneta.Money;
 
 import pharmacy.catalog.Medicine;
 
 public class MedicineForm {
-    
-    private String description, name, tags, image, id; 
+    @NotEmpty(message="Darf nicht leer sein")
+    private String description, name, tags, image;
+    private String id;
     private double amount; 
     private int quantity;
 	private boolean presonly; 

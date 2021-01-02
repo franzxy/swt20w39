@@ -14,6 +14,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -106,7 +109,12 @@ class InventoryController {
 	}
 	@PostMapping("/addmed")
 	@PreAuthorize("hasRole('BOSS')")
-	String addingMedicine(@ModelAttribute MedicineForm formular, Model model) {
+	String addingMedicine(@Valid MedicineForm formular, Errors result, Model model) {
+		if(result.hasErrors()){
+			this.formular=formular;
+			model.addAttribute("formular", this.formular);
+			return "redirect:/inventory#newmed";
+		}
 		System.out.println("ID: "+formular.getId());
 		this.formular=formular;
 		if(!this.formular.getId().equals("")){
