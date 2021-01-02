@@ -9,6 +9,8 @@ import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ import java.util.Optional;
 @Controller
 @SessionAttributes("cart")
 public class OrderController {
+	private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
 	private final OrderManagement<Order> orderManagement;
 

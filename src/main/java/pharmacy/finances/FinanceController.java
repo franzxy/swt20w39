@@ -46,7 +46,7 @@ public class FinanceController {
 	private Money plus;
 	private Money minus;
 	private Fixkosten fixk;
-	private final RechnungsForm rf;
+	
 	FinanceController(Accountancy acc, OrderManagement<Order> orderManagement, UserManagement um, BusinessTime time, 
 			UserAccountManagement userAccount) {
 		this.userAccount=userAccount;
@@ -61,7 +61,7 @@ public class FinanceController {
 		this.minus=Money.of(0.0, "EUR");
 		this.plus=Money.of(0.0, "EUR");
 		this.fixk=new Fixkosten();
-		this.rf=new RechnungsForm();		
+				
 	}
 	//Filter Stuff #1
 	private List<AccountancyEntry> getEntriesOfRole(String role){
@@ -173,7 +173,7 @@ public class FinanceController {
 		model.addAttribute("minus",this.minus.getNumber().doubleValue());
 		model.addAttribute("fixk",this.fixk);
 		model.addAttribute("total", this.ist.getNumber().doubleValue());
-		model.addAttribute("rf", this.rf);
+		
 		
 		return "finances";
 	}
@@ -188,7 +188,7 @@ public class FinanceController {
 		model.addAttribute("fixk",this.fixk);
 		model.addAttribute("total", this.ist.getNumber().doubleValue());
 		model.addAttribute("tab", this.filter(filterB));
-		model.addAttribute("rf", this.rf);
+		
 		return "finances";
 	}
 	@GetMapping("/editfix")
