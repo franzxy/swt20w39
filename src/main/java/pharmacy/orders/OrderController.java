@@ -45,7 +45,7 @@ public class OrderController {
 		int amount = number <= 0 ? 1 : number;
 
 		cart.addOrUpdateItem(item, Quantity.of(amount));
-
+		System.out.println(cart.getPrice().getNumber().doubleValue());
 		return "redirect:/";
 	}
 
