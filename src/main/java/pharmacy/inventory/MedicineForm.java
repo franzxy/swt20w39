@@ -1,43 +1,61 @@
 package pharmacy.inventory;
 
-import pharmacy.catalog.Medicine.IngredientType;
-import pharmacy.catalog.Medicine.MedicineType;
-import pharmacy.catalog.Medicine.PrescriptionType;
+import java.util.Arrays;
+
+import javax.validation.constraints.NotEmpty;
+import org.javamoney.moneta.Money;
+
+import pharmacy.catalog.Medicine;
 
 public class MedicineForm {
-    private String image, usage, name; 
-	private int size, amount; 
-	private String bbd; 
-    private String ingredient1; 
-    private String ingredient2;
-    private String ingredient3;
-	private PrescriptionType presType; 
-	private IngredientType ingType; 
-    private MedicineType medType;
-
+    @NotEmpty(message="Darf nicht leer sein")
+    private String description, name, tags, image;
+    private String id;
+    private double amount; 
+    private int quantity;
+	private boolean presonly; 
     private double price;
+    private double purchasingprice;
+
     public MedicineForm() {
-        this.image = "";
-        this.usage = "bsp";
-        this.size = 2;
-        this.name="name";
-        this.amount = 1;
-        this.bbd = "2000-01-01";
-        this.ingredient1 = "";
-        this.ingredient2 = "";
-        this.ingredient3 = "";
-        this.presType = PrescriptionType.PRESONLY;
-        this.ingType = IngredientType.BOTH;
-        this.medType = MedicineType.CAPSULE;
+        this.description="";
+        this.name="";
+        this.tags="";
+        this.image="";
+        this.amount=0.0;
+        this.presonly=false;
         this.price=0.0;
+        this.purchasingprice=0.0;
+        this.quantity=0;
+        this.id="";
     }
-    
+
+    public Medicine toMedicine(){
+        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.split(",")), this.amount,  this.presonly, this.image, this.quantity);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public String getImage() {
@@ -48,82 +66,20 @@ public class MedicineForm {
         this.image = image;
     }
 
-    public String getUsage() {
-        return usage;
-    }
-
-    public void setUsage(String usage) {
-        this.usage = usage;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public String getBbd() {
-        return bbd;
+    public boolean isPresonly() {
+        return presonly;
     }
 
-    public void setBbd(String bbd) {
-        //System.out.println(bbd);
-        this.bbd=bbd;
-    }
-
-    public String getIngredient1() {
-        return ingredient1;
-    }
-
-    public void setIngredient1(String ingredients) {
-        this.ingredient1 = ingredients;
-    }
-    public String getIngredient2() {
-        return ingredient2;
-    }
-
-    public void setIngredient2(String ingredients) {
-        this.ingredient2 = ingredients;
-    }
-    public String getIngredient3() {
-        return ingredient3;
-    }
-
-    public void setIngredient3(String ingredients) {
-        this.ingredient3 = ingredients;
-    }
-    public PrescriptionType getPresType() {
-        return presType;
-    }
-
-    public void setPresType(PrescriptionType presType) {
-        this.presType = presType;
-    }
-
-    public IngredientType getIngType() {
-        return ingType;
-    }
-
-    public void setIngType(IngredientType ingType) {
-        this.ingType = ingType;
-    }
-
-    public MedicineType getMedType() {
-        return medType;
-    }
-
-    public void setMedType(MedicineType medType) {
-        this.medType = medType;
+    public void setPresonly(boolean presonly) {
+        this.presonly = presonly;
     }
 
     public double getPrice() {
@@ -134,7 +90,30 @@ public class MedicineForm {
         this.price = price;
     }
 
-    
-    
+    public double getPurchasingprice() {
+        return purchasingprice;
+    }
 
+    public void setPurchasingprice(double purchasingprice) {
+        this.purchasingprice = purchasingprice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
+   
+    
+    
