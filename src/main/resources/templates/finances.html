@@ -164,12 +164,8 @@
           <input style="margin:5px" class="button"type="submit" value="Fixkosten bearbeiten"></input>
         </form>
         
-        <form action="#rechnungen" >
-          <input style="margin:5px" class="button"type="submit" value="Rechnungen"></input>
-        </form>
-        <form th:action="@{/finances}">
-          <input style="margin:5px" class="button"type="submit" value="Buchhaltung"></input>
-        </form>
+       
+        
         <form th:action="@{/create}" method="POST">
           <input style="margin:5px" class="button"type="submit" value="Beispieleinträge generieren"></input>
         </form>
@@ -201,33 +197,8 @@
         </table>
         </div>
       
-        <div id="rechnungen" class="rechnung">
-        <div class="block border">
-           <table class="ui table">
-                <thead>
-                <tr>
-                    <th >Datum</th>
-                    <th >ID</th>
-                    <th >Betrag in €</th>
-                    <th >Rechung</th>
-                </tr>
-                </thead>
-                 <tbody>
-            <tr th:if="${rech.empty}">
-                <td style="text-align: center;"colspan="4"> Keine offenen Rechnungen </td>
-            </tr>
-            <tr th:each="sec : ${rech}"> 
-                <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
-                <td  th:text="${sec.getId().getIdentifier()}">ID</td>
-                <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
-                <td>
-                  <a class="button"th:text="Details" th:href="@{/order/{id}(id=${sec.getId().getIdentifier()})}"></a>
-                </td>
-                </tr>
-            </tbody>
-            </table>
-            </div>
-        </div>
+        
+        
         <!--Popup for changing fix-->
         <div id="editfix" class="overlay">
           <div class="popup border">

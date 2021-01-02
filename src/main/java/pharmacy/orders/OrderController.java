@@ -1,12 +1,13 @@
 package pharmacy.orders;
 
-
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
+import org.salespointframework.time.Interval;
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.slf4j.Logger;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.*;
 
 import pharmacy.catalog.Medicine;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.zip.Deflater;
 
 @Controller
 @SessionAttributes("cart")
@@ -60,6 +64,7 @@ public class OrderController {
 		return userAccount.map(account -> {
 
 			var order = new Order(account, Cash.CASH);
+			
 
 			cart.addItemsTo(order);
 
@@ -73,7 +78,31 @@ public class OrderController {
 	}
 
 	@GetMapping("/orders")
-	String orders() {
+	String orders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		model.addAttribute("rech", this.orderManagement.findBy(userAccount.get()).toList());
+		model.addAttribute("filter", new OrderFilter());
+		return "orders";
+	}
+	@PostMapping("/orders")
+	String postorders(@ModelAttribute OrderFilter filter,Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		List<Order> ret =List.of() ;
+		if(!userAccount.isEmpty()){
+			if(userAccount.get().hasRole(Role.of("BOSS"))){
+				List<Order> all = this.orderManagement.findBy(OrderStatus.COMPLETED).toList();
+				//all.addAll(this.orderManagement.findBy(OrderStatus.PAID).toList());
+				//all.addAll(this.orderManagement.findBy(OrderStatus.OPEN).toList()); 
+				switch(filter.getFilter()){
+					case OFFEN: ret= this.orderManagement.findBy(OrderStatus.OPEN).toList();break;
+					case BEZAHLT: ret=this.orderManagement.findBy(OrderStatus.PAID).toList();break;
+					case COMPLETED: ret= this.orderManagement.findBy(OrderStatus.COMPLETED).toList();break;
+					default: ret=all;break;
+				}
+			}else{
+				ret=this.orderManagement.findBy(userAccount.get()).toList();
+			}
+		}
+		model.addAttribute("rech", ret);
+		model.addAttribute("filter", filter);
 		return "orders";
 	}
 }
