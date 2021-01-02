@@ -29,7 +29,7 @@ class CatalogController {
 	//private final MultiInventory<MultiInventoryItem> inventory;
 	//private final BusinessTime businessTime;
 
-	CatalogController(MedicineCatalog medicineCatalog, MultiInventory<MultiInventoryItem> inventory, BusinessTime businessTime, UniqueInventory inventory) {
+	CatalogController(MedicineCatalog medicineCatalog, BusinessTime businessTime, UniqueInventory inventory) {
 		this.catalog = medicineCatalog;
 		this.inventory = inventory;
 		//this.businessTime = businessTime;
@@ -128,8 +128,10 @@ class CatalogController {
 
 	@GetMapping("/medicine/{medicine}")
 	public String detail(@PathVariable Medicine medicine, Model model) {
-
-		//Quantity q = inventory.findByProductIdentifier(medicine.getId()).getTotalQuantity();
+		Quantity q=Quantity.of(0);
+		if(inventory.findByProductIdentifier(medicine.getId()).isPresent()){
+			q = inventory.findByProductIdentifier(medicine.getId()).get().getQuantity();
+		}
 
 		model.addAttribute("medicine" , medicine);
 		model.addAttribute("quantity", q); //TODO geht noch nicht
