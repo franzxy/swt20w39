@@ -3,10 +3,13 @@ package pharmacy.catalog;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.MultiInventory;
 import org.salespointframework.inventory.MultiInventoryItem;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +24,14 @@ class CatalogController {
 	private static final Quantity NONE = Quantity.of(0);
 
 	private final MedicineCatalog catalog;
+	@Autowired
+	private UniqueInventory<UniqueInventoryItem> inventory;
 	//private final MultiInventory<MultiInventoryItem> inventory;
 	//private final BusinessTime businessTime;
 
-	CatalogController(MedicineCatalog medicineCatalog, MultiInventory<MultiInventoryItem> inventory, BusinessTime businessTime) {
+	CatalogController(MedicineCatalog medicineCatalog, MultiInventory<MultiInventoryItem> inventory, BusinessTime businessTime, UniqueInventory inventory) {
 		this.catalog = medicineCatalog;
-		//this.inventory = inventory;
+		this.inventory = inventory;
 		//this.businessTime = businessTime;
 	}
 
@@ -124,7 +129,7 @@ class CatalogController {
 	@GetMapping("/medicine/{medicine}")
 	public String detail(@PathVariable Medicine medicine, Model model) {
 
-		Quantity q = inventory.findByProductIdentifier(medicine.getId()).getTotalQuantity();
+		//Quantity q = inventory.findByProductIdentifier(medicine.getId()).getTotalQuantity();
 
 		model.addAttribute("medicine" , medicine);
 		model.addAttribute("quantity", q); //TODO geht noch nicht
