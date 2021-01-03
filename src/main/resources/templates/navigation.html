@@ -1,17 +1,21 @@
 <nav th:fragment="navigation">   
+    <div sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
+        <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
+        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
+        <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
+        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
+        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
+    </div>
     <a class="a nav height flex center" th:href="@{/}">
         <img class="icon" th:src="@{pharmacy.png}">
     </a>
     <div class="row height flex space align">
-        <a class="a nav height flex center" th:href="@{/searchform}">Suche</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/customers}">Kunden</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/employees}">Mitarbeiter</a>
+        <form action="#" th:action="@{/search}" method="post" class="ui form">
+            <input type="text" name="term" placeholder="Suchbegriff eingeben">
+        </form>
     </div>
     <div class="row height flex align">
-        <a class="a nav height flex center" sec:authorize="hasRole('CUSTOMER')" th:href="@{/cart}">Warenkorb</a>
+        <a class="a nav height flex center" th:href="@{/cart}">Warenkorb</a>
         <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
         <a class="a nav height flex center" sec:authorize="isAuthenticated()" th:href="@{/account}">Account</a>
     </div>
