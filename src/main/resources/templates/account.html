@@ -7,12 +7,6 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="row flex align">
-            <h1 th:text="${'Hallo, '+firstName}"></h1>
-            <a class="a nav height center" th:href="@{/logout}">
-                <img class="icon" th:src="@{logout.png}">
-            </a>
-        </div>
         <form method="post" role="form" class="ui form" id="form" th:action="@{/account}" th:object="${changePassword}">
 
             <h3 class="ui dividing header">Passwort ändern</h3>

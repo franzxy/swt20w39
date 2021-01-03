@@ -32,7 +32,6 @@ public class User {
 
 	@OneToOne
 	private UserAccount userAccount;
-	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
@@ -54,9 +53,8 @@ public class User {
 	@SuppressWarnings("unused")
 	private User() {}
 
-	public User(UserAccount userAccount, String name) {
+	public User(UserAccount userAccount) {
 		this.userAccount = userAccount;
-		this.name = name;
 	}
 
 	public long getId() {
@@ -65,14 +63,6 @@ public class User {
 
 	public UserAccount getUserAccount() {
 		return userAccount;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String newName) {
-		name = newName;
 	}
 
 	public void addRole(Role role) {

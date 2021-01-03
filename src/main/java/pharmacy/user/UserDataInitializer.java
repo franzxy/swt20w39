@@ -35,23 +35,23 @@ class UserDataInitializer implements DataInitializer {
 	@Override
 	public void initialize() {
 
-		if (userAccountManagement.findByUsername("ceo@apotheke.gg").isPresent()) {
+		if (userAccountManagement.findByUsername("apostheke").isPresent()) {
 			return;
 		}
 
 		LOG.info("Creating default users and users.");
 
-		var boss = userAccountManagement.create("ceo@apotheke.gg", UnencryptedPassword.of("#1234hans#"), Role.of("BOSS"));
-		users.save(new User(boss, "Apo Theke"));
+		var boss = userAccountManagement.create("apostheke", UnencryptedPassword.of("#1234hans#"), Role.of("BOSS"));
+		users.save(new User(boss));
 
-		var emp = userAccountManagement.create("hans@apotheke.gg", UnencryptedPassword.of("#1234hans#"), Role.of("EMPLOYEE"));
-		users.save(new User(emp, "Hans Peter"));
+		var emp = userAccountManagement.create("hansi", UnencryptedPassword.of("#1234hans#"), Role.of("EMPLOYEE"));
+		users.save(new User(emp));
 		
 		List.of(
-			new UserForm("hans peter", "hans@hans.com", "#1234hans#", "#1234hans#"),
-			new UserForm("hansi peter", "hansi@hans.com", "#1234hans#", "#1234hans#"),
-			new UserForm("hansa peter", "hansa@hans.com", "#1234hans#", "#1234hans#"),
-			new UserForm("hanso peter", "hanso@hans.com", "#1234hans#", "#1234hans#")
+			new UserForm("hans peter", "#1234hans#", "#1234hans#"),
+			new UserForm("hansi peter", "#1234hans#", "#1234hans#"),
+			new UserForm("hansa peter", "#1234hans#", "#1234hans#"),
+			new UserForm("hanso peter", "#1234hans#", "#1234hans#")
 		).forEach(userManagement::addUser);
 	}
 }

@@ -1,22 +1,29 @@
 <nav th:fragment="navigation">   
-    <div sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-        <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
+    <div class="flex row center width bar">
+        <a class="a nav height flex center" th:href="@{/}">
+            <img class="icon" th:src="@{pharmacy.png}">
+        </a>
+        <form class="row height flex space align" action="#" th:action="@{/search}" method="post">
+            <input type="text" name="term" placeholder="Suchbegriff eingeben">
+            <button type="submit" class="ui labeled icon button">
+                <span>Suchen</span>
+            </button>
+        </form>
+        <div class="row height flex align">
+            <a class="a nav height flex center" th:href="@{/cart}">Warenkorb</a>
+            <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+            <div class="height flex center" sec:authorize="isAuthenticated()">
+                <a class="a nav height flex center" th:href="@{/account}">Account</a>
+                <a class="a nav height center" th:href="@{/logout}">
+                    <img class="icon" th:src="@{logout.png}">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="flex row center width bar" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
         <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
         <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
         <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
         <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
-    </div>
-    <a class="a nav height flex center" th:href="@{/}">
-        <img class="icon" th:src="@{pharmacy.png}">
-    </a>
-    <div class="row height flex space align">
-        <form action="#" th:action="@{/search}" method="post" class="ui form">
-            <input type="text" name="term" placeholder="Suchbegriff eingeben">
-        </form>
-    </div>
-    <div class="row height flex align">
-        <a class="a nav height flex center" th:href="@{/cart}">Warenkorb</a>
-        <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
-        <a class="a nav height flex center" sec:authorize="isAuthenticated()" th:href="@{/account}">Account</a>
     </div>
 </nav>

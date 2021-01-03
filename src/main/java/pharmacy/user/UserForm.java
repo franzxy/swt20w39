@@ -9,11 +9,8 @@ import javax.validation.constraints.Pattern;
 class UserForm {
 	
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
+	@ValidUserName
 	private final String name;
-
-	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
-	@Email
-	private final String email;
 
 	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
@@ -37,19 +34,14 @@ class UserForm {
 		return password.equals(confirmPassword);
 	}
 
-	public UserForm(String name, String email, String password, String confirmPassword) {
+	public UserForm(String name, String password, String confirmPassword) {
 		this.name = name;
-		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public String getEmail() {
-		return email;
 	}
 
 	public String getPassword() {
