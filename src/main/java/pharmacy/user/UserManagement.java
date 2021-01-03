@@ -40,6 +40,13 @@ public class UserManagement {
 		return users.save(new User(userAccount));
 	}
 
+	public String removeUser(User user) {
+		
+		users.delete(user);
+
+		return "user removed";
+	}
+
 	public String changePassword(UserPasswordForm form) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -47,6 +54,13 @@ public class UserManagement {
 		userAccounts.changePassword(user.get(), UnencryptedPassword.of(form.getNewPassword()));
 		
 		return "password changed";
+	}
+	
+	public String changeInsurance(User user, InsuranceForm insuranceForm) {
+		
+		user.setInsurance(insuranceForm.getInsurance());
+
+		return "insurance changed";
 	}
 /*
 	public String addCustomer(User user, CustomerForm customerForm) {
@@ -75,13 +89,28 @@ public class UserManagement {
 		return "customer changed";
 	}
 */
-	public String addEmployee(User user, EmployeeForm employeeForm) {
+	public String hireEmployee(User user, EmployeeForm employeeForm) {
 		
 		user.removeRole(Role.of("CUSTOMER"));
 		user.addRole(Role.of("EMPLOYEE"));
 		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
 
 		return "employee added";
+	}
+	
+	public String changeEmployee(User user, EmployeeForm employeeForm) {
+		
+		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
+
+		return "employee changed";
+	}
+	
+	public String dismissEmployee(User user) {
+		
+		user.removeRole(Role.of("EMPLOYEE"));
+		user.addRole(Role.of("CUSTOMER"));
+
+		return "employee changed";
 	}
 /*
 	public String changeEmployee(User user, EmployeeDetailForm employeeDetailForm) {
