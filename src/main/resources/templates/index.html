@@ -55,7 +55,7 @@
 
 			<div class="extra content" th:text="${{medicine.price}}">Preis</div>
 
-			<div sec:authorize="isAuthenticated()" class="content">
+			<div class="content">
 				<form  class="ui form" method="post" th:action="@{/cart}">
 					<input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
 					<input type="hidden" name="number" value="1"/>
