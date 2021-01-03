@@ -51,6 +51,8 @@ class CatalogController {
 		Iterator<Medicine> stock = catalog.findAll().iterator();
 		ArrayList<Medicine> result = new ArrayList<>();
 
+		if(searchTerm.equals("null")) searchTerm = "";
+
 		if(searchTerm.equals("") && noPres == false) {
 			while (stock.hasNext()) {
 				Medicine d = stock.next();
@@ -134,7 +136,10 @@ class CatalogController {
 			}
 		}
 		model.addAttribute("tempTerm", searchTerm);
-		model.addAttribute("tags", tags);
+
+
+		if(tag.equals("") && !searchTerm.equals("")) model.addAttribute("tags", tags);
+
 
 		model.addAttribute("catalog", result);
 		model.addAttribute("Titel", "Apotheke");
