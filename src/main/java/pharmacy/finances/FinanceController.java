@@ -17,6 +17,7 @@ import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,7 @@ import pharmacy.user.UserManagement;
 
 @Controller
 @org.springframework.core.annotation.Order(20)
+@EnableScheduling
 public class FinanceController {
 	@Autowired
 	private final Accountancy acc;
@@ -150,8 +152,8 @@ public class FinanceController {
 		AccountancyEntry sal= new AccountancyEntry(Money.of(betr, "EUR"), bez);
 		this.acc.add(sal);
 	}
-	@Scheduled(cron="0 0 0 1 * ? *")
-	private void autopay(){
+	@Scheduled(cron="0 0 0 1 * ?")
+	protected void autopay(){
 		//Fixkosten
 		createKosten("Strom", -1*this.fixk.getStrom());
 		createKosten("Miete", -1*this.fixk.getMiete());
