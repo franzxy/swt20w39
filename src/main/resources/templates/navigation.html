@@ -13,7 +13,7 @@
             <a class="a nav height flex center" th:href="@{/cart}">Warenkorb</a>
             <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
             <div class="height flex center" sec:authorize="isAuthenticated()">
-                <a class="a nav height flex center" th:href="@{/account}">Account</a>
+                <a class="a nav height flex center" th:href="@{/account}" th:text="${'Hallo, '+#authentication.getName()}" >Account</a>
                 <a class="a nav height center" th:href="@{/logout}">
                     <img class="icon" th:src="@{logout.png}">
                 </a>
