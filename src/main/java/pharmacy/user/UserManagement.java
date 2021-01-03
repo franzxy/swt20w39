@@ -36,10 +36,8 @@ public class UserManagement {
 	public User addUser(UserForm userForm) {
 		var password = UnencryptedPassword.of(userForm.getPassword());
 		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("CUSTOMER"));
-		userAccount.setFirstname(userForm.getFirstname());
-		userAccount.setLastname(userForm.getLastname());
 
-		return users.save(new User(userAccount));
+		return users.save(new User(userAccount, userForm.getName()));
 	}
 
 	public String changePassword(UserPasswordForm form) {

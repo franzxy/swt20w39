@@ -9,10 +9,7 @@ import javax.validation.constraints.Pattern;
 class UserForm {
 	
 	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
-	private final String fname;
-	
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
-	private final String lname;
+	private final String name;
 
 	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
 	@Email
@@ -40,20 +37,15 @@ class UserForm {
 		return password.equals(confirmPassword);
 	}
 
-	public UserForm(String fname, String lname, String email, String password, String confirmPassword) {
-		this.fname = fname;
-		this.lname = lname;
+	public UserForm(String name, String email, String password, String confirmPassword) {
+		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 	}
 
-	public String getFirstname() {
-		return fname;
-	}
-
-	public String getLastname() {
-		return lname;
+	public String getName() {
+		return name;
 	}
 
 	public String getEmail() {

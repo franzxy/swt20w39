@@ -3,7 +3,6 @@ package pharmacy.user;
 import javax.validation.Valid;
 
 import org.salespointframework.useraccount.Role;
-import org.springframework.data.util.Streamable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,7 @@ class UserController {
 	}
 
 	@GetMapping("/register")
-	String user(Model model, UserForm userForm) {
+	String register(Model model, UserForm userForm) {
 
 		model.addAttribute("userForm", userForm);
 
@@ -31,7 +30,7 @@ class UserController {
 	}
 
     @PostMapping("/register")
-	String newUser(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
+	String changeRegister(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
 
 		if (result.hasErrors()) {
 			return "register";
@@ -42,26 +41,31 @@ class UserController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/customers")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String customers(Model model) {
+	@GetMapping("/users")
+	@PreAuthorize("hasRole('BOSS')")
+	String users(Model model) {
 
 		model.addAttribute("users", userManagement.findAll());
 		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
 
-		return "customers";
+		return "users";
 	}
 
-	@GetMapping("/customer/{userId}")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String customer(@PathVariable Long userId, Model model, AddressForm addressForm, EmployeeForm employeeForm) {
+	@GetMapping("/user/{userId}")
+	@PreAuthorize("hasRole('BOSS')")
+	String user(@PathVariable Long userId, Model model, AddressForm addressForm, EmployeeForm employeeForm) {
 		
 		var user = userManagement.findUser(userId).get();
 		model.addAttribute("addressForm", addressForm);
 		model.addAttribute("employeeForm", employeeForm);
 		model.addAttribute("user", user);
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
 
-		return "customer";
+		return "user";
 	}
 /*
 	@PostMapping("/user/{userId}")
@@ -81,47 +85,9 @@ class UserController {
 		return "user";
 	}
 */
-	@GetMapping("/employees")
-	@PreAuthorize("hasRole('BOSS')")
-	String users(Model model) {
-
-		model.addAttribute("users", userManagement.findAll());
-		model.addAttribute("employee", Role.of("EMPLOYEE"));
-
-		return "employees";
-	}
-
-	@GetMapping("/employee/{userId}")
-	@PreAuthorize("hasRole('BOSS')")
-	String employee(@PathVariable Long userId, Model model/*, EmployeeForm employeeForm*/) {
-		
-		var user = userManagement.findUser(userId).get();
-		//model.addAttribute("employeeForm", employeeForm);
-		model.addAttribute("user", user);
-
-		return "employee";
-	}
-/*
-	@PostMapping("/user/{userId}")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String changeUser(@Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result, @PathVariable Long userId, Model model) {
-		
-		var user = userManagement.findUser(userId).get();
-		model.addAttribute("user", user);
-		model.addAttribute("userRole", user.getUserAccount().hasRole(Role.of("USER")));
-
-		if (result.hasErrors()) {
-			return "user";
-		}
-		
-		userManagement.addEmployee(userManagement.findUser(userId).get(), employeeForm);
-
-		return "user";
-	}
-*/
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
-	String changePassword(Model model, UserPasswordForm changePassword) {
+	String account(Model model, UserPasswordForm changePassword) {
 		
 		model.addAttribute("changePassword", changePassword);
 		model.addAttribute("firstName", userManagement.currentUserName());
@@ -131,7 +97,7 @@ class UserController {
 
 	@PostMapping("/account")
 	@PreAuthorize("isAuthenticated()")
-	String changePassword(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
+	String changeAccount(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
 		
 		model.addAttribute("firstName", userManagement.currentUserName());
 		
@@ -143,8 +109,7 @@ class UserController {
 		
 		return "account";
 	}
-
-	/*
+/*
 	String example(@LoggedIn Optional<UserAccount> userAccount) {
         // functional style using map and lambda expression:
         return userAccount.map(account -> {
@@ -152,13 +117,5 @@ class UserController {
             return "...";
         }).orElse("redirect:/");  // if the user account is *not* present
 	}
-	*/
-
-	// TEST 2 MAPPINGS FOR SAME WITH DIFFERENT AUTH -> WILL IT WORK???
-
-	@GetMapping("/account")
-	String test() {
-		
-		return "register";
-	}
+*/
 }

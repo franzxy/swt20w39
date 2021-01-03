@@ -54,8 +54,9 @@ public class User {
 	@SuppressWarnings("unused")
 	private User() {}
 
-	public User(UserAccount userAccount) {
+	public User(UserAccount userAccount, String name) {
 		this.userAccount = userAccount;
+		this.name = name;
 	}
 
 	public long getId() {

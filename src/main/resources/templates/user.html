@@ -14,7 +14,7 @@
         <p th:text="${'E-Mail: '+user.userAccount.getUsername()}">E-Mail</p>
         
         <p>Adressen</p>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/customer/{id}(id=${user.getId()}" th:object="${addressForm}">
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${addressForm}">
             <div class="field">
                 <label for="address">Name</label>
                 <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
@@ -60,7 +60,7 @@
         </form>-->
 
         <p>Zum Mitarbeiter befördern</p>
-		<form method="post" role="form" class="ui form" id="form" th:action="@{/customer/{id}(id=${user.getId()}" th:object="${employeeForm}">
+		<form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${employeeForm}">
             <div class="field">
                 <label for="address">Adresse</label>
                 <select id="address" name="address" th:field="*{address}" th:errorclass="fieldError" required="required">

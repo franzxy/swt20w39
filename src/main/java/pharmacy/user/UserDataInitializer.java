@@ -42,20 +42,16 @@ class UserDataInitializer implements DataInitializer {
 		LOG.info("Creating default users and users.");
 
 		var boss = userAccountManagement.create("ceo@apotheke.gg", UnencryptedPassword.of("#1234hans#"), Role.of("BOSS"));
-		boss.setFirstname("Apo");
-		boss.setLastname("Theke");
-		users.save(new User(boss));
+		users.save(new User(boss, "Apo Theke"));
 
 		var emp = userAccountManagement.create("hans@apotheke.gg", UnencryptedPassword.of("#1234hans#"), Role.of("EMPLOYEE"));
-		emp.setFirstname("Hans");
-		emp.setLastname("Peter");
-		users.save(new User(emp));
+		users.save(new User(emp, "Hans Peter"));
 		
 		List.of(
-			new UserForm("hans", "peter", "hans@hans.com", "#1234hans#", "#1234hans#"),
-			new UserForm("hansi", "peter", "hansi@hans.com", "#1234hans#", "#1234hans#"),
-			new UserForm("hansa", "peter", "hansa@hans.com", "#1234hans#", "#1234hans#"),
-			new UserForm("hanso", "peter", "hanso@hans.com", "#1234hans#", "#1234hans#")
+			new UserForm("hans peter", "hans@hans.com", "#1234hans#", "#1234hans#"),
+			new UserForm("hansi peter", "hansi@hans.com", "#1234hans#", "#1234hans#"),
+			new UserForm("hansa peter", "hansa@hans.com", "#1234hans#", "#1234hans#"),
+			new UserForm("hanso peter", "hanso@hans.com", "#1234hans#", "#1234hans#")
 		).forEach(userManagement::addUser);
 	}
 }
