@@ -209,10 +209,10 @@ public class FinanceController {
 	public String createdefaultenties( Model model) {
 		if(!this.userAccount.findAll().isEmpty()){
 			//System.out.println(this.userAccount.findByUsername("boss").get());
-			Order o1=new Order(this.userAccount.findByUsername("boss").get());
+			Order o1=new Order(this.userAccount.findByUsername("apo").get());
 			o1.addChargeLine(Money.of(20,"EUR"), "default");
 			o1.setPaymentMethod(Cash.CASH);
-			Order o2=new Order(this.userAccount.findByUsername("boss").get());
+			Order o2=new Order(this.userAccount.findByUsername("apo").get());
 			o2.addChargeLine(Money.of(20,"EUR"), "default");
 			o2.setPaymentMethod(Cash.CASH);
 			this.orderManagement.save(o1);
