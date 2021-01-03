@@ -11,8 +11,7 @@
         	<thead>
 				<tr>
 					<th>ID</th>
-					<th>Name</th>
-					<th>E-MaiL</th>
+					<th>Benutzername</th>
 					<th>Rolle</th>
 					<th>Details</th>
 				</tr>
@@ -20,8 +19,7 @@
 			<tbody>
 				<tr class="ui card" th:each="user : ${users}">
 					<td th:text="${user.getId()}">ID</td>
-					<td th:text="${user.getName()}">Name</td>
-					<td th:text="${user.userAccount.getUsername()}">E-Mail-Adresse</td>
+					<td th:text="${user.userAccount.getUsername()}">Benutzername</td>
 					<td th:if="${user.userAccount.hasRole(customer)}">Kunde</td>
 					<td th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter</td>
 					<td th:if="${user.userAccount.hasRole(boss)}">CEO</td>

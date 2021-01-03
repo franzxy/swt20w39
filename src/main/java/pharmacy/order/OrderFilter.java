@@ -1,4 +1,4 @@
-package pharmacy.orders;
+package pharmacy.order;
 
 import org.springframework.data.annotation.Id;
 

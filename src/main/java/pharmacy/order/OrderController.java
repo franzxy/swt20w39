@@ -1,37 +1,40 @@
 package pharmacy.order;
 
-import org.salespointframework.inventory.InventoryItem;
-import org.salespointframework.inventory.UniqueInventory;
-import org.salespointframework.inventory.UniqueInventoryItem;
-import org.salespointframework.order.*;
-import org.springframework.web.bind.annotation.*;
-import pharmacy.catalog.Medicine;
-
-import java.util.Optional;
-
+import org.salespointframework.order.Cart;
+import org.salespointframework.order.Order;
+import org.salespointframework.order.OrderManagement;
+import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
+import org.salespointframework.time.Interval;
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.*;
+
+import pharmacy.catalog.Medicine;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.zip.Deflater;
 
 @Controller
-@PreAuthorize("isAuthenticated()")
 @SessionAttributes("cart")
-class OrderController {
-
-	private static final Quantity NONE = Quantity.of(0);
+public class OrderController {
+	private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
 	private final OrderManagement<Order> orderManagement;
-	private final UniqueInventory<UniqueInventoryItem> inventory;
 
-	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory) {
+	OrderController(OrderManagement<Order> orderManagement) {
 
-		Assert.notNull(orderManagement, "OrderManagement must not be null!");
-		Assert.notNull(inventory, "Inventory must not be null!");
-		this.inventory = inventory;
+		Assert.notNull(orderManagement, "OrderManagement must not be null.");
 		this.orderManagement = orderManagement;
 	}
 
@@ -41,48 +44,13 @@ class OrderController {
 	}
 
 	@PostMapping("/cart")
-	String addDisc(@RequestParam("pid") Medicine medicine, @RequestParam("number") int number, @ModelAttribute Cart cart) {
+	String addItem(@RequestParam("pid") Medicine item, @RequestParam("number") int number, @ModelAttribute Cart cart) {
 
+		int amount = number <= 0 ? 1 : number;
 
-		var maxQuantity = inventory.findByProductIdentifier(medicine.getId()) //
-				.map(InventoryItem::getQuantity) //
-				.orElse(NONE);
-
-		Quantity quantity = cart.get()
-				.filter(item -> item.getProduct().getId().equals(medicine.getId()))
-				.findAny()
-				.map(item -> item.getQuantity())
-				.orElse(Quantity.NONE);
-		Quantity amount = quantity
-				.add(Quantity.of(number));
-
-		if(maxQuantity.isGreaterThanOrEqualTo(amount)) {
-			cart.addOrUpdateItem(medicine, Quantity.of(number));
-		} else {
-			cart.addOrUpdateItem(medicine, maxQuantity.subtract(quantity));
-		}
-
-		return "redirect:index";
-	}
-
-	@PostMapping("/cart/update")
-	String increaseDiscs(@RequestParam("pid") String cartItemId, @RequestParam("number") int number, @ModelAttribute Cart cart) {
-		Optional<CartItem> mayBeCartItem = cart.getItem(cartItemId);
-		if (mayBeCartItem.isPresent()) {
-			CartItem item = mayBeCartItem.get();
-			var maxQuantity = inventory.findByProductIdentifier(item.getProduct().getId())
-					.map(InventoryItem::getQuantity)
-					.orElse(NONE);
-			Quantity amount = item.getQuantity().add(Quantity.of(number));
-			if (maxQuantity.isGreaterThanOrEqualTo(amount)  && amount.isGreaterThan(Quantity.NONE) ) {
-				cart.addOrUpdateItem(item.getProduct(), Quantity.of(number));
-			}
-			if (amount.isEqualTo(Quantity.NONE)) {
-				cart.removeItem(cartItemId);
-			}
-		}
-
-		return "cart";
+		cart.addOrUpdateItem(item, Quantity.of(amount));
+		System.out.println(cart.getPrice().getNumber().doubleValue());
+		return "redirect:/";
 	}
 
 	@GetMapping("/cart")
@@ -96,6 +64,7 @@ class OrderController {
 		return userAccount.map(account -> {
 
 			var order = new Order(account, Cash.CASH);
+			
 
 			cart.addItemsTo(order);
 
@@ -106,5 +75,34 @@ class OrderController {
 
 			return "redirect:/";
 		}).orElse("redirect:/cart");
+	}
+
+	@GetMapping("/orders")
+	String orders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		model.addAttribute("rech", this.orderManagement.findBy(userAccount.get()).toList());
+		model.addAttribute("filter", new OrderFilter());
+		return "orders";
+	}
+	@PostMapping("/orders")
+	String postorders(@ModelAttribute OrderFilter filter,Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		List<Order> ret =List.of() ;
+		if(!userAccount.isEmpty()){
+			if(userAccount.get().hasRole(Role.of("BOSS"))){
+				List<Order> all = this.orderManagement.findBy(OrderStatus.COMPLETED).toList();
+				//all.addAll(this.orderManagement.findBy(OrderStatus.PAID).toList());
+				//all.addAll(this.orderManagement.findBy(OrderStatus.OPEN).toList()); 
+				switch(filter.getFilter()){
+					case OFFEN: ret= this.orderManagement.findBy(OrderStatus.OPEN).toList();break;
+					case BEZAHLT: ret=this.orderManagement.findBy(OrderStatus.PAID).toList();break;
+					case COMPLETED: ret= this.orderManagement.findBy(OrderStatus.COMPLETED).toList();break;
+					default: ret=all;break;
+				}
+			}else{
+				ret=this.orderManagement.findBy(userAccount.get()).toList();
+			}
+		}
+		model.addAttribute("rech", ret);
+		model.addAttribute("filter", filter);
+		return "orders";
 	}
 }

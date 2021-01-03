@@ -9,9 +9,7 @@
 		<nav th:include="navigation :: navigation"></nav>
 		
 		<p th:text="${'ID: '+user.getId()}">ID</p>
-		<p th:text="${'Name: '+user.userAccount.getFirstname()}">Vorname</p>
-		<p th:text="${'Name: '+user.userAccount.getLastname()}">Nachname</p>
-        <p th:text="${'E-Mail: '+user.userAccount.getUsername()}">E-Mail</p>
+        <p th:text="${'Benutzername: '+user.userAccount.getUsername()}">Benutzername</p>
         
         <p>Adressen</p>
         <form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${addressForm}">

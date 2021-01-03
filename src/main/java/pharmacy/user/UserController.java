@@ -88,9 +88,8 @@ class UserController {
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
 	String account(Model model, UserPasswordForm changePassword) {
-		
+
 		model.addAttribute("changePassword", changePassword);
-		model.addAttribute("firstName", userManagement.currentUserName());
 		
 		return "account";
 	}
@@ -98,9 +97,7 @@ class UserController {
 	@PostMapping("/account")
 	@PreAuthorize("isAuthenticated()")
 	String changeAccount(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
-		
-		model.addAttribute("firstName", userManagement.currentUserName());
-		
+				
 		if (result.hasErrors()) {
 			return "account";
 		}

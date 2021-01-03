@@ -35,9 +35,9 @@ public class UserManagement {
 */
 	public User addUser(UserForm userForm) {
 		var password = UnencryptedPassword.of(userForm.getPassword());
-		var userAccount = userAccounts.create(userForm.getEmail(), password, Role.of("CUSTOMER"));
+		var userAccount = userAccounts.create(userForm.getName(), password, Role.of("CUSTOMER"));
 
-		return users.save(new User(userAccount, userForm.getName()));
+		return users.save(new User(userAccount));
 	}
 
 	public String changePassword(UserPasswordForm form) {
@@ -129,12 +129,4 @@ public class UserManagement {
 	public Optional<User> findUser(Long id) {
 		return users.findById(id);
 	}
-
-	public String currentUserName() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		var user = userAccounts.findByUsername(auth.getName());
-		return user.get().getFirstname();
-	}
-
-	// public Boolean comparePasswords (one, two)
 }

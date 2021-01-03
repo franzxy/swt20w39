@@ -18,11 +18,15 @@ body {
 
 nav {
 	display: flex;
+	width: 100%;
+	flex-direction: column;
+	background-color: black;
+}
+
+.bar {
 	justify-content: space-between;
 	align-items: center;
 	height: 40px;
-	width: 100%;
-	background: black;
 }
 
 .a {
@@ -66,6 +70,10 @@ nav {
 
 .row {
 	flex-direction: row;
+}
+
+.width {
+	width: 100%;
 }
 
 .height {
