@@ -2,30 +2,27 @@ package pharmacy.user;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "ADDRESSES")
-public class Address implements Serializable{
-
-	private @Id @GeneratedValue long id;
+@Embeddable
+public class Address {
 
 	private String name;
 	private String street;
 	private Long postCode;
 	private String city;
-	
+
+	public Address() {}
+
 	public Address(String name, String street, Long postCode, String city) {
+		this.name = name;
 		this.street = street;
 		this.postCode = postCode;
 		this.city = city;
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public String getName() {
