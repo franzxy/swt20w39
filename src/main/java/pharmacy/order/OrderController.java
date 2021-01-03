@@ -79,7 +79,24 @@ public class OrderController {
 
 	@GetMapping("/orders")
 	String orders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
-		model.addAttribute("rech", this.orderManagement.findBy(userAccount.get()).toList());
+		List<Order> ret =List.of() ;
+		if(!userAccount.isEmpty()){
+			if(userAccount.get().hasRole(Role.of("BOSS"))){
+				ArrayList<Order> all = new ArrayList<Order>();
+				all.addAll(this.orderManagement.findBy(OrderStatus.COMPLETED).toList());
+				all.addAll(this.orderManagement.findBy(OrderStatus.PAID).toList());
+				all.addAll(this.orderManagement.findBy(OrderStatus.OPEN).toList()); 
+				ret=all;
+				
+			}
+			if(userAccount.get().hasRole(Role.of("CUSTOMER"))){
+				ret=this.orderManagement.findBy(userAccount.get()).toList();
+			}
+			if(userAccount.get().hasRole(Role.of("EMPLOYEE"))){
+				ret=this.orderManagement.findBy(OrderStatus.PAID).toList();
+			}
+		}
+		model.addAttribute("rech",ret);
 		model.addAttribute("filter", new OrderFilter());
 		return "orders";
 	}
@@ -103,6 +120,9 @@ public class OrderController {
 			if(userAccount.get().hasRole(Role.of("CUSTOMER"))){
 				ret=this.orderManagement.findBy(userAccount.get()).toList();
 			}
+			if(userAccount.get().hasRole(Role.of("EMPLOYEE"))){
+				ret=this.orderManagement.findBy(OrderStatus.PAID).toList();
+			}
 		}
 		model.addAttribute("rech", ret);
 		model.addAttribute("filter", filter);
@@ -124,5 +144,14 @@ public class OrderController {
 		
 
 		return "orderdetails";
+	}
+	
+	@GetMapping("/orders/{id}/complete")
+	public String complete(@PathVariable String id, Model model){
+		orderManagement.findBy(OrderStatus.PAID).forEach(order->{
+			if(order.getId().getIdentifier().equals(id))
+			orderManagement.completeOrder(order);
+		});
+		return "redirect:/orders";
 	}
 }

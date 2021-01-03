@@ -145,7 +145,7 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="border bar1" ><p>Kontostand: <span th:text="${total}"/> €</p></div>
+        
         <div class="sidenav border">
        
               <h1 style="color:white">Unimplemented features</h1>
@@ -177,12 +177,13 @@
                     <th >Betrag in €</th>
                     <th >Status</th>
                     <th >User</th>
+                    <th sec:authorize="hasRole('EMPLOYEE')">Fertigstellen</th>
                     <th >Rechung</th>
                 </tr>
                 </thead>
                  <tbody>
             <tr th:if="${rech.empty}">
-                <td style="text-align: center;"colspan="5"> Keine Bestellungen </td>
+                <td style="text-align: center;"colspan="7"> Keine Bestellungen </td>
             </tr>
             <tr th:each="sec : ${rech}"> 
                 <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
@@ -190,6 +191,7 @@
                 <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
                 <td  th:text="${sec.getOrderStatus().toString()}">Status</td>
                 <td  th:text="${sec.getUserAccount().getUsername()}">User</td>
+                <td sec:authorize="hasRole('EMPLOYEE')"><a th:text="Feritigstellen"class="button"th:href="@{/orders/{id}/complete(id=${sec.getId().getIdentifier()})}"></a></td>
                 <td>
                   <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId().getIdentifier()})}"></a>
                 </td>
