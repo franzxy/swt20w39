@@ -4,7 +4,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
         <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
-		<title>Account</title>
+		<title>Benutzer</title>
 	</head>
     <body>
 		<nav th:include="navigation :: navigation"></nav>
@@ -26,9 +26,9 @@
     
 		<p th:if="${user.getInsurance()}" th:text="${'Krankenkasse: '+user.getInsurance()}">ID</p>
 
-		<form th:if="${user.userAccount.hasRole(customer)}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${employeeForm}">
+        <a th:href="@{/user/{id}(id=${user.getId()})/employee}">Zum Mitarbeiter befördern</a>
 
-            <p>Zum Mitarbeiter befördern</p>
+		<form th:if="${user.userAccount.hasRole(employee)}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${employeeForm}">
 
             <div class="field">
                 <label for="name">Gehalt</label>

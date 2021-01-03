@@ -13,19 +13,12 @@ import org.javamoney.moneta.Money;
 class EmployeeForm {
 	
 	private final Long salary;
-	
-	private final Long vacation;
 
-	public EmployeeForm(Long salary, Long vacation) {
+	public EmployeeForm(Long salary) {
 		this.salary = salary;
-		this.vacation = vacation;
 	}
 
 	public Long getSalary() {
 		return salary;
-	}
-
-	public Long getVacation() {
-		return vacation;
 	}
 }

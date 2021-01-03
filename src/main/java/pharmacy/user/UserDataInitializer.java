@@ -2,6 +2,7 @@ package pharmacy.user;
 
 import java.util.List;
 
+import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.salespointframework.useraccount.Role;
@@ -45,7 +46,9 @@ class UserDataInitializer implements DataInitializer {
 		users.save(new User(boss));
 
 		var emp = userAccountManagement.create("hans", UnencryptedPassword.of("#12hans#"), Role.of("EMPLOYEE"));
-		users.save(new User(emp));
+		var empUser = new User(emp);
+		empUser.setSalary(Money.of(3000, "EUR"));
+		users.save(empUser);
 		
 		List.of(
 			new UserForm("hansi", "#12hans#", "#12hans#"),
