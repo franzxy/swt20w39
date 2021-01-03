@@ -35,44 +35,24 @@
                 <div class="meta">
                     <span th:text="${medicine.description}">Verwendung</span>
                     <br><br>
-                    <!--<span th:text="${{medicine.medType}}">Typ</span>
-                    <br><br>
-                    <span th:text="${{medicine.presType}}">Verschreibungsart</span>
-                    <br><br>-->
                     <span th:text="${{medicine.price}}">Preis</span>
-                </div>
-
-                <div class="description" sec:authorize="!isAuthenticated()">
-                    <p style="color:#FF0000";>Sie müssen eingeloggt sein um Produkte zum Warenkorb hinzufügen zu können!</p>
-                </div>
-
-                <div class="description" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-                    <p>Vorrat: (funktioniert noch nicht!)</p> <p th:text="${quantity}">Vorrat</p>
+                    <br><br>
+                    <span th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Verwendung</span>
                 </div>
 
                 <br>
 
-                <form sec:authorize="isAuthenticated()" class="ui form" method="post" th:action="@{/cart}" th:if="${orderable}">
+                <form class="ui form" method="post" th:action="@{/cart}" th:if="${orderable}">
                     <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
                     <div class="field">
                         <label for="number">Anzahl</label>
-                        <input id="number" type="number" name="number" step="1" value="1"/><br/>
+                        <input id="number" type="number" name="number" min="1" th:max="${medicine.quantity}" step="1" value="1"/><br/>
                     </div>
                     <button type="submit" class="ui labeled icon button">
                         <i class="add to cart icon"></i><span>In den Warenkorb</span>
                     </button>
                 </form>
 
-                <form sec:authorize="hasRole('BOSS')" class="ui form" method="post" th:action="@{/cartstock}">
-                    <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
-                    <div class="field">
-                        <label for="number">Anzahl</label>
-                        <input id="number" type="number" name="number" step="1" value="1"/><br/>
-                    </div>
-                    <button type="submit" class="ui labeled icon button">
-                        <i class="add to cart icon"></i><span>Zum Inventar hinzufügen (funktioniert noch nicht)</span>
-                    </button>
-                </form>
 
             </div>
         </div>
