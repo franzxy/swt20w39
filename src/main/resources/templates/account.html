@@ -2,11 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+        <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Account</title>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
+
+        <p th:text="${'ID: '+user.getId()}">ID</p>
+        <p th:text="${'Benutzername: '+user.userAccount.getUsername()}">Benutzername</p>
+
         <form method="post" role="form" class="ui form" id="form" th:action="@{/account}" th:object="${changePassword}">
 
             <h3 class="ui dividing header">Passwort ändern</h3>
@@ -45,5 +50,70 @@
     
             <button type="submit" class="ui button">Passwort ändern</button>
         </form>
+        
+        <p>Adressen</p>
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${addressForm}">
+            <div class="field">
+                <label for="address">Name</label>
+                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <div class="field">
+                <label for="address">Straße und Hausnummer</label>
+                <input id="name" name="name" th:field="*{street}" th:errorclass="fieldError" type="text" required="required"/><br/>
+            </div>
+
+            <div class="field">
+                <label for="name">Postleitzahl</label>
+                <input id="name" name="name" th:field="*{postCode}" th:errorclass="fieldError" type="number" required="required"/><br/>
+            </div>
+    
+            <div class="field">
+                <label for="password">Stadt</label>
+                <input id="password" name="password" th:field="*{city}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <button type="submit" class="ui button">Adresse hinzufügen</button>
+        </form>
+
+        <div th:each="address : ${user.getAddresses()}">
+            <a th:text="${address.getName()}">Name</a>
+            <p>Make Default Address</p>
+        </div>
+
+        <p>Zahlungsmittel</p>
+        tbc
+    
+        <p>Krankenkasse</p>
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${insuranceForm}">
+            <div class="field">
+                <label for="address">Krankenkasse</label>
+                <input id="address" name="address" placeholder="${user.getInsurance() && user.getInsurance()}" th:field="*{insurance}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <button type="submit" class="ui button">Krankenkasse ändern</button>
+        </form>
+
+        <p>Zum Mitarbeiter befördern</p>
+		<form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${employeeForm}">
+
+            <div class="field">
+                <label for="name">Gehalt</label>
+                <input id="name" name="name" th:field="*{salary}" th:errorclass="fieldError" type="number" required="required"/><br/>
+            </div>
+    
+            <div class="field">
+                <label for="password">Urlaubstage</label>
+                <input id="password" name="password" th:field="*{vacation}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <button type="submit" class="ui button">Zum Mitarbeiter befördern</button>
+        </form>
+
+        <button type="submit" class="ui button">Kunden löschen</button>
     </body>
 </html>

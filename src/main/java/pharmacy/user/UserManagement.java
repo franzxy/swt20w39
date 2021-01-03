@@ -75,9 +75,12 @@ public class UserManagement {
 		return "customer changed";
 	}
 */
-	public String addEmployee(User user) {
+	public String addEmployee(User user, EmployeeForm employeeForm) {
 		
-		
+		user.removeRole(Role.of("CUSTOMER"));
+		user.addRole(Role.of("EMPLOYEE"));
+		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
+
 		return "employee added";
 	}
 /*
