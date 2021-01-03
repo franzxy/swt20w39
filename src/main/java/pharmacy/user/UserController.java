@@ -63,7 +63,7 @@ class UserController {
 
 		return "customer";
 	}
-
+/*
 	@PostMapping("/user/{userId}")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
 	String changeUser(@PathVariable Long userId, Model model, @Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors addressErrors, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors employeeErrors) {
@@ -80,7 +80,7 @@ class UserController {
 
 		return "user";
 	}
-
+*/
 	@GetMapping("/employees")
 	@PreAuthorize("hasRole('BOSS')")
 	String users(Model model) {
@@ -153,4 +153,12 @@ class UserController {
         }).orElse("redirect:/");  // if the user account is *not* present
 	}
 	*/
+
+	// TEST 2 MAPPINGS FOR SAME WITH DIFFERENT AUTH -> WILL IT WORK???
+
+	@GetMapping("/account")
+	String test() {
+		
+		return "register";
+	}
 }
