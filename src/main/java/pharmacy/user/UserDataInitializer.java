@@ -35,23 +35,23 @@ class UserDataInitializer implements DataInitializer {
 	@Override
 	public void initialize() {
 
-		if (userAccountManagement.findByUsername("apostheke").isPresent()) {
+		if (userAccountManagement.findByUsername("apo").isPresent()) {
 			return;
 		}
 
 		LOG.info("Creating default users and users.");
 
-		var boss = userAccountManagement.create("apostheke", UnencryptedPassword.of("#1234hans#"), Role.of("BOSS"));
+		var boss = userAccountManagement.create("apo", UnencryptedPassword.of("#123apo#"), Role.of("BOSS"));
 		users.save(new User(boss));
 
-		var emp = userAccountManagement.create("hansi", UnencryptedPassword.of("#1234hans#"), Role.of("EMPLOYEE"));
+		var emp = userAccountManagement.create("hansi", UnencryptedPassword.of("#12hans#"), Role.of("EMPLOYEE"));
 		users.save(new User(emp));
 		
 		List.of(
-			new UserForm("hans peter", "#1234hans#", "#1234hans#"),
-			new UserForm("hansi peter", "#1234hans#", "#1234hans#"),
-			new UserForm("hansa peter", "#1234hans#", "#1234hans#"),
-			new UserForm("hanso peter", "#1234hans#", "#1234hans#")
+			new UserForm("hans peter", "#12hans#", "#12hans#"),
+			new UserForm("hansi peter", "#12hans#", "#12hans#"),
+			new UserForm("hansa peter", "#12hans#", "#12hans#"),
+			new UserForm("hanso peter", "#12hans#", "#12hans#")
 		).forEach(userManagement::addUser);
 	}
 }
