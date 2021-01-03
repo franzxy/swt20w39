@@ -25,5 +25,6 @@
         <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
         <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
         <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
+        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
     </div>
 </nav>

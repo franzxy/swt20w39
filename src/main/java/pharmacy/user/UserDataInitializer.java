@@ -44,14 +44,13 @@ class UserDataInitializer implements DataInitializer {
 		var boss = userAccountManagement.create("apo", UnencryptedPassword.of("#123apo#"), Role.of("BOSS"));
 		users.save(new User(boss));
 
-		var emp = userAccountManagement.create("hansi", UnencryptedPassword.of("#12hans#"), Role.of("EMPLOYEE"));
+		var emp = userAccountManagement.create("hans", UnencryptedPassword.of("#12hans#"), Role.of("EMPLOYEE"));
 		users.save(new User(emp));
 		
 		List.of(
-			new UserForm("hans peter", "#12hans#", "#12hans#"),
-			new UserForm("hansi peter", "#12hans#", "#12hans#"),
-			new UserForm("hansa peter", "#12hans#", "#12hans#"),
-			new UserForm("hanso peter", "#12hans#", "#12hans#")
+			new UserForm("hansi", "#12hans#", "#12hans#"),
+			new UserForm("hanso", "#12hans#", "#12hans#"),
+			new UserForm("hansa", "#12hans#", "#12hans#")
 		).forEach(userManagement::addUser);
 	}
 }
