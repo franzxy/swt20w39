@@ -134,7 +134,7 @@ public class OrderController {
 	}
 	@GetMapping("/orders/{id}")
 	public String detail(@PathVariable String id, Model model, @LoggedIn Optional<UserAccount> userAccount) {
-		System.out.println(id);
+		
 		if(userAccount.isEmpty()){
 			model.addAttribute("rech", this.orderManagement.findBy(userAccount.get()).toList());
 			model.addAttribute("filter", new OrderFilter());
