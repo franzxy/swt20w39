@@ -11,27 +11,43 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 	<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 
-	<title>Apotheke</title>
+	<title th:text="${Titel}">Apotheke</title>
 </head>
 
 <body>
-	<nav th:include="navigation :: navigation"></nav>
+<nav th:include="navigation :: navigation"></nav>
+<br>
+<button class="ui button" onclick="toggleSideBar()">Filter</button>
 
+<div class="sidenav" id="sidenav" style="display:none">
 	<br>
-
 	<form action="#" th:action="@{/}" th:object=${searchform} method="post" class="ui form">
 		<div class="field">
 
 			<input type="text" th:field="*{searchTerm}" placeholder="Suchbegriff eingeben" />
-
 			<br><br>
+			<input type="checkbox" id="nopres" name="nopres" th:checked="${nopres}"/>
+			<label for="nopres">Nur rezeptfreie Medikamente anzeigen</label>
+
 
 			<button type="submit" class="ui labeled icon button">
-				<i class="search icon"></i><span> Suchen</span>
+				<i class="search icon"></i><span>Suchen</span>
 			</button>
 		</div>
 
 	</form>
+
+</div>
+
+<div class="main">
+
+
+
+	<br>
+
+	<header>
+		<h1 th:text="${Suchbegriff}">Suchbegriff</h1>
+	</header>
 
 	<br>
 
@@ -52,14 +68,15 @@
 				<div class="description" th:text="${medicine.description}">Verwendung</div>
 			</div>
 
+			<div class="content" th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Typ</div>
 
 			<div class="extra content" th:text="${{medicine.price}}">Preis</div>
 
 			<div class="content">
 				<form  class="ui form" method="post" th:action="@{/cart}">
 					<input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
-					<input type="hidden" name="number" value="1"/>
-
+					<input id="number" type="number" name="number" min="1" th:max="${medicine.quantity}" step="1" value="1"/><br/>
+					<br>
 					<button type="submit" class="ui labeled icon button">
 						<i class="add to cart icon"></i><span>In den Warenkorb</span>
 					</button>
@@ -68,5 +85,23 @@
 
 		</div>
 	</div>
+
+
+</div>
+
+<script>
+
+	function toggleSideBar() {
+		var sidebar = document.getElementById("sidenav");
+		if(sidebar.style.display == "none") {
+			sidebar.style.display = "block";
+		} else {
+			sidebar.style.display = "none";
+		}
+	}
+
+</script>
+
+
 </body>
 </html>

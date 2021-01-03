@@ -1,5 +1,6 @@
 package pharmacy.catalog;
 
+import org.javamoney.moneta.Money;
 import org.salespointframework.inventory.InventoryItem;
 import org.salespointframework.inventory.MultiInventory;
 import org.salespointframework.inventory.MultiInventoryItem;
@@ -14,8 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.money.MonetaryAmount;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -36,21 +39,85 @@ class CatalogController {
 	}
 
 	@GetMapping("/")
-	public String catalog(Model model) {
+	public String catalog(@RequestParam(name="s", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean noPres, Model model) {
+		model.addAttribute("searchform", new SearchForm());
 
 		Iterator<Medicine> stock = catalog.findAll().iterator();
 		ArrayList<Medicine> result = new ArrayList<>();
 
-		while(stock.hasNext()) {
-			Medicine d = stock.next();
-
-			//if(d.getIngType() == Medicine.IngredientType.SHOP || d.getIngType() == Medicine.IngredientType.BOTH) {
+		if(searchTerm.equals("") && noPres == false) {
+			while (stock.hasNext()) {
+				Medicine d = stock.next();
 				result.add(d);
-			//}
+			}
+
+		} else if(searchTerm.equals("") && noPres == true) {
+			while (stock.hasNext()) {
+				Medicine d = stock.next();
+				if (!d.isPresonly()) {
+					if (d.getQuantity() > 0) {
+						if (!result.contains(d)) {
+							result.add(d);
+						}
+					}
+				}
+			}
+
+		} else {
+
+
+			String[] search = searchTerm.toLowerCase().split(" ");
+
+			while (stock.hasNext()) {
+				Medicine d = stock.next();
+
+				for (int i = 0; i < search.length; i++) {
+
+					if (d.getName().toLowerCase().contains(search[i])) {
+						if(!noPres || !d.isPresonly()) {
+							if (d.getQuantity() > 0) {
+								if (!result.contains(d)) {
+									result.add(d);
+								}
+							}
+						}
+					}
+
+					List<String> tags = d.getCategories().toList();
+
+					for(String t : tags) {
+						for (int ii = 0; ii < search.length; ii++) {
+							if (t.toLowerCase().contains(search[i])) {
+								if(!noPres || !d.isPresonly()) {
+									if (d.getQuantity() > 0) {
+										if (!result.contains(d)) {
+											result.add(d);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		model.addAttribute("catalog", result);
-		model.addAttribute("searchform", new SearchForm());
+		model.addAttribute("Titel", "Apotheke");
+
+		if(!searchTerm.equals("")) {
+			model.addAttribute("Suchbegriff", "Ergebnisse für \"" + searchTerm + "\":");
+			model.addAttribute("Titel", "Ergebnisse für \"" + searchTerm + "\"");
+		}
+
+
+		if(result.size() == 0) {
+			model.addAttribute("Suchbegriff", "Keine Ergebnisse für \"" + searchTerm + "\"");
+			model.addAttribute("Titel", "Keine Ergebnisse");
+		}
+
+
+
 		return "index";
 	}
 
@@ -58,72 +125,7 @@ class CatalogController {
 	@PostMapping("/")
 	public String submitSearchInCatalog(@ModelAttribute SearchForm form, Model model) {
 		model.addAttribute("SearchForm", form);
-		return "redirect:/search?s=" + form.getSearchTerm() + "&i=shop";
-	}
-
-	@GetMapping("/search")
-	//p=presType, m=medType, i=ingType
-	public String searchCatalog(@RequestParam(name="e", defaultValue = "false") boolean empty, @RequestParam(name="s", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean noPres, @RequestParam(name="i", defaultValue = "shop") String ingType, @RequestParam(name="m", defaultValue = "all") String medType, Model model) {
-		model.addAttribute("searchform", new SearchForm());
-
-		if(empty) {
-			model.addAttribute("Titel", "Erweiterte Suche");
-			return "search";
-		}
-
-		String[] search = searchTerm.toLowerCase().split(" ");
-		ArrayList<Medicine> result = new ArrayList<>();
-		Iterator<Medicine> stock = catalog.findAll().iterator();
-
-
-		while (stock.hasNext()) {
-			Medicine d = stock.next();
-
-			for (int i = 0; i < search.length; i++) {
-
-				if (searchTerm.equals("") || d.getName().toLowerCase().contains(search[i])) {
-
-					//if(!noPres || d.getPresType().equals("Frei Verkäuflich")) {
-
-						//if(medType.equals("all") || d.getMedType().equals(medType)) {
-
-							//if(ingType.equals("all") || d.getIngType().toString().toLowerCase().equals(ingType) || (  (ingType.equals("shop")||ingType.equals("labor"))   &&   d.getIngType() == Medicine.IngredientType.BOTH  )) {
-
-								if (!result.contains(d)) {
-									result.add(d);
-								}
-							//}
-						//}
-					//}
-				}
-			}
-		}
-
-		model.addAttribute("catalog", result);
-
-		if(result.size() == 0) {
-			model.addAttribute("Suchbegriff", "Keine Ergebnisse");
-			model.addAttribute("Titel", "Keine Ergebnisse");
-		}
-
-		else if(searchTerm.equals("")) {
-			model.addAttribute("Suchbegriff", "Alle Medikamente");
-			model.addAttribute("Titel", "Alle Medikamente");
-		}
-
-		else {
-			model.addAttribute("Suchbegriff", "Ergebnisse für \"" + searchTerm + "\":");
-			model.addAttribute("Titel", "Ergebnisse für \"" + searchTerm + "\"");
-		}
-
-		return "search";
-	}
-
-	@PostMapping("/search")
-	public String submitSearch(@ModelAttribute SearchForm form, Model model) {
-		model.addAttribute("SearchForm", form);
-		if(form.getIngType() == null) form.setIngType("shop");
-		return "redirect:/search?s=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&m=" + form.getMedType() + "&i=" + form.getIngType();
+		return "redirect:/?s=" + form.getSearchTerm() + "&p=" + form.getNoPres();
 	}
 
 	@GetMapping("/medicine/{medicine}")

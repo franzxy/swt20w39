@@ -3,12 +3,6 @@
         <a class="a nav height flex center" th:href="@{/}">
             <img class="icon" th:src="@{/img/pharmacy.png}">
         </a>
-        <form class="row height flex space align" action="#" th:action="@{/search}" method="post">
-            <input type="text" name="term" placeholder="Suchbegriff eingeben">
-            <button type="submit" class="ui labeled icon button">
-                <span>Suchen</span>
-            </button>
-        </form>
         <div class="row height flex align">
             <a class="a nav height flex center" th:href="@{/cart}">Warenkorb</a>
             <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
