@@ -1,34 +1,32 @@
 package pharmacy.order;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
-import org.salespointframework.time.Interval;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pharmacy.catalog.Medicine;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.zip.Deflater;
 
 @Controller
 @SessionAttributes("cart")
 public class OrderController {
-	private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
+	//private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
 	private final OrderManagement<Order> orderManagement;
 

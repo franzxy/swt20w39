@@ -1,7 +1,9 @@
 package pharmacy.inventory;
 
-import org.javamoney.moneta.Money;
-import org.salespointframework.inventory.InventoryItem;
+import java.util.HashMap;
+
+import javax.validation.Valid;
+
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Order;
@@ -16,10 +18,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-
-import java.util.HashMap;
-
-import javax.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
