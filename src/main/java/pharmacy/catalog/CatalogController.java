@@ -128,6 +128,13 @@ class CatalogController {
 		return "redirect:/?s=" + form.getSearchTerm() + "&p=" + form.getNoPres();
 	}
 
+	@PostMapping("/search")
+	public String submitSearch(@ModelAttribute SearchForm form, Model model) {
+		model.addAttribute("SearchForm", form);
+		return "redirect:/?s=" + form.getSearchTerm();
+
+	}
+
 	@GetMapping("/medicine/{medicine}")
 	public String detail(@PathVariable Medicine medicine, Model model) {
 		Quantity q=Quantity.of(0);
