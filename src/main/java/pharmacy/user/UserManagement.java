@@ -62,6 +62,13 @@ public class UserManagement {
 
 		return "insurance changed";
 	}
+	
+	public String changeAddress(User user, AddressForm addressForm) {
+		
+		user.changeAddress(new Address(addressForm.getName(), addressForm.getStreet(), addressForm.getPostCode(), addressForm.getCity()));
+
+		return "address added";
+	}
 /*
 	public String addCustomer(User user, CustomerForm customerForm) {
 		

@@ -33,8 +33,7 @@ public class User {
 	@OneToOne
 	private UserAccount userAccount;
 
-	@OneToMany(cascade = CascadeType.ALL)
-    private List<Address> addresses = new ArrayList<>();
+	private Address address;
 /*
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<PaymentMethod> payments = new ArrayList<>();
@@ -51,7 +50,7 @@ public class User {
 	private Long vacationRemaining;
 */
 	@SuppressWarnings("unused")
-	private User() {}
+	public User() {}
 
 	public User(UserAccount userAccount) {
 		this.userAccount = userAccount;
@@ -73,12 +72,12 @@ public class User {
 		userAccount.remove(role);
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void addAddress(Address newAddress) {
-		addresses.add(newAddress);
+	public void changeAddress(Address newAddress) {
+		address = newAddress;
 	}
 /*
 	public List<PaymentMethod> getPayments() {

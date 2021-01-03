@@ -1,5 +1,6 @@
 package pharmacy.user;
 
+import javax.mail.Address;
 import javax.validation.Valid;
 
 import org.salespointframework.useraccount.Role;
@@ -43,9 +44,10 @@ class UserController {
 
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('BOSS')")
-	String users(Model model, EmployeeForm employeeForm, InsuranceForm insuranceForm) {
+	String users(Model model, EmployeeForm employeeForm, InsuranceForm insuranceForm, AddressForm addressForm) {
 
 		model.addAttribute("insuranceForm", insuranceForm);
+		model.addAttribute("addressForm", addressForm);
 		model.addAttribute("employeeForm", employeeForm);
 
 		model.addAttribute("users", userManagement.findAll());
@@ -65,6 +67,19 @@ class UserController {
 		}
 		
 		userManagement.changeInsurance(userManagement.findUser(userId).get(), insuranceForm);
+
+		return "redirect:/users";
+	}
+	
+	@PostMapping("/user/{userId}/address")
+	@PreAuthorize("hasRole('BOSS')")
+	String addAddress(@PathVariable Long userId, @Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors result) {
+		
+		if (result.hasErrors()) {
+			return "redirect:/users";
+		}
+		
+		userManagement.changeAddress(userManagement.findUser(userId).get(), addressForm);
 
 		return "redirect:/users";
 	}

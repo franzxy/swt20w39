@@ -12,12 +12,12 @@ class AddressForm {
 	private final String street;
 
 	@NotNull(message = "{DeliveryForm.email.NotEmpty}")
-	private final Number postCode;
+	private final Long postCode;
 
 	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
 	private final String city;
 
-	public AddressForm(String name, String street, Number postCode, String city) {
+	public AddressForm(String name, String street, Long postCode, String city) {
 		this.name = name;
 		this.street = street;
 		this.postCode = postCode;
@@ -32,7 +32,7 @@ class AddressForm {
 		return street;
 	}
 
-	public Number getPostCode() {
+	public Long getPostCode() {
 		return postCode;
 	}
 
