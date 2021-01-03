@@ -2,6 +2,7 @@ package pharmacy.user;
 
 import javax.validation.Valid;
 
+import org.salespointframework.useraccount.Role;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ class UserController {
 	}
 
 	@GetMapping("/register")
-	String user(Model model, UserForm userForm) {
+	String register(Model model, UserForm userForm) {
 
 		model.addAttribute("userForm", userForm);
 
@@ -29,7 +30,7 @@ class UserController {
 	}
 
     @PostMapping("/register")
-	String newUser(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
+	String changeRegister(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
 
 		if (result.hasErrors()) {
 			return "register";
@@ -40,120 +41,65 @@ class UserController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/customer")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String customer(Model model, CustomerForm customerForm) {
-
-		model.addAttribute("customerForm", customerForm);
-		
-		return "customer";
-	}
-
-    @PostMapping("/customer")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String newCustomer(@Valid @ModelAttribute("customerForm")CustomerForm customerForm, Errors result) {
-
-		if (result.hasErrors()) {
-			return "customer";
-		}
-
-		userManagement.addCustomer(customerForm);
-
-		return "redirect:/users";
-	}
-
-	@GetMapping("/doctor")
-	@PreAuthorize("hasRole('BOSS')")
-	String doctor(Model model, UserForm userForm) {
-
-		model.addAttribute("userForm", userForm);
-
-		return "doctor";
-	}
-
-    @PostMapping("/doctor")
-	@PreAuthorize("hasRole('BOSS')")
-	String newDoctor(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
-
-		if (result.hasErrors()) {
-			return "doctor";
-		}
-
-		userManagement.addDoctor(userForm);
-
-		return "redirect:/users";
-	}
-
-	@GetMapping("/employee")
-	@PreAuthorize("hasRole('BOSS')")
-	String employee(Model model, EmployeeForm employeeForm) {
-		
-		model.addAttribute("employeeForm", employeeForm);
-		
-		return "employee";
-	}
-
-    @PostMapping("/employee")
-	@PreAuthorize("hasRole('BOSS')")
-	String newEmployee(@Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
-
-		if (result.hasErrors()) {
-			return "employee";
-		}
-
-		userManagement.addEmployee(employeeForm);
-
-		return "redirect:/users";
-	}
-
 	@GetMapping("/users")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
+	@PreAuthorize("hasRole('BOSS')")
 	String users(Model model) {
 
-		model.addAttribute("userList", userManagement.findAll());
+		model.addAttribute("users", userManagement.findAll());
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
 
 		return "users";
 	}
 
 	@GetMapping("/user/{userId}")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String user(@PathVariable Long userId, Model model) {
-
-		model.addAttribute("user", userManagement.findUser(userId).get());
+	@PreAuthorize("hasRole('BOSS')")
+	String user(@PathVariable Long userId, Model model, AddressForm addressForm, EmployeeForm employeeForm) {
+		
+		var user = userManagement.findUser(userId).get();
+		model.addAttribute("addressForm", addressForm);
+		model.addAttribute("employeeForm", employeeForm);
+		model.addAttribute("user", user);
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
 
 		return "user";
 	}
-
+/*
 	@PostMapping("/user/{userId}")
 	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String changeUser(@PathVariable Long userId, Model model) {
+	String changeUser(@PathVariable Long userId, Model model, @Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors addressErrors, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors employeeErrors) {
 		
-		model.addAttribute("user", userManagement.findUser(userId).get());
-		/*
+		var user = userManagement.findUser(userId).get();
+		model.addAttribute("user", user);
+		model.addAttribute("userRole", user.getUserAccount().hasRole(Role.of("USER")));
+
 		if (result.hasErrors()) {
-			return "account";
+			return "user";
 		}
 		
-		userManagement.changePassword(changePassword);
-		*/
+		userManagement.addEmployee(userManagement.findUser(userId).get(), employeeForm);
+
 		return "user";
 	}
-
+*/
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
-	String changePassword(Model model, UserPasswordForm changePassword) {
+	String account(Model model, UserPasswordForm changePassword) {
 		
 		model.addAttribute("changePassword", changePassword);
-		model.addAttribute("userName", userManagement.currentUserName());
+		model.addAttribute("firstName", userManagement.currentUserName());
 		
 		return "account";
 	}
 
 	@PostMapping("/account")
 	@PreAuthorize("isAuthenticated()")
-	String changePassword(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
+	String changeAccount(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
 		
-		model.addAttribute("userName", userManagement.currentUserName());
+		model.addAttribute("firstName", userManagement.currentUserName());
 		
 		if (result.hasErrors()) {
 			return "account";
@@ -163,8 +109,7 @@ class UserController {
 		
 		return "account";
 	}
-
-	/*
+/*
 	String example(@LoggedIn Optional<UserAccount> userAccount) {
         // functional style using map and lambda expression:
         return userAccount.map(account -> {
@@ -172,5 +117,5 @@ class UserController {
             return "...";
         }).orElse("redirect:/");  // if the user account is *not* present
 	}
-	*/
+*/
 }

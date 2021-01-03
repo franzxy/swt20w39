@@ -20,36 +20,38 @@ class UserDataInitializer implements DataInitializer {
 
 	private final UserAccountManagement userAccountManagement;
 	private final UserManagement userManagement;
+	private final UserRepository users;
 
-	UserDataInitializer(UserAccountManagement userAccountManagement, UserManagement userManagement) {
+	UserDataInitializer(UserAccountManagement userAccountManagement, UserManagement userManagement, UserRepository users) {
 
 		Assert.notNull(userAccountManagement, "UserAccountManagement must not be null!");
 		Assert.notNull(userManagement, "UserRepository must not be null!");
 
 		this.userAccountManagement = userAccountManagement;
 		this.userManagement = userManagement;
+		this.users = users;
 	}
 
 	@Override
 	public void initialize() {
 
-		if (userAccountManagement.findByUsername("boss").isPresent()) {
+		if (userAccountManagement.findByUsername("ceo@apotheke.gg").isPresent()) {
 			return;
 		}
 
 		LOG.info("Creating default users and users.");
 
-		var userAccount = userAccountManagement.create("boss", UnencryptedPassword.of("123"), Role.of("BOSS"));
-		userAccount.setFirstname("Boss");
+		var boss = userAccountManagement.create("ceo@apotheke.gg", UnencryptedPassword.of("#1234hans#"), Role.of("BOSS"));
+		users.save(new User(boss, "Apo Theke"));
 
-		var password = "123";
-		/*
-		List.of(//
-				new RegistrationForm("hans", password, "wurst"),
-				new RegistrationForm("dextermorgan", password, "Miami-Dade County"),
-				new RegistrationForm("earlhickey", password, "Camden County - Motel"),
-				new RegistrationForm("mclovinfogell", password, "Los Angeles")//
-		).forEach(userManagement::createUser);
-		*/
+		var emp = userAccountManagement.create("hans@apotheke.gg", UnencryptedPassword.of("#1234hans#"), Role.of("EMPLOYEE"));
+		users.save(new User(emp, "Hans Peter"));
+		
+		List.of(
+			new UserForm("hans peter", "hans@hans.com", "#1234hans#", "#1234hans#"),
+			new UserForm("hansi peter", "hansi@hans.com", "#1234hans#", "#1234hans#"),
+			new UserForm("hansa peter", "hansa@hans.com", "#1234hans#", "#1234hans#"),
+			new UserForm("hanso peter", "hanso@hans.com", "#1234hans#", "#1234hans#")
+		).forEach(userManagement::addUser);
 	}
 }

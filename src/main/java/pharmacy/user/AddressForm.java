@@ -3,13 +3,13 @@ package pharmacy.user;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-class CustomerAddressForm {
+class AddressForm {
+
+	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
+	private final String name;
 	
 	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final String street;
-
-	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
-	private final String houseNumber;
 
 	@NotNull(message = "{DeliveryForm.email.NotEmpty}")
 	private final Number postCode;
@@ -17,19 +17,19 @@ class CustomerAddressForm {
 	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
 	private final String city;
 
-	public CustomerAddressForm(String street, String houseNumber, Number postCode, String city) {
+	public AddressForm(String name, String street, Number postCode, String city) {
+		this.name = name;
 		this.street = street;
-		this.houseNumber = houseNumber;
 		this.postCode = postCode;
 		this.city = city;
 	}
 
-	public String getStreet() {
-		return street;
+	public String getName() {
+		return name;
 	}
 
-	public String getHouseNumber() {
-		return houseNumber;
+	public String getStreet() {
+		return street;
 	}
 
 	public Number getPostCode() {

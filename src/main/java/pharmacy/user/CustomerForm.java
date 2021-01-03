@@ -17,7 +17,6 @@ class CustomerForm {
 	@NotEmpty(message = "{RegistrationForm.email.NotEmpty}")
 	private final String email;
 
-	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
 	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
@@ -25,19 +24,6 @@ class CustomerForm {
 	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
 	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
 	private final String password;
-
-	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
-	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
-	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
-	@Pattern(regexp="^(?=.*[A-Z]).+$", message = "{PasswordForm.newPassword.Upper}")
-	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
-	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
-	private final String confirmPassword;
-
-	@AssertTrue(message="Passwörter stimmen nicht überein.")
-	private boolean isConfirm() {
-		return password.equals(confirmPassword);
-	}
 	
 	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final String street;
@@ -52,12 +38,11 @@ class CustomerForm {
 	
 	private final Boolean privateInsurance;
 
-	public CustomerForm(String name, String lastName, String email, String password, String confirmPassword, String street, String houseNumber, Long postCode, String city, Boolean privateInsurance) {
+	public CustomerForm(String name, String lastName, String email, String password, String street, String houseNumber, Long postCode, String city, Boolean privateInsurance) {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.confirmPassword = confirmPassword;
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.postCode = postCode;
@@ -81,10 +66,6 @@ class CustomerForm {
 		return password;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
 	public String getStreet() {
 		return street;
 	}
@@ -100,7 +81,11 @@ class CustomerForm {
 	public String getCity() {
 		return city;
 	}
-
+/*
+	public Long getCardNumber() {
+		return cardNumber;
+	}
+*/
 	public Boolean getPrivateInsurance() {
 		return privateInsurance;
 	}

@@ -2,7 +2,6 @@ package pharmacy.user;
 
 import java.util.function.LongFunction;
 
-import javax.persistence.Id;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -10,22 +9,14 @@ import javax.validation.constraints.Size;
 
 import org.javamoney.moneta.Money;
 
-class EmployeeForm {
+class EmployeeDetailForm {
 	
-	private final Long address;
-	
-	private final Long salary;
-	
-	private final Long vacation;
+	private final Long salary, vacation, iban;
 
-	public EmployeeForm(Long address, Long salary, Long vacation) {
-		this.address = address;
+	public EmployeeDetailForm(Long salary, Long vacation, Long iban) {
 		this.salary = salary;
 		this.vacation = vacation;
-	}
-
-	public Long getAddress() {
-		return address;
+		this.iban = iban;
 	}
 
 	public Long getSalary() {
@@ -34,5 +25,9 @@ class EmployeeForm {
 
 	public Long getVacation() {
 		return vacation;
+	}
+
+	public Long getIban() {
+		return iban;
 	}
 }

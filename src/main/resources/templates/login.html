@@ -17,7 +17,7 @@
         <form class="ui form" role="form" th:action="@{/login}" method="post">
 
             <div class="field">
-                <label for="username">E-Mail-Adresse</label>
+                <label for="username">E-Mail</label>
                 <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
             </div>
     
@@ -27,6 +27,9 @@
             </div>
     
             <button type="submit" class="ui button">Login</button>
+            
+            <span>Neu hier?</span>
+            <a class="a nav height flex center" th:href="@{/register}">Registrieren</a>
         </form>
     </body>
 </html>

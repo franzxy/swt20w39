@@ -9,21 +9,21 @@
 		<nav th:include="navigation :: navigation"></nav>
 		
 		<p th:text="${'ID: '+user.getId()}">ID</p>
-		<p th:text="${'Vorname: '+user.userAccount.getFirstname()}">Vorname</p>
-		<p th:text="${'Nachname: '+user.userAccount.getLastname()}">Nachname</p>
-		<p th:text="${'E-Mail-Adresse: '+user.userAccount.getUsername()}">E-Mail-Adresse</p>
-
-		<!--
-		<form th:if="${}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${customerAddForm}">
+		<p th:text="${'Name: '+user.userAccount.getFirstname()}">Vorname</p>
+		<p th:text="${'Name: '+user.userAccount.getLastname()}">Nachname</p>
+        <p th:text="${'E-Mail: '+user.userAccount.getUsername()}">E-Mail</p>
+        
+        <p>Adressen</p>
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${addressForm}">
             <div class="field">
-                <label for="address">Straße</label>
-                <input id="address" name="address" th:field="*{street}" th:errorclass="fieldError" type="text"
+                <label for="address">Name</label>
+                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
                        required="required"/>
             </div>
 
             <div class="field">
-                <label for="address">Hausnummer</label>
-                <input id="name" name="name" th:field="*{houseNumber}" th:errorclass="fieldError" type="text" required="required"/><br/>
+                <label for="address">Straße und Hausnummer</label>
+                <input id="name" name="name" th:field="*{street}" th:errorclass="fieldError" type="text" required="required"/><br/>
             </div>
 
             <div class="field">
@@ -36,18 +36,54 @@
                 <input id="password" name="password" th:field="*{city}" th:errorclass="fieldError" type="text"
                        required="required"/>
             </div>
+
+            <button type="submit" class="ui button">Adresse hinzufügen</button>
+        </form>
+
+        <div th:each="address : ${user.getAddresses()}">
+            <a th:text="${address.getName()}">Name</a>
+        </div>
+
+        <p>Zahlungsmittel</p>
+        tbc
     
+        <p>Krankenkasse</p>
+        tbc
+        <!--<form method="post" role="form" class="ui form" id="form" th:action="@{/customer/{id}(id=${user.getId()}" th:object="${insuranceForm}">
             <div class="field">
-                <label for="password">Private Krankenkasse</label>
-                <select id="password" name="password" th:field="*{privateInsurance}" th:errorclass="fieldError"
-                       required="required">
-                    <option value="false">Nein</option>
-                    <option value="true">Ja</option>
+                <label for="address">Name</label>
+                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <button type="submit" class="ui button">Krankenkasse ändern</button>
+        </form>-->
+
+        <p>Zum Mitarbeiter befördern</p>
+		<form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${employeeForm}">
+            <div class="field">
+                <label for="address">Adresse</label>
+                <select id="address" name="address" th:field="*{address}" th:errorclass="fieldError" required="required">
+                    <option th:each="address : ${user.getAddresses()}" value="${address.getId()}">
+                        <a th:text="${address.getName()}">Name</a>
+                    </option>
                 </select>
             </div>
 
-            <button type="submit" class="ui button">Zum Kunden machen</button>
-		</form>
-		-->
+            <div class="field">
+                <label for="name">Gehalt</label>
+                <input id="name" name="name" th:field="*{salary}" th:errorclass="fieldError" type="number" required="required"/><br/>
+            </div>
+    
+            <div class="field">
+                <label for="password">Urlaubstage</label>
+                <input id="password" name="password" th:field="*{vacation}" th:errorclass="fieldError" type="text"
+                       required="required"/>
+            </div>
+
+            <button type="submit" class="ui button">Zum Mitarbeiter befördern</button>
+        </form>
+
+        <button type="submit" class="ui button">Kunden löschen</button>
 	</body>
 </html>
