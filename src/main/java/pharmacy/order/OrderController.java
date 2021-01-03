@@ -49,7 +49,7 @@ public class OrderController {
 		int amount = number <= 0 ? 1 : number;
 
 		cart.addOrUpdateItem(item, Quantity.of(amount));
-		System.out.println(cart.getPrice().getNumber().doubleValue());
+
 		return "redirect:/";
 	}
 
@@ -57,7 +57,11 @@ public class OrderController {
 	String basket() {
 		return "cart";
 	}
-
+	@PostMapping("/clearcart")
+	String emptycart(@ModelAttribute Cart cart){
+		cart.clear();
+		return "redirect:/cart";
+	}
 	@PostMapping("/checkout")
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 
