@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" th:href="@{style.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+        <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Account</title>
 	</head>
     <body>
@@ -10,63 +11,24 @@
 		
 		<p th:text="${'ID: '+user.getId()}">ID</p>
         <p th:text="${'Benutzername: '+user.userAccount.getUsername()}">Benutzername</p>
+        <p th:if="${user.userAccount.hasRole(customer)}">Rolle: Kunde</p>
+        <p th:if="${user.userAccount.hasRole(employee)}">Rolle: Mitarbeiter</p>
+        <p th:if="${user.userAccount.hasRole(boss)}">Rolle: CEO</p>
         
         <p>Adressen</p>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${addressForm}">
-            <div class="field">
-                <label for="address">Name</label>
-                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
-                       required="required"/>
-            </div>
-
-            <div class="field">
-                <label for="address">Straße und Hausnummer</label>
-                <input id="name" name="name" th:field="*{street}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            </div>
-
-            <div class="field">
-                <label for="name">Postleitzahl</label>
-                <input id="name" name="name" th:field="*{postCode}" th:errorclass="fieldError" type="number" required="required"/><br/>
-            </div>
-    
-            <div class="field">
-                <label for="password">Stadt</label>
-                <input id="password" name="password" th:field="*{city}" th:errorclass="fieldError" type="text"
-                       required="required"/>
-            </div>
-
-            <button type="submit" class="ui button">Adresse hinzufügen</button>
-        </form>
-
         <div th:each="address : ${user.getAddresses()}">
             <a th:text="${address.getName()}">Name</a>
+            <p>Make Default Address</p>
         </div>
 
         <p>Zahlungsmittel</p>
         tbc
     
-        <p>Krankenkasse</p>
-        tbc
-        <!--<form method="post" role="form" class="ui form" id="form" th:action="@{/customer/{id}(id=${user.getId()}" th:object="${insuranceForm}">
-            <div class="field">
-                <label for="address">Name</label>
-                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
-                       required="required"/>
-            </div>
+		<p th:if="${user.getInsurance()}" th:text="${'Krankenkasse: '+user.getInsurance()}">ID</p>
 
-            <button type="submit" class="ui button">Krankenkasse ändern</button>
-        </form>-->
+		<form th:if="${user.userAccount.hasRole(customer)}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()})}" th:object="${employeeForm}">
 
-        <p>Zum Mitarbeiter befördern</p>
-		<form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${employeeForm}">
-            <div class="field">
-                <label for="address">Adresse</label>
-                <select id="address" name="address" th:field="*{address}" th:errorclass="fieldError" required="required">
-                    <option th:each="address : ${user.getAddresses()}" value="${address.getId()}">
-                        <a th:text="${address.getName()}">Name</a>
-                    </option>
-                </select>
-            </div>
+            <p>Zum Mitarbeiter befördern</p>
 
             <div class="field">
                 <label for="name">Gehalt</label>
@@ -82,6 +44,6 @@
             <button type="submit" class="ui button">Zum Mitarbeiter befördern</button>
         </form>
 
-        <button type="submit" class="ui button">Kunden löschen</button>
+        <button th:if="${user.userAccount.hasRole(customer)}" type="submit" class="ui button">Kunden löschen</button>
 	</body>
 </html>

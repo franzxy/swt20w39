@@ -1,7 +1,7 @@
 <nav th:fragment="navigation">   
     <div class="flex row center width bar">
         <a class="a nav height flex center" th:href="@{/}">
-            <img class="icon" th:src="@{pharmacy.png}">
+            <img class="icon" th:src="@{/img/pharmacy.png}">
         </a>
         <form class="row height flex space align" action="#" th:action="@{/search}" method="post">
             <input type="text" name="term" placeholder="Suchbegriff eingeben">
@@ -15,7 +15,7 @@
             <div class="height flex center" sec:authorize="isAuthenticated()">
                 <a class="a nav height flex center" th:href="@{/account}" th:text="${'Hallo, '+#authentication.getName()}" >Account</a>
                 <a class="a nav height center" th:href="@{/logout}">
-                    <img class="icon" th:src="@{logout.png}">
+                    <img class="icon" th:src="@{/img/logout.png}">
                 </a>
             </div>
         </div>

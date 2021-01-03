@@ -55,26 +55,30 @@ class UserController {
 
 	@GetMapping("/user/{userId}")
 	@PreAuthorize("hasRole('BOSS')")
-	String user(@PathVariable Long userId, Model model, AddressForm addressForm, EmployeeForm employeeForm) {
+	String user(@PathVariable Long userId, Model model, EmployeeForm employeeForm) {
 		
-		var user = userManagement.findUser(userId).get();
-		model.addAttribute("addressForm", addressForm);
 		model.addAttribute("employeeForm", employeeForm);
+
+		var user = userManagement.findUser(userId).get();
 		model.addAttribute("user", user);
+
 		model.addAttribute("customer", Role.of("CUSTOMER"));
 		model.addAttribute("employee", Role.of("EMPLOYEE"));
 		model.addAttribute("boss", Role.of("BOSS"));
 
 		return "user";
 	}
-/*
+
 	@PostMapping("/user/{userId}")
-	@PreAuthorize("hasRole('BOSS') or hasRole('EMPLOYEE')")
-	String changeUser(@PathVariable Long userId, Model model, @Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors addressErrors, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors employeeErrors) {
+	@PreAuthorize("hasRole('BOSS')")
+	String changeUser(@PathVariable Long userId, Model model, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
 		
 		var user = userManagement.findUser(userId).get();
 		model.addAttribute("user", user);
-		model.addAttribute("userRole", user.getUserAccount().hasRole(Role.of("USER")));
+		
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
 
 		if (result.hasErrors()) {
 			return "user";
@@ -84,7 +88,7 @@ class UserController {
 
 		return "user";
 	}
-*/
+
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
 	String account(Model model, UserPasswordForm changePassword) {
