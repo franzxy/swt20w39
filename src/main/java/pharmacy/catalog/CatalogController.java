@@ -136,8 +136,6 @@ class CatalogController {
 		}
 
 		model.addAttribute("medicine" , medicine);
-		model.addAttribute("quantity", q); //TODO geht noch nicht
-		//model.addAttribute("orderable", q.isGreaterThan(NONE));
 		model.addAttribute("orderable", true);
 
 		return "detail";
