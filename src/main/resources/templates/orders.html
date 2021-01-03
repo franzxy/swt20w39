@@ -175,19 +175,23 @@
                     <th >Datum</th>
                     <th >ID</th>
                     <th >Betrag in €</th>
+                    <th >Status</th>
+                    <th >User</th>
                     <th >Rechung</th>
                 </tr>
                 </thead>
                  <tbody>
             <tr th:if="${rech.empty}">
-                <td style="text-align: center;"colspan="4"> Keine Bestellungen </td>
+                <td style="text-align: center;"colspan="5"> Keine Bestellungen </td>
             </tr>
             <tr th:each="sec : ${rech}"> 
                 <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
                 <td  th:text="${sec.getId().getIdentifier()}">ID</td>
                 <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
+                <td  th:text="${sec.getOrderStatus().toString()}">Status</td>
+                <td  th:text="${sec.getUserAccount().getUsername()}">User</td>
                 <td>
-                  <a class="button"th:text="Details" th:href="@{/order/{id}(id=${sec.getId().getIdentifier()})}"></a>
+                  <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId().getIdentifier()})}"></a>
                 </td>
                 </tr>
             </tbody>
