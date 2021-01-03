@@ -38,8 +38,14 @@ class CatalogController {
 		//this.businessTime = businessTime;
 	}
 
+	@PostMapping("/tagsearch")
+	public String tagSearch(@RequestParam("tempsearch") String tempsearch, @RequestParam("tag") String tag) {
+		return "redirect:/?s=" + tempsearch + "&t=" + tag;
+	}
+
+
 	@GetMapping("/")
-	public String catalog(@RequestParam(name="s", required=true, defaultValue = "") String searchTerm, @RequestParam(name="p", defaultValue = "false") boolean noPres, Model model) {
+	public String catalog(@RequestParam(name="s", required=true, defaultValue = "") String searchTerm, @RequestParam(name="t", required=true, defaultValue = "") String tag, @RequestParam(name="p", defaultValue = "false") boolean noPres, Model model) {
 		model.addAttribute("searchform", new SearchForm());
 
 		Iterator<Medicine> stock = catalog.findAll().iterator();
@@ -76,14 +82,31 @@ class CatalogController {
 					if (d.getName().toLowerCase().contains(search[i])) {
 						if(!noPres || !d.isPresonly()) {
 							if (d.getQuantity() > 0) {
-								if (!result.contains(d)) {
-									result.add(d);
+								if(tag.equals("")) {
+									if (!result.contains(d)) {
+										result.add(d);
+									}
+
+								} else {
+
+									List<String> tags = d.getCategories().toList();
+
+									for(String t : tags) {
+
+										if(tag.equals(t)) {
+											if (!result.contains(d)) {
+												result.add(d);
+
+											}
+										}
+
+									}
 								}
 							}
 						}
 					}
 
-					List<String> tags = d.getCategories().toList();
+					/*List<String> tags = d.getCategories().toList();
 
 					for(String t : tags) {
 						for (int ii = 0; ii < search.length; ii++) {
@@ -97,10 +120,21 @@ class CatalogController {
 								}
 							}
 						}
-					}
+					}*/
 				}
 			}
 		}
+
+		ArrayList<String> tags = new ArrayList<>();
+		for(Medicine p : result) {
+			for(String s : p.getCategories()) {
+				if(!tags.contains(s)) {
+					tags.add(s);
+				}
+			}
+		}
+		model.addAttribute("tempTerm", searchTerm);
+		model.addAttribute("tags", tags);
 
 		model.addAttribute("catalog", result);
 		model.addAttribute("Titel", "Apotheke");
