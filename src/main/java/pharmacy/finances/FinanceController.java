@@ -1,7 +1,5 @@
 package pharmacy.finances;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +10,11 @@ import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
-import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -31,6 +29,7 @@ import pharmacy.user.UserManagement;
 
 @Controller
 @org.springframework.core.annotation.Order(20)
+@EnableScheduling
 public class FinanceController {
 	@Autowired
 	private final Accountancy acc;
@@ -150,8 +149,8 @@ public class FinanceController {
 		AccountancyEntry sal= new AccountancyEntry(Money.of(betr, "EUR"), bez);
 		this.acc.add(sal);
 	}
-	@Scheduled(cron="0 0 0 1 * ? *")
-	private void autopay(){
+	@Scheduled(cron="0 0 0 1 * ?")
+	protected void autopay(){
 		//Fixkosten
 		createKosten("Strom", -1*this.fixk.getStrom());
 		createKosten("Miete", -1*this.fixk.getMiete());
@@ -210,10 +209,10 @@ public class FinanceController {
 	public String createdefaultenties( Model model) {
 		if(!this.userAccount.findAll().isEmpty()){
 			//System.out.println(this.userAccount.findByUsername("boss").get());
-			Order o1=new Order(this.userAccount.findByUsername("boss").get());
+			Order o1=new Order(this.userAccount.findByUsername("apo").get());
 			o1.addChargeLine(Money.of(20,"EUR"), "default");
 			o1.setPaymentMethod(Cash.CASH);
-			Order o2=new Order(this.userAccount.findByUsername("boss").get());
+			Order o2=new Order(this.userAccount.findByUsername("apo").get());
 			o2.addChargeLine(Money.of(20,"EUR"), "default");
 			o2.setPaymentMethod(Cash.CASH);
 			this.orderManagement.save(o1);

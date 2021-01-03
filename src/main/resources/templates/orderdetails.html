@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Details</title>
+		<style>
+
+      html{
+        /*background-image: linear-gradient(to top,#1F2833 0%, black 70%);*/
+        background-color: #1F2833;
+      }
+     li{
+         color: white;
+     }
+    </style>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav> 
+
+        
+                
+                 
+            <ul> 
+                <li>Datum: <span th:text="${#temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"/></li>
+                <li>ID: <span th:text="${det.getId().getIdentifier()}"/></li>
+                <li>Betrag: <span th:text="${det.getTotal().getNumber().doubleValue()}"/></li>
+                <li>Status: <span th:text="${det.getOrderStatus().toString()}"/></li>
+                <li>User: <span th:text="${det.getUserAccount().getUsername()}"/></li>
+                <li>User-Id: <span th:text="${det.getUserAccount().getId().getIdentifier()}"/></li>
+                <li>Bezahlungsmethode: <span th:text="${det.getPaymentMethod()}"/></li>
+               
+            </ul>
+            
+   
+        
+        
+    </body>
+</html>

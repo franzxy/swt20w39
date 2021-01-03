@@ -1,34 +1,34 @@
 package pharmacy.order;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
-import org.salespointframework.time.Interval;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pharmacy.catalog.Medicine;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.zip.Deflater;
 
 @Controller
 @SessionAttributes("cart")
 public class OrderController {
-	private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
+	//private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
 	private final OrderManagement<Order> orderManagement;
 
@@ -49,7 +49,7 @@ public class OrderController {
 		int amount = number <= 0 ? 1 : number;
 
 		cart.addOrUpdateItem(item, Quantity.of(amount));
-		System.out.println(cart.getPrice().getNumber().doubleValue());
+
 		return "redirect:/";
 	}
 
@@ -57,7 +57,11 @@ public class OrderController {
 	String basket() {
 		return "cart";
 	}
-
+	@PostMapping("/clearcart")
+	String emptycart(@ModelAttribute Cart cart){
+		cart.clear();
+		return "redirect:/cart";
+	}
 	@PostMapping("/checkout")
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 
@@ -79,7 +83,24 @@ public class OrderController {
 
 	@GetMapping("/orders")
 	String orders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
-		model.addAttribute("rech", this.orderManagement.findBy(userAccount.get()).toList());
+		List<Order> ret =List.of() ;
+		if(!userAccount.isEmpty()){
+			if(userAccount.get().hasRole(Role.of("BOSS"))){
+				ArrayList<Order> all = new ArrayList<Order>();
+				all.addAll(this.orderManagement.findBy(OrderStatus.COMPLETED).toList());
+				all.addAll(this.orderManagement.findBy(OrderStatus.PAID).toList());
+				all.addAll(this.orderManagement.findBy(OrderStatus.OPEN).toList()); 
+				ret=all;
+				
+			}
+			if(userAccount.get().hasRole(Role.of("CUSTOMER"))){
+				ret=this.orderManagement.findBy(userAccount.get()).toList();
+			}
+			if(userAccount.get().hasRole(Role.of("EMPLOYEE"))){
+				ret=this.orderManagement.findBy(OrderStatus.PAID).toList();
+			}
+		}
+		model.addAttribute("rech",ret);
 		model.addAttribute("filter", new OrderFilter());
 		return "orders";
 	}
@@ -88,21 +109,53 @@ public class OrderController {
 		List<Order> ret =List.of() ;
 		if(!userAccount.isEmpty()){
 			if(userAccount.get().hasRole(Role.of("BOSS"))){
-				List<Order> all = this.orderManagement.findBy(OrderStatus.COMPLETED).toList();
-				//all.addAll(this.orderManagement.findBy(OrderStatus.PAID).toList());
-				//all.addAll(this.orderManagement.findBy(OrderStatus.OPEN).toList()); 
+				ArrayList<Order> all = new ArrayList<Order>();
+				all.addAll(this.orderManagement.findBy(OrderStatus.COMPLETED).toList());
+				all.addAll(this.orderManagement.findBy(OrderStatus.PAID).toList());
+				all.addAll(this.orderManagement.findBy(OrderStatus.OPEN).toList()); 
 				switch(filter.getFilter()){
 					case OFFEN: ret= this.orderManagement.findBy(OrderStatus.OPEN).toList();break;
 					case BEZAHLT: ret=this.orderManagement.findBy(OrderStatus.PAID).toList();break;
 					case COMPLETED: ret= this.orderManagement.findBy(OrderStatus.COMPLETED).toList();break;
+					case EIGENE: ret= this.orderManagement.findBy(userAccount.get()).toList();break;
 					default: ret=all;break;
 				}
-			}else{
+			}
+			if(userAccount.get().hasRole(Role.of("CUSTOMER"))){
 				ret=this.orderManagement.findBy(userAccount.get()).toList();
+			}
+			if(userAccount.get().hasRole(Role.of("EMPLOYEE"))){
+				ret=this.orderManagement.findBy(OrderStatus.PAID).toList();
 			}
 		}
 		model.addAttribute("rech", ret);
 		model.addAttribute("filter", filter);
 		return "orders";
+	}
+	@GetMapping("/orders/{id}")
+	public String detail(@PathVariable String id, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		
+		if(userAccount.isEmpty()){
+			model.addAttribute("rech", this.orderManagement.findBy(userAccount.get()).toList());
+			model.addAttribute("filter", new OrderFilter());
+			return "orders";
+		}
+		orderManagement.findBy(userAccount.get()).forEach(order->{
+			if(order.getId().getIdentifier().equals(id)){
+				model.addAttribute("det", order);
+			}
+		});
+		
+
+		return "orderdetails";
+	}
+	
+	@GetMapping("/orders/{id}/complete")
+	public String complete(@PathVariable String id, Model model){
+		orderManagement.findBy(OrderStatus.PAID).forEach(order->{
+			if(order.getId().getIdentifier().equals(id))
+			orderManagement.completeOrder(order);
+		});
+		return "redirect:/orders";
 	}
 }

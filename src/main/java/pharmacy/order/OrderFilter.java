@@ -7,7 +7,8 @@ public class OrderFilter{
 		ALLE("Alles"),
 		OFFEN("Offen"),
 		BEZAHLT("Bezahlt"),
-		COMPLETED("Abgeschlossen");
+		COMPLETED("Abgeschlossen"),
+		EIGENE("Eigene");
 		@Id
 		private int id;
 		

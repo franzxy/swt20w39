@@ -1,7 +1,9 @@
 package pharmacy.inventory;
 
-import org.javamoney.moneta.Money;
-import org.salespointframework.inventory.InventoryItem;
+import java.util.HashMap;
+
+import javax.validation.Valid;
+
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Order;
@@ -10,13 +12,12 @@ import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-
-import javax.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,7 @@ import pharmacy.catalog.MedicineCatalog;
 // Straight forward?
 
 @Controller
+@EnableScheduling
 class InventoryController {
 	@Autowired
 	private UniqueInventory<UniqueInventoryItem> inventory;
@@ -42,44 +44,41 @@ class InventoryController {
 
 	private MedicineForm formular;
 
-	
+	private HashMap<String, Integer> waitlist;
 	InventoryController(UniqueInventory<UniqueInventoryItem> inventory, MedicineCatalog medicineCatalog, UserAccountManagement userAccount, OrderManagement<Order> orderManagement) {
 		this.inventory = inventory;
 		this.medicineCatalog=medicineCatalog;
 		this.userAccount=userAccount;
 		this.orderManagement=orderManagement;
 		this.formular=new MedicineForm();
+		this.waitlist=new HashMap<String, Integer>();
 	}
-	@Scheduled(cron="0 0 0 1 * ? *")
-	private void autorestock(){
+	@Scheduled(cron = "0 0 22 * * ?")
+	protected void autorestock(){
 		this.inventory.findAll().forEach(item->{
 			if(!item.hasSufficientQuantity(Quantity.of(((Medicine)item.getProduct()).getQuantity()))){
-				Order o1 = new Order(this.userAccount.findByUsername("boss").get());
 				while(item.getQuantity().isLessThan(Quantity.of(((Medicine)item.getProduct()).getQuantity()))){
-					o1.addChargeLine(((Medicine)item.getProduct()).getPurchaseprice().multiply(-1), "Nachbestellung von "+((Medicine)item.getProduct()).getName());
-					item.increaseQuantity(Quantity.of(1));
+					this.restock(1, item.getId().getIdentifier());
 				}
-				o1.setPaymentMethod(Cash.CASH);
-				this.orderManagement.save(o1);
-				this.orderManagement.payOrder(o1);
 			}
 		});
+		this.waitlist.forEach((k,v) -> {
+			restock(v, k);
+		});
+		this.waitlist=new HashMap<String, Integer>();
+
 	}
-	/**
-	 * Displays all {@link InventoryItem}s in the system
-	 *
-	 * @param model will never be {@literal null}.
-	 * @return the view name.
-	 */
-	private void restockByOne(String id){
+
+	private void restock(int anz, String id){
 		this.inventory.findAll().forEach(item->{
 			if(item.getId().getIdentifier().equals(id)){
 				Order o1 = new Order(this.userAccount.findByUsername("boss").get());
-				o1.addChargeLine(((Medicine)item.getProduct()).getPurchaseprice().multiply(-1), "Manuelle Nachbestellung von "+((Medicine)item.getProduct()).getName());
-				item.increaseQuantity(Quantity.of(1));
+				o1.addChargeLine(((Medicine)item.getProduct()).getPurchaseprice().multiply(-1*anz), "Nachbestellung von: "+anz+"x "+((Medicine)item.getProduct()).getName());
+				inventory.save(item.increaseQuantity(Quantity.of(anz)));
 				o1.setPaymentMethod(Cash.CASH);
 				this.orderManagement.save(o1);
 				this.orderManagement.payOrder(o1);
+				this.orderManagement.completeOrder(o1);
 			}
 		});
 	}
@@ -89,6 +88,7 @@ class InventoryController {
 	String inventory(Model model) {
 		model.addAttribute("inventory", inventory.findAll().toList());
 		model.addAttribute("formular", this.formular);
+		model.addAttribute("waitlist", this.waitlist);
 		return "inventory";
 	}
 	@PostMapping("/inventory")
@@ -96,6 +96,7 @@ class InventoryController {
 	String filtern( Model model) {
 		model.addAttribute("inventory", inventory.findAll().toList());
 		model.addAttribute("formular", this.formular);
+		model.addAttribute("waitlist", this.waitlist);
 		return "inventory";
 	}
 
@@ -107,6 +108,11 @@ class InventoryController {
 		//model.addAttribute("formular", this.formular);
 		return "redirect:/inventory";
 	}
+	//When adding, a new medicine is created, the target quantity is defined in the medicine itself, 
+	//but there is none in the inventory yet.
+	//Since the target quantity is set in the medicine, the autorestock method will stop there and automatically reorder it.
+	//If only one existing medicine is being processed, it will be deleted before adding it, otherwise a duplicate will be created.
+	//Important: The ID changes after editing!
 	@PostMapping("/addmed")
 	@PreAuthorize("hasRole('BOSS')")
 	String addingMedicine(@Valid MedicineForm formular, Errors result, Model model) {
@@ -116,30 +122,32 @@ class InventoryController {
 			return "redirect:/inventory#newmed";
 		}
 		System.out.println("ID: "+formular.getId());
+		int qan=0;
 		this.formular=formular;
 		if(!this.formular.getId().equals("")){
 			UniqueInventory<UniqueInventoryItem> tmp= this.inventory;
+			for(UniqueInventoryItem uni:tmp.findAll().toList()){
+				if(uni.getId().getIdentifier().equals(formular.getId())){
+					qan=uni.getQuantity().getAmount().intValue();
+				}
+			}
 			tmp.findAll().forEach(item-> {
 			if(item.getId().getIdentifier().equals(formular.getId())){
+				
 				this.inventory.delete(item);
+				this.medicineCatalog.delete((Medicine)item.getProduct());
 				System.out.println("Medikament gelöscht");
 			}
 			});
-			MedicineCatalog tmp2=this.medicineCatalog;
-			tmp2.findAll().forEach(med->{
-				if(!this.inventory.findByProduct(med).isEmpty()){
-					if(this.inventory.findByProduct(med).get().getId().getIdentifier().equals(formular.getId())){
-						this.medicineCatalog.delete(med);
-					}
-				}
-			});
+			
 		}
+		final int quantity=qan;
 		medicineCatalog.save(formular.toMedicine());
 		//Copied that from initializer, only works that way. Why ever
 		medicineCatalog.findAll().forEach(medicine -> {
 			// Try to find an InventoryItem for the project and create a default one with 10 items if none available
 			if (inventory.findByProduct(medicine).isEmpty()) {
-				inventory.save(new UniqueInventoryItem((Medicine)medicine, Quantity.of(formular.getQuantity())));
+				inventory.save(new UniqueInventoryItem((Medicine)medicine, Quantity.of(quantity)));
 			}});
 		
 		this.formular=new MedicineForm();
@@ -149,7 +157,8 @@ class InventoryController {
 	}
 
 
-	
+	//Increasing a Medicine Quantity, will mean that the Medicine is added to a waitlist that will be processed by autorestock.
+	//after that the waitlist is cleared and the Medicine will be orderd by its original Quantity
 	@GetMapping("/inrease")
 	@PreAuthorize("hasRole('BOSS')")
 	String preinreaseQuantity(Model model) {
@@ -158,11 +167,15 @@ class InventoryController {
 	@PostMapping("/increase")
 	@PreAuthorize("hasRole('BOSS')")
 	String inreaseQuantity(@ModelAttribute MedicineForm formular, Model model) {
-	
-		this.restockByOne(formular.getId());
+		int val=1;
+		if(waitlist.containsKey(formular.getId())){
+			val+=waitlist.get(formular.getId());
+		 }
+		waitlist.put(formular.getId(), val);
 		this.formular=new MedicineForm();
 		model.addAttribute("inventory", inventory.findAll().toList());
 		model.addAttribute("formular", this.formular);
+		model.addAttribute("waitlist", this.waitlist);
 		return "redirect:/addmed";
 	}
 
@@ -200,7 +213,6 @@ class InventoryController {
 	@PostMapping("/details")
 	@PreAuthorize("hasRole('BOSS')")
 	String details(@ModelAttribute MedicineForm formular, Model model) {
-		System.out.println("ID for details "+formular.getId());
 		MedicineForm med= new MedicineForm();
 		this.inventory.findAll().forEach(item->{
 			if(item.getId().getIdentifier().equals(formular.getId())){

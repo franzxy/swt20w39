@@ -38,6 +38,9 @@
                     <form  class="ui form" method="post" th:action="@{/checkout}"> <!--sec:authorize="hasRole('CUSTOMER')"-->
                         <button type="submit" class="ui button" >Kaufen</button>
                     </form>
+                    <form  class="ui form" method="post" th:action="@{/clearcart}"> <!--sec:authorize="hasRole('CUSTOMER')"-->
+                        <button type="submit" class="ui button" >Verwerfen</button>
+                    </form>
                 </div>
             </div>
         </div>
