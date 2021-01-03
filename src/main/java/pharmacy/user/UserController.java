@@ -43,7 +43,10 @@ class UserController {
 
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('BOSS')")
-	String users(Model model) {
+	String users(Model model, EmployeeForm employeeForm, InsuranceForm insuranceForm) {
+
+		model.addAttribute("insuranceForm", insuranceForm);
+		model.addAttribute("employeeForm", employeeForm);
 
 		model.addAttribute("users", userManagement.findAll());
 		model.addAttribute("customer", Role.of("CUSTOMER"));
@@ -52,41 +55,62 @@ class UserController {
 
 		return "users";
 	}
-
-	@GetMapping("/user/{userId}")
+	
+	@PostMapping("/user/{userId}/insurance")
 	@PreAuthorize("hasRole('BOSS')")
-	String user(@PathVariable Long userId, Model model, EmployeeForm employeeForm) {
+	String changeInsurance(@PathVariable Long userId, @Valid @ModelAttribute("insuranceForm")InsuranceForm insuranceForm, Errors result) {
 		
-		model.addAttribute("employeeForm", employeeForm);
-
-		var user = userManagement.findUser(userId).get();
-		model.addAttribute("user", user);
-
-		model.addAttribute("customer", Role.of("CUSTOMER"));
-		model.addAttribute("employee", Role.of("EMPLOYEE"));
-		model.addAttribute("boss", Role.of("BOSS"));
-
-		return "user";
-	}
-
-	@PostMapping("/user/{userId}")
-	@PreAuthorize("hasRole('BOSS')")
-	String changeUser(@PathVariable Long userId, Model model, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
-		
-		var user = userManagement.findUser(userId).get();
-		model.addAttribute("user", user);
-		
-		model.addAttribute("customer", Role.of("CUSTOMER"));
-		model.addAttribute("employee", Role.of("EMPLOYEE"));
-		model.addAttribute("boss", Role.of("BOSS"));
-
 		if (result.hasErrors()) {
-			return "user";
+			return "redirect:/users";
 		}
 		
-		userManagement.addEmployee(userManagement.findUser(userId).get(), employeeForm);
+		userManagement.changeInsurance(userManagement.findUser(userId).get(), insuranceForm);
 
-		return "user";
+		return "redirect:/users";
+	}
+	
+	@PostMapping("/user/{userId}/hire")
+	@PreAuthorize("hasRole('BOSS')")
+	String hireEmployee(@PathVariable Long userId, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
+		
+		if (result.hasErrors()) {
+			return "redirect:/users";
+		}
+		
+		userManagement.hireEmployee(userManagement.findUser(userId).get(), employeeForm);
+
+		return "redirect:/users";
+	}
+	
+	@GetMapping("/user/{userId}/dismiss")
+	@PreAuthorize("hasRole('BOSS')")
+	String dismissEmployee(@PathVariable Long userId) {
+		
+		userManagement.dismissEmployee(userManagement.findUser(userId).get());
+
+		return "redirect:/users";
+	}
+
+	@PostMapping("/user/{userId}/salary")
+	@PreAuthorize("hasRole('BOSS')")
+	String changeEmployeeSalary(@PathVariable Long userId, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
+
+		if (result.hasErrors()) {
+			return "redirect:/users";
+		}
+		
+		userManagement.changeEmployee(userManagement.findUser(userId).get(), employeeForm);
+
+		return "redirect:/users";
+	}
+
+	@GetMapping("/user/{userId}/remove")
+	@PreAuthorize("hasRole('BOSS')")
+	String removeUser(@PathVariable Long userId) {
+		
+		userManagement.removeUser(userManagement.findUser(userId).get());
+
+		return "redirect:/users";
 	}
 
 	@GetMapping("/account")
