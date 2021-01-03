@@ -153,7 +153,7 @@
   			<form action="#" th:action="@{/orders}"  th:object="${filter}" method="POST">
                 <ul >
             
-                    <li th:each="ty : ${T(pharmacy.orders.OrderFilter.Filter).values()}">
+                    <li th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">
                       <input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
                       <label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
                     </li>
