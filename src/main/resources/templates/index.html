@@ -18,7 +18,7 @@
 		<nav th:include="navigation :: navigation"></nav>
 
 		<form class="searchbar" action="#" th:action="@{/search}" th:object=${searchform} method="post">
-			<input class="textinput" type="text" th:field="*{searchTerm}" placeholder="Was suchst du?" />
+			<input name="searchinput" class="textinput" type="text" th:field="*{searchTerm}" placeholder="Was suchst du?" />
 			<button class="iconbutton" type="submit"><img class="icon" th:src="@{/img/search.png}" ></button>
 		</form>
 		

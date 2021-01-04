@@ -53,16 +53,10 @@ class CatalogController {
 
 		if(searchTerm.equals("null")) searchTerm = "";
 
-		if(searchTerm.equals("") && noPres == false) {
+		if(searchTerm.equals("")) {
 			while (stock.hasNext()) {
 				Medicine d = stock.next();
-				result.add(d);
-			}
-
-		} else if(searchTerm.equals("") && noPres == true) {
-			while (stock.hasNext()) {
-				Medicine d = stock.next();
-				if (!d.isPresonly()) {
+				if (!d.isPresonly() || !noPres) {
 					if (d.getQuantity() > 0) {
 						if (!result.contains(d)) {
 							result.add(d);
@@ -72,7 +66,6 @@ class CatalogController {
 			}
 
 		} else {
-
 
 			String[] search = searchTerm.toLowerCase().split(" ");
 
@@ -101,7 +94,6 @@ class CatalogController {
 
 											}
 										}
-
 									}
 								}
 							}
@@ -135,27 +127,34 @@ class CatalogController {
 				}
 			}
 		}
+
 		model.addAttribute("tempTerm", searchTerm);
 
 
-		if(tag.equals("") && !searchTerm.equals("")) model.addAttribute("tags", tags);
+		String resultTitle = "";
 
+		if(result.size() == 0) {
+			resultTitle = "Keine Ergebnisse für \"" + searchTerm + "\"";
+
+			if(!tag.equals("")) {
+				resultTitle = resultTitle + " mit Tag \"" + tag + "\"";
+
+			}
+		} else if(!searchTerm.equals("")) {
+			resultTitle = "Ergebnisse für \"" + searchTerm + "\"";
+
+			if(!tag.equals("")) {
+				resultTitle = resultTitle + " mit Tag \"" + tag + "\"";
+
+			}
+		}
+
+		model.addAttribute("Suchbegriff", resultTitle);
+
+		if(tag.equals("") && !searchTerm.equals("")) model.addAttribute("tags", tags);
 
 		model.addAttribute("catalog", result);
 		model.addAttribute("Titel", "Apotheke");
-
-		if(!searchTerm.equals("")) {
-			model.addAttribute("Suchbegriff", "Ergebnisse für \"" + searchTerm + "\":");
-			model.addAttribute("Titel", "Ergebnisse für \"" + searchTerm + "\"");
-		}
-
-
-		if(result.size() == 0) {
-			model.addAttribute("Suchbegriff", "Keine Ergebnisse für \"" + searchTerm + "\"");
-			model.addAttribute("Titel", "Keine Ergebnisse");
-		}
-
-
 
 		return "index";
 	}
