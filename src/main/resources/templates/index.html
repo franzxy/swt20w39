@@ -1,124 +1,71 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<script th:src="@{/webjars/jquery/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script th:src="@{/webjars/Semantic-UI/semantic.min.js}" src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-	<link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet" href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-	<link th:href="@{/resources/css/style.css}" rel="stylesheet" href="../static/resources/css/style.css" type="text/css"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-	<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 
-	<title th:text="${Titel}">Apotheke</title>
-</head>
+		<title th:text="${Titel}">Apotheke</title>
 
-<body>
-<nav th:include="navigation :: navigation"></nav>
+	</head>
 
-<div class="row flex space align">
-	<form class="ui form" action="#" th:action="@{/search}" th:object=${searchform} method="post">
-		<div class="field">
-			<input type="text" th:field="*{searchTerm}" placeholder="Suchbegriff eingeben" />
+	<body>
+		
+		<nav th:include="navigation :: navigation"></nav>
+
+		<form class="searchbar" action="#" th:action="@{/search}" th:object=${searchform} method="post">
+			<input class="textinput" type="text" th:field="*{searchTerm}" placeholder="Was suchst du?" />
+			<button class="iconbutton" type="submit"><img class="icon" th:src="@{/img/search.png}" ></button>
+		</form>
+		
+		<div class="sidenav">
+			<form class="form" action="#" th:action="@{/}" th:object=${searchform} method="post">
+
+				<div class="field">
+					<label class="label" for="nopres">Nur rezeptfreie Medikamente anzeigen</label>
+					<input class="checkbox" type="checkbox" id="nopres" name="nopres" th:checked="${nopres}"/>
+				</div>
+
+				<div class="field" th:each="tag : ${tags}">
+					<form  class="ui form" method="post" th:action="@{/tagsearch}">
+						<input type="hidden" name="tempsearch" value="0" th:value="${tempTerm}"/>
+						<input type="hidden" name="tag" value="0" th:value="${tag}"/>
+
+						<button type="submit" class="ui labeled icon button" th:text="${tag}"></button>
+					</form>
+				</div>
+
+				<div class="field">
+					<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
+				</div>
+				<div class="field">
+				<h3 th:text="${Suchbegriff}"></h3>
+			</div>
+			</form>
+			
 		</div>
-		<button type="submit" class="ui labeled icon button">
-			<span>Suchen</span>
-		</button>
-	</form>
-</div >
+		<div class="meds" th:remove="all-but-first">
 
-<div class="sidenav" id="sidenav">
+			<div class="med" th:each="medicine : ${catalog}" th:href="@{/medicine/{id}(id=${medicine.id})}">
 
-	<form action="#" th:action="@{/}" th:object=${searchform} method="post" class="ui form">
+				<img class="medimg" th:src="@{/img/{image}.png(image=${medicine.image})}" src="../static/img/med1.png"/>
 
-		<div class="field">
-
-
-			<input type="checkbox" id="nopres" name="nopres" th:checked="${nopres}"/>
-			<label for="nopres">Nur rezeptfreie Medikamente anzeigen</label>
-
-
-			<div th:each="tag : ${tags}">
-				<form  class="ui form" method="post" th:action="@{/tagsearch}">
-					<input type="hidden" name="tempsearch" value="0" th:value="${tempTerm}"/>
-					<input type="hidden" name="tag" value="0" th:value="${tag}"/>
-
-					<button type="submit" class="ui labeled icon button" th:text="${tag}"></button>
-				</form>
+				<div class="meddetails">
+					<h5 th:text="${medicine.name}"></h5>
+					<div class="content" th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Typ</div>
+					<div class="extra content" th:text="${{medicine.price}}">Preis</div>
+					<form  class="form" method="post" th:action="@{/cart}">
+						<input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
+						<input class="numberinput" id="number" type="number" name="number" min="1" th:max="${medicine.quantity}" step="1" value="1"/>
+						<button class="button" type="submit" th:text="${'In den Warenkorb'}"></button>
+					</form>
+				</div>
 			</div>
-
-			<br>
-			<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
 		</div>
-
-	</form>
-
-</div>
-
-<div class="main">
-
-
-
-	<br>
-
-	<header>
-		<h1 th:text="${Suchbegriff}">Suchbegriff</h1>
-	</header>
-
-	<br>
-
-	<div class="ui link cards" th:remove="all-but-first">
-		<div class="ui card" th:each="medicine : ${catalog}">
-
-			<div class="content">
-				<a class="header" th:href="@{/medicine/{id}(id=${medicine.id})}" th:text="${medicine.name}">Medikament</a>
-			</div>
-
-			<div class="image">
-				<a th:href="@{/medicine/{id}(id=${medicine.id})}">
-					<img class="thumbnail" th:src="@{/img/{image}.png(image=${medicine.image})}" src="../static/img/med1.png"/>
-				</a>
-			</div>
-
-			<div class="content">
-				<div class="description" th:text="${medicine.description}">Verwendung</div>
-			</div>
-
-			<div class="content" th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Typ</div>
-
-			<div class="extra content" th:text="${{medicine.price}}">Preis</div>
-
-			<div class="content">
-				<form  class="ui form" method="post" th:action="@{/cart}">
-					<input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
-					<input id="number" type="number" name="number" min="1" th:max="${medicine.quantity}" step="1" value="1"/><br/>
-					<br>
-					<button type="submit" class="ui labeled icon button">
-						<i class="add to cart icon"></i><span>In den Warenkorb</span>
-					</button>
-				</form>
-			</div>
-
-		</div>
-	</div>
-
-
-</div>
-
-<script>
-
-	function toggleSideBar() {
-		var sidebar = document.getElementById("sidenav");
-		if(sidebar.style.display == "none") {
-			sidebar.style.display = "block";
-		} else {
-			sidebar.style.display = "none";
-		}
-	}
-
-</script>
-
-
-</body>
+		<div class="pad"></div>
+	</body>
 </html>

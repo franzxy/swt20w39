@@ -1,25 +1,10 @@
-<nav th:fragment="navigation">   
-    <div class="flex row center width bar">
-        <a class="a nav height flex center" th:href="@{/}">
-            <img class="icon" th:src="@{/img/pharmacy.png}">
-        </a>
-
-        <div class="row height flex align">
-            <a class="a nav height flex center" th:href="@{/cart}">Warenkorb</a>
-            <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
-            <div class="height flex center" sec:authorize="isAuthenticated()">
-                <a class="a nav height flex center" th:href="@{/account}" th:text="${'Hallo, '+#authentication.getName()}" >Account</a>
-                <a class="a nav height center" th:href="@{/logout}">
-                    <img class="icon" th:src="@{/img/logout.png}">
-                </a>
-            </div>
+<nav th:fragment="navigation">  
+    <div class="bottombar">
+        <div class="bottomnav">
+            <a class="iconbutton" th:href="@{/}"><img class="icon" th:src="@{/img/pharmacy.png}"></a>
+            <a class="iconbutton" th:href="@{/cart}"><img class="icon" th:src="@{/img/cart.png}" ></a>
+            <a class="iconbutton" th:href="@{/account}"><img class="icon" th:src="@{/img/account.png}" ></a>
+            <a class="iconbutton" th:href="@{/menu}" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')"><img class="icon" th:src="@{/img/menu.png}" /></a>
         </div>
-    </div>
-    <div class="flex row center width bar" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
-        <a class="a nav height flex center" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
     </div>
 </nav>

@@ -13,6 +13,7 @@ import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -43,6 +44,11 @@ public class OrderController {
 		return new Cart();
 	}
 
+	@GetMapping("/cart")
+	String basket() {
+		return "cart";
+	}
+
 	@PostMapping("/cart")
 	String addItem(@RequestParam("pid") Medicine item, @RequestParam("number") int number, @ModelAttribute Cart cart) {
 
@@ -53,15 +59,12 @@ public class OrderController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/cart")
-	String basket() {
-		return "cart";
-	}
 	@PostMapping("/clearcart")
 	String emptycart(@ModelAttribute Cart cart){
 		cart.clear();
 		return "redirect:/cart";
 	}
+
 	@PostMapping("/checkout")
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 
@@ -73,7 +76,6 @@ public class OrderController {
 			cart.addItemsTo(order);
 
 			orderManagement.payOrder(order);
-			orderManagement.completeOrder(order);
 
 			cart.clear();
 
@@ -104,6 +106,7 @@ public class OrderController {
 		model.addAttribute("filter", new OrderFilter());
 		return "orders";
 	}
+
 	@PostMapping("/orders")
 	String postorders(@ModelAttribute OrderFilter filter,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		List<Order> ret =List.of() ;
@@ -132,6 +135,7 @@ public class OrderController {
 		model.addAttribute("filter", filter);
 		return "orders";
 	}
+
 	@GetMapping("/orders/{id}")
 	public String detail(@PathVariable String id, Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		

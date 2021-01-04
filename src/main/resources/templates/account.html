@@ -1,104 +1,124 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-        <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Account</title>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
 
-        <p th:text="${'ID: '+user.getId()}">ID</p>
-        <p th:text="${'Benutzername: '+user.userAccount.getUsername()}">Benutzername</p>
-        
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/account}" th:object="${passwordForm}">
-
-            <h3 class="ui dividing header">Passwort ändern</h3>
-    
-            <div class="ui negative message" th:if="${#fields.hasErrors('*')}">
-                <p>Einige Angaben sind nicht korrekt.</p>
-            </div>
-    
+        <div class="center">
+            
             <div class="field">
-                <label for="password">Altes Passwort</label>
-                <input id="oldPassword" name="oldPassword" th:field="*{oldPassword}" th:errorclass="fieldError" type="password"
-                       required="required"/><br/>
-                <p th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}">Das Passwort darf
-                    nicht leer sein.</p>
-            </div>
-    
-            <div class="field">
-                <label for="password">Neues Passwort</label>
-                <input id="newPassword" name="newPassword" th:field="*{newPassword}" th:errorclass="fieldError" type="password"
-                       required="required"/><br/>
-                
-                <p th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}">Das Passwort darf
-                    nicht leer sein.</p>
-                
-            </div>
-    
-            <div class="field">
-                <label for="password">Neues Passwort Bestätigen</label>
-                <input id="newPassword" name="newPassword" th:field="*{confirmPassword}" th:errorclass="fieldError" type="password"
-                       required="required"/><br/>
-                
-                       <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Das Passwort darf
-                           nicht leer sein.</p>
-                
-            </div>
-    
-            <button type="submit" class="ui button">Passwort ändern</button>
-        </form>
-
-        <form th:if="${user.getInsurance() == null}" method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
-            <div class="field">
-                <label for="name">Krankenkasse</label>
-                <input id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            </div>
-
-            <button type="submit" class="ui button">Krankenkasse hinzufügen</button>
-        </form>
-        <form th:if="${user.getInsurance()}" method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
-            <a th:text="${'Aktuelle Krankenkasse: '+user.getInsurance()}"></a>
-            <div class="field">
-                <label for="name">Neue Krankenkasse</label>
-                <input id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            </div>
-
-            <button type="submit" class="ui button">Krankenkasse ändern</button>
-        </form>
-
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/account/address}" th:object="${addressForm}">
-            <div class="field">
-                <label for="address">Name</label>
-                <input th:value="${user.getAddress()} ? ${user.getAddress().getName()} : ${addressForm.name}" name="name" th:errorclass="fieldError" type="text" required="required"/>
-            </div>
-
-            <div class="field">
-                <label for="address">Straße und Hausnummer</label>
-                <input th:value="${user.getAddress()} ? ${user.getAddress().getStreet()} : ${addressForm.street}" name="street" th:errorclass="fieldError" type="text" required="required"/><br/>
-            </div>
-
-            <div class="field">
-                <label for="name">Postleitzahl</label>
-                <input th:value="${user.getAddress()} ? ${user.getAddress().getPostCode()} : ${addressForm.postCode}" name="postCode" th:errorclass="fieldError" type="number" required="required"/><br/>
-            </div>
-    
-            <div class="field">
-                <label for="password">Stadt</label>
-                <input th:value="${user.getAddress()} ? ${user.getAddress().getCity()} : ${addressForm.city}" name="city" th:errorclass="fieldError" type="text" required="required"/>
+                <h1 th:text="${'Hallo, '+user.userAccount.getUsername()}">Benutzername</h1>
             </div>
             
-            <button th:text="${user.getAddress() == null} ? ${'Adresse hinzufügen'} : ${'Adresse ändern'}" type="submit" class="ui button"></button>
-        </form>
+            <div class="field">
+                <a class="button" sec:authorize="isAuthenticated()" th:text="Ausloggen" th:href="@{/logout}"></a>
+            </div>
 
-        <p>Zahlungsmittel</p>
-        tbc
+            <form class="form" method="post" role="form" id="form" th:action="@{/account}" th:object="${passwordForm}">
 
-        <a th:if="${user.userAccount.hasRole(employee)}" class="flex center button" th:text="${'Gehalt: '+user.getSalary()}"></a>
+                <div class="field">
+                    <h2 class="ui dividing header">Passwort</h2>
+                </div>
+        
+                <div class="field">
+                    <label class="label" for="password">Altes Passwort</label>
+                    <input class="textinput" id="oldPassword" name="oldPassword" th:field="*{oldPassword}" th:errorclass="fieldError" type="password"
+                        required="required"/>
+                    <p th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}">Das Passwort darf
+                        nicht leer sein.</p>
+                </div>
+        
+                <div class="field">
+                    <label class="label" for="password">Neues Passwort</label>
+                    <input class="textinput" id="newPassword" name="newPassword" th:field="*{newPassword}" th:errorclass="fieldError" type="password"
+                        required="required"/>
+                    
+                    <p th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}">Das Passwort darf
+                        nicht leer sein.</p>
+                </div>
+        
+                <div class="field">
+                    <label class="label" for="password">Neues Passwort Bestätigen</label>
+                    <input class="textinput" id="newPassword" name="newPassword" th:field="*{confirmPassword}" th:errorclass="fieldError" type="password"
+                        required="required"/>
+                </div>
+        
+                <div class="field">
+                    <button type="submit" class="ui button">Passwort ändern</button>
+                </div>
+            </form>
 
-        <a th:if="${user.userAccount.hasRole(customer)}" class="flex center button" th:href="@{/account/remove}">Löschen</a>
+            <form th:if="${user.getInsurance() == null}" method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
 
+                <div class="field">
+                    <h2 class="ui dividing header">Versicherung</h2>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="name">Krankenkasse</label>
+                    <input class="textinput" id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/>
+                </div>
+                
+                <div class="field">
+                    <button type="submit" class="ui button">Krankenkasse hinzufügen</button>
+                </div>
+            </form>
+            <form th:if="${user.getInsurance()}" method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
+                <a th:text="${'Aktuelle Krankenkasse: '+user.getInsurance()}"></a>
+                <div class="field">
+                    <label class="label" for="name">Neue Krankenkasse</label>
+                    <input class="textinput" id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/>
+                </div>
+
+                <button type="submit" class="ui button">Krankenkasse ändern</button>
+            </form>
+
+            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/address}" th:object="${addressForm}">
+                
+                <div class="field">
+                    <h2 class="ui dividing header">Adresse</h2>
+                </div>
+                <div class="field">
+                    <label class="label" for="address">Name</label>
+                    <input class="textinput" th:value="${user.getAddress()} ? ${user.getAddress().getName()} : ${addressForm.name}" name="name" th:errorclass="fieldError" type="text" required="required"/>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="address">Straße und Hausnummer</label>
+                    <input class="textinput" th:value="${user.getAddress()} ? ${user.getAddress().getStreet()} : ${addressForm.street}" name="street" th:errorclass="fieldError" type="text" required="required"/>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="name">Postleitzahl</label>
+                    <input class="textinput" th:value="${user.getAddress()} ? ${user.getAddress().getPostCode()} : ${addressForm.postCode}" name="postCode" th:errorclass="fieldError" type="number" required="required"/>
+                </div>
+        
+                <div class="field">
+                    <label class="label" for="password">Stadt</label>
+                    <input class="textinput" th:value="${user.getAddress()} ? ${user.getAddress().getCity()} : ${addressForm.city}" name="city" th:errorclass="fieldError" type="text" required="required"/>
+                </div>
+                
+                <div class="field">
+                    <button th:text="${user.getAddress() == null} ? ${'Adresse hinzufügen'} : ${'Adresse ändern'}" type="submit" class="ui button"></button>
+                </div>
+            </form>
+
+            <p>Zahlungsmittel</p>
+            tbc
+
+            <a th:if="${user.userAccount.hasRole(employee)}" class="flex center button" th:text="${'Gehalt: '+user.getSalary()}"></a>
+
+            <a th:if="${user.userAccount.hasRole(customer)}" class="flex center button" th:href="@{/account/remove}">Löschen</a>
+        </div>
+        <div class="pad"></div>
     </body>
 </html>

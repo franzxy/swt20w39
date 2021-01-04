@@ -1,49 +1,54 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-        <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Warenkorb</title>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div th:unless="${cart.empty}">
-            <table class="ui celled table">
-                <thead>
-                <tr>
-                    <th >Bezeichnung</th>
-                    <th >Anzahl</th>
-                    <th >Preis</th>
-                </tr>
-                </thead>
-                <tbody th:remove="all-but-first">
-    
-                <tr th:each="item : ${cart} ">
-                    <td th:text="${item.productName}">Default</td>
-                    <td th:text="${item.quantity}">10</td>
-                    <td th:text="${{item.price}}">10 Euro</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="ui two column centered grid">
-            <div class="four column centered row">
-                <div class="column">
-                    <div class="ui horizontal statistic">
-                        <div class="label" >Summe:</div>
-                        <div class="value"><span th:text="${{cart.price}}">1337</span></div>
-                    </div>
+        <div class="center">
+            <div th:unless="${cart.empty}">
+                <div class="field">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th >Bezeichnung</th>
+                            <th >Anzahl</th>
+                            <th >Preis</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                
+                            <tr th:each="item : ${cart} ">
+                                <td th:text="${item.productName}">Default</td>
+                                <td th:text="${item.quantity}">10</td>
+                                <td th:text="${{item.price}}">10 Euro</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="column">
-                    <form  class="ui form" method="post" th:action="@{/checkout}"> <!--sec:authorize="hasRole('CUSTOMER')"-->
-                        <button type="submit" class="ui button" >Kaufen</button>
+                <div class="field">
+                    <label class="label" th:text="${'Summe'}"></label>
+                    <div class="value"><span th:text="${{cart.price}}">1337</span></div>
+                </div>
+                <div class="field">
+                    <form class="form" method="post" th:action="@{/clearcart}">
+                        <button class="button" type="submit" th:text="${'Warenkorb leeren'}"></button>
                     </form>
-                    <form  class="ui form" method="post" th:action="@{/clearcart}"> <!--sec:authorize="hasRole('CUSTOMER')"-->
-                        <button type="submit" class="ui button" >Verwerfen</button>
+                </div>
+                <div class="field">
+                    <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
+                    <form sec:authorize="isAuthenticated()" class="ui form" method="post" th:action="@{/checkout}">
+                        <button type="submit" class="ui button">Jetzt Bezahlen</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
     </body>
 </html>
