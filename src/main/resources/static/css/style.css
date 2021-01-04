@@ -5,10 +5,11 @@
 }
 
 html {
-	height: 100vh;
-	width: 100vw;
-	font: 13px/22px Helvetica, Arial, sans-serif;
-	background: white;
+	height: 100%;
+	width: 100%;
+	font: 13px/22px Roboto, sans-serif;
+	background: black;
+	color: white;
 }
 
 body {
@@ -17,82 +18,188 @@ body {
 }
 
 nav {
-	display: flex;
+	z-index: 2;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.bottombar {
+	z-index: 3;
 	width: 100%;
-	flex-direction: column;
-	background-color: black;
-}
-
-.bar {
-	justify-content: space-between;
+	position: fixed;
+	display: flex;
+	justify-content: center;
 	align-items: center;
+	flex-direction: row;
+	bottom: 0;
+	left: 0;
+}
+
+.bottomnav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	background: #404040;
+	margin: 10px;
+}
+
+.searchbar {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	background: #101010;
+}
+
+.textinput {
+	background: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	width: 300px;
 	height: 40px;
-}
-
-.a {
-	color: white;
-	text-decoration: none;
-	line-height: normal;
-}
-
-.a:hover{
-	transition: color 0.3s ease;
-	color: lightgray;
-}
-
-.active {
-	color: lightgray;
-}
-
-.space {
-	justify-content: space-evenly;
-	flex-grow: 1;
-}
-
-.nav {
 	padding: 0 10px;
+	border: none;
+	color: white;
+	background: #101010;
 }
 
-.button {
-	cursor: pointer;
-	padding: 0 15px;
-	height: 30px;
+.numberinput {
+	background: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	width: 50px;
+	height: 40px;
+	padding: 0 10px;
 	border: none;
-	background: rgba(20, 20, 20, 0.5);
-	border-radius: 15px;
+	color: white;
+	background: #101010;
+}
+
+.iconbutton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	background: none;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
 }
 
 .icon {
-	background: black;
-	height: 30px;
-	width: 30px;
+	background: none;
+	height: 20px;
+	width: 20px;
 }
 
-.row {
-	flex-direction: row;
-}
-
-.width {
-	width: 100%;
-}
-
-.height {
-	height: 100%;
-}
-
-.flex{
+.button {
 	display: flex;
-}
-
-.justify {
 	justify-content: center;
+	align-items: center;
+	border: none;
+	background: #101010;
+	width: 100px;
+	height: 40px;
+	cursor: pointer;
+	color: white;
+	text-decoration: none;
 }
 
-.align {
+.form {
+	display: flex;
+	justify-content: center;
 	align-items: center;
+	flex-direction: column;
+}
+
+.field {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 20px;
 }
 
 .center {
+	padding-top: 100px;
+	width: 100%;
+	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
+
+.sidenav {
+	width: 100%;
+	padding: 10px 0;
+}
+
+.catalog {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.meds {
+	width: 100%;
+	justify-content: space-evenly;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.med {
+	width: 200px;
+	background: #202020;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+
+.med::hover > .medimg {
+	
+}
+
+.medimg {
+	width: 100%;
+	height: 150px;
+}
+
+.meddetails {
+	padding: 10px;
+	height: 150px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-direction: column;
+}
+
+.meddetails .form {
+	flex-direction: row;
+}
+
+.pad {
+	padding-bottom: 60px;
+}
+
+td, th {
+	border: none;
+	padding: 0px 10px;
+	height: 40px;
+  }
+  
+table tr:nth-child(even){background-color: #303030;}
+  
+th {
+	text-align: left;
+	background-color: #202020;
+	color: white;
+  }

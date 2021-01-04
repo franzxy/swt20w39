@@ -8,31 +8,34 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/register}" th:object="${userForm}">
-    
-            <div class="field">
-                <label for="address">Benutzername</label>
-                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
-                       required="required"/>
-            </div>
-    
-            <div class="field">
-                <label for="password">Passwort</label>
-                <input id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
-                       required="required"/>
-            </div>
-    
-            <div class="field">
-                <label for="password">Passwort Bestätigen</label>
-                <input id="newPassword" name="newPassword" th:field="*{confirmPassword}" th:errorclass="fieldError" type="password"
-                       required="required"/><br/>
-                
-                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Das Passwort darf
-                    nicht leer sein.</p>
-                
-            </div>
 
-            <button type="submit" class="ui button">Registrieren</button>
-        </form>
+        <div class="center">
+            <form class="form" method="post" role="form" id="form" th:action="@{/register}" th:object="${userForm}">
+        
+                <div class="field">
+                    <label class="label" for="address">Benutzername</label>
+                    <input class="textinput" id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
+                        required="required"/>
+                </div>
+        
+                <div class="field">
+                    <label class="label" for="password">Passwort</label>
+                    <input class="textinput" id="password" name="password" th:field="*{password}" th:errorclass="fieldError" type="password"
+                        required="required"/>
+                </div>
+        
+                <div class="field">
+                    <label class="label" for="password">Passwort Bestätigen</label>
+                    <input class="textinput"id="newPassword" name="newPassword" th:field="*{confirmPassword}" th:errorclass="fieldError" type="password"
+                        required="required"/><br/>
+                    
+                    <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Das Passwort darf
+                        nicht leer sein.</p>
+                    
+                </div>
+
+                <button type="submit" class="ui button">Registrieren</button>
+            </form>
+        </div>
     </body>
 </html>

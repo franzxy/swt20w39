@@ -8,29 +8,26 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-            
-        <c:if test="${param.error != null}">
-    <div id="error">
-        <spring:message code="message.badCredentials">   
-        </spring:message>
-    </div>
-</c:if>
-        <form class="ui form" role="form" th:action="@{/login}" method="post">
 
-            <div class="field">
-                <label for="username">Benutzername</label>
-                <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
-            </div>
-    
-            <div class="field">
-                <label for="password">Passwort</label>
-                <input type="password" id="password" name="password"/> <br/>
-            </div>
-    
-            <button type="submit" class="ui button">Login</button>
-            
-            <span>Neu hier?</span>
-            <a class="a nav height flex center" th:href="@{/register}">Registrieren</a>
-        </form>
+        <div class="center">
+            <form class="form" role="form" th:action="@{/login}" method="post">
+                <div class="field">
+                    <label class="label" for="username">Benutzername</label>
+                    <input class="textinput" type="text" id="username" name="username" autofocus="autofocus"/>
+                </div>
+                <div class="field">
+                    <label class="label" for="password">Passwort</label>
+                    <input class="textinput" type="password" id="password" name="password"/>
+                </div>
+                <div class="field">
+                    <button class="button" type="submit">Login</button>
+                </div>
+                <div class="field">
+                    <span class="span">Neu hier?</span>
+                    <a class="button" th:href="@{/register}">Registrieren</a>
+                </div>
+            </form>
+        </div>
+
     </body>
 </html>

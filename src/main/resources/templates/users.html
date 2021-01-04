@@ -14,7 +14,7 @@
 					<th>ID</th>
 					<th>Benutzername</th>
 					<th>Krankenkasse</th>
-					<th>Adressen</th>
+					<th>Adresse</th>
 					<th>Zahlungsmittel</th>
 					<th>Rolle</th>
 					<th>Arbeitsverhältnis</th>
@@ -29,8 +29,8 @@
 					<td>
 						<form th:if="${user.getInsurance() == null}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}/insurance(id=${user.getId()})}" th:object="${insuranceForm}">
 							<div class="field">
-								<label for="name">Krankenkasse</label>
-								<input id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/><br/>
+								<label class="label"  for="name">Krankenkasse</label>
+								<input class="textinput" id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/><br/>
 							</div>
 				
 							<button type="submit" class="ui button">Krankenkasse hinzufügen</button>
@@ -38,8 +38,8 @@
 						<form th:if="${user.getInsurance()}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}/insurance(id=${user.getId()})}" th:object="${insuranceForm}">
 							<a th:text="${'Aktuelle Krankenkasse: '+user.getInsurance()}"></a>
 							<div class="field">
-								<label for="name">Neue Krankenkasse</label>
-								<input id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/><br/>
+								<label class="label"  for="name">Neue Krankenkasse</label>
+								<input class="textinput" id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/><br/>
 							</div>
 				
 							<button type="submit" class="ui button">Krankenkasse ändern</button>
@@ -48,30 +48,30 @@
 					<td>
 						<form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}/address(id=${user.getId()})}" th:object="${addressForm}">
 							<div class="field">
-								<label for="address">Name</label>
-								<input th:value="${user.getAddress()} ? ${user.getAddress().getName()} : ${addressForm.name}" name="name" th:errorclass="fieldError" type="text" required="required"/>
+								<label class="label"  for="address">Name</label>
+								<input class="textinput" th:value="${user.getAddress()} ? ${user.getAddress().getName()} : ${addressForm.name}" name="name" th:errorclass="fieldError" type="text" required="required"/>
 							</div>
 				
 							<div class="field">
-								<label for="address">Straße und Hausnummer</label>
-								<input th:value="${user.getAddress()} ? ${user.getAddress().getStreet()} : ${addressForm.street}" name="street" th:errorclass="fieldError" type="text" required="required"/><br/>
+								<label class="label"  for="address">Straße und Hausnummer</label>
+								<input class="textinput" th:value="${user.getAddress()} ? ${user.getAddress().getStreet()} : ${addressForm.street}" name="street" th:errorclass="fieldError" type="text" required="required"/><br/>
 							</div>
 				
 							<div class="field">
-								<label for="name">Postleitzahl</label>
-								<input th:value="${user.getAddress()} ? ${user.getAddress().getPostCode()} : ${addressForm.postCode}" name="postCode" th:errorclass="fieldError" type="number" required="required"/><br/>
+								<label class="label"  for="name">Postleitzahl</label>
+								<input class="numberinput" th:value="${user.getAddress()} ? ${user.getAddress().getPostCode()} : ${addressForm.postCode}" name="postCode" th:errorclass="fieldError" type="number" required="required"/><br/>
 							</div>
 					
 							<div class="field">
-								<label for="password">Stadt</label>
-								<input th:value="${user.getAddress()} ? ${user.getAddress().getCity()} : ${addressForm.city}" name="city" th:errorclass="fieldError" type="text" required="required"/>
+								<label class="label"  for="password">Stadt</label>
+								<input class="textinput" th:value="${user.getAddress()} ? ${user.getAddress().getCity()} : ${addressForm.city}" name="city" th:errorclass="fieldError" type="text" required="required"/>
 							</div>
 							
 							<button th:text="${user.getAddress() == null} ? ${'Adresse hinzufügen'} : ${'Adresse ändern'}" type="submit" class="ui button"></button>
 						</form>
 					</td>
 					<td>
-						<a class="a nav height flex center button" th:href="@{/user/{id}/payment(id=${user.getId()})}">Zahlungsmittel hinzufügen</a>
+						<a class="button" th:href="@{/user/{id}/payment(id=${user.getId()})}">Zahlungsmittel hinzufügen</a>
 					</td>
 					<td th:if="${user.userAccount.hasRole(customer)}">Kunde</td>
 					<td th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter</td>
@@ -79,29 +79,29 @@
 					<td th:if="${user.userAccount.hasRole(customer)}">
 						<form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}/hire(id=${user.getId()})}" th:object="${employeeForm}">
 							<div class="field">
-								<label for="name">Gehalt</label>
-								<input id="name" name="name" th:field="*{salary}" th:errorclass="fieldError" type="number" required="required"/><br/>
+								<label class="label"  for="name">Gehalt</label>
+								<input class="numberinput" id="name" name="name" th:field="*{salary}" th:errorclass="fieldError" type="number" required="required"/><br/>
 							</div>
 				
 							<button type="submit" class="ui button">Einstellen</button>
 						</form>
 					</td>
 					<td th:if="${user.userAccount.hasRole(employee)}">
-						<a class="a nav height flex center button" th:href="@{/user/{id}/dismiss(id=${user.getId()})}">Entlassen</a>
+						<a class="button" th:href="@{/user/{id}/dismiss(id=${user.getId()})}">Entlassen</a>
 					</td>
 					<td th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer</td>
 					<td>
 						<form th:if="${user.userAccount.hasRole(employee)}" method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}/salary(id=${user.getId()})}" th:object="${employeeForm}">
 							<a th:text="${'Aktuelles Gehalt: '+user.getSalary()}"></a>
 							<div class="field">
-								<label for="name">Neues Gehalt</label>
-								<input id="name" name="name" th:field="*{salary}" th:errorclass="fieldError" type="number" required="required"/><br/>
+								<label class="label"  for="name">Neues Gehalt</label>
+								<input class="numberinput" id="name" name="name" th:field="*{salary}" th:errorclass="fieldError" type="number" required="required"/><br/>
 							</div>
 				
 							<button type="submit" class="ui button">Gehalt anpassen</button>
 						</form>
 					</td>
-					<td><a th:if="${user.userAccount.hasRole(customer)}" class="a nav height flex center button" th:href="@{/user/{id}/remove(id=${user.getId()})}">Löschen</a></td>
+					<td><a th:if="${user.userAccount.hasRole(customer)}" class="button" th:href="@{/user/{id}/remove(id=${user.getId()})}">Löschen</a></td>
 				</tr>
 			</tbody>
 		</table>
