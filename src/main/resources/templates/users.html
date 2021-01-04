@@ -67,7 +67,9 @@
 								<input class="textinput" th:value="${user.getAddress()} ? ${user.getAddress().getCity()} : ${addressForm.city}" name="city" th:errorclass="fieldError" type="text" required="required"/>
 							</div>
 							
-							<button th:text="${user.getAddress() == null} ? ${'Adresse hinzufügen'} : ${'Adresse ändern'}" type="submit" class="ui button"></button>
+							<div class="field">
+								<button th:text="${user.getAddress() == null} ? ${'Adresse hinzufügen'} : ${'Adresse ändern'}" type="submit" class="ui button"></button>
+							</div>
 						</form>
 					</td>
 					<td>

@@ -115,9 +115,14 @@
             <p>Zahlungsmittel</p>
             tbc
 
-            <a th:if="${user.userAccount.hasRole(employee)}" class="flex center button" th:text="${'Gehalt: '+user.getSalary()}"></a>
-
-            <a th:if="${user.userAccount.hasRole(customer)}" class="flex center button" th:href="@{/account/remove}">Löschen</a>
+            <div class="field">
+                <a th:if="${user.userAccount.hasRole(employee)}" class="button" th:text="${'Gehalt: '+user.getSalary()}"></a>
+            </div>
+            
+            <div class="field">
+                <a th:if="${user.userAccount.hasRole(customer)}" class="button" th:href="@{/account/remove}">Löschen</a>
+        
+            </div>
         </div>
         <div class="pad"></div>
     </body>
