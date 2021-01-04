@@ -50,7 +50,7 @@
 		</div>
 		<div class="meds" th:remove="all-but-first">
 
-			<div class="med" th:each="medicine : ${catalog}" th:href="@{/medicine/{id}(id=${medicine.id})}">
+			<a class="med" th:each="medicine : ${catalog}" th:href="@{/medicine/{id}(id=${medicine.id})}">
 
 				<img class="medimg" th:src="@{/img/{image}.png(image=${medicine.image})}" src="../static/img/med1.png"/>
 
@@ -58,13 +58,8 @@
 					<h5 th:text="${medicine.name}"></h5>
 					<div class="content" th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Typ</div>
 					<div class="extra content" th:text="${{medicine.price}}">Preis</div>
-					<form  class="form" method="post" th:action="@{/cart}">
-						<input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
-						<input class="numberinput" id="number" type="number" name="number" min="1" th:max="${medicine.quantity}" step="1" value="1"/>
-						<button class="button" type="submit" th:text="${'In den Warenkorb'}"></button>
-					</form>
 				</div>
-			</div>
+			</a>
 		</div>
 		<div class="pad"></div>
 	</body>
