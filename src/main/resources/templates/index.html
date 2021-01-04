@@ -16,13 +16,21 @@
 
 <body>
 <nav th:include="navigation :: navigation"></nav>
-<br>
-<button class="ui button" onclick="toggleSideBar()">Filter</button>
 
-<div class="sidenav" id="sidenav" style="display:none">
-	<br>
+<div class="row flex space align">
+	<form class="ui form" action="#" th:action="@{/search}" th:object=${searchform} method="post">
+		<div class="field">
+			<input type="text" th:field="*{searchTerm}" placeholder="Suchbegriff eingeben" />
+		</div>
+		<button type="submit" class="ui labeled icon button">
+			<span>Suchen</span>
+		</button>
+	</form>
+</div >
+
+<div class="sidenav" id="sidenav">
+
 	<form action="#" th:action="@{/}" th:object=${searchform} method="post" class="ui form">
-
 
 		<div class="field">
 
@@ -41,9 +49,7 @@
 			</div>
 
 			<br>
-			<button type="submit" class="ui labeled icon button">
-				<i class="search icon"></i><span>Suchen</span>
-			</button>
+			<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
 		</div>
 
 	</form>

@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.salespointframework.useraccount.Role;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -130,24 +131,54 @@ class UserController {
 
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
-	String account(Model model, UserPasswordForm changePassword) {
+	String account(Model model, PasswordForm passwordForm, EmployeeForm employeeForm, InsuranceForm insuranceForm, AddressForm addressForm) {
 
-		model.addAttribute("changePassword", changePassword);
-		
+		model.addAttribute("passwordForm", passwordForm);
+		model.addAttribute("insuranceForm", insuranceForm);
+		model.addAttribute("addressForm", addressForm);
+		model.addAttribute("employeeForm", employeeForm);
+
+		model.addAttribute("user", userManagement.currentUser().get());
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
+
 		return "account";
 	}
-
-	@PostMapping("/account")
+	
+	@PostMapping("/account/insurance")
 	@PreAuthorize("isAuthenticated()")
-	String changeAccount(Model model, @Valid @ModelAttribute("changePassword") UserPasswordForm changePassword, Errors result) {
-				
+	String changeAccountInsurance(@Valid @ModelAttribute("insuranceForm")InsuranceForm insuranceForm, Errors result) {
+		
 		if (result.hasErrors()) {
-			return "account";
+			return "redirect:/account";
 		}
 		
-		userManagement.changePassword(changePassword);
+		userManagement.changeInsurance(userManagement.currentUser().get(), insuranceForm);
+
+		return "redirect:/account";
+	}
+	
+	@PostMapping("/account/address")
+	@PreAuthorize("isAuthenticated()")
+	String addAccountAddress(@Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors result) {
 		
-		return "account";
+		if (result.hasErrors()) {
+			return "redirect:/account";
+		}
+		
+		userManagement.changeAddress(userManagement.currentUser().get(), addressForm);
+
+		return "redirect:/account";
+	}
+
+	@GetMapping("/account/remove")	
+	@PreAuthorize("hasRole('CUSTOMER')")
+	String removeAccountUser() {
+		
+		userManagement.removeUser(userManagement.currentUser().get());
+
+		return "redirect:/logout";
 	}
 /*
 	String example(@LoggedIn Optional<UserAccount> userAccount) {
