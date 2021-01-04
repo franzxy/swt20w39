@@ -12,7 +12,7 @@ import org.salespointframework.useraccount.Password.UnencryptedPassword;
 import org.springframework.security.core.context.SecurityContextHolder;
 import javax.validation.constraints.Pattern;	
 
-class UserPasswordForm {
+class PasswordForm {
 	
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
 	private String oldPassword;
@@ -46,7 +46,7 @@ class UserPasswordForm {
 		return newPassword.equals(confirmPassword);
 	}
 
-	public UserPasswordForm(String oldPassword, String newPassword, String confirmPassword) {
+	public PasswordForm(String oldPassword, String newPassword, String confirmPassword) {
 		this.oldPassword = oldPassword;
 		this.newPassword = newPassword;
 		this.confirmPassword = confirmPassword;

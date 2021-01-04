@@ -11,8 +11,8 @@
 
         <p th:text="${'ID: '+user.getId()}">ID</p>
         <p th:text="${'Benutzername: '+user.userAccount.getUsername()}">Benutzername</p>
-
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/account}" th:object="${changePassword}">
+        
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/account}" th:object="${passwordForm}">
 
             <h3 class="ui dividing header">Passwort ändern</h3>
     
@@ -50,70 +50,55 @@
     
             <button type="submit" class="ui button">Passwort ändern</button>
         </form>
-        
-        <p>Adressen</p>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${addressForm}">
+
+        <form th:if="${user.getInsurance() == null}" method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
             <div class="field">
-                <label for="address">Name</label>
-                <input id="address" name="address" th:field="*{name}" th:errorclass="fieldError" type="text"
-                       required="required"/>
+                <label for="name">Krankenkasse</label>
+                <input id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/><br/>
             </div>
 
-            <div class="field">
-                <label for="address">Straße und Hausnummer</label>
-                <input id="name" name="name" th:field="*{street}" th:errorclass="fieldError" type="text" required="required"/><br/>
-            </div>
-
-            <div class="field">
-                <label for="name">Postleitzahl</label>
-                <input id="name" name="name" th:field="*{postCode}" th:errorclass="fieldError" type="number" required="required"/><br/>
-            </div>
-    
-            <div class="field">
-                <label for="password">Stadt</label>
-                <input id="password" name="password" th:field="*{city}" th:errorclass="fieldError" type="text"
-                       required="required"/>
-            </div>
-
-            <button type="submit" class="ui button">Adresse hinzufügen</button>
+            <button type="submit" class="ui button">Krankenkasse hinzufügen</button>
         </form>
-
-        <div th:each="address : ${user.getAddresses()}">
-            <a th:text="${address.getName()}">Name</a>
-            <p>Make Default Address</p>
-        </div>
-
-        <p>Zahlungsmittel</p>
-        tbc
-    
-        <p>Krankenkasse</p>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${insuranceForm}">
+        <form th:if="${user.getInsurance()}" method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
+            <a th:text="${'Aktuelle Krankenkasse: '+user.getInsurance()}"></a>
             <div class="field">
-                <label for="address">Krankenkasse</label>
-                <input id="address" name="address" placeholder="${user.getInsurance() && user.getInsurance()}" th:field="*{insurance}" th:errorclass="fieldError" type="text"
-                       required="required"/>
+                <label for="name">Neue Krankenkasse</label>
+                <input id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/><br/>
             </div>
 
             <button type="submit" class="ui button">Krankenkasse ändern</button>
         </form>
 
-        <p>Zum Mitarbeiter befördern</p>
-		<form method="post" role="form" class="ui form" id="form" th:action="@{/user/{id}(id=${user.getId()}" th:object="${employeeForm}">
+        <form method="post" role="form" class="ui form" id="form" th:action="@{/account/address}" th:object="${addressForm}">
+            <div class="field">
+                <label for="address">Name</label>
+                <input th:value="${user.getAddress()} ? ${user.getAddress().getName()} : ${addressForm.name}" name="name" th:errorclass="fieldError" type="text" required="required"/>
+            </div>
 
             <div class="field">
-                <label for="name">Gehalt</label>
-                <input id="name" name="name" th:field="*{salary}" th:errorclass="fieldError" type="number" required="required"/><br/>
+                <label for="address">Straße und Hausnummer</label>
+                <input th:value="${user.getAddress()} ? ${user.getAddress().getStreet()} : ${addressForm.street}" name="street" th:errorclass="fieldError" type="text" required="required"/><br/>
+            </div>
+
+            <div class="field">
+                <label for="name">Postleitzahl</label>
+                <input th:value="${user.getAddress()} ? ${user.getAddress().getPostCode()} : ${addressForm.postCode}" name="postCode" th:errorclass="fieldError" type="number" required="required"/><br/>
             </div>
     
             <div class="field">
-                <label for="password">Urlaubstage</label>
-                <input id="password" name="password" th:field="*{vacation}" th:errorclass="fieldError" type="text"
-                       required="required"/>
+                <label for="password">Stadt</label>
+                <input th:value="${user.getAddress()} ? ${user.getAddress().getCity()} : ${addressForm.city}" name="city" th:errorclass="fieldError" type="text" required="required"/>
             </div>
-
-            <button type="submit" class="ui button">Zum Mitarbeiter befördern</button>
+            
+            <button th:text="${user.getAddress() == null} ? ${'Adresse hinzufügen'} : ${'Adresse ändern'}" type="submit" class="ui button"></button>
         </form>
 
-        <button type="submit" class="ui button">Kunden löschen</button>
+        <p>Zahlungsmittel</p>
+        tbc
+
+        <a th:if="${user.userAccount.hasRole(employee)}" class="flex center button" th:text="${'Gehalt: '+user.getSalary()}"></a>
+
+        <a th:if="${user.userAccount.hasRole(customer)}" class="flex center button" th:href="@{/account/remove}">Löschen</a>
+
     </body>
 </html>

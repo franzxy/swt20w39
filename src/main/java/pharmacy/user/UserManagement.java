@@ -42,12 +42,13 @@ public class UserManagement {
 
 	public String removeUser(User user) {
 		
+		userAccounts.delete(user.getUserAccount());
 		users.delete(user);
 
 		return "user removed";
 	}
 
-	public String changePassword(UserPasswordForm form) {
+	public String changePassword(PasswordForm form) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		var user = userAccounts.findByUsername(auth.getName());
@@ -163,6 +164,10 @@ public class UserManagement {
 
 	public Streamable<User> findAll() {
 		return users.findAll();
+	}
+
+	public Optional<User> currentUser() {
+		return users.findAll().get().filter(u -> u.getUserAccount().getUsername().equals(SecurityContextHolder.getContext().getAuthentication().getName())).findFirst();
 	}
 
 	public Optional<User> findUser(Long id) {
