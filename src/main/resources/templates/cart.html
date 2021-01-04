@@ -43,7 +43,7 @@
                     </form>
                 </div>
                 <div class="field">
-                    <a class="a nav height flex center" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
+                    <a class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
                     <form sec:authorize="isAuthenticated()" class="ui form" method="post" th:action="@{/checkout}">
                         <button type="submit" class="ui button">Jetzt Bezahlen</button>
                     </form>
