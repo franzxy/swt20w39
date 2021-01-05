@@ -1,0 +1,90 @@
+= Protokoll Gruppe 39
+
+Treffen am 05.01.2020
+
+Ort:      BBB +
+Beginn:   15:00 +
+Ende:     16:00 +
+
+__Schriftführer:__ Timon Trettin +
+
+== Nächstes Treffen
+12.01.2021, 16:40 Uhr, BBB
+
+== Teilnehmer
+* Lennart Wittkowski: Tutor
+* Falk Natkowski
+* Lukas Luger
+* Timon Trettin
+
+== Aufgaben bis zum 10.01.2021
+* Falk Natkowski: Catalog, Inventory, Order, UI
+* Lukas Luger: Finances, Inventory, Order, UI
+* Timon Trettin: User, Order, Time, UX, UI
+
+=== Pflichtenheft, Dev Docu
+* Auf aktuellen Stand bringen
+
+=== Testabdeckung
+* 40%
+
+=== Anwendung Allgemein
+* .properties wieder nutzen
+* Umbau zur Online Apotheke
+** Kasse, Seiteneingang, Labor, Praxen entfällt
+** Im gebrauch mit der ePA
+
+=== Inventory
+* forms auslagern
+* Automatisch auffüllen
+
+=== Catalog
+* Filter nach Kategorien
+* form keep state after filter selected
+* paint/ stock img
+
+=== Order
+* Bestellung
+** Auslieferung der Ware abwarten
+* Warenkorb "/cart"
+** if empty button to discover aka "/"
+** Anzahl selector wie bei add to cart und delete button
+* Bestellungen "/orders"
+** "BOSS" Bestellung abfertigen und abbrechen
+** "EMPLOYEEE" sieht offene Bestellugen
+** Bestellung abfertigen Button für "EMPLOYEE"
+*** nur während Arbeitszeit
+* Meine Bestellungen "/myorders"
+** Order Abbrechen
+
+=== Finances
+* Filter (Mitarbeiter, Einkauf/Verkauf etc.)
+* Fixkosten bearbeiten
+* Rechnungen einsehen -> Verweis auf Bestellungen /order/orderId
+* Muss Kriterien
+** Monatsübersicht
+** Bessere Filter
+** Meine Finanzen "/myfinances"
+
+=== User
+* DataInitializer
+* Benutzerübersicht "/users"
+** Form Label einheitlich
+** padding bottom
+** forms auslagern
+** number -> string form
+* Krankenversicherung
+** Name
+** Versicherungsnummner
+* Salespoint Payment implementieren
+** Bankeinzug hinzufügen
+** Paydirekt hinzufügen
+* "BOSS" kann Schichten mit Stundenlohn und Anzahl der Arbeiter festlegen, Arbeiter tragen sich ein => können während dessen abfertigen
+
+=== Time
+* in packages benutzen
+
+=== UI
+* light/ dark mode compatible + accent color
+* show position on site when on subsite
+* expanding menu
