@@ -21,7 +21,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pharmacy.AbstractIntegrationTests;
-import pharmacy.catalog.Disc.DiscType;
+import pharmacy.Pharmacy;
+import pharmacy.catalog.Medicine;
 
 /**
  * Integration tests for {@link VideoCatalog}.
@@ -29,9 +30,10 @@ import pharmacy.catalog.Disc.DiscType;
  * @author Oliver Gierke
  * @author Andreas Zaschka
  */
-class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
+class PharmacyCatalogIntegrationTests extends AbstractIntegrationTests {
 
-	@Autowired VideoCatalog catalog;
+/**
+	@Autowired PharmacyCatalog catalog;
 
 	@Test
 	void findsAllBluRays() {
@@ -43,6 +45,7 @@ class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 	/**
 	 * @see #50
 	 */
+	/**
 	@Test
 	void discsDontHaveAnyCategoriesAssigned() {
 
@@ -50,4 +53,5 @@ class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 			assertThat(disc.getCategories()).isEmpty();
 		}
 	}
+	*/
 }

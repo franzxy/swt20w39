@@ -33,6 +33,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @ModuleTest(mode = BootstrapMode.DIRECT_DEPENDENCIES)
 class CatalogModuleTests {
 
+/**
 	@Autowired VideoCatalog catalog;
 	@Autowired ConfigurableApplicationContext context;
 
@@ -43,4 +44,5 @@ class CatalogModuleTests {
 
 		assertThat(assertable).doesNotHaveBean(Accountancy.class);
 	}
+ */
 }
