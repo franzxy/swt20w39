@@ -1,40 +1,58 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-    <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
-		<title>Details</title>
-		<style>
 
-      html{
-        /*background-image: linear-gradient(to top,#1F2833 0%, black 70%);*/
-        background-color: #1F2833;
-      }
-     li{
-         color: white;
-     }
-    </style>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Details</title>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav> 
 
-        
-                
+            <div class="center">
                  
-            <ul> 
-                <li>Datum: <span th:text="${#temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"/></li>
-                <li>ID: <span th:text="${det.getId().getIdentifier()}"/></li>
-                <li>Betrag: <span th:text="${det.getTotal().getNumber().doubleValue()}"/></li>
-                <li>Status: <span th:text="${det.getOrderStatus().toString()}"/></li>
-                <li>User: <span th:text="${det.getUserAccount().getUsername()}"/></li>
-                <li>User-Id: <span th:text="${det.getUserAccount().getId().getIdentifier()}"/></li>
-                <li>Bezahlungsmethode: <span th:text="${det.getPaymentMethod()}"/></li>
-               
-            </ul>
-            
-   
-        
-        
+                <div class="field">
+                    <a class="button" th:href="@{/orders}">Zurück</a>
+                </div>
+                 
+                <div class="field">
+                    <span class="span">Datum</span>
+                    <h4 th:text="${#temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"></h4>
+                </div>
+                 
+                <div class="field">
+                    <span class="span">ID</span>
+                    <h4 th:text="${det.getId().getIdentifier()}"></h4>
+                </div>
+                 
+                <div class="field">
+                    <span class="span">Betrag</span>
+                    <h4 th:text="${det.getTotal().getNumber().doubleValue()}"></h4>
+                </div>
+                 
+                <div class="field">
+                    <span class="span">Status</span>
+                    <h4 th:text="${det.getOrderStatus().toString()}"></h4>
+                </div>
+                 
+                <div class="field">
+                    <span class="span">User</span>
+                    <h4 th:text="${det.getUserAccount().getUsername()}"></h4>
+                </div>
+                 
+                <div class="field">
+                    <span class="span">User ID</span>
+                    <h4 th:text="${det.getUserAccount().getId().getIdentifier()}"></h4>
+                </div>
+                 
+                <div class="field">
+                    <span class="span">Bezahlmethode</span>
+                    <h4 th:text="${det.getPaymentMethod()}"></h4>
+                </div>
+            </div>
     </body>
 </html>

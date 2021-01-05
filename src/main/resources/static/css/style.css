@@ -99,6 +99,20 @@ nav {
 	width: 20px;
 }
 
+.span {
+	margin-bottom: 5px;
+}
+
+.label {
+	margin-bottom: 5px;
+	align-self: flex-start;
+}
+
+.inputlabel {
+	display: inline;
+	margin-bottom: 5px;
+}
+
 .button {
 	display: flex;
 	justify-content: center;

@@ -1,22 +1,32 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-        <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Zeitreise</title>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <form method="post" role="form" class="ui form" id="form" th:action="@{/time}" th:object="${durationForm}">
-            <p th:text="${time}"></p>
-            <div class="field">
-                <label for="duration">Stunden</label>
-                <input th:field="*{duration}" type="number"
-                       required="required"/>
-            </div>
 
-            <button type="submit" class="ui button">Zeit Überspringen</button>
-        </form>
+        <div class="center">
+            <form method="post" role="form" class="ui form" id="form" th:action="@{/time}" th:object="${durationForm}">
+                <div class="field">
+                    <label class="label">Aktuelle Zeit</label>
+                    <h3 th:text="${time}"></h3>
+                </div>
+                <div class="field">
+                    <label class="label" for="duration">Stunden</label>
+                    <input class="numberinput" th:field="*{duration}" type="number"
+                        required="required"/>
+                </div>
+
+                <button type="submit" class="ui button">Überspringen</button>
+            </form>
+        </div>
     </body>
 </html>

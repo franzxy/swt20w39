@@ -1,16 +1,15 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-    <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Inevntar</title>
 		<style>
-
-      html{
-        /*background-image: linear-gradient(to top,#1F2833 0%, black 70%);*/
-        background-color: #1F2833;
-      }
       table {
       	margin-top: 1%;
       	margin-right: 1%;
@@ -44,11 +43,12 @@
       	border-radius: 3px;
       }
       .block{
- 		 width: 72%; 
- 		 position: fixed;
-  		 top: 17%;
- 		 right: 2%;
- 		 background-color: #45A29E;
+ 		 height: 85%; 
+        width: 72%; 
+        position: fixed;
+        top: 2%;
+        right: 2%;
+        background-color: #45A29E;
  		
       
       }
@@ -63,10 +63,10 @@
   		background-color: #45A29E;
       }
       .sidenav {
- 		 height: 75%; 
+ 		 height: 85%; 
  		 width: 22%; 
  		 position: fixed;
-  		 top: 17%;
+  		 top: 2%;
  		 left: 2%;
  		 background-color: #45A29E;
  		 padding-top: 20px;
@@ -145,7 +145,6 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="border bar1" ><p style="text-align: center;">INVENTAR</p></div>
         <div class="sidenav border">
        
   			 <h1 style="color:white">Unimplemented Features</h1>
@@ -169,7 +168,7 @@
    
     
 
-		<div style="overflow-y: scroll; height:700px;"class="block border" >
+		<div style="overflow-y: scroll;"class="block border" >
        <table class="ui table">
             <thead>
             <tr>
