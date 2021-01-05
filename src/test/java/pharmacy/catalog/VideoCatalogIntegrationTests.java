@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 the original author or authors.
+ * Copyright 2013-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,34 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.catalog;
+package pharmacy.catalog;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.moduliths.test.ModuleTest;
-import org.moduliths.test.ModuleTest.BootstrapMode;
-import org.salespointframework.accountancy.Accountancy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.assertj.AssertableApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
+
+import pharmacy.AbstractIntegrationTests;
+import pharmacy.catalog.Disc.DiscType;
 
 /**
- * Module tests for catalog.
+ * Integration tests for {@link VideoCatalog}.
  *
  * @author Oliver Gierke
+ * @author Andreas Zaschka
  */
-@ModuleTest(mode = BootstrapMode.DIRECT_DEPENDENCIES)
-class CatalogModuleTests {
+class VideoCatalogIntegrationTests extends AbstractIntegrationTests {
 
 	@Autowired VideoCatalog catalog;
-	@Autowired ConfigurableApplicationContext context;
 
-	@Test // #100
-	void verifiesModuleBootstrapped() {
+	@Test
+	void findsAllBluRays() {
 
-		AssertableApplicationContext assertable = AssertableApplicationContext.get(() -> context);
+		Iterable<Disc> result = catalog.findByType(DiscType.BLURAY);
+		assertThat(result).hasSize(9);
+	}
 
-		assertThat(assertable).doesNotHaveBean(Accountancy.class);
+	/**
+	 * @see #50
+	 */
+	@Test
+	void discsDontHaveAnyCategoriesAssigned() {
+
+		for (Disc disc : catalog.findByType(DiscType.BLURAY)) {
+			assertThat(disc.getCategories()).isEmpty();
+		}
 	}
 }

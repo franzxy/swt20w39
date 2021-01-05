@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.user;
+package pharmacy.user;
 
 import static org.assertj.core.api.Assertions.*;
 
-import videoshop.AbstractIntegrationTests;
+import pharmacy.AbstractIntegrationTests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ import org.springframework.ui.ExtendedModelMap;
  * 
  * @author Oliver Gierke
  */
-class CustomerControllerIntegrationTests extends AbstractIntegrationTests {
+class UserControllerIntegrationTests extends AbstractIntegrationTests {
 
-	@Autowired CustomerController controller;
+	@Autowired UserController controller;
 
 	/**
 	 * Does not use any authentication and should raise a security exception.
@@ -41,7 +41,7 @@ class CustomerControllerIntegrationTests extends AbstractIntegrationTests {
 	void rejectsUnauthenticatedAccessToController() {
 
 		assertThatExceptionOfType(AuthenticationException.class) //
-				.isThrownBy(() -> controller.customers(new ExtendedModelMap()));
+				.isThrownBy(() -> controller.users(new ExtendedModelMap()));
 	}
 
 	/**
@@ -53,7 +53,7 @@ class CustomerControllerIntegrationTests extends AbstractIntegrationTests {
 
 		ExtendedModelMap model = new ExtendedModelMap();
 
-		controller.customers(model);
+		controller.users(model);
 
 		assertThat(model.get("customerList")).isNotNull();
 	}

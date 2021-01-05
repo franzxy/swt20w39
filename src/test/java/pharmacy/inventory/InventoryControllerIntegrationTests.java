@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2018 the original author or authors.
+ * Copyright 2017-2018 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.order;
+package pharmacy.inventory;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -23,45 +23,36 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
- * Integration tests for security setup.
+ * Integration tests for {@link InventoryController}.
  * 
  * @author Oliver Gierke
+ * @soundtrack Dave Matthews Band - The Stone (DMB Live 25)
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-class WebSecurityIntegrationTests {
+class InventoryControllerIntegrationTests {
 
 	@Autowired MockMvc mvc;
 
-	/**
-	 * Trying to access a secured resource should result in a redirect to the login page.
-	 * 
-	 * @see #19
-	 */
-	@Test
-	void redirectsToLoginPageForSecuredResource() throws Exception {
+	@Test // #75
+	void preventsPublicAccessForStockOverview() throws Exception {
 
-		mvc.perform(get("/orders")) //
+		mvc.perform(get("/stock")) //
 				.andExpect(status().isFound()) //
-				.andExpect(header().string("Location", endsWith("/login")));
+				.andExpect(header().string(HttpHeaders.LOCATION, endsWith("/login")));//
 	}
 
-	/**
-	 * Trying to access the orders as boss should result in the page being rendered.
-	 * 
-	 * @see #35
-	 */
-	@Test
+	@Test // #75
 	@WithMockUser(username = "boss", roles = "BOSS")
-	void returnsModelAndViewForSecuredUriAfterAuthentication() throws Exception {
+	void stockIsAccessibleForAdmin() throws Exception {
 
-		mvc.perform(get("/orders")) //
+		mvc.perform(get("/stock")) //
 				.andExpect(status().isOk()) //
-				.andExpect(view().name("orders")) //
-				.andExpect(model().attributeExists("ordersCompleted"));
+				.andExpect(model().attributeExists("stock"));
 	}
 }

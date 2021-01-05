@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop;
+package pharmacy;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -34,9 +34,9 @@ import org.springframework.util.StringUtils;
  * @author Oliver Gierke
  */
 @TestInstance(Lifecycle.PER_CLASS)
-class VideoshopModularityTests {
+class PharmacyModularityTests {
 
-	Modules modules = Modules.of(VideoShop.class);
+	Modules modules = Modules.of(Pharmacy.class);
 	Predicate<Module> isSalespointModule = it -> it.getBasePackage().getName().startsWith("org.salespoint");
 
 	@Test
@@ -65,7 +65,7 @@ class VideoshopModularityTests {
 
 		if (packageName.startsWith("org.salespoint")) {
 			return Optional.of("#ddddff");
-		} else if (packageName.startsWith("videoshop")) {
+		} else if (packageName.startsWith("pharmacy")) {
 			return Optional.of("#ddffdd");
 		} else {
 			return Optional.empty();
@@ -74,8 +74,8 @@ class VideoshopModularityTests {
 
 	private String getModuleDisplayName(Module module) {
 
-		return module.getBasePackage().getName().startsWith("videoshop") //
-				? "Videoshop :: ".concat(StringUtils.capitalize(module.getDisplayName())) //
+		return module.getBasePackage().getName().startsWith("pharmacy") //
+				? "pharmacy :: ".concat(StringUtils.capitalize(module.getDisplayName())) //
 				: module.getDisplayName();
 	}
 }

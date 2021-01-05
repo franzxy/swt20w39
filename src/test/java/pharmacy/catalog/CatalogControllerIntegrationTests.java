@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.catalog;
+package pharmacy.catalog;
 
 import static org.assertj.core.api.Assertions.*;
-
-import videoshop.AbstractIntegrationTests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
+
+import pharmacy.AbstractIntegrationTests;
 
 /**
  * Integration tests interacting with the {@link CatalogController} directly.

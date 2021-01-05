@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package videoshop.user;
+package pharmacy.user;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -29,7 +29,7 @@ import org.salespointframework.useraccount.UserAccountManagement;
  *
  * @author Oliver Drotbohm
  */
-class CustomerManagementUnitTests {
+class UserManagementUnitTests {
 
 	@Test // #93
 	void createsUserAccountWhenCreatingACustomer() {
