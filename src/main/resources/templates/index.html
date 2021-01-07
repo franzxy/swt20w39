@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 
-		<title th:text="${Titel}">Apotheke</title>
+		<title th:text="${title}">Apotheke</title>
 
 	</head>
 
@@ -17,37 +17,48 @@
 		
 		<nav th:include="navigation :: navigation"></nav>
 
-		<form class="searchbar" action="#" th:action="@{/search}" th:object=${searchform} method="post">
-			<input name="searchinput" class="textinput" type="text" th:field="*{searchTerm}" placeholder="Was suchst du?" />
-			<button class="iconbutton" type="submit"><img class="icon" th:src="@{/img/search.png}" ></button>
-		</form>
-		
-		<div class="sidenav">
-			<form class="form" action="#" th:action="@{/}" th:object=${searchform} method="post">
+		<form action="#"  th:action="@{/}" th:object=${searchform} method="post">
+
+			<div class = "searchbar">
+
+				<input class="textinput" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Was suchst du?" />
+				<button class="iconbutton" type="submit"><img class="icon" th:src="@{/img/search.png}" ></button>
+
+			</div>
+
+			<div class="sidenav">
 
 				<div class="field">
+
 					<label class="label" for="nopres">Nur rezeptfreie Medikamente anzeigen</label>
 					<input class="checkbox" type="checkbox" id="nopres" name="nopres" th:checked="${nopres}"/>
+
 				</div>
 
-				<div class="field" th:each="tag : ${tags}">
-					<form  class="ui form" method="post" th:action="@{/tagsearch}">
-						<input type="hidden" name="tempsearch" value="0" th:value="${tempTerm}"/>
-						<input type="hidden" name="tag" value="0" th:value="${tag}"/>
+				<div class="field" th:if="${showtags}">
 
-						<button type="submit" class="ui labeled icon button" th:text="${tag}"></button>
-					</form>
+					<label class="label" for="selector">Kategorie</label>
+					<select id="selector" th:field="*{tag}">
+
+						<option value="">Keine</option>
+						<option th:each="tag : ${tags}" th:text="${tag}" th:value="${tag}"></option>
+
+					</select>
+
 				</div>
 
 				<div class="field">
+
 					<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
+
 				</div>
-				<div class="field">
-				<h3 th:text="${Suchbegriff}"></h3>
 			</div>
-			</form>
-			
+		</form>
+
+		<div class="field">
+			<h3 th:text="${header}"></h3>
 		</div>
+
 		<div class="meds" th:remove="all-but-first">
 
 			<a class="med" th:each="medicine : ${catalog}" th:href="@{/medicine/{id}(id=${medicine.id})}">
@@ -55,12 +66,16 @@
 				<img class="medimg" th:src="@{/img/{image}.png(image=${medicine.image})}" src="../static/img/med1.png"/>
 
 				<div class="meddetails">
+
 					<h5 th:text="${medicine.name}"></h5>
 					<div class="content" th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Typ</div>
 					<div class="extra content" th:text="${{medicine.price}}">Preis</div>
+
 				</div>
 			</a>
 		</div>
+
 		<div class="pad"></div>
+
 	</body>
 </html>
