@@ -1,9 +1,5 @@
 package pharmacy.catalog;
 
-import org.javamoney.moneta.Money;
-import org.salespointframework.inventory.InventoryItem;
-import org.salespointframework.inventory.MultiInventory;
-import org.salespointframework.inventory.MultiInventoryItem;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
@@ -15,11 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.money.MonetaryAmount;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.Set;
 
 @Controller
 class CatalogController {
@@ -38,140 +32,90 @@ class CatalogController {
 		//this.businessTime = businessTime;
 	}
 
-	@PostMapping("/tagsearch")
-	public String tagSearch(@RequestParam("tempsearch") String tempsearch, @RequestParam("tag") String tag) {
-		return "redirect:/?s=" + tempsearch + "&t=" + tag;
-	}
-
-
 	@GetMapping("/")
-	public String catalog(@RequestParam(name="s", required=true, defaultValue = "") String searchTerm, @RequestParam(name="t", required=true, defaultValue = "") String tag, @RequestParam(name="p", defaultValue = "false") boolean noPres, Model model) {
+	public String catalog(@RequestParam(name="s", required=true, defaultValue = "") String searchTerm,
+	                      @RequestParam(name="t", required=true, defaultValue = "") String tag,
+	                      @RequestParam(name="p", defaultValue = "false") boolean noPres,
+	                      Model model) {
+
 		model.addAttribute("searchform", new SearchForm());
 
-		Iterator<Medicine> stock = catalog.findAll().iterator();
+		if (searchTerm.equals("null")) searchTerm = "";
+		if (tag.equals("null")) tag = "";
+
 		ArrayList<Medicine> result = new ArrayList<>();
+		Iterator<Medicine> i;
 
-		if(searchTerm.equals("null")) searchTerm = "";
-
-		if(searchTerm.equals("") && noPres == false) {
-			while (stock.hasNext()) {
-				Medicine d = stock.next();
-				result.add(d);
-			}
-
-		} else if(searchTerm.equals("") && noPres == true) {
-			while (stock.hasNext()) {
-				Medicine d = stock.next();
-				if (!d.isPresonly()) {
-					if (d.getQuantity() > 0) {
-						if (!result.contains(d)) {
-							result.add(d);
-						}
-					}
-				}
-			}
-
+		if(noPres) {
+			i = catalog.findByPresonly(false).iterator();
 		} else {
+			i = catalog.findAll().iterator();
+		}
 
+		if(searchTerm.equals("")) {
+			while(i.hasNext()) {
+				result.add(i.next());
+			}
+		}
 
+		else {
 			String[] search = searchTerm.toLowerCase().split(" ");
 
-			while (stock.hasNext()) {
-				Medicine d = stock.next();
+			while(i.hasNext()) {
+				Medicine m = i.next();
+				Set<String> tags = m.getCategories().toSet();
 
-				for (int i = 0; i < search.length; i++) {
+				for(String s : search) {
+					if (m.getName().toLowerCase().contains(s)) {
+						if(tag.equals("") || tags.contains(tag)) {
+							result.add(m);
 
-					if (d.getName().toLowerCase().contains(search[i])) {
-						if(!noPres || !d.isPresonly()) {
-							if (d.getQuantity() > 0) {
-								if(tag.equals("")) {
-									if (!result.contains(d)) {
-										result.add(d);
-									}
-
-								} else {
-
-									List<String> tags = d.getCategories().toList();
-
-									for(String t : tags) {
-
-										if(tag.equals(t)) {
-											if (!result.contains(d)) {
-												result.add(d);
-
-											}
-										}
-
-									}
-								}
-							}
 						}
 					}
-
-					/*List<String> tags = d.getCategories().toList();
-
-					for(String t : tags) {
-						for (int ii = 0; ii < search.length; ii++) {
-							if (t.toLowerCase().contains(search[i])) {
-								if(!noPres || !d.isPresonly()) {
-									if (d.getQuantity() > 0) {
-										if (!result.contains(d)) {
-											result.add(d);
-										}
-									}
-								}
-							}
-						}
-					}*/
 				}
 			}
 		}
 
-		ArrayList<String> tags = new ArrayList<>();
-		for(Medicine p : result) {
-			for(String s : p.getCategories()) {
-				if(!tags.contains(s)) {
-					tags.add(s);
+		ArrayList<String> newTags = new ArrayList<>();
+		for (Medicine m : result) {
+			for (String s : m.getCategories()) {
+				if(!newTags.contains(s)) {
+					newTags.add(s);
 				}
 			}
 		}
-		model.addAttribute("tempTerm", searchTerm);
 
+		if(tag.equals("") && !searchTerm.equals("") && result.size() > 0) {
+			model.addAttribute("tags", newTags);
+			model.addAttribute("showtags", true);
 
-		if(tag.equals("") && !searchTerm.equals("")) model.addAttribute("tags", tags);
+		}
 
+		String header = "";
 
+		if(result.size() == 0) header = "Keine Ergebnisse";
+
+		else {
+			header = "Ergebnisse für \"" +  searchTerm + "\":";
+			if(!tag.equals("")) header = "Ergebnisse für \"" +  searchTerm + "\" in Kategorie \"" + tag +"\":";
+		}
+
+		if(!searchTerm.equals("")) model.addAttribute("header", header);
+
+		model.addAttribute("oldTerm", searchTerm);
+		model.addAttribute("nopres", noPres);
 		model.addAttribute("catalog", result);
-		model.addAttribute("Titel", "Apotheke");
-
-		if(!searchTerm.equals("")) {
-			model.addAttribute("Suchbegriff", "Ergebnisse für \"" + searchTerm + "\":");
-			model.addAttribute("Titel", "Ergebnisse für \"" + searchTerm + "\"");
-		}
-
-
-		if(result.size() == 0) {
-			model.addAttribute("Suchbegriff", "Keine Ergebnisse für \"" + searchTerm + "\"");
-			model.addAttribute("Titel", "Keine Ergebnisse");
-		}
-
-
+		model.addAttribute("title", "Apotheke");
 
 		return "index";
 	}
 
-
 	@PostMapping("/")
-	public String submitSearchInCatalog(@ModelAttribute SearchForm form, Model model) {
+	public String submitSearchInCatalog(@RequestParam("searchbar") String bar, @ModelAttribute SearchForm form, Model model) {
 		model.addAttribute("SearchForm", form);
-		return "redirect:/?s=" + form.getSearchTerm() + "&p=" + form.getNoPres();
-	}
+		form.setSearchTerm(bar);
 
-	@PostMapping("/search")
-	public String submitSearch(@ModelAttribute SearchForm form, Model model) {
-		model.addAttribute("SearchForm", form);
-		return "redirect:/?s=" + form.getSearchTerm();
-
+		return "redirect:/?s=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&t=" + form.getTag();
 	}
 
 	@GetMapping("/medicine/{medicine}")
