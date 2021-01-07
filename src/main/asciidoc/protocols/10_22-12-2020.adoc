@@ -67,12 +67,12 @@ __Schriftführer:__ Timon Trettin +
 ** Meine Finanzen "/myfinances"
 
 === User
-* DataInitializer
 * Benutzerübersicht "/users"
-** Form Label einheitlich
-** padding bottom
-** forms auslagern
-** number -> string form
+** "BOSS" darf keine Personendaten ändern
+** Padding-Bottom
+* Account "/account"
+** Links zu "/myorders", "/myfinances"
+** Number -> String input
 * Krankenversicherung
 ** Name
 ** Versicherungsnummner
