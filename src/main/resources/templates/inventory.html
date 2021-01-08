@@ -14,18 +14,6 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         
-       
-  			<!--<form action="#" th:action="@{/finances}"  th:object="${filterI}" method="POST">
-  			<ul >
-          
-  				<li th:each="ty : ${T(pharmacy.inventory.FilterI.).values()}">
-           
-    				<input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
-    				<label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
-  				</li>
-            </ul>
-           <input  style="margin:5px" class="button"type="submit" value="Filtern" />
-		 </form> -->
 		 <form action="/meddetail" th:object="${formular}" >
       <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
 			<input style="margin:5px" class="button"type="submit" value="Medikament hinzufügen"></input>
