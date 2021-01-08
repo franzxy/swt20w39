@@ -61,7 +61,6 @@ __Schriftführer:__ Timon Trettin +
 === User
 * Benutzerübersicht "/users"
 ** "BOSS" darf keine Personendaten ändern
-** Padding-Bottom
 * Account "/account"
 ** Links zu "/myorders", "/myfinances"
 ** Number -> String Input
