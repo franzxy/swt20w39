@@ -7,73 +7,55 @@
 		<title>Benutzer</title>
 	</head>
     <body>
-        <nav th:include="navigation :: navigation"></nav>
-    	<table class="ui celled table">
-        	<thead>
-				<tr>
-					<th>ID</th>
-					<th>Benutzername</th>
-					<th>Krankenkasse</th>
-					<th>Adresse</th>
-					<th>Zahlungsmittel</th>
-					<th>Bestellungen</th>
-					<th>Finanzen</th>
-					<th>Löschen</th>
-				</tr>
-        	</thead>
-			<tbody>
-				<tr class="ui card" th:each="user : ${users}">
-					<td th:text="${user.getId()}">ID</td>
-					<td th:text="${user.userAccount.getUsername()}">Benutzername</td>
-					<td>
-						<div th:if="${user.getInsurance()}">
-							<a class="information" th:text="${user.getInsurance()}">Krankenkasse</a>
+		<nav th:include="navigation :: navigation"></nav>
+		<div class="center">
+			<table class="ui celled table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Benutzername</th>
+						<th>Arbeitsverhältnis</th>
+						<th>Löschen</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="ui card" th:each="user : ${users}">
+						<td th:text="${user.getId()}">ID</td>
+						<td th:text="${user.userAccount.getUsername()}">Benutzername</td>
+						<td th:if="${user.userAccount.hasRole(boss)}">
+							<form class="field" method="post" role="form" id="form" th:action="@{/user/{id}/salary(id=${user.getId()})}" th:object="${employeeForm}">
+								<label for="name">Gehalt</label>
+								<div class="row">
+									<input class="numberinput" id="name" name="salary" th:value="${user.getSalary()} ? ${user.getSalary().getNumber()} : ${employeeForm.getSalary()}" type="text" required="required"/>
+									<a class="currency">€</a>
+									<button type="submit" class="ui button">Anpassen</button>
+								</div>
+							</form>
+						</td>
+						<td th:if="${user.userAccount.hasRole(employee)}">
 							<div class="field">
-								<label class="label">Versichertennummer</label>
-								<a class="information" ></a>
+								<label for="name">Gehalt</label>
+								<div class="row">
+									<input class="numberinput" id="name" name="salary" th:value="${user.getSalary()} ? ${user.getSalary().getNumber()} : ${employeeForm.getSalary()}" type="text" required="required"/>
+									<a class="currency">€</a>
+									<button type="submit" class="ui button">Anpassen</button>
+								</div>
 							</div>
-						</div>
-					</td>
-					<td>
-						<div th:if="${user.getAddress()}">
 							<div class="field">
-								<label class="label"  for="address">Name</label>
-								<a class="information" th:text="${user.getAddress().getName()}"></a>
+								<a class="button" th:href="@{/user/{id}/dismiss(id=${user.getId()})}">Entlassen</a>
 							</div>
-				
-							<div class="field">
-								<label class="label"  for="address">Straße und Hausnummer</label>
-								<a class="information" th:text="${user.getAddress().getStreet()}"></a>
-							</div>
-				
-							<div class="field">
-								<label class="label"  for="name">Postleitzahl</label>
-								<a class="information" th:text="${user.getAddress().getPostCode()}"></a>
-							</div>
-					
-							<div class="field">
-								<label class="label"  for="password">Stadt</label>
-								<a class="information" th:text="${user.getAddress().getCity()}"></a>
-							</div>
-						</div>
-					</td>
-					<td>
-						<a>Zahlungsmittel</a>
-					</td>
-					<td>
-						<a>Bestellungen</a>
-					</td>
-					<td>
-						<a>Finanzen</a>
-					</td>
-					<td>
-						<a th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer kann nicht gelöscht werden.</a>
-						<a th:if="${user.userAccount.hasRole(employee)}" class="button" th:href="@{/user/{id}/dismiss(id=${user.getId()})}">Mitarbeiter Entlassen</a>
-						<a th:if="${user.userAccount.hasRole(customer)}" class="button" th:href="@{/user/{id}/remove(id=${user.getId()})}">Löschen</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="pad"></div>
+						</td>
+						<td th:if="${user.userAccount.hasRole(customer)}">
+							<a class="button" th:href="@{/user/{id}/hire(id=${user.getId()})}">Einstellen</a>
+						</td>
+						<td>
+							<a th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer kann nicht gelöscht werden.</a>
+							<a th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter können nicht gelöscht werden.</a>
+							<a th:if="${user.userAccount.hasRole(customer)}" class="button" th:href="@{/user/{id}/remove(id=${user.getId()})}">Löschen</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
     </body>
 </html>

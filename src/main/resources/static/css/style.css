@@ -18,49 +18,84 @@ body {
 }
 
 nav {
-	z-index: 2;
-	position: fixed;
-	top: 0;
-	left: 0;
+	background-color: #303030;
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-rows: auto auto;
+	grid-template-areas: 
+    "menu search personal"
+    "position position position";
 }
 
-.bottombar {
-	z-index: 3;
-	width: 100%;
-	position: fixed;
+nav a {
+	margin-left: 10px;
+}
+
+.menu {
+	grid-area: menu;
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: row;
+}
+
+.search {
+	grid-area: search;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: row;
-	bottom: 0;
-	left: 0;
+	height: 40px;
 }
 
-.bottomnav {
+.personal {
+	grid-area: personal;
+	height: 100%;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
 	flex-direction: row;
-	background: #404040;
-	margin: 10px;
 }
 
-.searchbar {
-	width: 100%;
+.personal a {
+	margin: 0;
+	margin-right: 10px;
+}
+
+.position {
+	grid-area: position;
+	height: 40px;
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	background: #101010;
 }
 
-.textinput {
+.currency {
+	background-color: #101010;
+	height: 40px;
+	justify-content: center;
+	text-align: center;
+	font-size: larger;
+	display: flex;
+	align-items: center;
+	width: 40px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+input {
+	align-self: flex-start;
 	background: none;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	width: 300px;
+	flex-grow: 1;
 	height: 40px;
 	padding: 0 10px;
 	border: none;
@@ -69,17 +104,7 @@ nav {
 }
 
 .numberinput {
-	background: none;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: row;
 	width: 50px;
-	height: 40px;
-	padding: 0 10px;
-	border: none;
-	color: white;
-	background: #101010;
 }
 
 .iconbutton {
@@ -103,7 +128,7 @@ nav {
 	margin-bottom: 5px;
 }
 
-.label {
+label {
 	margin-bottom: 5px;
 	align-self: flex-start;
 }
@@ -135,16 +160,16 @@ nav {
 }
 
 .field {
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	margin-bottom: 20px;
+	padding: 10px 0;
 }
 
 .center {
-	padding-top: 20px;
-	width: 100%;
+	padding: 20px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -209,9 +234,9 @@ nav {
 
 td, th {
 	border: none;
-	padding: 0px 10px;
+	padding: 0 10px;
 	height: 40px;
-  }
+}
   
 table tr:nth-child(even){background-color: #303030;}
   
@@ -219,8 +244,4 @@ th {
 	text-align: left;
 	background-color: #202020;
 	color: white;
-  }
-
-  .row {
-	  flex-direction: row;
-  }
+}

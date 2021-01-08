@@ -19,13 +19,6 @@
 
 		<form action="#"  th:action="@{/}" th:object=${searchform} method="post">
 
-			<div class = "searchbar">
-
-				<input class="textinput" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Was suchst du?" />
-				<button class="iconbutton" type="submit"><img class="icon" th:src="@{/img/search.png}" ></button>
-
-			</div>
-
 			<div class="sidenav">
 
 				<div class="field">
@@ -74,8 +67,5 @@
 				</div>
 			</a>
 		</div>
-
-		<div class="pad"></div>
-
 	</body>
 </html>

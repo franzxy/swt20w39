@@ -78,5 +78,4 @@ __Schriftführer:__ Timon Trettin +
 === UI
 * light/ dark mode kompatibel, Akzentfarbe
 * Aktuellen Pfad anzeigen "Account > Einstellungen > Passwort Ändern"
-* Animiertes Menü
 * Suche auf jeder Seite

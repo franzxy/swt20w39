@@ -59,7 +59,7 @@ public class UserManagement {
 	
 	public String changeInsurance(User user, InsuranceForm insuranceForm) {
 		
-		user.setInsurance(insuranceForm.getInsurance());
+		user.setInsurance(new Insurance(insuranceForm.getCompany(), insuranceForm.getInsuranceNumber()));
 
 		return "insurance changed";
 	}
@@ -97,11 +97,10 @@ public class UserManagement {
 		return "customer changed";
 	}
 */
-	public String hireEmployee(User user, EmployeeForm employeeForm) {
+	public String hireEmployee(User user) {
 		
 		user.removeRole(Role.of("CUSTOMER"));
 		user.addRole(Role.of("EMPLOYEE"));
-		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
 
 		return "employee added";
 	}
@@ -146,13 +145,6 @@ public class UserManagement {
 		user.removeRole(role);
 
 		return "role removed";
-	}
-
-	public String setInsurance(User user, String newInsurance) {
-
-		user.setInsurance(newInsurance);
-
-		return "new insurance";
 	}
 
 	public String setEmployeeSalary(User user, Money newSalary) {

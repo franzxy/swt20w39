@@ -1,27 +1,11 @@
 package pharmacy.user;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Stream;
-
-import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import org.javamoney.moneta.Money;
-import org.salespointframework.accountancy.ProductPaymentEntry;
-import org.salespointframework.payment.CreditCard;
-import org.salespointframework.payment.PaymentCard;
-import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 
@@ -38,7 +22,7 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<PaymentMethod> payments = new ArrayList<>();
 */
-	private String insurance;
+	private Insurance insurance;
 
 	// Employee
 
@@ -88,11 +72,11 @@ public class User {
 		payments.add(newPayment);
 	}
 */
-	public String getInsurance() {
+	public Insurance getInsurance() {
 		return insurance;
 	}
 
-	public void setInsurance(String newInsurance) {
+	public void setInsurance(Insurance newInsurance) {
 		insurance = newInsurance;
 	}
 

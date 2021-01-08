@@ -91,15 +91,11 @@ class UserController {
 		return "redirect:/users";
 	}
 	
-	@PostMapping("/user/{userId}/hire")
+	@GetMapping("/user/{userId}/hire")
 	@PreAuthorize("hasRole('BOSS')")
-	String hireEmployee(@PathVariable Long userId, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
+	String hireEmployee(@PathVariable Long userId) {
 		
-		if (result.hasErrors()) {
-			return "redirect:/users";
-		}
-		
-		userManagement.hireEmployee(userManagement.findUser(userId).get(), employeeForm);
+		userManagement.hireEmployee(userManagement.findUser(userId).get());
 
 		return "redirect:/users";
 	}

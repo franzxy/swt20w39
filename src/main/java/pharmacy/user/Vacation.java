@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "VACATIONS")
 public class Vacation implements Serializable {
 
 	private @Id @GeneratedValue long id;
@@ -19,6 +18,8 @@ public class Vacation implements Serializable {
 	private Date endDate;
 	private Long duration;
 	private Boolean approved;
+
+	public Vacation() {}
 
 	public Vacation(Date startDate, Date endDate) {
 		

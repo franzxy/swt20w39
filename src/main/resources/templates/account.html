@@ -57,7 +57,7 @@
                 </div>
             </form>
 
-            <form th:if="${user.getInsurance() == null}" method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
+            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
 
                 <div class="field">
                     <h2 class="ui dividing header">Versicherung</h2>
@@ -65,21 +65,17 @@
 
                 <div class="field">
                     <label class="label" for="name">Krankenkasse</label>
-                    <input class="textinput" id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/>
+                    <input class="textinput" id="name" name="name" th:field="*{company}" th:errorclass="fieldError" type="text" required="required"/>
+                </div>
+                <div class="field">
+                    <label class="label" for="name">Versichertennummer</label>
+                    <input class="textinput" id="name" name="name" th:field="*{insuranceNumber}" th:errorclass="fieldError" type="text" required="required"/>
                 </div>
                 
                 <div class="field">
-                    <button type="submit" class="ui button">Krankenkasse hinzufügen</button>
+                    <button th:if="${user.getInsurance()}" type="submit" class="ui button">Krankenkasse ändern</button>
+                    <button th:unless="${user.getInsurance()}" type="submit" class="ui button">Krankenkasse hinzufügen</button>
                 </div>
-            </form>
-            <form th:if="${user.getInsurance()}" method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
-                <a th:text="${'Aktuelle Krankenkasse: '+user.getInsurance()}"></a>
-                <div class="field">
-                    <label class="label" for="name">Neue Krankenkasse</label>
-                    <input class="textinput" id="name" name="name" th:field="*{insurance}" th:errorclass="fieldError" type="text" required="required"/>
-                </div>
-
-                <button type="submit" class="ui button">Krankenkasse ändern</button>
             </form>
 
             <form method="post" role="form" class="ui form" id="form" th:action="@{/account/address}" th:object="${addressForm}">
@@ -124,6 +120,5 @@
         
             </div>
         </div>
-        <div class="pad"></div>
     </body>
 </html>
