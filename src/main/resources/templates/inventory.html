@@ -51,7 +51,7 @@
             </thead>
              <tbody >
         <tr th:if="${inventory.empty}">
-            <tdcolspan="3"> Keine Medikamente vorhanden</td>
+            <td colspan="3"> Keine Medikamente vorhanden</td>
         </tr>
         <tr  th:each="entry : ${inventory}" > 
          
@@ -82,64 +82,5 @@
         </tbody>
         </table>
         </div>
-      
-		
-        <!--Popup for changing fix
-        <div id="editfix" class="overlay">
-          <div class="popup border">
-            <form action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
-                <ul >
-                <h1 style="margin: 5px;">Fixkosten Ändern</h1>
-                <div class="input-fileds">
-                  <label>Miete: </label>
-                  <input type="number"th:field="*{Miete}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Strom:</label>
-                  <input type="number"th:field="*{Strom}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Wasser:</label>
-                  <input type="number"th:field="*{Wasser}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Heizkosten:</label>
-                  <input type="number"th:field="*{Heizkosten}" />
-                  <label>€</label>
-                </div>
-                </ul>
-                   <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
-              </form> 
-              
-          </div>
-        </div>
-        <div id="rechnungsform" class="rechnung-prev">
-          <div class="popup2 border">
-            <div class="input-fileds">
-              <h1 style="color:white">Rechnung Nr. <span th:text="${rf.getId()}"></span></h1>
-            </div>
-              <div class="input-fileds">
-              <label style="color:white">Datum: <span th:text="${rf.getDate()}"></span></label>
-              </div>
-              <div class="input-fileds">
-              <label style="color:white">Vorname: <span th:text="${rf.getUsername()}"></span></label>
-              </div>
-              <div class="input-fileds">
-                <label style="color:white">Nachname: <span th:text="${rf.getLastname()}"></span></label>
-                </div>
-              <div class="input-fileds">
-              <label style="color:white">Email: <span th:text="${rf.getUemail()}"></span></label>
-              </div>
-              <div class="input-fileds">
-              <label style="color:white">Betrag: <span th:text="${rf.getBetrag()}"></span> €</label>
-              </div>
-              <form action="#" th:action="@{/rechnungsform}">
-                <input class="button" style="margin:5px"type="submit" value="Schließen" />
-              </form>
-          </div>
-        </div>-->
     </body>
 </html>
