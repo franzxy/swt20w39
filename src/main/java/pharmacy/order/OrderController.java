@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
+import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
@@ -137,29 +138,52 @@ public class OrderController {
 	}
 
 	@GetMapping("/orders/{id}")
-	public String detail(@PathVariable String id, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	public String detail(@PathVariable OrderIdentifier id, Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		
 		if(userAccount.isEmpty()){
 			model.addAttribute("rech", this.orderManagement.findBy(userAccount.get()).toList());
 			model.addAttribute("filter", new OrderFilter());
 			return "orders";
 		}
-		orderManagement.findBy(userAccount.get()).forEach(order->{
-			if(order.getId().getIdentifier().equals(id)){
-				model.addAttribute("det", order);
-			}
-		});
+		
+		Order order=this.orderManagement.get(id).get();
+		model.addAttribute("det", order);
+			
 		
 
 		return "orderdetails";
 	}
 	
 	@GetMapping("/orders/{id}/complete")
-	public String complete(@PathVariable String id, Model model){
-		orderManagement.findBy(OrderStatus.PAID).forEach(order->{
-			if(order.getId().getIdentifier().equals(id))
-			orderManagement.completeOrder(order);
-		});
+	public String complete(@PathVariable OrderIdentifier id, Model model){
+		if(this.orderManagement.get(id).isPresent()){
+			Order o=this.orderManagement.get(id).get();
+			this.orderManagement.completeOrder(o);
+		}
 		return "redirect:/orders";
+	}
+
+	@GetMapping("/orders/{id}/cancel")
+	public String cancel(@PathVariable OrderIdentifier id, Model model){
+		if(this.orderManagement.get(id).isPresent()){
+			try{
+				Order o=this.orderManagement.get(id).get();
+				this.orderManagement.cancelOrder(o, "Canceled by Boss");
+			}catch(ClassCastException e){
+				Order o=this.orderManagement.get(id).get();
+				this.orderManagement.delete(o);
+			}
+		}
+		return "redirect:/orders";
+	}
+
+	@GetMapping("/myorders")
+	String myorders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		List<Order> ret =List.of() ;
+		if(!userAccount.isEmpty()){
+			ret=this.orderManagement.findBy(userAccount.get()).toList();
+		}
+		model.addAttribute("rech", ret);
+		return "myorders";
 	}
 }
