@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Bestellungen</title>
+		
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+   
+        <div class="center">
+           <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th >Datum</th>
+                    <th >ID</th>
+                    <th >Betrag in €</th>
+                    <th >Status</th>
+                    <th >Rechung</th>
+                </tr>
+                </thead>
+                 <tbody>
+            <tr th:if="${rech.empty}">
+                <td style="text-align: center;"colspan="7"> Keine Bestellungen </td>
+            </tr>
+            <tr th:each="sec : ${rech}"> 
+                <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
+                <td  th:text="${sec.getId().getIdentifier()}">ID</td>
+                <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
+                <td  th:text="${sec.getOrderStatus().toString()}">Status</td>
+                <td>
+                  <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId()})}"></a>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+            </div>
+   
+        
+        
+    </body>
+</html>
