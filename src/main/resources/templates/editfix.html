@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Medikament</title>
+	</head>
+    <body>
+		<nav th:include="navigation :: navigation"></nav>
+		<div class="center">
+        <div class="popup border">
+            <div id="editfix" class="overlay">
+                <div class="popup border">
+                  <form action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
+                      <ul >
+                      <h1 style="margin: 5px;">Fixkosten Ändern</h1>
+                      <div class="input-fileds">
+                        <label>Miete: </label>
+                        <input type="number"th:field="*{Miete}" />
+                        <label>€</label>
+                      </div>
+                      <div class="input-fileds">
+                        <label>Strom:</label>
+                        <input type="number"th:field="*{Strom}" />
+                        <label>€</label>
+                      </div>
+                      <div class="input-fileds">
+                        <label>Wasser:</label>
+                        <input type="number"th:field="*{Wasser}" />
+                        <label>€</label>
+                      </div>
+                      <div class="input-fileds">
+                        <label>Heizkosten:</label>
+                        <input type="number"th:field="*{Heizkosten}" />
+                        <label>€</label>
+                      </div>
+                      </ul>
+                         <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
+                    </form> 
+                    
+                </div>
+              </div>
+            <form action="/finances" >
+                <input style="margin:5px" class="button"type="submit" value="Abbrechen"></input>
+            </form>
+        </div>

@@ -192,7 +192,8 @@ public class FinanceController {
 	}
 	@GetMapping("/editfix")
 	public String fix(Model model) {
-		return "redirect:/finances#editfix";
+		model.addAttribute("fixk",this.fixk);
+		return "editfix";
 	}
 	@PostMapping("/editfix")
 	public String fixsave(@ModelAttribute Fixkosten fixk,Model model) {
