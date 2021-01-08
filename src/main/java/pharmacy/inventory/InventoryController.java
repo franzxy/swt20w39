@@ -119,9 +119,8 @@ class InventoryController {
 		if(result.hasErrors()){
 			this.formular=formular;
 			model.addAttribute("formular", this.formular);
-			return "redirect:/inventory#newmed";
+			return "redirect:/meddetail";
 		}
-		System.out.println("ID: "+formular.getId());
 		int qan=0;
 		this.formular=formular;
 		if(!this.formular.getId().equals("")){
@@ -136,7 +135,7 @@ class InventoryController {
 				
 				this.inventory.delete(item);
 				this.medicineCatalog.delete((Medicine)item.getProduct());
-				System.out.println("Medikament gelöscht");
+				
 			}
 			});
 			
@@ -162,7 +161,7 @@ class InventoryController {
 	@GetMapping("/inrease")
 	@PreAuthorize("hasRole('BOSS')")
 	String preinreaseQuantity(Model model) {
-		return "redirect:/inventory#newmed";
+		return "redirect:/inventory";
 	}
 	@PostMapping("/increase")
 	@PreAuthorize("hasRole('BOSS')")
@@ -176,7 +175,7 @@ class InventoryController {
 		model.addAttribute("inventory", inventory.findAll().toList());
 		model.addAttribute("formular", this.formular);
 		model.addAttribute("waitlist", this.waitlist);
-		return "redirect:/addmed";
+		return "redirect:/inventory";
 	}
 
 
@@ -184,7 +183,7 @@ class InventoryController {
 	@GetMapping("/delete")
 	@PreAuthorize("hasRole('BOSS')")
 	String predelete(Model model) {
-		return "redirect:/inventory#newmed";
+		return "redirect:/inventory";
 	}
 	@PostMapping("/delete")
 	@PreAuthorize("hasRole('BOSS')")
@@ -198,19 +197,23 @@ class InventoryController {
 		this.formular=new MedicineForm();
 		model.addAttribute("inventory", inventory.findAll().toList());
 		model.addAttribute("formular", this.formular);
-		return "redirect:/addmed";
+		return "redirect:/inventory";
 	}
 
 
 
 
-	@GetMapping("/details")
+	@GetMapping("/meddetail")
 	@PreAuthorize("hasRole('BOSS')")
 	String predetails(Model model) {
-		//model.addAttribute("formular", new MedicineForm());
-		return "redirect:/inventory#newmed";
+		if(this.formular.getId().equals("")){
+			model.addAttribute("formular", new MedicineForm());
+		}else{
+		model.addAttribute("formular", this.formular);
+		}
+		return "meddetail";
 	}
-	@PostMapping("/details")
+	@PostMapping("/meddetail")
 	@PreAuthorize("hasRole('BOSS')")
 	String details(@ModelAttribute MedicineForm formular, Model model) {
 		MedicineForm med= new MedicineForm();
@@ -233,7 +236,14 @@ class InventoryController {
 		model.addAttribute("formular",med);
 		model.addAttribute("inventory", inventory.findAll().toList());
 		
-		return "redirect:/inventory#newmed";
+		return "meddetail";
 	}
+	@GetMapping("/discard")
+	@PreAuthorize("hasRole('BOSS')")
+	String flush(Model model) {
+		this.formular=new MedicineForm();
+		return "redirect:/inventory";
+	}
+	
 }
 
