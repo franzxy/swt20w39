@@ -20,37 +20,31 @@ __Schriftführer:__ Timon Trettin +
 == Aufgaben bis zum 10.01.2021
 * Falk Natkowski: Catalog, Inventory, Order, UI
 * Lukas Luger: Finances, Inventory, Order, UI
-* Timon Trettin: User, Order, Time, UX, UI
+* Timon Trettin: User, Order, Time, UI
 
 === Pflichtenheft, Dev Docu
 * Auf aktuellen Stand bringen
 
-=== Testabdeckung
-* 40%
-
 === Anwendung Allgemein
 * .properties wieder nutzen
-* Umbau zur Online Apotheke
-** Kasse, Seiteneingang, Labor, Praxen entfällt
-** Im gebrauch mit der ePA
 
 === Inventory
-* forms auslagern
+* Formulare auslagern
 * Automatisch auffüllen
 
 === Catalog
 * Filter nach Kategorien
-* form keep state after filter selected
-* paint/ stock img
+* Filter Formular Auswahl beibehalten bei neuladen der Seite
+* Medikamenten Bilder
 
 === Order
 * Bestellung
 ** Auslieferung der Ware abwarten
 * Warenkorb "/cart"
-** if empty button to discover aka "/"
-** Anzahl selector wie bei add to cart und delete button
+** Wenn leer Aufruf für "/"
+** Anzahl selector wie bei add to cart und Button zum Entfernen
 * Bestellungen "/orders"
-** "BOSS" Bestellung abfertigen und abbrechen
+** "BOSS" Buttons für Bestellung Abfertigen und Abbrechen
 ** "EMPLOYEEE" sieht offene Bestellugen
 ** Bestellung abfertigen Button für "EMPLOYEE"
 *** nur während Arbeitszeit
@@ -58,13 +52,11 @@ __Schriftführer:__ Timon Trettin +
 ** Order Abbrechen
 
 === Finances
-* Filter (Mitarbeiter, Einkauf/Verkauf etc.)
-* Fixkosten bearbeiten
+* Formulare Auslagern
 * Rechnungen einsehen -> Verweis auf Bestellungen /order/orderId
-* Muss Kriterien
-** Monatsübersicht
-** Bessere Filter
-** Meine Finanzen "/myfinances"
+* Monatsübersicht
+* Bessere Filter
+* Meine Finanzen "/myfinances"
 
 === User
 * Benutzerübersicht "/users"
@@ -72,19 +64,19 @@ __Schriftführer:__ Timon Trettin +
 ** Padding-Bottom
 * Account "/account"
 ** Links zu "/myorders", "/myfinances"
-** Number -> String input
+** Number -> String Input
 * Krankenversicherung
 ** Name
 ** Versicherungsnummner
 * Salespoint Payment implementieren
 ** Bankeinzug hinzufügen
 ** Paydirekt hinzufügen
-* "BOSS" kann Schichten mit Stundenlohn und Anzahl der Arbeiter festlegen, Arbeiter tragen sich ein => können während dessen abfertigen
 
 === Time
-* in packages benutzen
+* In den Packages benutzen
 
 === UI
-* light/ dark mode compatible + accent color
-* show position on site when on subsite
-* expanding menu
+* light/ dark mode kompatibel, Akzentfarbe
+* Aktuellen Pfad anzeigen "Account > Einstellungen > Passwort Ändern"
+* Animiertes Menü
+* Suche auf jeder Seite
