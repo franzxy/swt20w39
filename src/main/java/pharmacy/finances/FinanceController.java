@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import pharmacy.user.User;
@@ -189,6 +190,28 @@ public class FinanceController {
 		model.addAttribute("tab", this.filter(filterB));
 		
 		return "finances";
+	}
+	@GetMapping("/finances/{id}")
+	public String financedetail(@PathVariable String id,Model model) {
+		System.out.println(id.replace("Rechnung Nr. ", ""));
+		String id2=id.replace("Rechnung Nr. ", "");
+		this.orderManagement.findBy(OrderStatus.PAID).forEach(order->{
+			if(order.getId().getIdentifier().equals(id2)){
+				model.addAttribute("det", order);
+			}
+		});
+		this.orderManagement.findBy(OrderStatus.COMPLETED).forEach(order->{
+			if(order.getId().getIdentifier().equals(id2)){
+				model.addAttribute("det", order);
+			}
+		});
+		this.orderManagement.findBy(OrderStatus.OPEN).forEach(order->{
+			if(order.getId().getIdentifier().equals(id2)){
+				model.addAttribute("det", order);
+			}
+		});
+		
+		return "orderdetails";
 	}
 	@GetMapping("/editfix")
 	public String fix(Model model) {

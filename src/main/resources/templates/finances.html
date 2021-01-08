@@ -53,7 +53,10 @@
         </tr>
         <tr th:each="entry : ${tab}"> 
             <td th:text="${#temporals.format(entry.getDate().get(),'dd.MM.yyyy HH:mm')}">Time</td>
-            <td  th:text="${entry.getDescription()}">Beschreibung</td>
+            <td th:if="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}">
+              <a th:href="@{/finances/{id}(id=${entry.getDescription()})}"style="color: blue;" th:text="${entry.getDescription()}"></a>
+            </td>
+            <td th:unless="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}" th:text="${entry.getDescription()}">Beschreibung</td>
              <td  th:text="${entry.getValue().getNumber().doubleValue()}">Betrag</td>
             
             </tr>
