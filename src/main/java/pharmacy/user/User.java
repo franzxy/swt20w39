@@ -1,13 +1,20 @@
 package pharmacy.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.javamoney.moneta.Money;
+import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @Entity
 public class User {
@@ -18,21 +25,18 @@ public class User {
 	private UserAccount userAccount;
 
 	private Address address;
-/*
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<PaymentMethod> payments = new ArrayList<>();
-*/
+
 	private Insurance insurance;
+	private String payDirekt;
 
-	// Employee
-
+	private String iban;
 	private Money salary;
-/*
+
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Vacation> vacations = new ArrayList<>();
 
-	private Long vacationRemaining;
-*/
+	private Integer vacationRemaining;
+	
 	@SuppressWarnings("unused")
 	public User() {}
 
@@ -63,15 +67,23 @@ public class User {
 	public void changeAddress(Address newAddress) {
 		address = newAddress;
 	}
-/*
-	public List<PaymentMethod> getPayments() {
-		return payments;
+
+	public String getIban() {
+		return iban;
 	}
 
-	public void addPayment(PaymentMethod newPayment) {
-		payments.add(newPayment);
+	public void setIban(String newIban) {
+		iban = newIban;
 	}
-*/
+
+	public String getPayDirekt() {
+		return payDirekt;
+	}
+
+	public void setPayDirekt(String newPayDirekt) {
+		payDirekt = newPayDirekt;
+	}
+
 	public Insurance getInsurance() {
 		return insurance;
 	}
@@ -80,8 +92,6 @@ public class User {
 		insurance = newInsurance;
 	}
 
-	// Employee
-
 	public Money getSalary() {
 		return salary;
 	}
@@ -89,12 +99,18 @@ public class User {
 	public void setSalary(Money newSalary) {
 		salary = newSalary;
 	}
-/*
-	public Long getVacationRemaining() {
+
+	@Scheduled(cron = "@yearly")
+	protected void setVacationRemaining(){
+		
+		vacationRemaining = 30;
+	}
+
+	public Integer getVacationRemaining() {
 		return vacationRemaining;
 	}
 
-	public void setVacationRemaining(Long newVacationRemaining) {
+	public void setVacationRemaining(Integer newVacationRemaining) {
 		vacationRemaining = newVacationRemaining;
 	}
 
@@ -105,5 +121,9 @@ public class User {
 	public void addVacation(Vacation newVacation) {
 		vacations.add(newVacation);
 	}
-*/
+
+	public void removeVacation(Integer vac) {
+		vacations.remove(vacations.get(vac));
+	}
+
 }

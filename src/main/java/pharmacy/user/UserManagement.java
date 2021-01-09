@@ -107,6 +107,7 @@ public class UserManagement {
 	
 	public String changeEmployee(User user, EmployeeForm employeeForm) {
 		
+		user.setIban(employeeForm.getIban());
 		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
 
 		return "employee changed";
@@ -152,6 +153,24 @@ public class UserManagement {
 		user.setSalary(newSalary);
 
 		return "new salary";
+	}
+
+	public String addVacation(User user, VacationForm vacationForm) {
+		user.addVacation(new Vacation(vacationForm.getStartDate(), vacationForm.getEndDate()));
+		return "vacation added";
+	}
+
+	public String approveVacation(User user, Integer index) {
+		var vac = user.getVacations().get(index);
+		vac.setApproved(true);
+		user.setVacationRemaining(user.getVacationRemaining() - vac.getDuration());
+		
+		return "vacation added";
+	}
+
+	public String removeVacation(User user, Integer index) {
+		user.removeVacation(index);
+		return "vacation added";
 	}
 
 	public Streamable<User> findAll() {

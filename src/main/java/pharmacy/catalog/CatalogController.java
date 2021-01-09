@@ -2,6 +2,7 @@ package pharmacy.catalog;
 
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
+import org.salespointframework.order.Cart;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.slf4j.Logger;
@@ -119,8 +120,9 @@ class CatalogController {
 	}
 
 	@GetMapping("/medicine/{medicine}")
-	public String detail(@PathVariable Medicine medicine, Model model) {
-		Quantity q=Quantity.of(0);
+	public String detail(@PathVariable Medicine medicine, Model model, @ModelAttribute Cart cart) {
+		Quantity q = Quantity.of(0);
+
 		if(inventory.findByProductIdentifier(medicine.getId()).isPresent()){
 			q = inventory.findByProductIdentifier(medicine.getId()).get().getQuantity();
 		}
