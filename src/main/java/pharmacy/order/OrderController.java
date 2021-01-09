@@ -1,9 +1,10 @@
 package pharmacy.order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
+import java.time.LocalDateTime;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.Order;
@@ -15,6 +16,8 @@ import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -27,17 +30,19 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pharmacy.catalog.Medicine;
 
+@EnableScheduling
 @Controller
 @SessionAttributes("cart")
 public class OrderController {
 	//private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
 	private final OrderManagement<Order> orderManagement;
-
+	private HashMap<Order, LocalDateTime> completeline;
 	OrderController(OrderManagement<Order> orderManagement) {
 
 		Assert.notNull(orderManagement, "OrderManagement must not be null.");
 		this.orderManagement = orderManagement;
+		this.completeline=new HashMap<Order, LocalDateTime>();
 	}
 
 	@ModelAttribute("cart")
@@ -178,7 +183,8 @@ public class OrderController {
 	public String complete(@PathVariable OrderIdentifier id, Model model){
 		if(this.orderManagement.get(id).isPresent()){
 			Order o=this.orderManagement.get(id).get();
-			this.orderManagement.completeOrder(o);
+
+			this.completeline.put(o, LocalDateTime.now().plusDays(1));
 		}
 		return "redirect:/orders";
 	}
@@ -205,5 +211,14 @@ public class OrderController {
 		}
 		model.addAttribute("rech", ret);
 		return "myorders";
+	}
+	@Scheduled(fixedRate = 1000)
+	private void completeorder(){
+		this.completeline.forEach((k, v)->{
+			if(LocalDateTime.now().isAfter(v)){
+				this.orderManagement.completeOrder(k);
+			}
+		});
+
 	}
 }
