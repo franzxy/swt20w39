@@ -30,6 +30,9 @@ public class Scheduler {
             if(time.getTime().getYear()!=now.getYear()){
                 months = (12 - now.getMonthValue()) + time.getTime().getMonthValue();
                 months += 12 * (( time.getTime().getYear() - now.getYear()) - 1);
+
+                days = (365 - now.getDayOfYear()) + time.getTime().getDayOfYear();
+                days += 365 * (( time.getTime().getYear() - now.getYear()) - 1);
             }
             while(months>0){
                 monthly();
