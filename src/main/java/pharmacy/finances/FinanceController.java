@@ -193,7 +193,6 @@ public class FinanceController {
 	}
 	@GetMapping("/finances/{id}")
 	public String financedetail(@PathVariable String id,Model model) {
-		System.out.println(id.replace("Rechnung Nr. ", ""));
 		String id2=id.replace("Rechnung Nr. ", "");
 		this.orderManagement.findBy(OrderStatus.PAID).forEach(order->{
 			if(order.getId().getIdentifier().equals(id2)){
