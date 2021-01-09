@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.salespointframework.order.Cart;
+import org.salespointframework.order.CartItem;
 import org.salespointframework.order.Order;
+import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
+import org.salespointframework.catalog.Product;
 import pharmacy.catalog.Medicine;
 
 @Controller
@@ -51,12 +53,32 @@ public class OrderController {
 
 	@PostMapping("/cart")
 	String addItem(@RequestParam("pid") Medicine item, @RequestParam("number") int number, @ModelAttribute Cart cart) {
-
+		
 		int amount = number <= 0 ? 1 : number;
-
+		
 		cart.addOrUpdateItem(item, Quantity.of(amount));
-
+		
+	
 		return "redirect:/";
+	}
+	@GetMapping("/cart/{id}/delete")
+	String deleteItem(@PathVariable String id, @ModelAttribute Cart cart) {
+		cart.removeItem(id);
+		return "cart";
+	}
+
+	
+	@GetMapping("/updatecart")
+	String basket2() {
+		return "redirect:/cart";
+	}
+
+	@PostMapping("/updatecart")
+	String updateItem(@RequestParam("pid") String item, @RequestParam("number") int number, @ModelAttribute Cart cart) {
+		CartItem item2 = cart.getItem(item).get();
+		int amount = number <= 0 ? 1 : number;
+		cart.addOrUpdateItem(item2.getProduct(), Quantity.of(amount).subtract(item2.getQuantity()));
+		return "redirect:/cart";
 	}
 
 	@PostMapping("/clearcart")
@@ -137,29 +159,52 @@ public class OrderController {
 	}
 
 	@GetMapping("/orders/{id}")
-	public String detail(@PathVariable String id, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	public String detail(@PathVariable OrderIdentifier id, Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		
 		if(userAccount.isEmpty()){
 			model.addAttribute("rech", this.orderManagement.findBy(userAccount.get()).toList());
 			model.addAttribute("filter", new OrderFilter());
 			return "orders";
 		}
-		orderManagement.findBy(userAccount.get()).forEach(order->{
-			if(order.getId().getIdentifier().equals(id)){
-				model.addAttribute("det", order);
-			}
-		});
+		
+		Order order=this.orderManagement.get(id).get();
+		model.addAttribute("det", order);
+			
 		
 
 		return "orderdetails";
 	}
 	
 	@GetMapping("/orders/{id}/complete")
-	public String complete(@PathVariable String id, Model model){
-		orderManagement.findBy(OrderStatus.PAID).forEach(order->{
-			if(order.getId().getIdentifier().equals(id))
-			orderManagement.completeOrder(order);
-		});
+	public String complete(@PathVariable OrderIdentifier id, Model model){
+		if(this.orderManagement.get(id).isPresent()){
+			Order o=this.orderManagement.get(id).get();
+			this.orderManagement.completeOrder(o);
+		}
 		return "redirect:/orders";
+	}
+
+	@GetMapping("/orders/{id}/cancel")
+	public String cancel(@PathVariable OrderIdentifier id, Model model){
+		if(this.orderManagement.get(id).isPresent()){
+			try{
+				Order o=this.orderManagement.get(id).get();
+				this.orderManagement.cancelOrder(o, "Canceled by Boss");
+			}catch(ClassCastException e){
+				Order o=this.orderManagement.get(id).get();
+				this.orderManagement.delete(o);
+			}
+		}
+		return "redirect:/orders";
+	}
+
+	@GetMapping("/myorders")
+	String myorders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		List<Order> ret =List.of() ;
+		if(!userAccount.isEmpty()){
+			ret=this.orderManagement.findBy(userAccount.get()).toList();
+		}
+		model.addAttribute("rech", ret);
+		return "myorders";
 	}
 }

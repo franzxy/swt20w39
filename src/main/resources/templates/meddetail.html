@@ -1,0 +1,63 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Medikament</title>
+	</head>
+    <body>
+		<nav th:include="navigation :: navigation"></nav>
+		<div class="center">
+        <div class="popup border">
+            <form action="#newmed" th:action="@{/addmed}"  th:object="${formular}" method="POST">
+                <ul >
+                    <h1  style="margin: 5px;">Medikament bearbeiten</h1>
+                    <input type="hidden"th:field="*{id}" />
+                    <div class="input-fileds">
+                        <label>Name:</label>
+                        <input type="text"th:field="*{name}" />
+                    </div>
+                    <div class="input-fileds">
+                        <label>Beschreibung:</label>
+                        <input type="text"th:field="*{description}" />
+                    </div>
+                    <div class="input-fileds">
+                        <label>Tags (mit Komma trennen):</label>
+                        <input type="text"th:field="*{tags}" />
+                    </div>
+                    <div class="input-fileds">
+                        <label>Pfad zum Bild:</label>
+                        <input type="text"th:field="*{image}" />
+                    </div>
+                    <div class="input-fileds">
+                        <label>Gewicht:</label>
+                        <input type="number"th:field="*{amount}" />
+                        <label>Milligramm</label>
+                    </div>
+                    <div class="input-fileds">
+                        <label>Menge:</label>
+                        <input type="number"th:field="*{quantity}" />
+                    </div>
+                    <div class="input-fileds">
+                        <label>Verkaufspreis:</label>
+                        <input type="number"th:field="*{price}" />
+                        <label>€</label>
+                    </div>
+                    <div class="input-fileds">
+                        <label>Einkaufspreis:</label>
+                        <input type="number"th:field="*{purchasingprice}" />
+                        <label>€</label>
+                    </div>
+                    <div class="input-fileds">
+                        <label>Rezeptpflichtig:</label>
+                        <input type="checkbox" name ="presonly" th:field="*{presonly}" />
+                    </div>
+                </ul>
+                <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
+            </form>
+            <form action="/discard" th:object="${formular}" >
+                <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
+               <input style="margin:5px" class="button"type="submit" value="Abbrechen"></input>
+            </form>
+        </div>

@@ -36,18 +36,17 @@
                     <tr th:each="item : ${cart} ">
                         <td th:text="${item.productName}">Default</td>
                         <td>
-                            <form class="ui form" method="post" th:action="@{/cart}">
+                            <form class="ui form" method="post" th:action="@{/updatecart}">
                                 <div class="row">
-                                    <input class="numberinput" id="number" type="number" name="number" min="1" th:max="${item.quantity}" step="1" value="${item.quantity}"/><br/>
+                                    <input type="hidden" name="pid" value="0" th:value="${item.id}"/>
+                                    <input class="numberinput" id="number" type="number" name="number" min="1" max="5" step="1" th:value="${item.quantity}"/><br/>
                                     <button type="submit" class="button" th:text="${'Aktualisieren'}"></button>
                                 </div>
                             </form>
                         </td>
                         <td th:text="${{item.price}}">10 Euro</td>
                         <td>
-                            <form class="form" method="post" th:action="@{/cart}">
-                                <button type="submit" class="iconbutton"><img class="icon" th:src="@{/img/trash.png}"></button>
-                            </form>
+                         <a class="iconbutton" th:href="@{/cart/{id}/delete(id=${item.id})}"><img class="icon" th:src="@{/img/trash.png}"></a>   
                         </td>
                     </tr>
                     <tr>

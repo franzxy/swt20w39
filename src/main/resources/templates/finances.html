@@ -5,163 +5,26 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Finanzen</title>
-		<style>
-
-      html{
-        /*background-image: linear-gradient(to top,#1F2833 0%, black 70%);*/
-        background-color: #1F2833;
-      }
-      table {
-      	margin-top: 1%;
-      	margin-right: 1%;
-      	margin-bottom: 1%;
-        width: 98%;
-        float: right;
-        padding: 5px;
-        border-collapse: collapse;
-        text-align: left;
-        overflow: hidden;
-        }
-      tr {
-       border: 1px solid white; 
-       color: white; 
-      }
-      th{
-      	color: white;
-      }
-      p{
-      	color:white;
-      	font-size:30px;
-      }
-      ul{
-      	list-style-type: none;
-      	color: white;
-      	padding: 1%
-      }
-      
-      .border{
-      	border: 1px solid #66FCF1;
-      	border-radius: 3px;
-      }
-      .block{
- 		 width: 72%; 
- 		 position: fixed;
-  		 top: 17%;
- 		 right: 2%;
- 		 background-color: #45A29E;
- 		
-      
-      }
-      .bar1{
-      	margin:2% auto 0 auto;
-      	padding: 10px;
-  		width: 95%;
-  		overflow: hidden;
-  		position: absolute;
-  		position: relative;
-  		font-size:30px;
-  		background-color: #45A29E;
-      }
-      .sidenav {
- 		 height: 75%; 
- 		 width: 22%; 
- 		 position: fixed;
-  		 top: 17%;
- 		 left: 2%;
- 		 background-color: #45A29E;
- 		 padding-top: 20px;
- 		 padding-left: 7px;
-	  }
-    
-      .overlay{
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        transition: opacity 500ms;
-        visibility: hidden;
-        opacity: 0;
-
-      }
-      .overlay:target {
-         visibility: visible;
-        opacity: 1;
-      }
-      .rechnung{
-        
-        visibility: hidden;
-      
-      }
-      .rechnung:target {
-        visibility: visible;
-      }
-      .rechnung-prev{
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        transition: opacity 500ms;
-        visibility: hidden;
-        opacity: 0;
-      }
-      .rechnung-prev:target{
-        visibility: visible;
-        opacity: 1;
-      }
-      .popup{
-        position: fixed;
-        left:0;
-        right: 0;
-        top:0;
-        bottom: 0;
-        margin: auto;
-        width: 20%;
-        height: 22%;
-        padding: 10px;
-        background-color:  #45A29E;
-      }
-      .popup2{
-        position: fixed;
-        left:0;
-        right: 0;
-        top:0;
-        bottom: 0;
-        margin: auto;
-        width: 20%;
-        height: 30%;
-        padding: 10px;
-        background-color:  #45A29E;
-      }
-      .input-fileds{
-        left:0px;
-        padding:5px;
-      }
-
-    </style>
+	
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="border bar1" ><p>Kontostand: <span th:text="${total}"/> €</p></div>
-        <div class="sidenav border">
+        <div ><p>Kontostand: <span th:text="${total}"/> €</p></div>
+        <div class="field">
        
-  			<h1 style="color:white">Filter</h1>
+  			<h1 >Filter</h1>
   			<form action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
-  			<ul >
           
-  				<li th:each="ty : ${T(pharmacy.finances.FilterForm.Filter).values()}">
+  				<label th:each="ty : ${T(pharmacy.finances.FilterForm.Filter).values()}">
             <span th:if="${ty.toString() == 'Online Bestellungen'}"><h2 style="color:white; margin: 3px;">Einnahmen <span th:text="${plus}"/> €</h2></span>
             <span th:if="${ty.toString() == 'Gehälter'}"><h2 style="color:white; margin: 3px;">Ausgaben <span th:text="${minus}"/> €</h2></span>
-    				<input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
+            
+            <input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
     				<label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
-  				</li>
-            </ul>
+          </label>
            <input  style="margin:5px" class="button"type="submit" value="Filtern" />
          </form> 
-        <form action="#editfix">
+        <form action="/editfix">
           <input style="margin:5px" class="button"type="submit" value="Fixkosten bearbeiten"></input>
         </form>
         
@@ -175,8 +38,8 @@
    
     
 
-		<div class="block border">
-       <table class="ui table">
+      <div class="center" >
+       <table class="ui celled table">
             <thead>
             <tr>
                 <th >Datum</th>
@@ -186,52 +49,19 @@
             </thead>
              <tbody>
         <tr th:if="${tab.empty}">
-            <td style="text-align: center;"colspan="3"> Keine Buchhaltungseinträge Verfügbar</td>
+            <td colspan="3"> Keine Buchhaltungseinträge Verfügbar</td>
         </tr>
         <tr th:each="entry : ${tab}"> 
             <td th:text="${#temporals.format(entry.getDate().get(),'dd.MM.yyyy HH:mm')}">Time</td>
-            <td  th:text="${entry.getDescription()}">Beschreibung</td>
+            <td th:if="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}">
+              <a th:href="@{/finances/{id}(id=${entry.getDescription()})}"style="color: blue;" th:text="${entry.getDescription()}"></a>
+            </td>
+            <td th:unless="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}" th:text="${entry.getDescription()}">Beschreibung</td>
              <td  th:text="${entry.getValue().getNumber().doubleValue()}">Betrag</td>
             
             </tr>
         </tbody>
-        </table>
-        </div>
-      
-        
-        
-        <!--Popup for changing fix-->
-        <div id="editfix" class="overlay">
-          <div class="popup border">
-            <form action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
-                <ul >
-                <h1 style="margin: 5px;">Fixkosten Ändern</h1>
-                <div class="input-fileds">
-                  <label>Miete: </label>
-                  <input type="number"th:field="*{Miete}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Strom:</label>
-                  <input type="number"th:field="*{Strom}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Wasser:</label>
-                  <input type="number"th:field="*{Wasser}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Heizkosten:</label>
-                  <input type="number"th:field="*{Heizkosten}" />
-                  <label>€</label>
-                </div>
-                </ul>
-                   <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
-              </form> 
-              
-          </div>
-        </div>
-        
+      </table>
+      </div>
     </body>
 </html>

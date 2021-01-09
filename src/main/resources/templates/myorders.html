@@ -13,23 +13,7 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="center">      
-        <div sec:authorize="hasRole('BOSS')">
-  			    <form action="#" th:action="@{/orders}"  th:object="${filter}" method="POST">
-                    <label th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">
-                      <input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
-                      <label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
-                    </label>
-             <input  style="margin:5px" class="button"type="submit" value="Filtern" />
-           </form> 
-        </div>
-        
-      </div>
    
-    
-
-      
-        
         <div class="center">
            <table class="ui celled table">
                 <thead>
@@ -38,9 +22,6 @@
                     <th >ID</th>
                     <th >Betrag in €</th>
                     <th >Status</th>
-                    <th >User</th>
-                    <th sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">Fertigstellen</th>
-                    <th sec:authorize="hasRole('BOSS')">Abbrechen</th>
                     <th >Rechung</th>
                 </tr>
                 </thead>
@@ -53,13 +34,6 @@
                 <td  th:text="${sec.getId().getIdentifier()}">ID</td>
                 <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
                 <td  th:text="${sec.getOrderStatus().toString()}">Status</td>
-                <td  th:text="${sec.getUserAccount().getUsername()}">User</td>
-                <td sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-                  <a th:text="Feritigstellen"class="button"th:href="@{/orders/{id}/complete(id=${sec.getId()})}"></a>
-                </td>
-                <td sec:authorize="hasRole('BOSS')">
-                  <a class="button"th:text="Cancel" th:href="@{/orders/{id}/cancel(id=${sec.getId()})}"></a>
-                </td>
                 <td>
                   <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId()})}"></a>
                 </td>

@@ -9,167 +9,22 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Inevntar</title>
-		<style>
-      table {
-      	margin-top: 1%;
-      	margin-right: 1%;
-      	margin-bottom: 1%;
-        width: 98%;
-        float: right;
-        padding: 5px;
-        border-collapse: collapse;
-        text-align: left;
-        overflow: hidden;
-        }
-      tr {
-       border: 1px solid white; 
-       color: white; 
-      }
-      th{
-      	color: white;
-      }
-      p{
-      	color:white;
-      	font-size:30px;
-      }
-      ul{
-      	list-style-type: none;
-      	color: white;
-      	padding: 1%
-      }
-      
-      .border{
-      	border: 1px solid #66FCF1;
-      	border-radius: 3px;
-      }
-      .block{
- 		 height: 85%; 
-        width: 72%; 
-        position: fixed;
-        top: 2%;
-        right: 2%;
-        background-color: #45A29E;
- 		
-      
-      }
-      .bar1{
-      	margin:2% auto 0 auto;
-      	padding: 10px;
-  		width: 95%;
-  		overflow: hidden;
-  		position: absolute;
-  		position: relative;
-  		font-size:30px;
-  		background-color: #45A29E;
-      }
-      .sidenav {
- 		 height: 85%; 
- 		 width: 22%; 
- 		 position: fixed;
-  		 top: 2%;
- 		 left: 2%;
- 		 background-color: #45A29E;
- 		 padding-top: 20px;
- 		 padding-left: 7px;
-	  }
-    
-      .overlay{
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        transition: opacity 500ms;
-        visibility: hidden;
-        opacity: 0;
-
-      }
-      .overlay:target {
-         visibility: visible;
-        opacity: 1;
-      }
-      .rechnung{
-        
-        visibility: hidden;
-      
-      }
-      .rechnung:target {
-        visibility: visible;
-      }
-      .rechnung-prev{
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        transition: opacity 500ms;
-        visibility: hidden;
-        opacity: 0;
-      }
-      .rechnung-prev:target{
-        visibility: visible;
-        opacity: 1;
-      }
-      .popup{
-        position: fixed;
-        left:0;
-        right: 0;
-        top:0;
-        bottom: 0;
-        margin: auto;
-        width: 20%;
-        height: 60%;
-        padding: 10px;
-        background-color:  #45A29E;
-      }
-      .popup2{
-        position: fixed;
-        left:0;
-        right: 0;
-        top:0;
-        bottom: 0;
-        margin: auto;
-        width: 20%;
-        height: 27%;
-        padding: 10px;
-        background-color:  #45A29E;
-      }
-      .input-fileds{
-        left:0px;
-        padding:5px;
-      }
-
-    </style>
+		
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="sidenav border">
-       
-  			 <h1 style="color:white">Unimplemented Features</h1>
-  			<!--<form action="#" th:action="@{/finances}"  th:object="${filterI}" method="POST">
-  			<ul >
-          
-  				<li th:each="ty : ${T(pharmacy.inventory.FilterI.).values()}">
-           
-    				<input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
-    				<label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
-  				</li>
-            </ul>
-           <input  style="margin:5px" class="button"type="submit" value="Filtern" />
-		 </form> -->
-		 <form action="#newmed" th:object="${formular}" >
+        
+		 <form action="/meddetail" th:object="${formular}" >
       <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
 			<input style="margin:5px" class="button"type="submit" value="Medikament hinzufügen"></input>
 		  </form>
         
-      </div>
+
    
     
 
-		<div style="overflow-y: scroll;"class="block border" >
-       <table class="ui table">
+		<div class="center" >
+       <table class="ui celled table">
             <thead>
             <tr>
                 <th >Name</th>
@@ -184,7 +39,7 @@
             </thead>
              <tbody >
         <tr th:if="${inventory.empty}">
-            <td style="text-align: center;"colspan="3"> Keine Medikamente vorhanden</td>
+            <td colspan="3"> Keine Medikamente vorhanden</td>
         </tr>
         <tr  th:each="entry : ${inventory}" > 
          
@@ -194,19 +49,19 @@
           <td  th:text="${entry.getProduct().getQuantity()}">Zielenge</td>
           <td><span th:if="${waitlist.containsKey(entry.getId().getIdentifier())}"><span th:text="${waitlist.get(entry.getId().getIdentifier())}"></span></span></td>
           <td>
-            <form action="#newmed" th:action="@{/details}"th:object="${formular}" method="POST">
+            <form action="#" th:action="@{/meddetail}"th:object="${formular}" method="POST">
               <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
               <input class="button" style="margin:5px"type="submit" value="Details" />
             </form>
           </td>
           <td>
-            <form action="#newmed" th:action="@{/increase}" th:object="${formular}"method="POST">
+            <form action="#" th:action="@{/increase}" th:object="${formular}"method="POST">
               <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}" />
               <input class="button" style="margin:5px"type="submit" value="+1" />
             </form>
           </td>
           <td>
-            <form action="#newmed" th:action="@{/delete}"th:object="${formular}" method="POST">
+            <form action="#" th:action="@{/delete}"th:object="${formular}" method="POST">
               <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
               <input class="button" style="margin:5px"type="submit" value="Löschen" />
             </form>
@@ -215,120 +70,5 @@
         </tbody>
         </table>
         </div>
-      
-        <div id="newmed" class="overlay">
-			<div class="popup border">
-			  <form action="#newmed" th:action="@{/addmed}"  th:object="${formular}" method="POST">
-				  <ul >
-            <h1  style="margin: 5px;">Medikament bearbeiten</h1>
-            <input type="hidden"th:field="*{id}" />
-				  <div class="input-fileds">
-					<label>Name:</label>
-          <input type="text"th:field="*{name}" />
-				  </div>
-				  <div class="input-fileds">
-					<label>Beschreibung:</label>
-          <input type="text"th:field="*{description}" />
-				  </div>
-				  <div class="input-fileds">
-					<label>Tags (mit Komma trennen):</label>
-          <input type="text"th:field="*{tags}" />
-          </div>
-          <div class="input-fileds">
-            <label>Pfad zum Bild:</label>
-            <input type="text"th:field="*{image}" />
-          </div>
-				  <div class="input-fileds">
-					<label>Gewicht:</label>
-          <input type="number"th:field="*{amount}" />
-          <label>Milligramm</label>
-          </div>
-				  <div class="input-fileds">
-					<label>Menge:</label>
-					<input type="number"th:field="*{quantity}" />
-          </div>
-          <div class="input-fileds">
-            <label>Verkaufspreis:</label>
-            <input type="number"th:field="*{price}" />
-            <label>€</label>
-            </div>
-            <div class="input-fileds">
-              <label>Einkaufspreis:</label>
-              <input type="number"th:field="*{purchasingprice}" />
-              <label>€</label>
-              </div>
-              <div class="input-fileds">
-                <label>Rezeptpflichtig:</label>
-                <input type="checkbox" name ="presonly" th:field="*{presonly}" />
-                </div>
-            
-        
-      
-    
-          
-				  </ul>
-					 <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
-				</form> 
-				
-				
-			</div>
-		  </div>
-        <!--Popup for changing fix
-        <div id="editfix" class="overlay">
-          <div class="popup border">
-            <form action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
-                <ul >
-                <h1 style="margin: 5px;">Fixkosten Ändern</h1>
-                <div class="input-fileds">
-                  <label>Miete: </label>
-                  <input type="number"th:field="*{Miete}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Strom:</label>
-                  <input type="number"th:field="*{Strom}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Wasser:</label>
-                  <input type="number"th:field="*{Wasser}" />
-                  <label>€</label>
-                </div>
-                <div class="input-fileds">
-                  <label>Heizkosten:</label>
-                  <input type="number"th:field="*{Heizkosten}" />
-                  <label>€</label>
-                </div>
-                </ul>
-                   <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
-              </form> 
-              
-          </div>
-        </div>
-        <div id="rechnungsform" class="rechnung-prev">
-          <div class="popup2 border">
-            <div class="input-fileds">
-              <h1 style="color:white">Rechnung Nr. <span th:text="${rf.getId()}"></span></h1>
-            </div>
-              <div class="input-fileds">
-              <label style="color:white">Datum: <span th:text="${rf.getDate()}"></span></label>
-              </div>
-              <div class="input-fileds">
-              <label style="color:white">Vorname: <span th:text="${rf.getUsername()}"></span></label>
-              </div>
-              <div class="input-fileds">
-                <label style="color:white">Nachname: <span th:text="${rf.getLastname()}"></span></label>
-                </div>
-              <div class="input-fileds">
-              <label style="color:white">Email: <span th:text="${rf.getUemail()}"></span></label>
-              </div>
-              <div class="input-fileds">
-              <label style="color:white">Betrag: <span th:text="${rf.getBetrag()}"></span> €</label>
-              </div>
-              <form action="#" th:action="@{/rechnungsform}">
-                <input class="button" style="margin:5px"type="submit" value="Schließen" />
-              </form>
-          </div>
-        </div>-->
     </body>
 </html>
