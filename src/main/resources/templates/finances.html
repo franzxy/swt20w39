@@ -22,16 +22,21 @@
             <input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
     				<label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
           </label>
-           <input  style="margin:5px" class="button"type="submit" value="Filtern" />
+            <label>Nach Interval Filtern</label>
+            <input type="checkbox" th:field="*{intfilter}"/>
+            <label>Anfang</label>
+            <input type="date" th:field="*{begin}"/>
+            <label>Ende</label>
+            <input type="date" th:field="*{end}"/>
+           <input class="button"type="submit" value="Filtern" />
          </form> 
+
         <form action="/editfix">
-          <input style="margin:5px" class="button"type="submit" value="Fixkosten bearbeiten"></input>
-        </form>
-        
-       
+          <input  class="button"type="submit" value="Fixkosten bearbeiten"></input>
+        </form>     
         
         <form th:action="@{/create}" method="POST">
-          <input style="margin:5px" class="button"type="submit" value="Beispieleinträge generieren"></input>
+          <input class="button"type="submit" value="Beispieleinträge generieren"></input>
         </form>
         
       </div>

@@ -6,10 +6,6 @@ public class FilterForm{
 	public enum Filter {
 		ALLE("Alles"),
 		OBEST("Online Bestellungen"),
-		VERK("Verkäufe"),
-		PRAXA("Praxis A"),
-		PRAXB("Praxis B"),
-		PRAXC("Praxis C"),
 		GEHÄLTER("Gehälter"),
 		STROM("Strom"),
 		MIETE("Miete"),
@@ -37,7 +33,16 @@ public class FilterForm{
 	}
 	
 	private Filter filter;
-
+	private String begin;
+	private String end;
+	private boolean intfilter;
+	public FilterForm() {
+		this.filter=Filter.ALLE;
+		this.end="";
+		this.begin="";
+		this.intfilter=false;
+	}
+	
 	public Filter getFilter() {
 		return filter;
 	}
@@ -46,9 +51,31 @@ public class FilterForm{
 		this.filter = filter;
 	}
 
-	public FilterForm() {
-		this.filter=Filter.ALLE;
+	public String getBegin() {
+		return begin;
 	}
+
+	public void setBegin(String begin) {
+		this.begin = begin;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
+
+	public boolean isIntfilter() {
+		return intfilter;
+	}
+
+	public void setIntfilter(boolean intfilter) {
+		this.intfilter = intfilter;
+	}
+
+	
 	
 	
 }

@@ -1,5 +1,10 @@
 package pharmacy.finances;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,21 +113,37 @@ public class FinanceController {
 	//Main Filter Thing
 	private List<AccountancyEntry> filter(FilterForm filterB){
 		FilterForm.Filter filter1=filterB.getFilter();
-		List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
+		DateTimeFormatter format=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		List<AccountancyEntry> tmp=new ArrayList<AccountancyEntry>();
+		final List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
 		switch(filter1) {
-		case OBEST			: ret = this.getEntriesOfRole("CUSTOMER");			break;
-		case VERK			: ret = this.getEntriesOfRole("EMPLOYEE");			break;
-		case PRAXA			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "A");break;
-		case PRAXB			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "B");break;
-		case PRAXC			: ret = this.getEntriesOfRoleAndUser("DOCTOR", "C");break;
-		case GEHÄLTER		: ret = this.getByName("Gehalt von");				break;
-		case STROM			: ret = this.getByName("Strom");					break;
-		case MIETE			: ret = this.getByName("Miete");					break;
-		case WASSER			: ret = this.getByName("Wasser");					break;
-		case HEIZ			: ret = this.getByName("Heizkosten");				break;
-		default				: ret = this.acc.findAll().toList();				break;
+		case OBEST			: tmp = this.getEntriesOfRole("CUSTOMER");			break;
+		case GEHÄLTER		: tmp = this.getByName("Gehalt von");				break;
+		case STROM			: tmp = this.getByName("Strom");					break;
+		case MIETE			: tmp = this.getByName("Miete");					break;
+		case WASSER			: tmp = this.getByName("Wasser");					break;
+		case HEIZ			: tmp = this.getByName("Heizkosten");				break;
+		default				: tmp = this.acc.findAll().toList();				break;
 		}
-		return ret;
+		if(filterB.isIntfilter()){
+			try{
+				LocalDate begin=LocalDate.parse(filterB.getBegin(), format);
+				LocalDate end=LocalDate.parse(filterB.getEnd(), format);
+				tmp.forEach(acc->{
+					LocalDate l=acc.getDate().get().toLocalDate();
+					if(l.isAfter(begin) && l.isBefore(end)){
+						ret.add(acc);
+					}
+				});
+			}catch(DateTimeParseException e){
+				System.out.println("Failed to parse Time");
+				return tmp;
+			}
+			return ret;
+		}else{
+			return tmp;
+		}
+		
 	}
 	private void updateMoney(){
 		this.ist=Money.of(0.0, "EUR");
@@ -247,10 +268,4 @@ public class FinanceController {
 		this.createGehalt();
 		return "redirect:/finances";
 	}
-
-
-	
-
-	 
-	
 }
