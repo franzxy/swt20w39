@@ -1,8 +1,6 @@
 package pharmacy.finances;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -85,7 +83,7 @@ public class FinanceController {
 		return ret;
 	}
 	//Filter Stuff #2
-	private List<AccountancyEntry> getEntriesOfRoleAndUser (String role, String user){
+	/**private List<AccountancyEntry> getEntriesOfRoleAndUser (String role, String user){
 		List<AccountancyEntry> working=this.acc.findAll().toList();
 		List<AccountancyEntry> ret =new ArrayList<AccountancyEntry>();
 		for(Object o: this.orderManagement.findBy(OrderStatus.PAID).get().toArray()) {
@@ -99,7 +97,7 @@ public class FinanceController {
 			}
 		}
 		return ret;
-	}
+	}*/
 	//Filter Stuff #3
 	private List<AccountancyEntry> getByName(String name){
 		List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
