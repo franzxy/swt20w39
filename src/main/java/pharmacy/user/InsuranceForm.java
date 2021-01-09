@@ -3,9 +3,9 @@ package pharmacy.user;
 class InsuranceForm {
 	
 	private final String company;
-	private final Long insuranceNumber;
+	private final String insuranceNumber;
 
-	public InsuranceForm(String company, Long insuranceNumber) {
+	public InsuranceForm(String company, String insuranceNumber) {
 		this.company = company;
 		this.insuranceNumber = insuranceNumber;
 	}
@@ -14,7 +14,7 @@ class InsuranceForm {
 		return company;
 	}
 
-	public Long getInsuranceNumber() {
+	public String getInsuranceNumber() {
 		return insuranceNumber;
 	}
 }

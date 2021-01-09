@@ -15,6 +15,7 @@ import javax.validation.constraints.Pattern;
 class PasswordForm {
 	
 	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
+	@ValidPassword(message = "YOU PICKED THE WRONG HOUSE FOOL")
 	private String oldPassword;
 /*
 	@AssertTrue(message="Old password incorrect")

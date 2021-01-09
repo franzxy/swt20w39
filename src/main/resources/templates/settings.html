@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Einstellungen</title>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+
+        <div class="center">
+
+            <div class="form"><div class="field">
+                <label class="label" for="name">Passwort</label>
+                <a class="button" th:text="${'Passwort Ändern'}" th:href="@{/account/settings/password}"></a>
+            </div></div>
+
+            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/settings/paydirekt}" th:object="${payDirektForm}">
+                <div class="field">
+                    <label class="label" for="name">PayDirekt</label>
+                    <div class="row">
+                        <input class="textinput" id="name" name="username" th:value="${user.getPayDirekt()} ? ${user.getPayDirekt()} : ${payDirektForm.getUsername()}" placeholder="Account Name" th:errorclass="fieldError" type="text" required="required"/>
+                        <button th:if="${user.getPayDirekt()}" type="submit" class="ui button">Ändern</button>
+                        <button th:unless="${user.getPayDirekt()}" type="submit" class="ui button">Hinzufügen</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="form"><div class="field">
+                <label class="label" for="name">Versicherung</label>
+                <a th:if="${user.getInsurance()}" class="button" th:text="${'Versicherung Ändern'}" th:href="@{/account/settings/insurance}"></a>
+                <a th:unless="${user.getInsurance()}" class="button" th:text="${'Versicherung Hinzufügen'}" th:href="@{/account/settings/insurance}"></a>
+            </div></div>
+
+            <div class="form"><div class="field">
+                <label class="label" for="name">Adresse</label>
+                <a th:if="${user.getAddress()}" class="button" th:text="${'Adresse Ändern'}" th:href="@{/account/settings/address}"></a>
+                <a th:unless="${user.getAddress()}" class="button" th:text="${'Adresse Hinzufügen'}" th:href="@{/account/settings/address}"></a>
+            </div></div>
+<!--
+            <div class="form" sec:authorize="hasRole('EMPLOYEE')"><div class="field">
+                <a class="button" th:text="${'Mitarbeiter Daten Ändern'}" th:href="@{/account/settings/employeedata}"></a>
+            </div></div>
+-->
+            <div class="form" sec:authorize="hasRole('CUSTOMER')"><div class="field"></div>
+                <a class="button" th:text="${'Account Löschen'}" th:href="@{/account/settings/remove}"></a>
+            </div></div>
+        </div>            
+    </body>
+</html>
