@@ -12,10 +12,16 @@ import org.javamoney.moneta.Money;
 
 class EmployeeForm {
 	
+	private final String iban;
 	private final Long salary;
 
-	public EmployeeForm(Long salary) {
+	public EmployeeForm(String iban, Long salary) {
+		this.iban = iban;
 		this.salary = salary;
+	}
+
+	public String getIban() {
+		return iban;
 	}
 
 	public Long getSalary() {

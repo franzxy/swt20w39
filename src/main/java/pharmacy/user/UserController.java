@@ -130,7 +130,49 @@ class UserController {
 
 		return "redirect:/users";
 	}
+	/*
+	@GetMapping("/user/{userId}/vacation/{vacationId}/approve")
+	@PreAuthorize("hasRole('BOSS')")
+	String approveVacations(@PathVariable Long userId, @PathVariable Integer vacationId) {
+		
+		userManagement.approveVacation(userManagement.findUser(userId).get(), vacationId);
 
+		return "redirect:/users";
+	}
+	
+	@GetMapping("/user/{userId}/vacation/{vacationId}/reject")
+	@PreAuthorize("hasRole('BOSS')")
+	String rejectVacations(@PathVariable Long userId, @PathVariable Integer vacationId) {
+		
+		userManagement.removeVacation(userManagement.findUser(userId).get(), vacationId);
+
+		return "redirect:/users";
+	}
+
+	@GetMapping("/vacation")
+	@PreAuthorize("hasRole('EMPLOYEE')")
+	String vacation(Model model, VacationForm vacationForm) {
+
+		model.addAttribute("vacationForm", vacationForm);
+
+		model.addAttribute("user", userManagement.currentUser().get());
+
+		return "vacation";
+	}
+	
+	@PostMapping("/vacation")
+	@PreAuthorize("hasRole('EMPLOYEE')")
+	String addVacation(@Valid @ModelAttribute("vacationForm")VacationForm vacationForm, Errors result) {
+		
+		if (result.hasErrors()) {
+			return "vacation";
+		}
+		
+		userManagement.addVacation(userManagement.currentUser().get(), vacationForm);
+
+		return "account";
+	}
+*/
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
 	String account(Model model, PasswordForm passwordForm, EmployeeForm employeeForm, InsuranceForm insuranceForm, AddressForm addressForm) {

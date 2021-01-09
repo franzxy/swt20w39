@@ -2,13 +2,17 @@ package pharmacy.user;
 
 import java.util.Date;
 
-class EmployeeVacationForm {
+import org.springframework.format.annotation.DateTimeFormat;
+
+class VacationForm {
 	
+	@DateTimeFormat
 	private final Date startDate;
 
+	@DateTimeFormat
 	private final Date endDate;
 
-	public EmployeeVacationForm(Date startDate, Date endDate) {
+	public VacationForm(Date startDate, Date endDate) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}

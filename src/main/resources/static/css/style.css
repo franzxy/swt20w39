@@ -83,6 +83,7 @@ nav a {
 
 .row {
 	display: flex;
+	width: 100%;
 	flex-direction: row;
 	align-items: center;
 	flex-wrap: nowrap;
@@ -95,6 +96,7 @@ input {
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
+	width: calc(100% - 20px);
 	flex-grow: 1;
 	height: 40px;
 	padding: 0 10px;

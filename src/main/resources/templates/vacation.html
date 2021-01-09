@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+        <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Urlaub</title>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+
+        <div class="center">
+            <form class="form" method="post" role="form" id="form" th:action="@{/vacation}" th:object="${vacationForm}">
+        
+                <div class="field">
+                    <label class="label" for="address">start</label>
+                    <input class="textinput" id="address" name="address" th:field="*{startDate}" th:errorclass="fieldError" type="datetime-local"
+                        required="required"/>
+                </div>
+        
+                <div class="field">
+                    <label class="label" for="password">end</label>
+                    <input class="textinput" id="password" name="password" th:field="*{endDate}" th:errorclass="fieldError" type="datetime-local"
+                        required="required"/>
+                </div>
+
+                <div class="field">
+                    <button type="submit" class="ui button">send</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
