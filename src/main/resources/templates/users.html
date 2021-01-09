@@ -12,8 +12,8 @@
 			<table class="ui celled table">
 				<thead>
 					<tr>
-						<th>ID</th>
 						<th>Benutzername</th>
+						<th>Rolle</th>
 						<th>Arbeitsverhältnis</th>
 						<!--<th>Urlaub</th>-->
 						<th>Löschen</th>
@@ -21,8 +21,10 @@
 				</thead>
 				<tbody>
 					<tr class="ui card" th:each="user : ${users}">
-						<td th:text="${user.getId()}">ID</td>
 						<td th:text="${user.userAccount.getUsername()}">Benutzername</td>
+						<td th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer</td>
+						<td th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter</td>
+						<td th:if="${user.userAccount.hasRole(customer)}">Kunde</td>
 						<td th:if="${user.userAccount.hasRole(boss)}">
 							<form class="form" method="post" role="form" id="form" th:action="@{/user/{id}/salary(id=${user.getId()})}" th:object="${employeeForm}">
 								

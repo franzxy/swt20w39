@@ -7,12 +7,12 @@ public class Address {
 
 	private String name;
 	private String street;
-	private Long postCode;
+	private String postCode;
 	private String city;
 
 	public Address() {}
 
-	public Address(String name, String street, Long postCode, String city) {
+	public Address(String name, String street, String postCode, String city) {
 		this.name = name;
 		this.street = street;
 		this.postCode = postCode;
@@ -35,11 +35,11 @@ public class Address {
 		this.street = newStreet;
 	}
 
-	public Long getPostCode() {
+	public String getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(Long newPostCode) {
+	public void setPostCode(String newPostCode) {
 		this.postCode = newPostCode;
 	}
 

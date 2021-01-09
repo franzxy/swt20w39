@@ -148,6 +148,7 @@ label {
 	border: none;
 	background: #101010;
 	width: 100px;
+	padding: 0 10px;
 	height: 40px;
 	cursor: pointer;
 	color: white;

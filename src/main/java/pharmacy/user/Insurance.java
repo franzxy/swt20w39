@@ -6,11 +6,11 @@ import javax.persistence.Embeddable;
 public class Insurance {
 
 	private String company;
-	private Long insuranceNumber;
+	private String insuranceNumber;
 
 	public Insurance() {}
 
-	public Insurance(String company, Long insuranceNumber) {
+	public Insurance(String company, String insuranceNumber) {
 		this.company = company;
 		this.insuranceNumber = insuranceNumber;
 	}
@@ -19,15 +19,15 @@ public class Insurance {
 		return company;
 	}
 
-	public void setName(String newCompany) {
+	public void setCompany(String newCompany) {
 		company = newCompany;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return insuranceNumber;
 	}
 
-	public void setId(Long newInsuranceNumber) {
+	public void setId(String newInsuranceNumber) {
 		insuranceNumber = newInsuranceNumber;
 	}
 }

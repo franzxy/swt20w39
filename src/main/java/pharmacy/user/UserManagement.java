@@ -1,5 +1,6 @@
 package pharmacy.user;
 
+import org.salespointframework.useraccount.Password.EncryptedPassword;
 import org.salespointframework.useraccount.Password.UnencryptedPassword;
 
 import java.util.Optional;
@@ -48,6 +49,13 @@ public class UserManagement {
 		return "user removed";
 	}
 
+	public Boolean checkPassword(String old) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(UnencryptedPassword.of(userAccounts.findByUsername(auth.getName()).get().getPassword().toString()).toString());
+		return UnencryptedPassword.of(userAccounts.findByUsername(auth.getName()).get().getPassword().toString()).toString().equals(old);
+	}
+
 	public String changePassword(PasswordForm form) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -62,6 +70,13 @@ public class UserManagement {
 		user.setInsurance(new Insurance(insuranceForm.getCompany(), insuranceForm.getInsuranceNumber()));
 
 		return "insurance changed";
+	}
+	
+	public String changePayDirekt(User user, PayDirektForm payDirektForm) {
+		
+		user.setPayDirekt(payDirektForm.getUsername());
+
+		return "paydirekt changed";
 	}
 	
 	public String changeAddress(User user, AddressForm addressForm) {
@@ -142,7 +157,6 @@ public class UserManagement {
 	}
 
 	public String removeRole(User user, Role role) {
-		
 		user.removeRole(role);
 
 		return "role removed";

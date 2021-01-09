@@ -1,7 +1,7 @@
 package pharmacy.user;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 class AddressForm {
 
@@ -11,13 +11,14 @@ class AddressForm {
 	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
 	private final String street;
 
-	@NotNull(message = "{DeliveryForm.email.NotEmpty}")
-	private final Long postCode;
+	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
+	@Pattern(regexp="^[0-9]*$", message = "test")
+	private final String postCode;
 
 	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
 	private final String city;
 
-	public AddressForm(String name, String street, Long postCode, String city) {
+	public AddressForm(String name, String street, String postCode, String city) {
 		this.name = name;
 		this.street = street;
 		this.postCode = postCode;
@@ -32,7 +33,7 @@ class AddressForm {
 		return street;
 	}
 
-	public Long getPostCode() {
+	public String getPostCode() {
 		return postCode;
 	}
 
