@@ -15,10 +15,10 @@ import javax.validation.Payload;
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface ValidPassword {
 	
-	    String message() default "Invalid Name";
-	 
-	    Class<?>[] groups() default {};
-	 
-	    Class<? extends Payload>[] payload() default {};
+	String message() default "Passwörter stimmen nicht überein";
+	
+	Class<?>[] groups() default {};
+	
+	Class<? extends Payload>[] payload() default {};
 	
 }

@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 
 class PayDirektForm {
 	
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
+	@NotEmpty(message = "PayDirekt Benutzername fehlt")
 	private final String username;
 
 	public PayDirektForm(String username) {

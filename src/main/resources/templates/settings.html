@@ -12,6 +12,12 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
+        
+        <div class="position">
+            <a th:href="@{/account}">Account</a>
+            <p>></p>
+            <a th:href="@{/settings}">Einstellungen</a>
+        </div>
 
         <div class="center">
 
@@ -28,6 +34,7 @@
                         <button th:if="${user.getPayDirekt()}" type="submit" class="ui button">Ändern</button>
                         <button th:unless="${user.getPayDirekt()}" type="submit" class="ui button">Hinzufügen</button>
                     </div>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                 </div>
             </form>
 
