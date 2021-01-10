@@ -9,26 +9,39 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div ><p>Kontostand: <span th:text="${total}"/> €</p></div>
+        <div class="position">
+          <a th:href="@{/finances}">Finanzen</a>
+          <p>></p>
+        </div>
         <div class="field">
-       
-  			<h1 >Filter</h1>
-  			<form action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
-          
-  				<label th:each="ty : ${T(pharmacy.finances.FilterForm.Filter).values()}">
-            <span th:if="${ty.toString() == 'Online Bestellungen'}"><h2 style="color:white; margin: 3px;">Einnahmen <span th:text="${plus}"/> €</h2></span>
-            <span th:if="${ty.toString() == 'Gehälter'}"><h2 style="color:white; margin: 3px;">Ausgaben <span th:text="${minus}"/> €</h2></span>
-            
-            <input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
-    				<label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
-          </label>
-            <label>Nach Interval Filtern</label>
-            <input type="checkbox" th:field="*{intfilter}"/>
-            <label>Anfang</label>
-            <input type="date" th:field="*{begin}"/>
-            <label>Ende</label>
-            <input type="date" th:field="*{end}"/>
-           <input class="button"type="submit" value="Filtern" />
+          <p>Kontostand: <span th:text="${total}"/> €</p>
+          <p>Einnahmen <span th:text="${plus}"/> €</p>
+          <p>Ausgaben <span th:text="${minus}"/> €</p>
+        </div>
+
+        
+  			<div class="field">
+        <form  action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
+          <div class="filters">
+            <h1 >Filter</h1>
+            <div class="option">
+              <p>Kategorie</p>
+  				    <select class="option" th:field="*{filter}" >
+                <option th:each="ty : ${T(pharmacy.finances.FilterForm.Filter).values()}" th:value="${ty.name()}" th:text="${ty}"></option>
+              </select>
+            </div>
+            <div class="option">
+              <p>Nach Interval Filtern</p>
+              <input class="checkbox" type="checkbox" th:field="*{intfilter}"/>
+              <p>Anfang</p>
+              <input type="date" th:field="*{begin}"/>
+              <p>Ende</p>
+              <input type="date" th:field="*{end}"/>
+              <div class="field">
+                <input class="button"type="submit" value="Filtern" />
+              </div>
+            </div>
+          </div>
          </form> 
 
         <form action="/editfix">
@@ -38,8 +51,9 @@
         <form th:action="@{/create}" method="POST">
           <input class="button"type="submit" value="Beispieleinträge generieren"></input>
         </form>
-        
       </div>
+        
+      
    
     
 
