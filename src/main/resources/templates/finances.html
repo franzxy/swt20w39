@@ -9,7 +9,8 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="informations">
+        <div class="center">
+          <div class="row">
           <div class="information">
             <label>Kontostand</label>
             <div class="row">
@@ -32,22 +33,18 @@
             </div>
           </div>
         </div>
+          <div class="row">
+           <form class="space" action="/editfix">
+             <input  class="button"type="submit" value="Fixkosten bearbeiten"></input>
+           </form>     
+           
+           <form class="space" th:action="@{/create}" method="POST">
+             <input class="button"type="submit" value="Beispieleinträge generieren"></input>
+           </form>
+          </div>
+        </div>
 
-        
-
-      <div class="center" >
-       <div class="row">
-        <form class="field"action="/editfix">
-          <input  class="button"type="submit" value="Fixkosten bearbeiten"></input>
-        </form>     
-        
-        <form class="field"th:action="@{/create}" method="POST">
-          <input class="button"type="submit" value="Beispieleinträge generieren"></input>
-        </form>
-       </div>
-  			<div class="field">
-        <form class="form"  action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
-          <div class="filters">
+        <form class="filters"  action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
             <div class="option">
               <p>Kategorie</p>
   				    <select  th:field="*{filter}" >
@@ -69,11 +66,9 @@
             <div class="field">
               <input class="button"type="submit" value="Filtern" />
             </div>
-          </div>
          </form> 
 
-      </div>
-
+      <div class="center" >
        <table class="ui celled table">
             <tr>
                 <th >Datum</th>

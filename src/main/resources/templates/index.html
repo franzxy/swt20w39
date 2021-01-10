@@ -17,13 +17,9 @@
 
 		<nav th:include="navigation :: navigation"></nav>
 
-		<div class="center">
-
-			<form class="field" action="#"  th:action="@{/}" th:object=${searchform} method="post">
+			<form class="filters" action="#"  th:action="@{/}" th:object=${searchform} method="post">
 	
 				<input class="input" type="hidden" th:value="${oldTerm}" name="searchbar"/>
-	
-				<div class="filters">
 	
 					<div class="option">
 						<p for="nopres">Rezeptfrei</p>
@@ -37,14 +33,11 @@
 							<option th:each="tag : ${tags}" th:text="${tag}" th:value="${tag}"></option>
 						</select>
 					</div>
-				</div>
 	
 				<div class="field">
 					<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
 				</div>
 			</form>
-
-		</div>
 
 		<div class="field">
 			<h3 th:text="${header}"></h3>
