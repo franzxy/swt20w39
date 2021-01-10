@@ -46,7 +46,7 @@
                     <th >Rechung</th>
                 </tr>
             <tr th:if="${rech.empty}">
-                <td style="text-align: center;"colspan="7"> Keine Bestellungen </td>
+                <td style="text-align: center;"colspan="8"> Keine Bestellungen </td>
             </tr>
             <tr th:each="sec : ${rech}"> 
                 <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
@@ -54,11 +54,17 @@
                 <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
                 <td  th:text="${sec.getOrderStatus().toString()}">Status</td>
                 <td  th:text="${sec.getUserAccount().getUsername()}">User</td>
-                <td sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
+                <td sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:if="${sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).PAID}">
                   <a th:text="Fertigstellen"class="button"th:href="@{/orders/{id}/complete(id=${sec.getId()})}"></a>
                 </td>
-                <td sec:authorize="hasRole('BOSS')">
-                  <a class="button"th:text="Cancel" th:href="@{/orders/{id}/cancel(id=${sec.getId()})}"></a>
+                <td sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:unless="${sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).PAID}">
+                  <a th:text="'Nicht verfügbar'"class="button"th:href="@{#}"></a>
+                </td>
+                <td sec:authorize="hasRole('BOSS')" th:unless="${sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).COMPLETED}">
+                  <a class="button"th:text="Abbrechen" th:href="@{/orders/{id}/cancel(id=${sec.getId()})}"></a>
+                </td>
+                <td sec:authorize="hasRole('BOSS')" th:if="${sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).COMPLETED}">
+                  <a class="button"th:text="'Nicht möglich'" th:href="@{#}"></a>
                 </td>
                 <td>
                   <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId()})}"></a>
