@@ -17,33 +17,34 @@
 
 		<nav th:include="navigation :: navigation"></nav>
 
-		<div class="sidenav">
-			<form action="#"  th:action="@{/}" th:object=${searchform} method="post">
-				<div class="field">
+		<div class="center">
 
-					<input class="input" type="hidden" th:value="${oldTerm}" name="searchbar"/>
-
-					<div>
-						<label class="label" for="nopres">Nur rezeptfreie Medikamente anzeigen</label>
+			<form class="field" action="#"  th:action="@{/}" th:object=${searchform} method="post">
+	
+				<input class="input" type="hidden" th:value="${oldTerm}" name="searchbar"/>
+	
+				<div class="filters">
+	
+					<div class="option">
+						<p for="nopres">Rezeptfrei</p>
 						<input class="checkbox" type="checkbox" id="nopres" name="nopres" th:checked="${nopres}" />
 					</div>
-
-					<div th:if="${showtags}">
-						<label class="label" for="selector">Kategorie: </label>
-						<select id="selector" th:field="*{tag}">
+	
+					<div class="option" th:if="${showtags}">
+						<p for="selector">Kategorie</p>
+						<select class="selector" th:field="*{tag}">
 							<option value="">Keine</option>
 							<option th:each="tag : ${tags}" th:text="${tag}" th:value="${tag}"></option>
 						</select>
 					</div>
-
-					<div class="field">
-						<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
-					</div>
-
+				</div>
+	
+				<div class="field">
+					<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
 				</div>
 			</form>
-		</div>
 
+		</div>
 
 		<div class="field">
 			<h3 th:text="${header}"></h3>

@@ -13,24 +13,23 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="center">      
-        <div sec:authorize="hasRole('BOSS')">
-  			    <form action="#" th:action="@{/orders}"  th:object="${filter}" method="POST">
-                    <label th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">
-                      <input type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
-                      <label th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</label>
-                    </label>
-             <input  style="margin:5px" class="button"type="submit" value="Filtern" />
-           </form> 
-        </div>
-        
-      </div>
-   
-    
 
-      
-        
         <div class="center">
+
+          <form class="field" sec:authorize="hasRole('BOSS')" action="#" th:action="@{/orders}"  th:object="${filter}" method="POST">
+            <div class="filters">
+  
+                <div class="option" th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">
+                  <input class="radio" type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
+                  <p th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</p>
+                </div>
+  
+              <div class="field">
+                <input class="button" type="submit" value="Filtern" />
+              </div>
+            </div>
+          </form> 
+          
            <table class="ui celled table">
                 <thead>
                 <tr>
