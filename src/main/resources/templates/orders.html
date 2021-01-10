@@ -13,16 +13,25 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-
+        <div class="position">
+          <a th:href="@{/orders}">Bestellungen</a>
+          <p>></p>
+          
+        </div>
         <div class="center">
 
           <form class="field" sec:authorize="hasRole('BOSS')" action="#" th:action="@{/orders}"  th:object="${filter}" method="POST">
             <div class="filters">
-  
-                <div class="option" th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">
+              <div class="option">
+                  <p>Kategorie</p>
+                  <select class="option" th:field="*{filter}" >
+                  <option th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}" th:value="${ty.name()}" th:text="${ty}"></option>
+                  </select>
+              </div>
+                <!--<div class="option" th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">
                   <input class="radio" type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
                   <p th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</p>
-                </div>
+                </div>-->
   
               <div class="field">
                 <input class="button" type="submit" value="Filtern" />
