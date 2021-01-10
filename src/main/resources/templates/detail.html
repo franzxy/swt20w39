@@ -31,6 +31,9 @@
             <div class="field">
                 <a th:text="${medicine.description}">Beschreibung</a>
             </div>
+            <div class="field">
+                <a th:text="${medicine.amount + ' mg'}">Menge</a>
+            </div>
                 
             <div class="field">
                 <a th:text="${{medicine.price}}">Preis</a>
