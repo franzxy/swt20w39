@@ -1,6 +1,7 @@
 package pharmacy.finances;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class FinanceController {
 	private Money plus;
 	private Money minus;
 	private Fixkosten fixk;
-	
+	private LocalDateTime now;
 	FinanceController(Accountancy acc, OrderManagement<Order> orderManagement, UserManagement um, BusinessTime time, 
 			UserAccountManagement userAccount) {
 		this.userAccount=userAccount;
@@ -64,6 +65,8 @@ public class FinanceController {
 		this.minus=Money.of(0.0, "EUR");
 		this.plus=Money.of(0.0, "EUR");
 		this.fixk=new Fixkosten();
+		this.now=LocalDateTime.now();
+
 				
 	}
 	//Filter Stuff #1
@@ -154,7 +157,7 @@ public class FinanceController {
 		}
 	}
 	
-	 //AutoPay
+	 //AutoPay helper #1
 	private void createGehalt(){
 		List<User> working=this.um.findAll().toList();
 		if(this.time.getTime().getDayOfMonth()>29) {
@@ -165,12 +168,13 @@ public class FinanceController {
 			}
 		}}
 	}
+	//AutoPay helper #2
 	private void createKosten(String bez, double betr){
 		AccountancyEntry sal= new AccountancyEntry(Money.of(betr, "EUR"), bez);
 		this.acc.add(sal);
 	}
-	@Scheduled(cron="0 0 0 1 * ?")
-	protected void autopay(){
+	//Main AUTOPAY!
+	private void autopay(){
 		//Fixkosten
 		createKosten("Strom", -1*this.fixk.getStrom());
 		createKosten("Miete", -1*this.fixk.getMiete());
@@ -179,6 +183,20 @@ public class FinanceController {
 		//Gehälter
 		createGehalt();
 
+	}
+
+	@Scheduled(fixedRate = 500)
+	protected void endofmonthdetector(){
+		long months = time.getTime().getMonthValue() - now.getMonthValue();
+        if(time.getTime().getYear()!=now.getYear()){
+            months = (12 - now.getMonthValue()) + time.getTime().getMonthValue();
+			months += 12 * (( time.getTime().getYear() - now.getYear()) - 1);
+		}
+		while(months>0){
+			autopay();
+			months--;
+		}
+		this.now=time.getTime();
 	}
 	
 	@GetMapping("/finances")
