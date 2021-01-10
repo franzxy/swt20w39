@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.accountancy.Accountancy;
@@ -17,6 +18,7 @@ import org.salespointframework.payment.Cash;
 import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManagement;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -28,7 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.salespointframework.useraccount.UserAccount;
 import pharmacy.user.User;
 import pharmacy.user.UserManagement;
 
@@ -227,6 +229,16 @@ public class FinanceController {
 		model.addAttribute("tab", this.filter(filterB));
 		
 		return "finances";
+	}
+	@GetMapping("/myfinances")
+	@PreAuthorize("hasRole('BOSS')")
+	public String myfinances(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		List<Order> ret =List.of() ;
+		if(!userAccount.isEmpty()){
+			ret=this.orderManagement.findBy(userAccount.get()).toList();
+		}
+		model.addAttribute("rech", ret);
+		return "myfinances";
 	}
 	@GetMapping("/finances/{id}")
 	public String financedetail(@PathVariable String id,Model model) {
