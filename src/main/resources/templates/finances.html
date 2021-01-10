@@ -9,10 +9,6 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="position">
-          <a th:href="@{/finances}">Finanzen</a>
-          <p>></p>
-        </div>
         <div class="field">
           <p>Kontostand: <span th:text="${total}"/> €</p>
           <p>Einnahmen <span th:text="${plus}"/> €</p>
@@ -62,14 +58,11 @@
 
       <div class="center" >
        <table class="ui celled table">
-            <thead>
             <tr>
                 <th >Datum</th>
                 <th >Beschreibung</th>
                 <th >Betrag in €</th>
             </tr>
-            </thead>
-             <tbody>
         <tr th:if="${tab.empty}">
             <td colspan="3"> Keine Buchhaltungseinträge Verfügbar</td>
         </tr>
@@ -82,7 +75,6 @@
              <td  th:text="${entry.getValue().getNumber().doubleValue()}">Betrag</td>
             
             </tr>
-        </tbody>
       </table>
       </div>
     </body>

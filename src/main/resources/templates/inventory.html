@@ -14,60 +14,53 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         
-		 <form action="/meddetail" th:object="${formular}" >
-      <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
-			<input style="margin:5px" class="button"type="submit" value="Medikament hinzufügen"></input>
-		  </form>
+		  <div class="center" >
         
+        <form class="field" action="/meddetail" th:object="${formular}" >
+          <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
+          <input class="button" type="submit" th:value="${'Medikament hinzufügen'}"/>
+       </form>
 
-   
-    
-
-		<div class="center" >
        <table class="ui celled table">
-            <thead>
-            <tr>
-                <th >Name</th>
-                <th >Prdouktbeschreibung</th>
-                <th >Vorrätig</th>
-                <th >Zielmenge</th>
-                <th >Zusatzbestellung</th>
-				        <th >Details ändern</th>
-				        <th >Nachbestellen</th>
-			        	<th >Löschen</th>
+          <tr>
+              <th >Name</th>
+              <th >Prdouktbeschreibung</th>
+              <th >Vorrätig</th>
+              <th >Zielmenge</th>
+              <th >Zusatzbestellung</th>
+              <th >Details ändern</th>
+              <th >Nachbestellen</th>
+              <th >Löschen</th>
+          </tr>
+          <tr th:if="${inventory.empty}">
+              <td colspan="3"> Keine Medikamente vorhanden</td>
+          </tr>
+          <tr  th:each="entry : ${inventory}" > 
+          
+            <td  th:text="${entry.getProduct().getName()}">Name</td>
+            <td  th:text="${entry.getProduct().getDescription()}">Beschreibung</td>
+            <td  th:text="${entry.getQuantity().getAmount().intValue()}">Menge</td>
+            <td  th:text="${entry.getProduct().getQuantity()}">Zielenge</td>
+            <td><span th:if="${waitlist.containsKey(entry.getId().getIdentifier())}"><span th:text="${waitlist.get(entry.getId().getIdentifier())}"></span></span></td>
+            <td>
+              <form action="#" th:action="@{/meddetail}"th:object="${formular}" method="POST">
+                <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
+                <input class="button" type="submit" value="Details" />
+              </form>
+            </td>
+            <td>
+              <form action="#" th:action="@{/increase}" th:object="${formular}"method="POST">
+                <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}" />
+                <input class="button" type="submit" value="+1" />
+              </form>
+            </td>
+            <td>
+              <form action="#" th:action="@{/delete}"th:object="${formular}" method="POST">
+                <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
+                <input class="button" type="submit" value="Löschen" />
+              </form>
+            </td>
             </tr>
-            </thead>
-             <tbody >
-        <tr th:if="${inventory.empty}">
-            <td colspan="3"> Keine Medikamente vorhanden</td>
-        </tr>
-        <tr  th:each="entry : ${inventory}" > 
-         
-          <td  th:text="${entry.getProduct().getName()}">Name</td>
-          <td  th:text="${entry.getProduct().getDescription()}">Beschreibung</td>
-          <td  th:text="${entry.getQuantity().getAmount().intValue()}">Menge</td>
-          <td  th:text="${entry.getProduct().getQuantity()}">Zielenge</td>
-          <td><span th:if="${waitlist.containsKey(entry.getId().getIdentifier())}"><span th:text="${waitlist.get(entry.getId().getIdentifier())}"></span></span></td>
-          <td>
-            <form action="#" th:action="@{/meddetail}"th:object="${formular}" method="POST">
-              <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
-              <input class="button" style="margin:5px"type="submit" value="Details" />
-            </form>
-          </td>
-          <td>
-            <form action="#" th:action="@{/increase}" th:object="${formular}"method="POST">
-              <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}" />
-              <input class="button" style="margin:5px"type="submit" value="+1" />
-            </form>
-          </td>
-          <td>
-            <form action="#" th:action="@{/delete}"th:object="${formular}" method="POST">
-              <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
-              <input class="button" style="margin:5px"type="submit" value="Löschen" />
-            </form>
-          </td>
-            </tr>
-        </tbody>
         </table>
         </div>
     </body>

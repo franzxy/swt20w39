@@ -1,7 +1,7 @@
 <nav th:fragment="navigation">
     <div class="menu">
         <a class="iconbutton" th:href="@{/menu}" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')"><img class="icon" th:src="@{/img/menu.png}" /></a>
-        <a class="iconbutton" th:href="@{/}"><img class="icon" th:src="@{/img/pharmacy.png}" /></a>
+        <a class="logo" th:href="@{/}">ApoTheke</a>
     </div>
     <form class="search" action="#"  th:action="@{/}" th:object=${searchform} method="post">
         <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Was suchst du?" />
