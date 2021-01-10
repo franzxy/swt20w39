@@ -162,13 +162,13 @@ public class FinanceController {
 	 //AutoPay helper #1
 	private void createGehalt(){
 		List<User> working=this.um.findAll().toList();
-		if(this.time.getTime().getDayOfMonth()>29) {
+		
 		for(User u:working) {
 			if(u.getUserAccount().hasRole(Role.of("EMPLOYEE"))) {
-				AccountancyEntry sal= new AccountancyEntry(u.getSalary(), "Gehalt von "+u.getUserAccount().getLastname());
+				AccountancyEntry sal= new AccountancyEntry(u.getSalary().multiply(-1), "Gehalt von "+u.getUserAccount().getUsername());
 				this.acc.add(sal);
 			}
-		}}
+		}
 	}
 	//AutoPay helper #2
 	private void createKosten(String bez, double betr){
