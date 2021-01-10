@@ -23,7 +23,6 @@
   			<div class="field">
         <form  action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
           <div class="filters">
-            <h1 >Filter</h1>
             <div class="option">
               <p>Kategorie</p>
   				    <select class="option" th:field="*{filter}" >
@@ -33,14 +32,18 @@
             <div class="option">
               <p>Nach Interval Filtern</p>
               <input class="checkbox" type="checkbox" th:field="*{intfilter}"/>
+            </div>
+            <div class="option">
               <p>Anfang</p>
               <input type="date" th:field="*{begin}"/>
+            </div>
+            <div class="option">
               <p>Ende</p>
               <input type="date" th:field="*{end}"/>
+            </div>
               <div class="field">
                 <input class="button"type="submit" value="Filtern" />
               </div>
-            </div>
           </div>
          </form> 
 
