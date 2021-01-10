@@ -84,7 +84,7 @@ class CatalogDataInitializer implements DataInitializer {
 		medicineCatalog.save(new Medicine("Augentropfen", "Für kleine und große Augen",						   Money.of(10, "EUR"), Money.of(3, "EUR"), Arrays.asList("augentropfen", "sehschwäche", "orientierungslosigkeit"), 0.05, false, "13",7));
 		medicineCatalog.save(new Medicine("Nasenspray", "Für eine gereitzte Nase", 									  Money.of(5, "EUR"), Money.of(3, "EUR"), Arrays.asList("verstopft", "nasenspray", "nase"), 0.015,  false, "14",7));
 		medicineCatalog.save(new Medicine("Hustenbonbon (einzeln)", "Klein aber fein",                             Money.of(0.10, "EUR"), Money.of(0.04, "EUR"),Arrays.asList("schluckbeschwerden", "halsschmerzen", "lutschen"), 0.001,  false, "15",6));
-		medicineCatalog.save(new Medicine("Kopfschmerztablette 2", "Wenn der Kater nicht aufhören will", Money.of(12, "EUR"), Money.of(7, "EUR"),  Arrays.asList("tablette", "kopfschmerzen", "fiber"), 0.05, true, "",8));
+		medicineCatalog.save(new Medicine("Kopfschmerztablette 2", "Wenn der Kater nicht aufhören will", Money.of(12, "EUR"), Money.of(7, "EUR"),  Arrays.asList("tablette", "kopfschmerzen", "fiber"), 0.05, true, "32",8));
 
 		medicineCatalog.save(new Medicine("Kopfschmerztablette 3", "Richtig richtig gutes Zeug",									Money.of(23, "EUR"), Money.of(10, "EUR"), Arrays.asList("tablette", "kopfschmerzen", "fiber"), 0.03,  true, "16",9));
 		medicineCatalog.save(new Medicine("Hustensaft 2", "Saftiger saft, frisch gepresst",													Money.of(18, "EUR"), Money.of(15, "EUR"), Arrays.asList("natürlich", "erkältung", "hustensaft"), 0.05,false, "17",10));
