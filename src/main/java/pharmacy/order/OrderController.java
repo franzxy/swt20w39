@@ -203,7 +203,7 @@ public class OrderController {
 		return "redirect:/orders";
 	}
 
-	@GetMapping("/myorders")
+	@GetMapping("/account/myorders")
 	String myorders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		List<Order> ret =List.of() ;
 		if(!userAccount.isEmpty()){
