@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -46,16 +47,20 @@ class CatalogController {
 
 		ArrayList<Medicine> result = new ArrayList<>();
 		Iterator<Medicine> i;
+		Set<String> newTags = new HashSet<>();
 
-		if(noPres) {
-			i = catalog.findByPresonly(false).iterator();
-		} else {
-			i = catalog.findAll().iterator();
-		}
+		if(noPres) i = catalog.findByPresonly(false).iterator();
+		else i = catalog.findAll().iterator();
 
 		if(searchTerm.equals("")) {
+
 			while(i.hasNext()) {
-				result.add(i.next());
+				Medicine m = i.next();
+				Set<String> tags = m.getCategories().toSet();
+				newTags.addAll(tags);
+
+				if(tag.equals("") || tags.contains(tag)) result.add(m);
+
 			}
 		}
 
@@ -68,28 +73,13 @@ class CatalogController {
 
 				for(String s : search) {
 					if (m.getName().toLowerCase().contains(s)) {
-						if(tag.equals("") || tags.contains(tag)) {
-							result.add(m);
+						newTags.addAll(tags);
 
-						}
+						if(tag.equals("") || tags.contains(tag))result.add(m);
+
 					}
 				}
 			}
-		}
-
-		ArrayList<String> newTags = new ArrayList<>();
-		for (Medicine m : result) {
-			for (String s : m.getCategories()) {
-				if(!newTags.contains(s)) {
-					newTags.add(s);
-				}
-			}
-		}
-
-		if(tag.equals("") && !searchTerm.equals("") && result.size() > 0) {
-			model.addAttribute("tags", newTags);
-			model.addAttribute("showtags", true);
-
 		}
 
 		String header = "";
@@ -103,7 +93,9 @@ class CatalogController {
 
 		if(!searchTerm.equals("")) model.addAttribute("header", header);
 
+		model.addAttribute("tags", newTags);
 		model.addAttribute("oldTerm", searchTerm);
+		model.addAttribute("oldTag", tag);
 		model.addAttribute("nopres", noPres);
 		model.addAttribute("catalog", result);
 		model.addAttribute("title", "Apotheke");

@@ -1,9 +1,14 @@
 package pharmacy.catalog;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SearchForm {
 	private String searchTerm;
 	private String tag;
 	private boolean nopres;
+
+	private static final Logger LOG = LoggerFactory.getLogger(SearchForm.class);
 
 	public String getSearchTerm() {
 		return this.searchTerm;
@@ -27,5 +32,14 @@ public class SearchForm {
 
 	public void setNopres(boolean b) {
 		this.nopres = b;
+	}
+
+	public boolean isSelected(String t) {
+
+
+		LOG.info(t);
+		LOG.info(tag);
+		return t.equals(tag);
+
 	}
 }
