@@ -14,13 +14,12 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         
-		  <div class="center" >
-        
-        <form class="field" action="/meddetail" th:object="${formular}" >
+        <div class="informations">
+        <form class="space" action="/meddetail" th:object="${formular}" >
           <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
           <input class="button" type="submit" th:value="${'Medikament hinzufügen'}"/>
-       </form>
-
+       </form></div>
+    <div class="center">
        <table class="ui celled table">
           <tr>
               <th >Name</th>
@@ -61,7 +60,6 @@
               </form>
             </td>
             </tr>
-        </table>
-        </div>
+        </table></div>
     </body>
 </html>
