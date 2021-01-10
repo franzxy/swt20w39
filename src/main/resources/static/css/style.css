@@ -83,6 +83,22 @@ nav a {
 	margin-right: 10px;
 }
 
+.informations {
+	flex-grow: 1;
+	padding: 20px 0 0 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.information {
+	margin-right: 20px;
+}
+
+.left {
+	margin-left: 10px;
+}
+
 .position {
 	grid-area: position;
 	height: 40px;
@@ -112,10 +128,13 @@ select {
 }
 
 .filters {
+	background: #404040;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 100%;
+	padding: 20px 20px 10px 20px;
+	margin-bottom: 10px;
 }
 
 .filters .option:first-child{
@@ -265,7 +284,13 @@ label {
 	flex-wrap: wrap;
 }
 
+.space {
+	margin-bottom: 10px;
+	margin-right: 20px;
+}
+
 .med {
+	overflow: hidden;
 	color: white;
 	text-decoration: none;
 	width: 200px;
@@ -278,14 +303,19 @@ label {
 
 .med:hover .medimg {
 	background: white;
+	transform: scale(1.1);
 }
 
 .medimg {
+	background: #404040;
 	width: 200px;
 	height: 200px;
+	transition: all 0.3s;
 }
 
 .meddetails {
+	z-index: 2;
+	background: #404040;
 	padding: 10px;
 	flex-grow: 1;
 	display: flex;

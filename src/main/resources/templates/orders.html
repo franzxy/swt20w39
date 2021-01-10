@@ -19,8 +19,8 @@
             <div class="filters">
               <div class="option">
                   <p>Kategorie</p>
-                  <select class="option" th:field="*{filter}" >
-                  <option th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}" th:value="${ty.name()}" th:text="${ty}"></option>
+                  <select th:field="*{filter}" >
+                    <option th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}" th:value="${ty.name()}" th:text="${ty}"></option>
                   </select>
               </div>
                 <!--<div class="option" th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">

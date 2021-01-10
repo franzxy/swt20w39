@@ -31,8 +31,6 @@
                     <th >Preis</th>
                     <th ></th>
                 </tr>
-                </thead>
-                <tbody>
                     <tr th:each="item : ${cart} ">
                         <td th:text="${item.productName}">Default</td>
                         <td>
@@ -64,7 +62,6 @@
                             </form>
                         </td>
                     </tr>
-                </tbody>
             </table>
         </div>
     </body>
