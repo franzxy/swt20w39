@@ -63,9 +63,10 @@ class InventoryController {
 	private void autorestock(){
 		this.inventory.findAll().forEach(item->{
 			if(!item.hasSufficientQuantity(Quantity.of(((Medicine)item.getProduct()).getQuantity()))){
-				while(item.getQuantity().isLessThan(Quantity.of(((Medicine)item.getProduct()).getQuantity()))){
-					this.restock(1, item.getId().getIdentifier());
-				}
+				int anz = ((Medicine)item.getProduct()).getQuantity() - item.getQuantity().getAmount().intValue(); 
+				this.restock(anz, item.getId().getIdentifier());
+				System.out.println(item.getQuantity().getAmount().intValue());
+				
 			}
 		});
 		this.waitlist.forEach((k,v) -> {
@@ -91,9 +92,11 @@ class InventoryController {
 	private void restock(int anz, String id){
 		this.inventory.findAll().forEach(item->{
 			if(item.getId().getIdentifier().equals(id)){
-				Order o1 = new Order(this.userAccount.findByUsername("boss").get());
+				Order o1 = new Order(this.userAccount.findByUsername("apo").get());
 				o1.addChargeLine(((Medicine)item.getProduct()).getPurchaseprice().multiply(-1*anz), "Nachbestellung von: "+anz+"x "+((Medicine)item.getProduct()).getName());
+				
 				inventory.save(item.increaseQuantity(Quantity.of(anz)));
+
 				o1.setPaymentMethod(Cash.CASH);
 				this.orderManagement.save(o1);
 				this.orderManagement.payOrder(o1);
