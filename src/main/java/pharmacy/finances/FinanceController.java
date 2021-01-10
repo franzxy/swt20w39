@@ -259,7 +259,7 @@ public class FinanceController {
 			}
 		});
 		
-		return "orderdetails";
+		return "financedetails";
 	}
 	@GetMapping("/editfix")
 	public String fix(Model model) {
