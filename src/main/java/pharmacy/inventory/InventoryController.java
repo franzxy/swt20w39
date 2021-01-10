@@ -1,5 +1,6 @@
 package pharmacy.inventory;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import javax.validation.Valid;
@@ -10,6 +11,7 @@ import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
+import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -41,20 +43,24 @@ class InventoryController {
 	private final UserAccountManagement userAccount;
 	@Autowired
 	private final OrderManagement<Order> orderManagement;
-
+	@Autowired
+    private BusinessTime time;
+    private LocalDateTime now;
 	private MedicineForm formular;
 
 	private HashMap<String, Integer> waitlist;
-	InventoryController(UniqueInventory<UniqueInventoryItem> inventory, MedicineCatalog medicineCatalog, UserAccountManagement userAccount, OrderManagement<Order> orderManagement) {
+	InventoryController(UniqueInventory<UniqueInventoryItem> inventory, MedicineCatalog medicineCatalog, UserAccountManagement userAccount, OrderManagement<Order> orderManagement, BusinessTime time) {
 		this.inventory = inventory;
 		this.medicineCatalog=medicineCatalog;
 		this.userAccount=userAccount;
 		this.orderManagement=orderManagement;
 		this.formular=new MedicineForm();
 		this.waitlist=new HashMap<String, Integer>();
+		this.time=time;
+        this.now=LocalDateTime.now();
 	}
-	@Scheduled(cron = "0 0 22 * * ?")
-	protected void autorestock(){
+	
+	private void autorestock(){
 		this.inventory.findAll().forEach(item->{
 			if(!item.hasSufficientQuantity(Quantity.of(((Medicine)item.getProduct()).getQuantity()))){
 				while(item.getQuantity().isLessThan(Quantity.of(((Medicine)item.getProduct()).getQuantity()))){
@@ -67,6 +73,19 @@ class InventoryController {
 		});
 		this.waitlist=new HashMap<String, Integer>();
 
+	}
+	@Scheduled(fixedRate = 500)
+	protected void endofdaydetector(){
+		long days = time.getTime().getDayOfYear() - now.getDayOfYear();
+		if(time.getTime().getYear()!=now.getYear()){
+			days = (365 - now.getDayOfYear()) + time.getTime().getDayOfYear();
+            days += 365 * (( time.getTime().getYear() - now.getYear()) - 1);
+		}
+		while(days>0){
+			autorestock();
+			days--;
+		}
+		this.now=time.getTime();
 	}
 
 	private void restock(int anz, String id){
