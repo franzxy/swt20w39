@@ -47,9 +47,9 @@ public class Scheduler {
         }
     }
     public void monthly(){
-        System.out.println("Monat vorbei");
+       
     }
     public void daily(){
-        System.out.println("Tag vorbei");
+       
     }
 }
