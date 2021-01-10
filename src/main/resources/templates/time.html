@@ -17,7 +17,7 @@
             <form method="post" role="form" class="ui form" id="form" th:action="@{/time}" th:object="${durationForm}">
                 <div class="field">
                     <label class="label">Aktuelle Zeit</label>
-                    <h3 th:text="${time}"></h3>
+                    <h3 th:text="${#temporals.format(time,'dd.MM.yyyy HH:mm')}"></h3>
                 </div>
                 <div class="field">
                     <label class="label" for="duration">Stunden</label>
