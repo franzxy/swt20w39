@@ -8,25 +8,19 @@ import javax.validation.constraints.Pattern;
 
 class UserForm {
 	
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
-	@ValidUserName
+	@NotEmpty(message = "Benutzername fehlt")
+	@ValidUserName(message = "Benutzername wird schon verwendet")
 	private final String name;
 
-	@NotEmpty(message = "{RegistrationForm.password.NotEmpty}")
-	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
-	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
-	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
-	@Pattern(regexp="^(?=.*[A-Z]).+$", message = "{PasswordForm.newPassword.Upper}")
-	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
-	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
+	@NotEmpty(message = "Passwort fehlt")
+	@Size(min = 8, max = 128, message = "Passwort muss aus 8-120 Zeichen bestehen")
+	@Pattern(regexp="^(?=.*[a-z]).+$", message = "Passwort muss Kleinbuchstaben enthalten")
+	@Pattern(regexp="^(?=.*[A-Z]).+$", message = "Passwort muss Großbuchstaben enthalten")
+	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "Passwort muss Sonderzeichen enthalten")
+	@Pattern(regexp="^[\\S]+$", message = "Passwort darf kein Leerzeichen enthalten")
 	private final String password;
 
-	@NotEmpty(message = "{PasswordForm.newPassword.NotEmpty}")
-	@Size(min = 8, max = 128, message = "{PasswordForm.newPassword.Size}")
-	@Pattern(regexp="^(?=.*[a-z]).+$", message = "{PasswordForm.newPassword.Lower}")
-	@Pattern(regexp="^(?=.*[A-Z]).+$", message = "{PasswordForm.newPassword.Upper}")
-	@Pattern(regexp="^(?=.*[-+_!@#$%^&*.,?]).+$", message = "{PasswordForm.newPassword.Special}")
-	@Pattern(regexp="^[\\S]+$", message = "{PasswordForm.newPassword.Space}")
+	@NotEmpty(message = "Passwort Bestätigen fehlt")
 	private final String confirmPassword;
 
 	@AssertTrue(message="Passwörter stimmen nicht überein.")

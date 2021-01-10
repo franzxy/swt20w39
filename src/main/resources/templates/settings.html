@@ -28,6 +28,7 @@
                         <button th:if="${user.getPayDirekt()}" type="submit" class="ui button">Ändern</button>
                         <button th:unless="${user.getPayDirekt()}" type="submit" class="ui button">Hinzufügen</button>
                     </div>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                 </div>
             </form>
 

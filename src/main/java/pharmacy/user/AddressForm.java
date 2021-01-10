@@ -2,20 +2,22 @@ package pharmacy.user;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 class AddressForm {
 
-	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
+	@NotEmpty(message = "Name fehlt")
 	private final String name;
 	
-	@NotEmpty(message = "{DeliveryForm.name.NotEmpty}")
+	@NotEmpty(message = "Straße und Hausnummer fehlt")
 	private final String street;
 
-	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
-	@Pattern(regexp="^[0-9]*$", message = "test")
+	@NotEmpty(message = "Postleitzahl fehlt")
+	@Pattern(regexp="^[0-9]*$", message = "Postleitzahl darf nur aus Zahlen bestehen")
+	@Size(min = 5, max = 10, message = "Postleitzahl muss aus 5-10 Zeichen bestehen")
 	private final String postCode;
 
-	@NotEmpty(message = "{DeliveryForm.email.NotEmpty}")
+	@NotEmpty(message = "Stadt fehlt")
 	private final String city;
 
 	public AddressForm(String name, String street, String postCode, String city) {

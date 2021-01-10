@@ -8,8 +8,8 @@ import javax.validation.constraints.Pattern;
 
 class UserNameForm {
 	
-	@NotEmpty(message = "{RegistrationForm.name.NotEmpty}")
-	@ValidUserName
+	@NotEmpty(message = "Benutzername fehlt")
+	@ValidUserName(message = "Benutzername wird schon verwendet")
 	private final String name;
 
 	public UserNameForm(String name) {

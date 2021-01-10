@@ -31,6 +31,7 @@
 								<div class="field">
 									<label for="name">IBAN</label>
 									<input id="name" name="iban" th:value="${user.getIban()} ? ${user.getIban()} : ${employeeForm.getIban()}" type="text" required="required"/>
+									<p class="ui negative message" th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}"></p>
 								</div>
 
 								<div class="field">
@@ -39,6 +40,7 @@
 										<input class="numberinput" id="name" name="salary" th:value="${user.getSalary()} ? ${user.getSalary().getNumber()} : ${employeeForm.getSalary()}" type="text" required="required"/>
 										<a class="currency">€</a>
 									</div>
+									<p class="ui negative message" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></p>
 								</div>
 
 								<div class="field">

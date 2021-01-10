@@ -15,7 +15,7 @@ public class UsernameValidator implements ConstraintValidator<ValidUserName, Str
 		if(this.management.findByUsername(value).isEmpty())
 			return true;
 		context.disableDefaultConstraintViolation();
-		context.buildConstraintViolationWithTemplate("{RegistrationForm.name.ValidUserName}").addConstraintViolation();
+		context.buildConstraintViolationWithTemplate("Benutzername wird schon verwendet").addConstraintViolation();
 		return false;
 	}
 	
