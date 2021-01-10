@@ -9,40 +9,34 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <div class="field">
-          <p>Kontostand: <span th:text="${total}"/> €</p>
-          <p>Einnahmen <span th:text="${plus}"/> €</p>
-          <p>Ausgaben <span th:text="${minus}"/> €</p>
+        <div class="informations">
+          <div class="information">
+            <label>Kontostand</label>
+            <div class="row">
+              <p th:text="${total}"/></p>
+              <p>€</p>
+            </div>
+          </div>
+          <div class="information">
+            <label>Einnahmen</label>
+            <div class="row">
+              <p th:text="${plus}"/></p>
+              <p>€</p>
+            </div>
+          </div>
+          <div class="information">
+            <label>Ausgaben</label>
+            <div class="row">
+              <p th:text="${minus}"/></p>
+              <p>€</p>
+            </div>
+          </div>
         </div>
 
         
-  			<div class="field">
-        <form  action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
-          <div class="filters">
-            <div class="option">
-              <p>Kategorie</p>
-  				    <select class="option" th:field="*{filter}" >
-                <option th:each="ty : ${T(pharmacy.finances.FilterForm.Filter).values()}" th:value="${ty.name()}" th:text="${ty}"></option>
-              </select>
-            </div>
-            <div class="option">
-              <p>Nach Interval Filtern</p>
-              <input class="checkbox" type="checkbox" th:field="*{intfilter}"/>
-            </div>
-            <div class="option">
-              <p>Anfang</p>
-              <input type="date" th:field="*{begin}"/>
-            </div>
-            <div class="option">
-              <p>Ende</p>
-              <input type="date" th:field="*{end}"/>
-            </div>
-              <div class="field">
-                <input class="button"type="submit" value="Filtern" />
-              </div>
-          </div>
-         </form> 
 
+      <div class="center" >
+       <div class="row">
         <form class="field"action="/editfix">
           <input  class="button"type="submit" value="Fixkosten bearbeiten"></input>
         </form>     
@@ -50,13 +44,36 @@
         <form class="field"th:action="@{/create}" method="POST">
           <input class="button"type="submit" value="Beispieleinträge generieren"></input>
         </form>
-      </div>
-        
-      
-   
-    
+       </div>
+  			<div class="field">
+        <form class="form"  action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
+          <div class="filters">
+            <div class="option">
+              <p>Kategorie</p>
+  				    <select  th:field="*{filter}" >
+                <option th:each="ty : ${T(pharmacy.finances.FilterForm.Filter).values()}" th:value="${ty.name()}" th:text="${ty}"></option>
+              </select>
+            </div>
+            <div class="option">
+              <p>Interval</p>
+              <input class="checkbox" type="checkbox" th:field="*{intfilter}"/>
+            </div>
+            <div class="option">
+              <p>Anfang</p>
+              <input class="left" type="date" th:field="*{begin}"/>
+            </div>
+            <div class="option">
+              <p>Ende</p>
+              <input class="left" type="date" th:field="*{end}"/>
+            </div>
+            <div class="field">
+              <input class="button"type="submit" value="Filtern" />
+            </div>
+          </div>
+         </form> 
 
-      <div class="center" >
+      </div>
+
        <table class="ui celled table">
             <tr>
                 <th >Datum</th>

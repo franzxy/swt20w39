@@ -16,7 +16,6 @@
    
         <div class="center">
            <table class="ui celled table">
-                <thead>
                 <tr>
                     <th >Datum</th>
                     <th >ID</th>
@@ -24,8 +23,6 @@
                     <th >Status</th>
                     <th >Rechung</th>
                 </tr>
-                </thead>
-                 <tbody>
             <tr th:if="${rech.empty}">
                 <td style="text-align: center;"colspan="7"> Keine Bestellungen </td>
             </tr>
@@ -38,7 +35,6 @@
                   <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId()})}"></a>
                 </td>
                 </tr>
-            </tbody>
             </table>
             </div>
    
