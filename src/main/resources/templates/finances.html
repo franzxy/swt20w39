@@ -37,13 +37,13 @@
 
       <div class="center" >
        <div class="row">
-         <form class="space" action="/editfix">
-           <input  class="button"type="submit" value="Fixkosten bearbeiten"></input>
-         </form>     
-         
-         <form class="space" th:action="@{/create}" method="POST">
-           <input class="button"type="submit" value="Beispieleinträge generieren"></input>
-         </form>
+        <form class="field"action="/editfix">
+          <input  class="button"type="submit" value="Fixkosten bearbeiten"></input>
+        </form>     
+        
+        <form class="field"th:action="@{/create}" method="POST">
+          <input class="button"type="submit" value="Beispieleinträge generieren"></input>
+        </form>
        </div>
   			<div class="field">
         <form class="form"  action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
@@ -71,6 +71,7 @@
             </div>
           </div>
          </form> 
+
       </div>
 
        <table class="ui celled table">
