@@ -7,7 +7,12 @@
 		<title>Medikament</title>
 	</head>
     <body>
-		<nav th:include="navigation :: navigation"></nav>
+        <nav th:include="navigation :: navigation"></nav>
+        <div class="position">
+            <a th:href="@{/inventory}">Inventar</a>
+            <p>></p>
+            <a th:href="@{/meddetail}">Medikament</a>
+          </div>
 		<div class="center">
         <div class="popup border">
             <form action="#newmed" th:action="@{/addmed}"  th:object="${formular}" method="POST">
