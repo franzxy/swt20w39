@@ -65,8 +65,6 @@ class InventoryController {
 			if(!item.hasSufficientQuantity(Quantity.of(((Medicine)item.getProduct()).getQuantity()))){
 				int anz = ((Medicine)item.getProduct()).getQuantity() - item.getQuantity().getAmount().intValue(); 
 				this.restock(anz, item.getId().getIdentifier());
-				System.out.println(item.getQuantity().getAmount().intValue());
-				
 			}
 		});
 		this.waitlist.forEach((k,v) -> {
