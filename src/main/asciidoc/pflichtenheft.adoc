@@ -116,12 +116,11 @@ Die folgende Tabelle fasst alle Akteure zusammen und gibt zu jedem eine kurze Be
 |===
 |Name |Beschreibung
 |Boss  | verantwortlich für die Verwaltung des Systems sowie seine Angestellten
-|Angestellte | verantwortlich für den Verkauf sowie die Nachbestellung
-|Praxis | können Waren direkt aus dem Lager holen
+|Angestellte | verantwortlich für die Abfertigung der Ware
 |Registrierte Nutzer | können Waren aus dem Online Shop kaufen
 |Nicht-registrierte Nutzer | können sich im Online Shop umschauen, aber nichts zum Warenkorb hinzufügen
 |Kunden | können Artikel vor Ort kaufen
-|eingeschränkte Kunden | nach einmaliger Registrierung können eingeschränkte Kunden Artikel zur Lieferung bestellen
+
 |===
 
 === Überblick Anwendungsfalldiagramm
@@ -476,11 +475,7 @@ Wenn eines Verkauft wird, wird dies ebenfalls registriert
 a|
 Das System erkennt, wenn ein Produkt nicht mehr im Lager vorhanden ist und bestellt automatisch nach.
 
-|[[F06]]<<F06>>
-|v0.1
-|Ablaufdatumsverarbeitung
-a|
-Wenn ein Medikament ein Monat vor dem Ablaufdatum ist, werden die Mitarbeiter benachrichtigt und aufgefordert diese Zeitnah zu entsorgen.
+
 
 |[[F07]]<<F07>>
 |v0.1
@@ -488,11 +483,6 @@ Wenn ein Medikament ein Monat vor dem Ablaufdatum ist, werden die Mitarbeiter be
 a|
 Das System stellt ein Lesezugriff auf die Medikamenten-Datenbank für Online-Kunden zur Verfügung.  Mitarbeiter, Ärzte und der Chef haben entsprechend einen Änderungszugriff.
 
-|[[F08]]<<F08>>
-|v0.1
-|Kasse
-a|
-Eine integrierte Kasse Verwaltet Bestellungen, Gehaltsauszahlungen und Verkäufe, Miete und Strom, allgemeine Einnahmen und Ausgaben, sowie Abrechnung mit den jeweiligen Praxen. Desweiteren können Rechnungen und Berichte erstellt und archiviert werden
 
 |[[F09]]<<F09>>
 |v0.1
@@ -503,7 +493,6 @@ Produkte sollten folgende Attribute haben:
 *	ID
 *	Name
 *	Verpackungsgröße
-*	Ablaufdatum
 *	Bezeichnung
 *	Beschreibung
 *	Preis
@@ -560,12 +549,9 @@ Das Konto wird beim Initialisieren des Systems festgelegt. Die Möglichkeiten si
 a|
 Das Konto wird beim Initialisieren des Systems festgelegt. Die Möglichkeiten sind:
 
-*	Manuelle Bestellung
-*	Information zu Verfügbarkeit aller Medikamente
-*	Übersicht der aller Kunden
+
 *   Mitarbeiter können ihren account nicht löschen
-*   Können Bargeld entgegen nehmen und das Medikament somit bezahlen
-*   Können nicht verfügbare Medikamente reservieren
+*   Können ware Abfertigen und Ware einkaufen
 |===
 
 
@@ -697,7 +683,6 @@ Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Dies
 ** haben einen warenkorb
 ** können bestellen
 - Mitarbeiter:
-** können Kunden hinzufügen und entfernen
 ** haben erweiterte einsicht in Inventar und Bestellungen
 |===
 
@@ -719,10 +704,8 @@ Die entwickelte Software unterläuft bevor sie geliefert wird einige Tests. Dies
 |{Pre}        a|Ein nicht authentifizierter Benutzer benutzt das System.
 |{Event}      a|Der nicht angemeldete Benutzer clickt auf "Registrieren" in der Navigationszeile und gibt folgende Informationen an:
 - Name
-- E-Mail
 - Adresse
 - Passwort
-- Bewegungseingeschränkt ja/nein
 Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 |{Result}     a|
 - Ein neuer Benutzer mit den gegebenen Daten wird im System erstellt
@@ -736,9 +719,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 |Use Case      |<<UC0010>>
 |{Pre}        a|Ein nicht authentifizierter Nutzer benutzt das System.
 |{Event}      a|Der nicht angemeldete Benutzer clickt auf "Registrieren" in der Navigationszeile und gibt folgende Informationen an:
-- Name
-- E-Mail (bereits im System registriert)
-- Adresse
+- Name (Name existiert bereits im System)
 - Passwort
 - Bewegungseingeschränkt ja/nein
 Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
@@ -782,23 +763,7 @@ Anschliesend clickt er auf "Weiter" um die Informationen abzusenden.
 |{Result}     a|Das Medikament erscheint auf der Liste.
 |===
 
-[cols="1h, 4"]
-|===
-|ID            |[[AT09]]<<AT09>>
-|Use Case      |<<UC0050>>
-|{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
-|{Event}      a|Der Benutzer clickt auf "Kasse" und scannt Medikamente ein. Anschließend clickt er auf "pay".
-|{Result}     a|Eine Fehlermeldung erscheint das keine Bezahlmethode ausgewählt wurde.
-|===
 
-[cols="1h, 4"]
-|===
-|ID            |[[AT10]]<<AT10>>
-|Use Case      |<<UC0050>>
-|{Pre}        a|Ein Benutzer der Gruppe "Mitarbeiter" benutzt das System.
-|{Event}      a|Der Benutzer clickt auf "Kasse" und scannt Medikamente ein. Anschließend clickt er auf "pay".
-|{Result}     a|Der bezahlte Betrag wird an das Kassenmanagement übergeben. Das Inventar wird dem Verkauf entsprechend verändert. Die Liste im Interface wird geleert.
-|===
 
 [cols="1h, 4"]
 |===
