@@ -63,7 +63,7 @@
                 <td  th:text="${sec.getOrderStatus().toString()}">Status</td>
                 <td  th:text="${sec.getUserAccount().getUsername()}">User</td>
                 <td sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-                  <a th:text="Feritigstellen"class="button"th:href="@{/orders/{id}/complete(id=${sec.getId()})}"></a>
+                  <a th:text="Fertigstellen"class="button"th:href="@{/orders/{id}/complete(id=${sec.getId()})}"></a>
                 </td>
                 <td sec:authorize="hasRole('BOSS')">
                   <a class="button"th:text="Cancel" th:href="@{/orders/{id}/cancel(id=${sec.getId()})}"></a>
