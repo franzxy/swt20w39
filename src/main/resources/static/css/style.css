@@ -21,14 +21,22 @@ nav {
 	background-color: #303030;
 	display: grid;
 	grid-template-columns: 1fr 2fr 1fr;
-	grid-template-rows: auto auto;
+	grid-template-rows: 40px;
 	grid-template-areas: 
-    "menu search personal"
-    "position position position";
+    "menu search personal";
 }
 
 nav a {
 	margin-left: 10px;
+}
+
+.position {
+	color: white;
+	font-size: larger;
+}
+
+.position a {
+	margin: 0 10px;
 }
 
 .menu {
