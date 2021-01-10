@@ -146,7 +146,6 @@ public class OrderController {
 					case OFFEN: ret= this.orderManagement.findBy(OrderStatus.OPEN).toList();break;
 					case BEZAHLT: ret=this.orderManagement.findBy(OrderStatus.PAID).toList();break;
 					case COMPLETED: ret= this.orderManagement.findBy(OrderStatus.COMPLETED).toList();break;
-					case EIGENE: ret= this.orderManagement.findBy(userAccount.get()).toList();break;
 					default: ret=all;break;
 				}
 			}
