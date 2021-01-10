@@ -223,10 +223,19 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 |=== 
 |Klasse/Enumeration |Beschreibung
 |InventoryController |Ein Spring MVC Controller zur Bearbeitung von Anfragen zur Anzeige von ``Medicine``s
-|InventoryDataInitializer |Eine Implementierung des Dateninitialisierers zum Erstellen einer Dummy-prescriptiononly und withoutprescription beim Start der Anwendung
+|InventoryDataInitializer |Eine Implementierung des Dateninitialisierers zum Erstellen von Dummy-Medikamenten welche aus dem Katalog übernommen werden
+|MedicineForm |Ein Formular um neue Medikamente hinzuzufügen und bestehende zu bearbeiten
+|===
+=== Catalog
+
+
+[options="header"]
+|=== 
+|Klasse/Enumeration |Beschreibung
 |Medicine |Klasse zur Beschreibung von Medicine als Produkte der Apotheke
-|MedicineType |Enumeration zur Definition einer `Medicine` als withoutprescription oder prescriptiononly
 |MedicineCatalog |Eine Erweiterung von Salespoint.Catalog, um Apotheken-spezifische Abfragen hinzuzufügen
+|CatalogDataInitializer |Eine Implementierung des Dateninitialisierers zum Erstellen von Dummy-Medikamenten mit den Notwendigen Attributen
+|SearchForm |Ein Such-Formular um den Katalog zu durchsuchen
 |===
 
 === User
@@ -253,16 +262,10 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 |=== 
 |Klasse/Enumeration |Beschreibung 
 |OrderController|Einen Spring MVC-Controller für den Warenkorb
+|OrderFilter |Ein Filter-Formular um Bestellungen nach Bestellstatus zu filtern.
 |===
 
-=== Search
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Model_Search.png[]
-[options="header"]
-|=== 
-|Klasse/Enumeration |Beschreibung 
-|SearchController|Spring-Controller für die Suche
-|SearchForm|Suchformular-Modell
-|===
+
 
 === Finances
 image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/class__Finances.jpg[]
@@ -271,6 +274,9 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 |=== 
 |Klasse/Enumeration |Beschreibung 
 |FinanceController|Ein Spring MVC-Controller für die Buchhaltung
+|FilterForm|Ein Filter-Formular um die Finanzen nach Datum und Kategorie zu filtern.
+|FinanceDataInitializer|Eine Implementierung des Dateninitialisierers um konsistente Objekte der Accountancy und des OrderManagements zu erhalten.
+|Fixkosten|Ein Formular um die fixkosten anzupassen.
 |===
 
 === Rückverfolgbarkeit zwischen Analyse und Entwurfsmodell
