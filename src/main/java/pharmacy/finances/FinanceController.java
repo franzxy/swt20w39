@@ -231,7 +231,6 @@ public class FinanceController {
 		return "finances";
 	}
 	@GetMapping("/myfinances")
-	@PreAuthorize("hasRole('BOSS')")
 	public String myfinances(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		List<Order> ret =List.of() ;
 		if(!userAccount.isEmpty()){
