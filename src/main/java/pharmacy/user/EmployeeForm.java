@@ -5,6 +5,7 @@ import java.util.function.LongFunction;
 import javax.persistence.Id;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -16,7 +17,7 @@ class EmployeeForm {
 	@Pattern(regexp="^[A-Z]{2}(?:[ ]?[0-9]){18,20}$", message = "Das ist keine IBAN")
 	private final String iban;
 
-	@NotEmpty(message = "Gehalt fehlt")
+	@NotNull(message = "Gehalt fehlt")
 	@Pattern(regexp="^[0-9]*$", message = "Gehalt darf nur aus Zahlen bestehen")
 	private final Long salary;
 
