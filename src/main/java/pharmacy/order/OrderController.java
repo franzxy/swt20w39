@@ -1,9 +1,12 @@
 package pharmacy.order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.Order;
@@ -15,6 +18,7 @@ import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,13 +37,17 @@ import pharmacy.catalog.Medicine;
 @SessionAttributes("cart")
 public class OrderController {
 	//private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
-
+	@Autowired
 	private final OrderManagement<Order> orderManagement;
-	
-	OrderController(OrderManagement<Order> orderManagement) {
+	@Autowired
+	private final UniqueInventory<UniqueInventoryItem> inventory;
+
+	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory) {
 
 		Assert.notNull(orderManagement, "OrderManagement must not be null.");
 		this.orderManagement = orderManagement;
+		Assert.notNull(inventory, "Inventory must not be null.");
+		this.inventory = inventory;
 		
 		
 	}
@@ -50,7 +58,14 @@ public class OrderController {
 	}
 
 	@GetMapping("/cart")
-	String basket() {
+	String basket(@ModelAttribute Cart cart, Model model) {
+		HashMap<String, Integer> availability = new HashMap<String, Integer>();
+		cart.forEach(cartitem->{
+			Medicine Med= (Medicine) cartitem.getProduct();
+			int quan=inventory.findByProduct(Med).get().getQuantity().getAmount().intValue();
+			availability.put(cartitem.getId(), quan);
+		});
+		model.addAttribute("availability", availability);
 		return "cart";
 	}
 
