@@ -20,28 +20,28 @@
                   <form action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
                       <ul >
                       <h1 style="margin: 5px;">Fixkosten Ändern</h1>
-                      <div class="input-fileds">
+                      <div class="input">
                         <label>Miete: </label>
                         <input type="number"th:field="*{Miete}" />
                         <label>€</label>
                       </div>
-                      <div class="input-fileds">
+                      <div class="input">
                         <label>Strom:</label>
                         <input type="number"th:field="*{Strom}" />
                         <label>€</label>
                       </div>
-                      <div class="input-fileds">
+                      <div class="input">
                         <label>Wasser:</label>
                         <input type="number"th:field="*{Wasser}" />
                         <label>€</label>
                       </div>
-                      <div class="input-fileds">
+                      <div class="input">
                         <label>Heizkosten:</label>
                         <input type="number"th:field="*{Heizkosten}" />
                         <label>€</label>
                       </div>
                       </ul>
-                         <input class="button" style="margin:5px"type="submit" value="Speichern und Schließen" />
+                         <input style="width: auto;margin: 5px"class="button" type="submit" value="Speichern und Schließen" />
                     </form> 
                     
                 </div>

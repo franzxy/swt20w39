@@ -35,11 +35,11 @@
         </div>
           <div class="row">
            <form class="space" action="/editfix">
-             <input  class="button"type="submit" value="Fixkosten bearbeiten"></input>
+             <input  style="width: auto;"class="button"type="submit" th:value="${'Fixkosten bearbeiten'}"></input>
            </form>     
            
            <form class="space" th:action="@{/create}" method="POST">
-             <input class="button"type="submit" value="Beispieleinträge generieren"></input>
+             <input style="width: auto;" class="button"type="submit" value="Beispieleinträge generieren"></input>
            </form>
           </div>
         </div>
