@@ -31,11 +31,11 @@ __Schriftführer:__ Timon Trettin +
 * 40%
 
 === Inventory
-* nachbestellung 1 tag warten
-* stock image when none listed
+* Nachbestellung 1 Tag warten
+* Default Bild wenn keins angegeben
 
 === Catalog
-* Verfügbarkeit der Medikamente im Catalog anpassen
+* Verfügbarkeit der Medikamente im Katalog anpassen
 
 === Order
 * Warenkorb Item Anzahl in Navbar
