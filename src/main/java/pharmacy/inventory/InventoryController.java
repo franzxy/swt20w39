@@ -2,6 +2,7 @@ package pharmacy.inventory;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -47,15 +48,17 @@ class InventoryController {
     private BusinessTime time;
     private LocalDateTime now;
 	private MedicineForm formular;
+	@Autowired
+	private Map<String, Integer> waitlist;
 
-	private HashMap<String, Integer> waitlist;
-	InventoryController(UniqueInventory<UniqueInventoryItem> inventory, MedicineCatalog medicineCatalog, UserAccountManagement userAccount, OrderManagement<Order> orderManagement, BusinessTime time) {
+	
+	InventoryController(UniqueInventory<UniqueInventoryItem> inventory, MedicineCatalog medicineCatalog, UserAccountManagement userAccount, OrderManagement<Order> orderManagement, BusinessTime time, Map<String, Integer> waitlist) {
 		this.inventory = inventory;
 		this.medicineCatalog=medicineCatalog;
 		this.userAccount=userAccount;
 		this.orderManagement=orderManagement;
 		this.formular=new MedicineForm();
-		this.waitlist=new HashMap<String, Integer>();
+		this.waitlist=waitlist;
 		this.time=time;
         this.now=LocalDateTime.now();
 	}
@@ -197,6 +200,7 @@ class InventoryController {
 		model.addAttribute("waitlist", this.waitlist);
 		return "redirect:/inventory";
 	}
+	
 
 
 
