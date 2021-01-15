@@ -1,5 +1,8 @@
 package pharmacy.inventory;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import javax.validation.constraints.NotEmpty;
@@ -30,8 +33,11 @@ public class MedicineForm {
         this.id="";
     }
 
-    public Medicine toMedicine(){
-        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.split(",")), this.amount,  this.presonly, this.image, this.quantity);
+    public Medicine toMedicine(){   
+        String image2="1";
+        File pic = new File(".\\src\\main\\resources\\static\\img\\med\\"+this.image+".png");
+        if(pic.exists()) image2=this.image;
+        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.split(",")), this.amount,  this.presonly, image2, this.quantity);
     }
 
     public String getDescription() {
