@@ -128,13 +128,13 @@ class CatalogController {
 	@GetMapping("/medicine/{medicine}")
 	public String detail(@PathVariable Medicine medicine, Model model, @ModelAttribute Cart cart) {
 		Quantity q = Quantity.of(0);
-
-		if(inventory.findByProductIdentifier(medicine.getId()).isPresent()){
-			q = inventory.findByProductIdentifier(medicine.getId()).get().getQuantity();
+		System.out.println(medicine);
+		if(inventory.findByProduct(medicine).isPresent()){
+			q = inventory.findByProduct(medicine).get().getQuantity();
 		}
 
 		model.addAttribute("medicine" , medicine);
-		model.addAttribute("orderable", true);
+		model.addAttribute("available", q.getAmount().intValue());
 
 		return "detail";
 	}
