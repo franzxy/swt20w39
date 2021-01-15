@@ -19,52 +19,64 @@
                 <ul >
                     <h1  style="margin: 5px;">Medikament bearbeiten</h1>
                     <input type="hidden"th:field="*{id}" />
-                    <div class="input">
+                    <div class="field">
                         <label>Name:</label>
-                        <input type="text"th:field="*{name}" />
+                        <input class="textinput" type="text"th:field="*{name}" th:errorclass="fieldError"  required="required" />
+                        <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                     </div>
-                    <div class="input">
+                    <div class="field">
                         <label>Beschreibung:</label>
-                        <input type="text"th:field="*{description}" />
+                        <input class="textinput"type="text"th:field="*{description}" th:errorclass="fieldError"  required="required" />
                     </div>
-                    <div class="input">
+                    <div class="field">
                         <label>Tags (mit Komma trennen):</label>
-                        <input type="text"th:field="*{tags}" />
+                        <input class="textinput"type="text"th:field="*{tags}" th:errorclass="fieldError"  required="required" />
                     </div>
-                    <div class="input">
+                    <div class="field">
                         <label>Pfad zum Bild:</label>
-                        <input type="text"th:field="*{image}" />
+                        <input class="textinput"type="text"th:field="*{image}" th:errorclass="fieldError"  required="required" />
                     </div>
-                    <div class="input">
+                    <div class="field">
                         <label>Gewicht:</label>
-                        <input type="number"th:field="*{amount}" />
-                        <label>Milligramm</label>
+                        <div class="row">
+                            <input class="numberinput"type="number"th:field="*{amount}" />
+                            <a class="currency">g</a>
+                        </div>
                     </div>
-                    <div class="input">
+                    <div class="field">
                         <label>Menge:</label>
-                        <input type="number"th:field="*{quantity}" />
+                        <div class="row">
+                            <input class="numberinput"type="number"th:field="*{quantity}" />
+                            <a class="currency">Stück</a>
+                        </div>
                     </div>
-                    <div class="input">
-                        <label>Verkaufspreis:</label>
-                        <input type="number"th:field="*{price}" />
-                        <label>€</label>
+                    <div class="field">
+                        <label >Verkaufspreis:</label>
+                        <div class="row">
+                            <input class="numberinput"type="number"th:field="*{price}" />
+                            <a class="currency">€</a>
+                        </div>
                     </div>
-                    <div class="input">
+                    <div class="field">
                         <label>Einkaufspreis:</label>
-                        <input type="number"th:field="*{purchasingprice}" />
-                        <label>€</label>
+                        <div class="row">
+                            <input class="numberinput"type="number"th:field="*{purchasingprice}" />
+                            <a class="currency">€</a>
+                        </div>
                     </div>
-                    <div class="input">
+                    <div class="field">
                         <label>Rezeptpflichtig:</label>
                         <input type="checkbox" name ="presonly" th:field="*{presonly}" />
                     </div>
-                    <div class="input">
+                    <div class="field">
                         <input style="width: auto;margin: 5px" class="button" type="submit" value="Speichern und Schließen" />
                     </div>
             </ul>
             </form>
             <form action="/discard" th:object="${formular}" >
-                <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
-               <input style="margin:5px" class="button"type="submit" value="Abbrechen"></input>
+                <div class="field">
+                    <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
+                    <input class="button"type="submit" value="Abbrechen"></input>
+                </div>
             </form>
         </div>
