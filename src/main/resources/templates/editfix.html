@@ -20,33 +20,45 @@
                   <form action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
                       <ul >
                       <h1 style="margin: 5px;">Fixkosten Ändern</h1>
-                      <div class="input">
+                      <div class="field">
                         <label>Miete: </label>
-                        <input type="number"th:field="*{Miete}" />
-                        <label>€</label>
+                        <div class="row">
+                          <input class="numberinput"type="number"th:field="*{Miete}" />
+                          <a class="currency">€</a>
+                        </div>
                       </div>
-                      <div class="input">
+                      <div class="field">
                         <label>Strom:</label>
-                        <input type="number"th:field="*{Strom}" />
-                        <label>€</label>
+                        <div class="row">
+                          <input class="numberinput"type="number"th:field="*{Strom}" />
+                          <a class="currency">€</a>
+                        </div>
                       </div>
-                      <div class="input">
+                      <div class="field">
                         <label>Wasser:</label>
-                        <input type="number"th:field="*{Wasser}" />
-                        <label>€</label>
+                        <div class="row">
+                          <input class="numberinput"type="number"th:field="*{Wasser}" />
+                          <a class="currency">€</a>
+                        </div>
                       </div>
-                      <div class="input">
+                      <div class="field">
                         <label>Heizkosten:</label>
-                        <input type="number"th:field="*{Heizkosten}" />
-                        <label>€</label>
+                        <div class="row">
+                          <input class="numberinput"type="number"th:field="*{Heizkosten}" />
+                          <a class="currency">€</a>
+                        </div>
                       </div>
-                      </ul>
+                      <div class="field">
                          <input style="width: auto;margin: 5px"class="button" type="submit" value="Speichern und Schließen" />
-                    </form> 
+                      </div>
+                        </ul>
+                      </form> 
                     
                 </div>
               </div>
             <form action="/finances" >
+              <div class="field">
                 <input style="margin:5px" class="button"type="submit" value="Abbrechen"></input>
+              </div>
             </form>
         </div>
