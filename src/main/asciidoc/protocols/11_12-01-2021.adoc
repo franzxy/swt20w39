@@ -1,0 +1,63 @@
+= Protokoll Gruppe 39
+
+Treffen am 12.01.2021
+
+Ort:      BBB +
+Beginn:   15:00 +
+Ende:     16:00 +
+
+__Schriftführer:__ Timon Trettin +
+
+== Nächstes Treffen
+19.01.2021, 16:40 Uhr, BBB
+
+== Teilnehmer
+* Lennart Wittkowski: Tutor
+* Falk Natkowski
+* Lukas Luger
+* Timon Trettin
+
+== Aufgaben bis zum 10.01.2021
+* Falk Natkowski: Catalog, Inventory, Order, UI
+* Lukas Luger: Finances, Inventory, Order, UI
+* Timon Trettin: User, Order, Time, UI
+
+=== Cross-Testing
+* Falk: User, Features, Verbesserungsvorschläge
+* Lukas: Mitabreiter, UI, Verbesserungsvorschläge
+* Timon: Admin, UX, Einleitung, Verbesserungsvorschläge
+
+=== Testabdeckung
+* 40%
+
+=== Inventory
+* nachbestellung 1 tag warten
+* stock image when none listed
+
+=== Catalog
+* Verfügbarkeit der Medikamente im Catalog anpassen
+
+=== Order
+* Warenkorb Item Anzahl in Navbar
+* wenn Med rez.pfl. Vericherungskarte muss angegeben sein
+
+=== Finances
+* Einträge sollen korrektes Datum haben
+* Meine Finanzen "/myfinances"
+** "EMPLOYEE" sieht bei Details Gehaltszettel
+
+=== User
+* zahlungsmethoden
+* Profilbild
+* Benutzerübersicht "/users"
+** form crash fix
+** filters
+** sorting?
+
+=== Time
+* In den Packages benutzen
+
+=== UI
+* light/ dark mode kompatibel, Akzentfarbe
+* Aktuellen Pfad anzeigen "Account > Einstellungen > Passwort Ändern"
+* Thymleaf button text fixen
