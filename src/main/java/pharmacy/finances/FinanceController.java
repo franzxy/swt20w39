@@ -162,7 +162,6 @@ public class FinanceController {
 	 //AutoPay helper #1
 	private void createGehalt(){
 		List<User> working=this.um.findAll().toList();
-		
 		for(User u:working) {
 			if(u.getUserAccount().hasRole(Role.of("EMPLOYEE"))) {
 				AccountancyEntry sal= new AccountancyEntry(u.getSalary().multiply(-1), "Gehalt von "+u.getUserAccount().getUsername());
@@ -172,8 +171,10 @@ public class FinanceController {
 	}
 	//AutoPay helper #2
 	private void createKosten(String bez, double betr){
-		AccountancyEntry sal= new AccountancyEntry(Money.of(betr, "EUR"), bez);
-		this.acc.add(sal);
+		if(betr!=0){
+			AccountancyEntry sal= new AccountancyEntry(Money.of(betr, "EUR"), bez);
+			this.acc.add(sal);
+		}
 	}
 	//Main AUTOPAY!
 	private void autopay(){
@@ -292,7 +293,6 @@ public class FinanceController {
 		}
 		this.acc.add(new AccountancyEntry(Money.of(23,"EUR")," Test"));
 		this.autopay();
-		this.createGehalt();
 		return "redirect:/finances";
 	}
 }
