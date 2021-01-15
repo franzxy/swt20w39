@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -28,7 +29,7 @@ class CatalogController {
 	//private final MultiInventory<MultiInventoryItem> inventory;
 	//private final BusinessTime businessTime;
 
-	CatalogController(MedicineCatalog medicineCatalog, BusinessTime businessTime, UniqueInventory inventory) {
+	CatalogController(MedicineCatalog medicineCatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> inventory) {
 		this.catalog = medicineCatalog;
 		this.inventory = inventory;
 		//this.businessTime = businessTime;
@@ -97,8 +98,21 @@ class CatalogController {
 		model.addAttribute("oldTerm", searchTerm);
 		model.addAttribute("oldTag", tag);
 		model.addAttribute("nopres", noPres);
-		model.addAttribute("catalog", result);
+		//model.addAttribute("catalog", result);
 		model.addAttribute("title", "Apotheke");
+
+		//Add quantity from inventory
+		HashMap<String, Integer> availability = new HashMap<String, Integer>();
+		ArrayList<Medicine> optimisedres = new ArrayList<>();
+		result.forEach(Med->{
+			int quan=inventory.findByProduct(Med).get().getQuantity().getAmount().intValue();
+			availability.put(Med.getId().getIdentifier(), quan);
+			//remove Items that aren't available
+			if(quan>0)optimisedres.add(Med);
+		});
+		model.addAttribute("availability", availability);
+		model.addAttribute("catalog", optimisedres);
+		
 
 		return "index";
 	}

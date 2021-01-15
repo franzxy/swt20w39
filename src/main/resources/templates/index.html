@@ -53,6 +53,7 @@
 
 					<h5 th:text="${medicine.name}"></h5>
 					<div class="content" th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Typ</div>
+					<div class="content" th:text="${'Verfügbar: ' + availability.get(medicine.getId().getIdentifier())}">Verfügbarkeit</div>
 					<div class="extra content" th:text="${{medicine.price}}">Preis</div>
 
 				</div>
