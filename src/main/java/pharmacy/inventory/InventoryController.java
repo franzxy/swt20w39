@@ -135,7 +135,7 @@ class InventoryController {
 	//Important: The ID changes after editing!
 	@PostMapping("/addmed")
 	@PreAuthorize("hasRole('BOSS')")
-	String addingMedicine(@Valid MedicineForm formular, Errors result, Model model) {
+	String addingMedicine(@Valid @ModelAttribute("formular")MedicineForm formular, Errors result, Model model) {
 		if(result.hasErrors()){
 			this.formular=formular;
 			model.addAttribute("formular", this.formular);
