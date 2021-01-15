@@ -57,7 +57,7 @@
             <td>
               <form action="#" th:action="@{/delete}"th:object="${formular}" method="POST">
                 <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
-                <input class="button" type="submit" value="Löschen" />
+                <input class="iconbutton"type="image" th:src="@{/img/trash.png}" value="" />
               </form>
             </td>
             </tr>
