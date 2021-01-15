@@ -3,8 +3,10 @@ package pharmacy.order;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
@@ -41,15 +43,21 @@ public class OrderController {
 	private final OrderManagement<Order> orderManagement;
 	@Autowired
 	private final UniqueInventory<UniqueInventoryItem> inventory;
-
-	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory) {
+	@Autowired
+	private final Map<String, Integer> waitlist;
+	private boolean completionsuccess;
+	private Order failedorder;
+	private Map<ProductIdentifier, Integer> quan;
+	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, Map<String, Integer> waitlist) {
 
 		Assert.notNull(orderManagement, "OrderManagement must not be null.");
 		this.orderManagement = orderManagement;
 		Assert.notNull(inventory, "Inventory must not be null.");
 		this.inventory = inventory;
-		
-		
+		this.waitlist=waitlist;
+		this.completionsuccess=true;
+		this.failedorder=null;
+		this.quan=new HashMap<ProductIdentifier, Integer>();
 	}
 
 	@ModelAttribute("cart")
@@ -107,11 +115,10 @@ public class OrderController {
 
 	@PostMapping("/checkout")
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
-
+		
 		return userAccount.map(account -> {
 
 			var order = new Order(account, Cash.CASH);
-			
 
 			cart.addItemsTo(order);
 
@@ -196,10 +203,36 @@ public class OrderController {
 	public String complete(@PathVariable OrderIdentifier id, Model model){
 		if(this.orderManagement.get(id).isPresent()){
 			Order o=this.orderManagement.get(id).get();
-			this.orderManagement.completeOrder(o);
+			o.getOrderLines().get().forEach(orderline -> {
+				int quan = inventory.findByProductIdentifier(orderline.getProductIdentifier()).get().getQuantity().getAmount().intValue();
+				int orderd = orderline.getQuantity().getAmount().intValue();
+				this.quan.put(orderline.getProductIdentifier(), quan);
+				if(!(quan>=orderd)){
+					this.fail();
+				}
+			});
+			if(this.completionsuccess){
+				this.orderManagement.completeOrder(o);
+				return "redirect:/orders";
+			}else{
+				this.completionsuccess=true;
+				this.failedorder=o;
+				return "redirect:/ordercompletionfail";
+			}
+			
 		
 		}
 		return "redirect:/orders";
+	}
+	private void fail(){
+		this.completionsuccess=false;
+	}
+	@GetMapping("/ordercompletionfail")
+	public String orderfail(Model model){
+		
+		model.addAttribute("order", this.failedorder);
+		model.addAttribute("quantity", this.quan);
+		return "ordercompletionfail";
 	}
 
 	@GetMapping("/orders/{id}/cancel")

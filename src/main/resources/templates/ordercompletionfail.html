@@ -1,0 +1,43 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Fehler beim Fertigstellen</title>
+		
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+        <div class="center">
+          <div class="field">
+              <label th:text="${'ID: ' + order.getId().getIdentifier()}"></label>
+            </div>
+            <div class="field">
+                <label th:text="${'User: ' + order.getUserAccount().getUsername()}"></label>
+            </div>
+            <div class="field">
+                <label th:text="${'Datum: '+ #temporals.format(order.getDateCreated(),'dd.MM.yyyy HH:mm')}"></label>
+            </div>
+           <table class="ui celled table">
+                <tr>
+                    <th >Produkt</th>
+                    <th >Bestellt</th>
+                    <th >Verfügbar</th>
+                </tr>
+            <tr th:if="${order.getOrderLines().isEmpty()}">
+                <td style="text-align: center;"colspan="3"> Keine Infos </td>
+            </tr>
+            <tr th:each="orderline : ${order.getOrderLines().get().toArray()}"> 
+                <td  th:text="${orderline.getProductName()}">Name</td>
+                <td  th:text="${orderline.getQuantity().getAmount().intValue()}">Bestellt</td>
+                <td  th:text="${quantity.get(orderline.getProductIdentifier())}">Status</td>
+                </tr>
+            </table>
+            </div>
+    </body>
+</html>
