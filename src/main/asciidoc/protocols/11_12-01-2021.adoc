@@ -31,15 +31,18 @@ __Schriftführer:__ Timon Trettin +
 * 40%
 
 === Inventory
-* nachbestellung 1 tag warten
-* stock image when none listed
+* Nachbestellung 1 Tag warten
+* Default Bild wenn keins angegeben
 
 === Catalog
-* Verfügbarkeit der Medikamente im Catalog anpassen
+* Verfügbarkeit der Medikamente im Katalog anpassen
 
 === Order
 * Warenkorb Item Anzahl in Navbar
-* wenn Med rez.pfl. Vericherungskarte muss angegeben sein
+* Checkout "/checkout"
+** Zahlungsart wählen
+** Adresse wählen
+** wenn Med rez.pfl.: Vericherung
 
 === Finances
 * Einträge sollen korrektes Datum haben
@@ -47,17 +50,10 @@ __Schriftführer:__ Timon Trettin +
 ** "EMPLOYEE" sieht bei Details Gehaltszettel
 
 === User
-* zahlungsmethoden
+* Zahlungsmethoden
 * Profilbild
 * Benutzerübersicht "/users"
-** form crash fix
-** filters
-** sorting?
-
-=== Time
-* In den Packages benutzen
+** Form crash fix
 
 === UI
-* light/ dark mode kompatibel, Akzentfarbe
-* Aktuellen Pfad anzeigen "Account > Einstellungen > Passwort Ändern"
 * Thymleaf button text fixen

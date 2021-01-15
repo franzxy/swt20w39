@@ -1,7 +1,7 @@
 = Cross-Testing Feedback
 
-__Durchführende Gruppe:__
-__Anwendung von Gruppe:__
+__Durchführende Gruppe: 39__
+__Anwendung von Gruppe: Unterbrunner Ärztehaus__
 
 == Getestetes System
 Welche Aufgabe/Problemstellung löst die Anwendung.
@@ -11,6 +11,12 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 [options="header"]
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
+| /pwChange | "ADMIN"; 1234, 123456, 123456 | Altes Passwort falsch | Passwort geändert |
+| /katalog | "ADMIN" | Kann nicht zum Warenkorb hinzufügen | … |
+| /inventory | "ADMIN" | Medikament, Preis Filter | Error |
+| /inventory | "ADMIN" | Neues Medikament | Error |
+| /users/update/email/admin | "ADMIN"; "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom" |
+| /users/update/AddressPostcode/admin | "ADMIN"; "test" | … | Error |
 | … | … | … | … |
 |===
 
