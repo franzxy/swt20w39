@@ -16,7 +16,10 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 | /inventory | "ADMIN" | Medikament, Preis Filter | Error |
 | /inventory | "ADMIN" | Neues Medikament | Error |
 | /users/update/email/admin | "ADMIN"; "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom" |
-| /users/update/AddressPostcode/admin | "ADMIN"; "test" | … | Error |
+| /users/update/AddressPostcode/admin | "ADMIN"; "test" | Keine Bean Validation | Error |
+| /workers/update | "ADMIN"; "test" | Keine Bean Validation | Error |
+| … | … | … | … |
+| … | … | … | … |
 | … | … | … | … |
 |===
 
