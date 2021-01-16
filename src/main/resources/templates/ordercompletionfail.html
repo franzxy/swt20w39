@@ -13,15 +13,20 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
+        <div class="position">
+            <a th:href="@{/orders}">Bestellungen</a>
+            <p>></p>
+            <a th:href="@{#}">Fehler</a>
+          </div>
         <div class="center">
           <div class="field">
-              <label th:text="${'ID: ' + order.getId().getIdentifier()}"></label>
+              <h4 th:text="${'ID: ' + order.getId().getIdentifier()}"></h4>
             </div>
             <div class="field">
-                <label th:text="${'User: ' + order.getUserAccount().getUsername()}"></label>
+                <h4 th:text="${'User: ' + order.getUserAccount().getUsername()}"></h4>
             </div>
             <div class="field">
-                <label th:text="${'Datum: '+ #temporals.format(order.getDateCreated(),'dd.MM.yyyy HH:mm')}"></label>
+                <h4 th:text="${'Datum: '+ #temporals.format(order.getDateCreated(),'dd.MM.yyyy HH:mm')}"></h4>
             </div>
            <table class="ui celled table">
                 <tr>
