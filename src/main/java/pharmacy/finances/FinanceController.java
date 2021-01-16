@@ -87,23 +87,8 @@ public class FinanceController {
 		}
 		return ret;
 	}
+	
 	//Filter Stuff #2
-	/**private List<AccountancyEntry> getEntriesOfRoleAndUser (String role, String user){
-		List<AccountancyEntry> working=this.acc.findAll().toList();
-		List<AccountancyEntry> ret =new ArrayList<AccountancyEntry>();
-		for(Object o: this.orderManagement.findBy(OrderStatus.PAID).get().toArray()) {
-			for(AccountancyEntry a: working) {
-				if(a.getDescription().contains( ((Order) o).getId().toString())) {
-					if(((Order) o).getUserAccount().hasRole(Role.of(role))&& ((Order) o).getUserAccount().getLastname().equals(user)) {
-					ret.add(a);
-					}
-					 
-				}
-			}
-		}
-		return ret;
-	}*/
-	//Filter Stuff #3
 	private List<AccountancyEntry> getByName(String name){
 		List<AccountancyEntry> ret=new ArrayList<AccountancyEntry>();
 		for(AccountancyEntry a:this.acc.findAll().toList()){
@@ -233,11 +218,24 @@ public class FinanceController {
 	}
 	@GetMapping("/myfinances")
 	public String myfinances(Model model, @LoggedIn Optional<UserAccount> userAccount) {
-		List<Order> ret =List.of() ;
+		List<AccountancyEntry> ret= new ArrayList<AccountancyEntry>();
 		if(!userAccount.isEmpty()){
-			ret=this.orderManagement.findBy(userAccount.get()).toList();
+			this.acc.findAll().forEach(entry ->{
+				this.orderManagement.findBy(userAccount.get()).forEach(order -> {
+					if(entry.getDescription().contains(order.getId().getIdentifier())){
+						ret.add(entry);
+					 }
+				});
+				if(userAccount.get().hasRole(Role.of("EMPLOYEE"))){
+					if(entry.getDescription().startsWith("Gehalt von ") && entry.getDescription().contains(userAccount.get().getUsername())){
+						ret.add(entry);
+					}
+				}
+
+			});
 		}
-		model.addAttribute("rech", ret);
+		
+		model.addAttribute("tab", ret);
 		return "myfinances";
 	}
 	@GetMapping("/finances/{id}")

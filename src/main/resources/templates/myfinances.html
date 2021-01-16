@@ -14,27 +14,27 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
    
-        <div class="center">
-           <table class="ui celled table">
-                <tr>
-                    <th >Datum</th>
-                    <th >Beschreibung</th>
-                    <th >Betrag in €</th>
-                    <th >Rechung</th>
-                </tr>
-            <tr th:if="${rech.empty}">
-                <td style="text-align: center;"colspan="7"> Keine Bestellungen </td>
-            </tr>
-            <tr th:each="sec : ${rech}"> 
-                <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
-                <td  th:text="${'Rechnung Nr. ' + sec.getId().getIdentifier()}">ID</td>
-                <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
-                <td>
-                  <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId()})}"></a>
-                </td>
-                </tr>
-            </table>
-            </div>
+        <div class="center" >
+            <table class="ui celled table">
+                 <tr>
+                     <th >Datum</th>
+                     <th >Beschreibung</th>
+                     <th >Betrag in €</th>
+                 </tr>
+             <tr th:if="${tab.empty}">
+                 <td colspan="3"> Keine Buchhaltungseinträge Verfügbar</td>
+             </tr>
+             <tr th:each="entry : ${tab}"> 
+                 <td th:text="${#temporals.format(entry.getDate().get(),'dd.MM.yyyy HH:mm')}">Time</td>
+                 <td th:if="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}">
+                   <a th:href="@{/finances/{id}(id=${entry.getDescription()})}"style="color: blue;" th:text="${entry.getDescription()}"></a>
+                 </td>
+                 <td th:unless="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}" th:text="${entry.getDescription()}">Beschreibung</td>
+                  <td  th:text="${entry.getValue().getNumber().doubleValue()}">Betrag</td>
+                 
+                 </tr>
+           </table>
+           </div>
    
         
         
