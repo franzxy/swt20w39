@@ -54,6 +54,20 @@
                     <span class="span">Bezahlmethode</span>
                     <h4 th:text="${det.getPaymentMethod()}"></h4>
                 </div>
+                <table class="ui celled table">
+                    <tr>
+                        <th >Produkt</th>
+                        <th >Bestellt</th>
+                        
+                    </tr>
+                <tr th:if="${det.getOrderLines().isEmpty()}">
+                    <td style="text-align: center;"colspan="3"> Keine Infos </td>
+                </tr>
+                <tr th:each="orderline : ${det.getOrderLines().get().toArray()}"> 
+                    <td  th:text="${orderline.getProductName()}">Name</td>
+                    <td  th:text="${orderline.getQuantity().getAmount().intValue()}">Bestellt</td>
+                    </tr>
+                </table>
             </div>
     </body>
 </html>
