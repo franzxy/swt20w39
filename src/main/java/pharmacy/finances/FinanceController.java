@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.javamoney.moneta.Money;
 import org.salespointframework.accountancy.Accountancy;
 import org.salespointframework.accountancy.AccountancyEntry;
+import org.salespointframework.accountancy.AccountancyEntryIdentifier;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
@@ -231,13 +232,19 @@ public class FinanceController {
 						ret.add(entry);
 					}
 				}
-
+				
 			});
 		}
 		
 		model.addAttribute("tab", ret);
 		return "myfinances";
 	}
+	@GetMapping("/myfinances/{id}")
+	public String salarypaper(@PathVariable AccountancyEntryIdentifier id,Model model) {
+		model.addAttribute("det", this.acc.get(id).get());
+		return "salarypaper";
+	}
+
 	@GetMapping("/finances/{id}")
 	public String financedetail(@PathVariable String id,Model model) {
 		String id2=id.replace("Rechnung Nr. ", "");

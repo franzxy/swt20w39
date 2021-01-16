@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Details</title>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav> 
+        <div class="position">
+            <a th:href="@{/myfinances}">Finanzen</a>
+            <p>></p>
+            <a th:href="@{#}">Details</a>
+          </div>
+            <div class="center">
+                <div class="field">
+                    <span class="span">Datum</span>
+                    <h4 th:if="${det.getDate().isPresent()}"th:text="${#temporals.format(det.getDate().get(),'dd.MM.yyyy HH:mm')}"></h4>
+                </div>
+                <div class="field">
+                    <span class="span">Betrag</span>
+                    <h4 th:text="${det.getValue().getNumber().doubleValue()}"></h4>
+                </div>                 
+                <div class="field">
+                    <span class="span">Beschreibung</span>
+                    <h4 th:text="${det.getDescription()}"></h4>
+                </div>
+            </div>
+    </body>
+</html>
