@@ -80,10 +80,10 @@ class CatalogDataInitializer implements DataInitializer {
 		medicineCatalog.save(new Medicine("Schmerzsalbe",            "Wenn es wieder richtig am schmerzen ist", Money.of(30, "EUR"), Money.of(23, "EUR"), Arrays.asList("salbe", "rücken", "gelenke"), 0.2,  false, "9",3));
 		medicineCatalog.save(new Medicine("Hautcreme", "Für häutende Haut", 											Money.of(14, "EUR"), Money.of(10, "EUR"), Arrays.asList("ausschlag", "creme", "betäubend"), 0.03,  true, "10",4));
 		medicineCatalog.save(new Medicine("Allergiemittel", "Für Alergiker mit hohem Niveau",				   Money.of(9, "EUR"), Money.of(4, "EUR"), Arrays.asList("allergie", "atemnot", "spritze"), 0.03,  true, "11",5));
-		medicineCatalog.save(new Medicine("Insulin", "Gut insuliertes Insolium Insulites", 							 Money.of(70, "EUR"), Money.of(50, "EUR"), Arrays.asList("spritze", "schwindel", "unterzucker"), 0.5,  true, "12",5));
+		medicineCatalog.save(new Medicine("Insulin", "Gut insuliertes Insolium Insulites", 							 Money.of(70, "EUR"), Money.of(50, "EUR"), Arrays.asList("spritze", "schwindel", "unterzucker"), 0.5,  true, "15",5));
 		medicineCatalog.save(new Medicine("Augentropfen", "Für kleine und große Augen",						   Money.of(10, "EUR"), Money.of(3, "EUR"), Arrays.asList("augentropfen", "sehschwäche", "orientierungslosigkeit"), 0.05, false, "13",7));
 		medicineCatalog.save(new Medicine("Nasenspray", "Für eine gereitzte Nase", 									  Money.of(5, "EUR"), Money.of(3, "EUR"), Arrays.asList("verstopft", "nasenspray", "nase"), 0.015,  false, "14",7));
-		medicineCatalog.save(new Medicine("Hustenbonbon (einzeln)", "Klein aber fein",                             Money.of(0.10, "EUR"), Money.of(0.04, "EUR"),Arrays.asList("schluckbeschwerden", "halsschmerzen", "lutschen"), 0.001,  false, "15",6));
+		medicineCatalog.save(new Medicine("Hustenbonbon (einzeln)", "Klein aber fein",                             Money.of(0.10, "EUR"), Money.of(0.04, "EUR"),Arrays.asList("schluckbeschwerden", "halsschmerzen", "lutschen"), 0.001,  false, "12",6));
 		medicineCatalog.save(new Medicine("Kopfschmerztablette 2", "Wenn der Kater nicht aufhören will", Money.of(12, "EUR"), Money.of(7, "EUR"),  Arrays.asList("tablette", "kopfschmerzen", "fiber"), 0.05, true, "32",8));
 
 		medicineCatalog.save(new Medicine("Kopfschmerztablette 3", "Richtig richtig gutes Zeug",									Money.of(23, "EUR"), Money.of(10, "EUR"), Arrays.asList("tablette", "kopfschmerzen", "fiber"), 0.03,  true, "16",9));

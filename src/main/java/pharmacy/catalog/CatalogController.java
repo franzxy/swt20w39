@@ -1,5 +1,6 @@
 package pharmacy.catalog;
 
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -116,6 +118,8 @@ class CatalogController {
 
 		return "index";
 	}
+
+
 
 	@PostMapping("/")
 	public String submitSearchInCatalog(@RequestParam("searchbar") String bar, @ModelAttribute SearchForm form, Model model) {

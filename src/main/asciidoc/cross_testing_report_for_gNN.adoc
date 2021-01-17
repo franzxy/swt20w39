@@ -29,25 +29,59 @@ bewegungseingeschränkte Patienten - wird derzeit diskutiert. Entwickeln Sie ein
 Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslieferservice werden ebenfalls erwartet.
 
 == Fehler-Report
-// See http://asciidoctor.org/docs/user-manual/#tables
+
+=== Admin
 [options="header"]
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
-| /pwChange | "ADMIN"; 1234, 123456, 123456 | Altes Passwort falsch | Passwort geändert
-| /katalog | "ADMIN" | Kann nicht zum Warenkorb hinzufügen | …
-| /inventory | "ADMIN" | Medikament, Preis Filter | Error 
-| /inventory | "ADMIN" | Neues Medikament | Error 
-| /users/update/email/admin | "ADMIN"; "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom" 
-| /users/update/AddressPostcode/admin | "ADMIN"; "test" | Keine Bean Validation | Error 
-| /workers/update | "ADMIN"; "test" | Keine Bean Validation | Error 
-| … | … | … | … 
-| … | … | … | … 
-| … | … | … | … 
+| /pwChange | 1234, 123456, 123456 | Altes Passwort falsch | Passwort geändert
+| /katalog | - | Kann nicht zum Warenkorb hinzufügen | …
+| /inventory | - | Medikament, Preis Filter | Error 
+| /inventory | - | Neues Medikament | Error 
+| /workers/update | "test" | Keine Bean Validation | Error 
+| /users/update/email/admin | "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom"
+| /users/update/AddressPostcode/admin | "test" | Keine Bean Validation | Error
+| /users/update/AddressTown/admin | "123" | Keine Bean Validation | Error
+| /users/update/AddressStreet/admin | "Straße, 12" | Keine Bean Validation | Error
+| /createWorker/create | "abc" als Strundenlohn | Keine Bean Validation | Error
+| /createWorker | "123" als Email | Keine Bean Validation | Leeres Formular
+| /createWorker | "123, Straße" als Adresse | Keine Bean Validation | Leeres Formular
+| /createWorker | "abc" als PLZ | Keine Bean Validation | Leeres Formular
+|===
+
+=== Mitarbeiter
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| - | - | - | -
+|===
+
+=== Registrierter Benutzer
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| /katalog/{id} | Beliebiges Medikament, Feld Anzahl leer | Klick auf "In den Warenkorb" mit Feld Anzahl leer schmeißt 404-Fehler | 404
+| /cart | - | "Warenkorb leeren" leitet auf /template weiter" | /template
+| /cart/checkout | - | "Zurück zur Startseite" leitet auf /template weiter" | /template
+| /orders | Bestellung getätigt | Standardwert für Tag/Monat ist 0 | -
+| /profileUser | Leeres Input-Feld | Nutzerdaten lassen sich auf null setzen | -
+|===
+
+=== Benutzer
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| / | - | Navbar-Elemente werden bei zu schmalem Fenster nicht angezeigt (stattdessen nichtöffnendes Hamburger-Menü | -
+| /register | Ungültige Email | Keine Bean-Validation im Email-Feld | -
+| /register | Bereits existierender Nutzername/Email | Registrierung bricht ab, aber ohne Fehlermeldung | -
 |===
 
 == Sonstiges
 
 === Fehlende Features
+** Content auf Startseite (z.B. Produktvorschläge, Willkommenstext etc.)
+** Eigenes Logo statt BULMA-Logo
+** Suchfunktion
 
 === UX: Interaktion mit der Anwendung (Usability)
 * Startseite lenkt von Hauptfunktion Katalog ab
@@ -61,7 +95,11 @@ Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslie
 ** Wenn Warenkorb leer, kein Hinweis oder Aufforderung zur Weiterleitung auf Katalog
 
 === UI: Optik der Anwendung
-
+** Zu viele Speichern-Buttons bei /workers/{name}
+** buttons zu nah am input-field
+** Text bei Filter buttons kaum erkennbar bei /katalog
+** Buttons sind zu nah beieinander bei /inventory
+** Darstellung der Kategorien bei Medikamenten optimieren ("[..,..]")
 
 == Verbesserungsvorschläge
 * "Passwort aendern" -> "Passwort ändern"
