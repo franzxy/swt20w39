@@ -43,7 +43,9 @@ class UserDataInitializer implements DataInitializer {
 		LOG.info("Creating default users and users.");
 
 		var boss = userAccountManagement.create("apo", UnencryptedPassword.of("#123apo#"), Role.of("BOSS"));
-		users.save(new User(boss));
+		var bossUser = new User(boss);
+		bossUser.setPicture("https://www.welt.de/img/regionales/hamburg/mobile169760744/3652503737-ci102l-w1300/Ahmad-Ahadi-Apored-vor-Gericht.jpg");
+		users.save(bossUser);
 
 		var emp = userAccountManagement.create("hans", UnencryptedPassword.of("#12hans#"), Role.of("EMPLOYEE"));
 		var empUser = new User(emp);

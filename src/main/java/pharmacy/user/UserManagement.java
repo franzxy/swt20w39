@@ -72,11 +72,11 @@ public class UserManagement {
 		return "insurance changed";
 	}
 	
-	public String changePayDirekt(User user, PayDirektForm payDirektForm) {
+	public String changePicture(User user, PictureForm pictureForm) {
 		
-		user.setPayDirekt(payDirektForm.getUsername());
+		user.setPicture(pictureForm.getPicture());
 
-		return "paydirekt changed";
+		return "picture changed";
 	}
 	
 	public String changeAddress(User user, AddressForm addressForm) {

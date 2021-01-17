@@ -6,16 +6,16 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Pattern;
 
-class PayDirektForm {
+class PictureForm {
 	
 	@NotEmpty(message = "PayDirekt Benutzername fehlt")
-	private final String username;
+	private final String picture;
 
-	public PayDirektForm(String username) {
-		this.username = username;
+	public PictureForm(String picture) {
+		this.picture = picture;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getPicture() {
+		return picture;
 	}
 }

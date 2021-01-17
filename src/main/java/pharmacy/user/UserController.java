@@ -187,9 +187,9 @@ class UserController {
 
 	@GetMapping("/account/settings")
 	@PreAuthorize("isAuthenticated()")
-	String settings(Model model, PayDirektForm payDirektForm) {
+	String settings(Model model, PictureForm pictureForm) {
 
-		model.addAttribute("payDirektForm", payDirektForm);
+		model.addAttribute("pictureForm", pictureForm);
 
 		model.addAttribute("user", userManagement.currentUser().get());
 		model.addAttribute("customer", Role.of("CUSTOMER"));
@@ -199,16 +199,16 @@ class UserController {
 		return "settings";
 	}
 	
-	@PostMapping("/account/settings/paydirekt")
+	@PostMapping("/account/settings/picture")
 	@PreAuthorize("isAuthenticated()")
-	String changeAccountPay(Model model, @Valid @ModelAttribute("payDirektForm")PayDirektForm payDirektForm, Errors result) {
+	String changePicture(Model model, @Valid @ModelAttribute("pictureForm")PictureForm pictureForm, Errors result) {
 		model.addAttribute("user", userManagement.currentUser().get());
 		
 		if (result.hasErrors()) {
 			return "settings";
 		}
 		
-		userManagement.changePayDirekt(userManagement.currentUser().get(), payDirektForm);
+		userManagement.changePicture(userManagement.currentUser().get(), pictureForm);
 
 		return "redirect:/account/settings";
 	}
