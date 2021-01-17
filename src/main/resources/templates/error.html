@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Fehler beim Fertigstellen</title>
+		
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+        <div class="center">
+            <div class="field">
+                <img  width="40%"th:src="@{/img/404.svg}" src="../static/img/med2.png"/>
+            </div>
+            <div class="field">
+                <h1>Wer soll verantwortlich sein?</h1>
+            </div>
+            <div class="field center">
+                <div class="row">
+                    <a class="button space">Sie</a>
+                    <a class="button">Die Entwickler</a>
+                </div>
+            </div>
+        </div>
