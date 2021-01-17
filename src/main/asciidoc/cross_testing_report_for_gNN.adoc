@@ -11,21 +11,33 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 [options="header"]
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
-| /pwChange | "ADMIN"; 1234, 123456, 123456 | Altes Passwort falsch | Passwort geändert |
-| /katalog | "ADMIN" | Kann nicht zum Warenkorb hinzufügen | … |
-| /inventory | "ADMIN" | Medikament, Preis Filter | Error |
-| /inventory | "ADMIN" | Neues Medikament | Error |
-| /users/update/email/admin | "ADMIN"; "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom" |
-| /users/update/AddressPostcode/admin | "ADMIN"; "test" | Keine Bean Validation | Error |
-| /workers/update | "ADMIN"; "test" | Keine Bean Validation | Error |
-| … | … | … | … |
-| … | … | … | … |
-| … | … | … | … |
+| /pwChange | "ADMIN"; 1234, 123456, 123456 | Altes Passwort falsch | Passwort geändert
+| /katalog | "ADMIN" | Kann nicht zum Warenkorb hinzufügen | …
+| /inventory | "ADMIN" | Medikament, Preis Filter | Error
+| /inventory | "ADMIN" | Neues Medikament | Error
+| /users/update/email/admin | "ADMIN"; "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom"
+| /users/update/AddressPostcode/admin | "ADMIN"; "test" | Keine Bean Validation | Error
+| /workers/update | "ADMIN"; "test" | Keine Bean Validation | Error
+| / | keine | Navbar-Elemente werden bei zu schmalem Fenster nicht angezeigt (stattdessen nichtöffnendes Hamburger-Menü | -
+| /katalog/{id} | Beliebiges Medikament, Feld Anzahl leer | Klick auf "In den Warenkorb" mit Feld Anzahl leer schmeißt 404-Fehler | 404
+| /cart | "USER" | "Warenkorb leeren" leitet auf /template weiter" | /template
+| /cart/checkout | "USER" | "Zurück zur Startseite" leitet auf /template weiter" | /template
+| /orders | "USER"; Bestellung getätigt | Standardwert für Tag/Monat ist 0 | -
+| /register | Ungültige Email | Keine Bean-Validation im Email-Feld | -
+| /register | Bereits existierender Nutzername/Email | Registrierung bricht ab, aber ohne Fehlermeldung | -
+| /profileUser | Leeres Input-Feld | Nutzerdaten lasses sich auf null setzen | -
+| … | … | … | …
+
 |===
 
 == Sonstiges
 * Optik der Anwendung
+
 * Fehlende Features
+** Content auf Startseite (z.B. Produktvorschläge, Willkommenstext etc.)
+** Eigenes Logo statt BULMA-Logo
+** Suchfunktion
+
 * Interaktion mit der Anwendung (Usability)
 
 == Verbesserungsvorschläge

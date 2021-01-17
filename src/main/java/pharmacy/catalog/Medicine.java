@@ -1,5 +1,6 @@
 package pharmacy.catalog;
 
+import java.io.File;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -77,5 +78,8 @@ public class Medicine extends Product {
 		this.quantity = quantity;
 	}
 
-	
+	public boolean hasImage(String med) {
+		File f = new File("src/main/resources/static/img/med/" + getImage() + ".png");
+		return (f.exists());
+	}
 }

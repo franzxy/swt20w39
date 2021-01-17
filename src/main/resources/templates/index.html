@@ -47,7 +47,7 @@
 
 			<a class="med" th:each="medicine : ${catalog}" th:href="@{/medicine/{id}(id=${medicine.id})}">
 
-				<img class="medimg" th:src="@{/img/med/{image}.png(image=${medicine.image})}" src="../static/img/med1.png"/>
+				<img class="medimg" th:src="${medicine.hasImage(medicine.name)} ? @{/img/med/{image}.png(image=${medicine.image})} : '/img/med/default.png'" src="../static/img/med/default.png"/>
 
 				<div class="meddetails">
 
