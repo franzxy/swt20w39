@@ -31,26 +31,26 @@ import pharmacy.AbstractIntegrationTests;
  */
 class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
 
-	/**
+
 	@Autowired CatalogController controller;
 
 	/**
 	 * Integration test for an individual controller.
 	 */
-	/**
+
 	@Test
 	@SuppressWarnings("unchecked")
-	public void sampleControllerIntegrationTest() {
+	public void controllerIntegrationTest() {
 
 		Model model = new ExtendedModelMap();
 
-		String returnedView = controller.blurayCatalog(model);
+		String returnedView = controller.catalog("", "", false, model);
 
-		assertThat(returnedView).isEqualTo("catalog");
+		assertThat(returnedView).isEqualTo("index");
 
-		Iterable<Object> object = (Iterable<Object>) model.asMap().get("catalog");
+		//Iterable<Object> object = (Iterable<Object>) model.asMap().get("index");
 
-		assertThat(object).hasSize(9);
+		//assertThat(object).hasSize(32);
 	}
-	*/
+
 }
