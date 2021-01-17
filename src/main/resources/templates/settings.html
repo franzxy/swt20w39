@@ -26,15 +26,15 @@
                 <a class="button" th:text="${'Passwort Ändern'}" th:href="@{/account/settings/password}"></a>
             </div></div>
 
-            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/settings/paydirekt}" th:object="${payDirektForm}">
+            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/settings/picture}" th:object="${pictureForm}">
                 <div class="field">
-                    <label class="label" for="name">PayDirekt</label>
+                    <label class="label" for="name">Profilbild</label>
                     <div class="row">
-                        <input class="textinput" id="name" name="username" th:value="${user.getPayDirekt()} ? ${user.getPayDirekt()} : ${payDirektForm.getUsername()}" placeholder="Account Name" th:errorclass="fieldError" type="text" required="required"/>
-                        <button th:if="${user.getPayDirekt()}" type="submit" class="ui button">Ändern</button>
-                        <button th:unless="${user.getPayDirekt()}" type="submit" class="ui button">Hinzufügen</button>
+                        <input class="textinput" id="name" name="picture" th:value="${user.getPicture()} ? ${user.getPicture()} : ${pictureForm.getPicture()}" placeholder="URL" th:errorclass="fieldError" type="text" required="required"/>
+                        <button th:if="${user.getPicture()}" type="submit" class="ui button">Ändern</button>
+                        <button th:unless="${user.getPicture()}" type="submit" class="ui button">Hinzufügen</button>
                     </div>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"></p>
                 </div>
             </form>
 

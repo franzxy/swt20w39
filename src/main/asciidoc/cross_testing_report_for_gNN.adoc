@@ -43,17 +43,16 @@ Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslie
 | /users/update/AddressPostcode/admin | "test" | Keine Bean Validation | Error
 | /users/update/AddressTown/admin | "123" | Keine Bean Validation | Error
 | /users/update/AddressStreet/admin | "Straße, 12" | Keine Bean Validation | Error
-| /createWorker/create | "abc" als Strundenlohn | Keine Bean Validation | Error
-| /createWorker | "123" als Email | Keine Bean Validation | Leeres Formular
-| /createWorker | "123, Straße" als Adresse | Keine Bean Validation | Leeres Formular
-| /createWorker | "abc" als PLZ | Keine Bean Validation | Leeres Formular
 |===
 
 === Mitarbeiter
 [options="header"]
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
-| - | - | - | -
+| /createWorker/create | "abc" als Strundenlohn | Keine Bean Validation | Error
+| /createWorker | "123" als Email | Keine Bean Validation | Leeres Formular
+| /createWorker | "123, Straße" als Adresse | Keine Bean Validation | Leeres Formular
+| /createWorker | "abc" als PLZ | Keine Bean Validation | Leeres Formular
 |===
 
 === Registrierter Benutzer
