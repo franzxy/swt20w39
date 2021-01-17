@@ -57,3 +57,4 @@ __Schriftführer:__ Timon Trettin +
 
 === UI
 * Thymleaf button text fixen
+* Error page

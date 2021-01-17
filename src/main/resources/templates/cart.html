@@ -20,9 +20,7 @@
             <table class="cart" th:unless="${cart.empty}">
                 <div class="field">
                     <a class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
-                    <form sec:authorize="isAuthenticated()" class="ui form" method="post" th:action="@{/checkout}">
-                        <button type="submit" class="ui button">Zum Checkout</button>
-                    </form>
+                    <a class="button" sec:authorize="isAuthenticated()" th:href="@{/checkout}">Zum Checkout</a>
                 </div>
                 <thead>
                 <tr>
