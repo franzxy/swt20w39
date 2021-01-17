@@ -34,12 +34,32 @@ class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
 
 		Model model = new ExtendedModelMap();
 
-		String returnedView = controller.catalog("1", "", false, model);
-
+		//Test PrescriptionType working
+		String returnedView = controller.catalog("", "", true, model);
 		Iterable<Object> object = (Iterable<Object>) model.asMap().get("catalog");
+		assertThat(object).hasSize(14);
 
+		//Test Search
+		returnedView = controller.catalog("1", "", false, model);
+		object = (Iterable<Object>) model.asMap().get("catalog");
 		assertThat(object).hasSize(2);
+
+		returnedView = controller.catalog("1", "", true, model);
+		object = (Iterable<Object>) model.asMap().get("catalog");
+		assertThat(object).hasSize(1);
+
+		//Test tags working
+		returnedView = controller.catalog("", "durchfall", false, model);
+		object = (Iterable<Object>) model.asMap().get("catalog");
+		assertThat(object).hasSize(2);
+
+		returnedView = controller.catalog("", "durchfall", true, model);
+		object = (Iterable<Object>) model.asMap().get("catalog");
+		assertThat(object).hasSize(1);
+
+		returnedView = controller.catalog("900", "durchfall", false, model);
+		object = (Iterable<Object>) model.asMap().get("catalog");
+		assertThat(object).hasSize(1);
+
 	}
-
-
 }
