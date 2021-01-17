@@ -97,9 +97,20 @@ Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslie
 === UI: Optik der Anwendung
 ** Zu viele Speichern-Buttons bei /workers/{name}
 ** buttons zu nah am input-field
-** Text bei Filter buttons kaum erkennbar bei /katalog
+** schlechtes Kontrastverhältnis bei
+*** Filter Buttons
+*** Formularen
+** Title-bar durchgehend beibehalten
+** Tabellenköpfe einheitlich halten (Abhebung von anderem Content)
 ** Buttons sind zu nah beieinander bei /inventory
 ** Darstellung der Kategorien bei Medikamenten optimieren ("[..,..]")
+** Beschreibungstext neben das Medikament und nicht darüber
+
+* Fehlende Features
+** Content auf Startseite (z.B. Produktvorschläge, Willkommenstext etc.)
+** Eigenes Logo statt BULMA-Logo
+** Suchfunktion
+* Interaktion mit der Anwendung (Usability)
 
 == Verbesserungsvorschläge
 * "Passwort aendern" -> "Passwort ändern"
