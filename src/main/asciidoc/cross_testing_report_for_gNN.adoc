@@ -1,59 +1,105 @@
 = Cross-Testing Feedback
 
 __Durchführende Gruppe: 39__
+
 __Anwendung von Gruppe: Unterbrunner Ärztehaus__
 
 == Getestetes System
-Welche Aufgabe/Problemstellung löst die Anwendung.
+Dem großen Unterbrunner Ärztehaus wird eine Apotheke angegliedert.
+Es handelt sich um einen Verkaufsraum mit drei Kassen und einer Selbstbedienungsabteilung für nicht rezeptpflichtige Waren (Pflaster,
+medizinische Badezusätze, Heiltees aller Art, Pflegesalben etc.).
+Daneben gibt es ein kleines chemisches Labor, wo auf Anforderung der Ärzte spezielle Pulver, Salben und Tinkturen bereitet werden können
+(abzuholen einen Tag nach Bestellung). Bei Bestellungen von Mixturen oder nicht vorrätigen Medikamenten werden den Kunden Bestellzettel
+mit einer eindeutigen Identifikationsnummer ausgegeben (das Rezept verbleibt in der Apotheke).
+Die Apothekenschränke sind wie üblich alphabetisch sortiert. An jeder Medikamentenpackung ist ein Strichcode angebracht, welcher das Medikament und die Packungsgröße eindeutig identifiziert.
+Bei Verkauf eines Medikaments wird der Code an der Kasse eingelesen. Auf diese Weise wird der Posten auf die Kundenrechnung und
+gleichzeitig in die tägliche Nachbestellung übernommen. Medikamente werden entweder wie andere Waren bar bezahlt oder an Kassenpatienten gegen Entrichtung der Zuzahlung (10% des Preises,
+jedoch mindestens 5 EUR und maximal 10 EUR pro Arzneimittel) abgegeben.
+Kassenleistungen werden von den Apotheken mit einer Zentralkasse monatlich abgerechnet. Mit Hilfe der neuen Apotheke ersparen sich die Praxen auch die Bewirtschaftung eigener Medizinvorräte:
+Neben den Mitarbeitern der Apotheke haben auch die Ärzte und einige besonders zuverlässige Arzthelferinnen jederzeit Zugang zum Medikamentenschrank. Für diesen Zweck gibt es eine Tür zur Apotheke, die vom Ärztehaus aus durch Eingabe einer praxisspezifischen PIN
+geöffnet werden kann. Auf der anderen Seite der Tür befindet sich ein Lesegerät, an dem beim Verlassen der Strichcode der entnommenen Medikamente erfaßt wird.
+Zwecks eindeutiger Zuordnung der Medikamente und um den Betrieb der Apotheke nicht übermäßig zu stören, hat zu einem Zeitpunkt höchstens
+eine Praxis Zugang zur Apotheke. Die Ärzte haben erklärt, daß dies keine wesentliche Einschränkung darstellt. Die Abrechnung mit den
+einzelnen Arztpraxen erfolgt monatlich. Alle Lesegeräte sind an den Computer der Apotheke angeschlossen, über den die automatische
+Nachbestellung von Medikamenten, die eigene Bilanz und die Abrechnung mit den Ersatzkassen läuft.
+Außerdem wird an diesem Computer wöchentlich eine Liste der Medikamente ausgedruckt, deren Verfallsdatum in der nächsten Woche erreicht
+wird oder das schon überschritten ist. Diese werden wöchentlich ausgesondert.
+Die Einführung eines weiteren Dienstes - die Auslieferung von Medikamenten an das nahegelegene Altersheim und andere
+bewegungseingeschränkte Patienten - wird derzeit diskutiert. Entwickeln Sie eine Software, die die oben dargestellten Vorgänge (einschließlich
+Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslieferservice werden ebenfalls erwartet.
 
 == Fehler-Report
-// See http://asciidoctor.org/docs/user-manual/#tables
+
+=== Admin
 [options="header"]
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
-| /pwChange | "ADMIN"; 1234, 123456, 123456 | Altes Passwort falsch | Passwort geändert
-| /katalog | "ADMIN" | Kann nicht zum Warenkorb hinzufügen | …
-| /inventory | "ADMIN" | Medikament, Preis Filter | Error
-| /inventory | "ADMIN" | Neues Medikament | Error
-| /users/update/email/admin | "ADMIN"; "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom"
-| /users/update/AddressPostcode/admin | "ADMIN"; "test" | Keine Bean Validation | Error
-| /users/update/AddressTown/admin | "ADMIN"; "123" | Keine Bean Validation | Error
-| /users/update/AddressStreet/admin | "ADMIN"; "Straße, 12" | Keine Bean Validation | Error
-| /workers/update | "ADMIN"; "test" | Keine Bean Validation | Error
-| / | keine | Navbar-Elemente werden bei zu schmalem Fenster nicht angezeigt (stattdessen nichtöffnendes Hamburger-Menü | -
-| /katalog/{id} | Beliebiges Medikament, Feld Anzahl leer | Klick auf "In den Warenkorb" mit Feld Anzahl leer schmeißt 404-Fehler | 404
-| /cart | "USER" | "Warenkorb leeren" leitet auf /template weiter" | /template
-| /cart/checkout | "USER" | "Zurück zur Startseite" leitet auf /template weiter" | /template
-| /orders | "USER"; Bestellung getätigt | Standardwert für Tag/Monat ist 0 | -
-| /register | Ungültige Email | Keine Bean-Validation im Email-Feld | -
-| /register | Bereits existierender Nutzername/Email | Registrierung bricht ab, aber ohne Fehlermeldung | -
-| /profileUser | Leeres Input-Feld | Nutzerdaten lasses sich auf null setzen | -
-| /workers/update | "abc" als Gehalt | Keine BeanValidation |Error
-| /workers/update/AdressStreet/admin | "123, Straße" als Adresse |  Keine Bean Validation |Straße wird auf 123, Straße gesetzt
-| /workers/update/AdressTown/admin | "123" als Wohnort | Keine Bean Validation |Wohnort wird auf "123" gesetzt
-| /workers/update/AddressPostcode/admin | "abc" als PLZ | Keine Bean Validation | PLZ ist nun abc
+| /pwChange | 1234, 123456, 123456 | Altes Passwort falsch | Passwort geändert
+| /katalog | - | Kann nicht zum Warenkorb hinzufügen | …
+| /inventory | - | Medikament, Preis Filter | Error 
+| /inventory | - | Neues Medikament | Error 
+| /workers/update | "test" | Keine Bean Validation | Error 
+| /users/update/email/admin | "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom"
+| /users/update/AddressPostcode/admin | "test" | Keine Bean Validation | Error
+| /users/update/AddressTown/admin | "123" | Keine Bean Validation | Error
+| /users/update/AddressStreet/admin | "Straße, 12" | Keine Bean Validation | Error
 | /createWorker/create | "abc" als Strundenlohn | Keine Bean Validation | Error
-| /createWorker | "123" als Email | Keine Bean Validation | Leeres Formular
 | /createWorker | "123" als Email | Keine Bean Validation | Leeres Formular
 | /createWorker | "123, Straße" als Adresse | Keine Bean Validation | Leeres Formular
 | /createWorker | "abc" als PLZ | Keine Bean Validation | Leeres Formular
+|===
 
-| … | … | … | …
+=== Mitarbeiter
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| - | - | - | -
+|===
 
+=== Registrierter Benutzer
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| /katalog/{id} | Beliebiges Medikament, Feld Anzahl leer | Klick auf "In den Warenkorb" mit Feld Anzahl leer schmeißt 404-Fehler | 404
+| /cart | - | "Warenkorb leeren" leitet auf /template weiter" | /template
+| /cart/checkout | - | "Zurück zur Startseite" leitet auf /template weiter" | /template
+| /orders | Bestellung getätigt | Standardwert für Tag/Monat ist 0 | -
+| /profileUser | Leeres Input-Feld | Nutzerdaten lassen sich auf null setzen | -
+|===
+
+=== Benutzer
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| / | - | Navbar-Elemente werden bei zu schmalem Fenster nicht angezeigt (stattdessen nichtöffnendes Hamburger-Menü | -
+| /register | Ungültige Email | Keine Bean-Validation im Email-Feld | -
+| /register | Bereits existierender Nutzername/Email | Registrierung bricht ab, aber ohne Fehlermeldung | -
 |===
 
 == Sonstiges
-* Optik der Anwendung
+
+=== Fehlende Features
+** Content auf Startseite (z.B. Produktvorschläge, Willkommenstext etc.)
+** Eigenes Logo statt BULMA-Logo
+** Suchfunktion
+
+=== UX: Interaktion mit der Anwendung (Usability)
+* Startseite lenkt von Hauptfunktion Katalog ab
+* Ohne Anmeldung kann nicht in den Warenkorb gelegt werden, erschwert Kaufentscheidung
+** Registrieren benötigt viele Daten welche auch später ergänzt werden könnten, da unwesentlich für Login
+* Rezeptfrei/ pflichtig an unterster Stelle in Filterhierarchie, obwohl meist verwendeter Filter vor allem bei Online Apotheke
+* Als Admin nicht Bestellen zu können ist sehr umständlich, trotz der höherrangigen Berechtigung wird einem Funktionalität verwehrt
+* Trennung zwischen Personenbezogenen und Anwendungsbezogenen Funktionen fehlt in Navbar
+** Profil, Anmelden und Passwort ändern sind getrennt
+** "Profil" wird für (Öffentliche) Nutzerprofile genutzt und "Account" für private Daten zwischen Kunde und Unternehmen
+** Wenn Warenkorb leer, kein Hinweis oder Aufforderung zur Weiterleitung auf Katalog
+
+=== UI: Optik der Anwendung
 ** Zu viele Speichern-Buttons bei /workers/{name}
 ** buttons zu nah am input-field
 ** Text bei Filter buttons kaum erkennbar bei /katalog
 ** Buttons sind zu nah beieinander bei /inventory
 ** Darstellung der Kategorien bei Medikamenten optimieren ("[..,..]")
-* Fehlende Features
-** Content auf Startseite (z.B. Produktvorschläge, Willkommenstext etc.)
-** Eigenes Logo statt BULMA-Logo
-** Suchfunktion
-* Interaktion mit der Anwendung (Usability)
 
 == Verbesserungsvorschläge
-* Was kann noch weiter verbessert werden?
+* "Passwort aendern" -> "Passwort ändern"
