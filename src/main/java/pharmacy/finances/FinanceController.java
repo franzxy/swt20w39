@@ -179,7 +179,7 @@ public class FinanceController {
 		long months = time.getTime().getMonthValue() - now.getMonthValue();
         if(time.getTime().getYear()!=now.getYear()){
             months = (12 - now.getMonthValue()) + time.getTime().getMonthValue();
-			months += 12 * (( time.getTime().getYear() - now.getYear()) - 1);
+			months += 12L * (( time.getTime().getYear() - now.getYear()) - 1);
 		}
 		while(months>0){
 			autopay();

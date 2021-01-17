@@ -81,7 +81,7 @@ class InventoryController {
 		long days = time.getTime().getDayOfYear() - now.getDayOfYear();
 		if(time.getTime().getYear()!=now.getYear()){
 			days = (365 - now.getDayOfYear()) + time.getTime().getDayOfYear();
-            days += 365 * (( time.getTime().getYear() - now.getYear()) - 1);
+            days += 365L * (( time.getTime().getYear() - now.getYear()) - 1);
 		}
 		while(days>0){
 			autorestock();
