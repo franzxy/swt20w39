@@ -24,9 +24,22 @@ class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
 
 		assertThat(returnedView).isEqualTo("index");
 
-		//Iterable<Object> object = (Iterable<Object>) model.asMap().get("index");
+		Iterable<Object> object = (Iterable<Object>) model.asMap().get("catalog");
 
-		//assertThat(object).hasSize(32);
+		assertThat(object).hasSize(32);
 	}
+
+	@Test
+	public void searchTest() {
+
+		Model model = new ExtendedModelMap();
+
+		String returnedView = controller.catalog("1", "", false, model);
+
+		Iterable<Object> object = (Iterable<Object>) model.asMap().get("catalog");
+
+		assertThat(object).hasSize(2);
+	}
+
 
 }
