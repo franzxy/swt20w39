@@ -1,6 +1,10 @@
 package pharmacy.user;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.LongAdder;
+
 import javax.mail.Address;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.salespointframework.useraccount.Role;
@@ -9,10 +13,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @Controller
 class UserController {
@@ -22,7 +28,17 @@ class UserController {
 	UserController(UserManagement userManagement) {
 		this.userManagement = userManagement;
 	}
-
+/*
+	public class GlobalControllerAdvice {
+		
+		@ModelAttribute
+		public void globalAttributes(Model model) {
+			if(userManagement.currentUser().isPresent()) {
+				model.addAttribute("picture", userManagement.currentUser().get().getPicture());
+			}
+		}
+	} 
+*/
 	@GetMapping("/menu")
 	String menu() {
 

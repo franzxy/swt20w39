@@ -28,6 +28,7 @@ Die Einführung eines weiteren Dienstes - die Auslieferung von Medikamenten an d
 bewegungseingeschränkte Patienten - wird derzeit diskutiert. Entwickeln Sie eine Software, die die oben dargestellten Vorgänge (einschließlich
 Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslieferservice werden ebenfalls erwartet.
 
+<<<
 == Fehler-Report
 
 === Admin
@@ -55,6 +56,7 @@ Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslie
 | /createWorker | "abc" als PLZ | Keine Bean Validation | Leeres Formular
 |===
 
+<<<
 === Registrierter Benutzer
 [options="header"]
 |===
@@ -75,6 +77,7 @@ Personalverwaltung) geeignet unterstützt. Vorschläge zur Gestaltung des Auslie
 | /register | Bereits existierender Nutzername/Email | Registrierung bricht ab, aber ohne Fehlermeldung | -
 |===
 
+<<<
 == Sonstiges
 
 === Fehlende Features
