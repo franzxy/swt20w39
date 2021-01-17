@@ -30,6 +30,7 @@ class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
 	}
 
 	@Test
+	@SuppressWarnings("unchecked")
 	public void searchTest() {
 
 		Model model = new ExtendedModelMap();
