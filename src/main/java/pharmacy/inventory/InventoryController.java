@@ -78,9 +78,9 @@ class InventoryController {
 	}
 	@Scheduled(fixedRate = 500)
 	protected void endofdaydetector(){
-		long days = time.getTime().getDayOfYear() - now.getDayOfYear();
+		long days = (long)time.getTime().getDayOfYear() - now.getDayOfYear();
 		if(time.getTime().getYear()!=now.getYear()){
-			days = (365 - now.getDayOfYear()) + time.getTime().getDayOfYear();
+			days = (long)(365 - now.getDayOfYear()) + time.getTime().getDayOfYear();
             days += 365L * (( time.getTime().getYear() - now.getYear()) - 1);
 		}
 		while(days>0){
@@ -94,7 +94,7 @@ class InventoryController {
 		this.inventory.findAll().forEach(item->{
 			if(item.getId().getIdentifier().equals(id)){
 				Order o1 = new Order(this.userAccount.findByUsername("apo").get());
-				o1.addChargeLine(((Medicine)item.getProduct()).getPurchaseprice().multiply(-1*anz), "Nachbestellung von: "+anz+"x "+((Medicine)item.getProduct()).getName());
+				o1.addChargeLine(((Medicine)item.getProduct()).getPurchaseprice().multiply(-1F*anz), "Nachbestellung von: "+anz+"x "+((Medicine)item.getProduct()).getName());
 				
 				inventory.save(item.increaseQuantity(Quantity.of(anz)));
 

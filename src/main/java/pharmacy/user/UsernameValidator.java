@@ -11,7 +11,6 @@ public class UsernameValidator implements ConstraintValidator<ValidUserName, Str
 	private UserAccountManagement management;
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		// TODO Auto-generated method stub
 		if(this.management.findByUsername(value).isEmpty())
 			return true;
 		context.disableDefaultConstraintViolation();

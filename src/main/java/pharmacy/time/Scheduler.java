@@ -23,15 +23,15 @@ public class Scheduler {
     public void update(){
         if(time.getTime().isAfter(now)){
             //Days that arent computed
-            long days = time.getTime().getDayOfYear() - now.getDayOfYear();
+            long days = (long)time.getTime().getDayOfYear() - now.getDayOfYear();
 
             //Months that arent computed
-            long months = time.getTime().getMonthValue() - now.getMonthValue();
+            long months = (long)time.getTime().getMonthValue() - now.getMonthValue();
             if(time.getTime().getYear()!=now.getYear()){
-                months = (12 - now.getMonthValue()) + time.getTime().getMonthValue();
+                months = (long)(12 - now.getMonthValue()) + time.getTime().getMonthValue();
                 months += 12L * (( time.getTime().getYear() - now.getYear()) - 1);
 
-                days = (365 - now.getDayOfYear()) + time.getTime().getDayOfYear();
+                days = (long)(365 - now.getDayOfYear()) + time.getTime().getDayOfYear();
                 days += 365L * (( time.getTime().getYear() - now.getYear()) - 1);
             }
             while(months>0){

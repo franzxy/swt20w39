@@ -176,9 +176,9 @@ public class FinanceController {
 
 	@Scheduled(fixedRate = 500)
 	protected void endofmonthdetector(){
-		long months = time.getTime().getMonthValue() - now.getMonthValue();
+		long months = (long)time.getTime().getMonthValue() - now.getMonthValue();
         if(time.getTime().getYear()!=now.getYear()){
-            months = (12 - now.getMonthValue()) + time.getTime().getMonthValue();
+            months = (long)(12 - now.getMonthValue()) + time.getTime().getMonthValue();
 			months += 12L * (( time.getTime().getYear() - now.getYear()) - 1);
 		}
 		while(months>0){
