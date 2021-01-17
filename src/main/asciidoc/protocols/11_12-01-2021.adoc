@@ -38,11 +38,11 @@ __Schriftführer:__ Timon Trettin +
 * Verfügbarkeit der Medikamente im Katalog anpassen
 
 === Order
-* Warenkorb Item Anzahl in Navbar
 * Checkout "/checkout"
 ** Zahlungsart wählen
 ** Adresse wählen
 ** wenn Med rez.pfl.: Vericherung
+* Kann: Warenkorb Item Anzahl in Navbar
 
 === Finances
 * Einträge sollen korrektes Datum haben
@@ -51,9 +51,9 @@ __Schriftführer:__ Timon Trettin +
 
 === User
 * Zahlungsmethoden
-* Profilbild
 * Benutzerübersicht "/users"
 ** Form crash fix
+* Kann: Profilbild
 
 === UI
 * Thymleaf button text fixen

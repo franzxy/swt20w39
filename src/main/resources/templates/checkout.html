@@ -8,20 +8,16 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
-		<title>Warenkorb</title>
+		<title>Checkout</title>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
         <div class="center">
-            <div class="form" th:if="${cart.empty}">
-                <label>Der Warenkorb ist leer.</label>
-                <a class="button" th:href="@{/}">Einkaufen</a>
-            </div>
             <table class="cart" th:unless="${cart.empty}">
                 <div class="field">
                     <a class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
                     <form sec:authorize="isAuthenticated()" class="ui form" method="post" th:action="@{/checkout}">
-                        <button type="submit" class="ui button">Zum Checkout</button>
+                        <button type="submit" class="ui button">Jetzt Bezahlen</button>
                     </form>
                 </div>
                 <thead>

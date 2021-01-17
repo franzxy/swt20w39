@@ -29,6 +29,7 @@ class UserController {
 		this.userManagement = userManagement;
 	}
 /*
+	@ControllerAdvice
 	public class GlobalControllerAdvice {
 		
 		@ModelAttribute

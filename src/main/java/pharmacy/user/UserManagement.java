@@ -123,7 +123,7 @@ public class UserManagement {
 	public String changeEmployee(User user, EmployeeForm employeeForm) {
 		
 		user.setIban(employeeForm.getIban());
-		user.setSalary(Money.of(employeeForm.getSalary(), "EUR"));
+		user.setSalary(Money.of(Long.valueOf(employeeForm.getSalary()), "EUR"));
 
 		return "employee changed";
 	}

@@ -22,19 +22,19 @@
 					<td th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer</td>
 					<td th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter</td>
 					<td th:if="${user.userAccount.hasRole(customer)}">Kunde</td>
-					<td th:if="${user.userAccount.hasRole(boss)}">
-						<form class="form" method="post" role="form" id="form" th:action="@{/user/{id}/salary(id=${user.getId()})}" th:object="${employeeForm}">
+					<td>
+						<form th:if="${user.userAccount.hasRole(boss) || user.userAccount.hasRole(employee)}" class="form" method="post" role="form" id="form" th:action="@{/user/{id}/salary(id=${user.getId()})}" th:object="${employeeForm}">
 							
 							<div class="field">
 								<label for="name">IBAN</label>
-								<input id="name" name="iban" th:value="${user.getIban()} ? ${user.getIban()} : ${employeeForm.getIban()}" type="text" required="required"/>
+								<input id="name" name="iban" placeholder="DE07123412341234123412" th:value="${user.getIban()} ? ${user.getIban()} : ${employeeForm.getIban()}" type="text" th:errorclass="fieldError" required="required"/>
 								<p class="ui negative message" th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}"></p>
 							</div>
 
 							<div class="field">
 								<label for="name">Gehalt</label>
 								<div class="row">
-									<input class="numberinput" id="name" name="salary" th:value="${user.getSalary()} ? ${user.getSalary().getNumber()} : ${employeeForm.getSalary()}" type="text" required="required"/>
+									<input class="numberinput" placeholder="450" id="name" name="salary" th:value="${user.getSalary()} ? ${user.getSalary().getNumber()} : ${employeeForm.getSalary()}" th:errorclass="fieldError" type="text" required="required"/>
 									<a class="currency">€</a>
 								</div>
 								<p class="ui negative message" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></p>
@@ -45,35 +45,10 @@
 							</div>
 
 						</form>
-					</td>
-					<td th:if="${user.userAccount.hasRole(employee)}">
-						
-						<form class="form" method="post" role="form" id="form" th:action="@{/user/{id}/salary(id=${user.getId()})}" th:object="${employeeForm}">
-							
-							<div class="field">
-								<label for="name">IBAN</label>
-								<input id="name" name="iban" th:value="${user.getIban()} ? ${user.getIban()} : ${employeeForm.getIban()}" type="text" required="required"/>
-							</div>
-
-							<div class="field">
-								<label for="name">Gehalt</label>
-								<div class="row">
-									<input class="numberinput" id="name" name="salary" th:value="${user.getSalary()} ? ${user.getSalary().getNumber()} : ${employeeForm.getSalary()}" type="text" required="required"/>
-									<a class="currency">€</a>
-								</div>
-							</div>
-
-							<div class="field">
-								<button type="submit" class="ui button">Anpassen</button>
-							</div>
-
-						</form>
-						<div class="field">
+						<div th:if="${user.userAccount.hasRole(employee)}" class="field">
 							<a class="button" th:href="@{/user/{id}/dismiss(id=${user.getId()})}">Entlassen</a>
 						</div>
-					</td>
-					<td th:if="${user.userAccount.hasRole(customer)}">
-						<a class="button" th:href="@{/user/{id}/hire(id=${user.getId()})}">Einstellen</a>
+						<a th:if="${user.userAccount.hasRole(customer)}" class="button" th:href="@{/user/{id}/hire(id=${user.getId()})}">Einstellen</a>
 					</td>
 					<!--<td th:if="${user.userAccount.hasRole(boss)}">
 						<a>24/7 Grind</a>

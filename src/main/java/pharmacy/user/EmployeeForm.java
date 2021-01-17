@@ -17,11 +17,11 @@ class EmployeeForm {
 	@Pattern(regexp="^[A-Z]{2}(?:[ ]?[0-9]){18,20}$", message = "Das ist keine IBAN")
 	private final String iban;
 
-	@NotNull(message = "Gehalt fehlt")
+	@NotEmpty(message = "Gehalt fehlt")
 	@Pattern(regexp="^[0-9]*$", message = "Gehalt darf nur aus Zahlen bestehen")
-	private final Long salary;
+	private final String salary;
 
-	public EmployeeForm(String iban, Long salary) {
+	public EmployeeForm(String iban, String salary) {
 		this.iban = iban;
 		this.salary = salary;
 	}
@@ -30,7 +30,7 @@ class EmployeeForm {
 		return iban;
 	}
 
-	public Long getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 }
