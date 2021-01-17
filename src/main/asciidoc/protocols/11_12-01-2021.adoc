@@ -17,7 +17,7 @@ __Schriftführer:__ Timon Trettin +
 * Lukas Luger
 * Timon Trettin
 
-== Aufgaben bis zum 10.01.2021
+== Aufgaben bis zum 17.01.2021
 * Falk Natkowski: Catalog, Inventory, Order, UI
 * Lukas Luger: Finances, Inventory, Order, UI
 * Timon Trettin: User, Order, Time, UI
