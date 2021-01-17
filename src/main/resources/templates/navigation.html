@@ -9,6 +9,6 @@
     </form>
     <div class="personal">
         <a class="iconbutton" th:href="@{/cart}"><img class="icon" th:src="@{/img/cart.png}"></a>
-        <a class="iconbutton" th:object=${user} th:href="@{/account}"><!--<img if="${user.getPicture()}" class="icon" th:src="${user.getPicture()}"><img th:unless="${user.getPicture()}" class="icon" th:src="@{/img/account.png}">--></a>
+        <a class="iconbutton" th:object=${user} th:href="@{/account}"><!--<img if="${user.getPicture()}" class="icon" th:src="${user.getPicture()}"><img th:unless="${user.getPicture()}" class="icon" th:src="@{/img/account.png}">--><img class="icon" th:src="@{/img/account.png}"></a>
     </div>
 </nav>
