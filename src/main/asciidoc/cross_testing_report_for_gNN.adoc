@@ -17,6 +17,8 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 | /inventory | "ADMIN" | Neues Medikament | Error
 | /users/update/email/admin | "ADMIN"; "tom" | Keine Bean Validation => Wenn Browser den input type "email" nicht unterstützt werden fehlerhafte Einträge gespeichert | Neue Email "tom"
 | /users/update/AddressPostcode/admin | "ADMIN"; "test" | Keine Bean Validation | Error
+| /users/update/AddressTown/admin | "ADMIN"; "123" | Keine Bean Validation | Error
+| /users/update/AddressStreet/admin | "ADMIN"; "Straße, 12" | Keine Bean Validation | Error
 | /workers/update | "ADMIN"; "test" | Keine Bean Validation | Error
 | / | keine | Navbar-Elemente werden bei zu schmalem Fenster nicht angezeigt (stattdessen nichtöffnendes Hamburger-Menü | -
 | /katalog/{id} | Beliebiges Medikament, Feld Anzahl leer | Klick auf "In den Warenkorb" mit Feld Anzahl leer schmeißt 404-Fehler | 404
@@ -26,18 +28,31 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 | /register | Ungültige Email | Keine Bean-Validation im Email-Feld | -
 | /register | Bereits existierender Nutzername/Email | Registrierung bricht ab, aber ohne Fehlermeldung | -
 | /profileUser | Leeres Input-Feld | Nutzerdaten lasses sich auf null setzen | -
+| /workers/update | "abc" als Gehalt | Keine BeanValidation |Error
+| /workers/update/AdressStreet/admin | "123, Straße" als Adresse |  Keine Bean Validation |Straße wird auf 123, Straße gesetzt
+| /workers/update/AdressTown/admin | "123" als Wohnort | Keine Bean Validation |Wohnort wird auf "123" gesetzt
+| /workers/update/AddressPostcode/admin | "abc" als PLZ | Keine Bean Validation | PLZ ist nun abc
+| /createWorker/create | "abc" als Strundenlohn | Keine Bean Validation | Error
+| /createWorker | "123" als Email | Keine Bean Validation | Leeres Formular
+| /createWorker | "123" als Email | Keine Bean Validation | Leeres Formular
+| /createWorker | "123, Straße" als Adresse | Keine Bean Validation | Leeres Formular
+| /createWorker | "abc" als PLZ | Keine Bean Validation | Leeres Formular
+
 | … | … | … | …
 
 |===
 
 == Sonstiges
 * Optik der Anwendung
-
+** Zu viele Speichern-Buttons bei /workers/{name}
+** buttons zu nah am input-field
+** Text bei Filter buttons kaum erkennbar bei /katalog
+** Buttons sind zu nah beieinander bei /inventory
+** Darstellung der Kategorien bei Medikamenten optimieren ("[..,..]")
 * Fehlende Features
 ** Content auf Startseite (z.B. Produktvorschläge, Willkommenstext etc.)
 ** Eigenes Logo statt BULMA-Logo
 ** Suchfunktion
-
 * Interaktion mit der Anwendung (Usability)
 
 == Verbesserungsvorschläge
