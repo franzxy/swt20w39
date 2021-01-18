@@ -39,8 +39,8 @@ __Schriftführer:__ Timon Trettin +
 
 === Order
 * Checkout "/checkout"
-** Zahlungsart wählen
 ** Adresse wählen
+** Zahlungsart wählen
 ** wenn Med rez.pfl.: Vericherung
 * Kann: Warenkorb Item Anzahl in Navbar
 

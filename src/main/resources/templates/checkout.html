@@ -13,52 +13,76 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         <div class="center">
-            <table class="cart" th:unless="${cart.empty}">
+            <div class="field">
+                <a class="button" th:href="@{/cart}">Zurück zum Warenkorb</a>
+            </div>
+            <form method="post" role="form" class="ui form" id="form" th:action="@{/checkout/address}" th:object="${addressForm}">
+                
+                
                 <div class="field">
-                    <a class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
-                    <form sec:authorize="isAuthenticated()" class="ui form" method="post" th:action="@{/checkout}">
-                        <button type="submit" class="ui button">Jetzt Bezahlen</button>
-                    </form>
+                    <h2 class="ui dividing header">Adresse</h2>
                 </div>
-                <thead>
-                <tr>
-                    <th >Artikel</th>
-                    <th >Menge</th>
-                    <th >Preis</th>
-                    <th ></th>
-                </tr>
-                    <tr th:each="item : ${cart} ">
-                        <td th:text="${item.productName}">Default</td>
-                        <td>
-                            <form class="ui form" method="post" th:action="@{/updatecart}">
-                                <div class="row">
-                                    <input type="hidden" name="pid" value="0" th:value="${item.id}"/>
-                                    <input class="numberinput" id="number" type="number" name="number" min="1" th:max="${availability.get(item.id)}" step="1" th:value="${item.quantity}"/><br/>
-                                    <button type="submit" class="button" th:text="${'Aktualisieren'}"></button>
-                                </div>
-                            </form>
-                        </td>
-                        <td th:text="${{item.price}}">10 Euro</td>
-                        <td>
-                         <a class="iconbutton" th:href="@{/cart/{id}/delete(id=${item.id})}"><img class="icon" th:src="@{/img/trash.png}"></a>   
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <label class="label" th:text="${'Summe'}"></label>
-                            <div class="value"><span th:text="${{cart.price}}">1337</span></div>
-                        </td>
-                        <td>
-                            <form class="form" method="post" th:action="@{/clearcart}">
-                                <button class="button" type="submit" th:text="${'Warenkorb leeren'}"></button>
-                            </form>
-                        </td>
-                    </tr>
-            </table>
+                <div class="field">
+                    <label class="label" for="address">Name</label>
+                    <input class="textinput" placeholder="Apo Theke" th:value="${user.getAddress()} ? ${user.getAddress().getName()} : ${addressForm.getName()}" name="name" th:errorclass="fieldError" type="text" required="required"/>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="address">Straße und Hausnummer</label>
+                    <input class="textinput" placeholder="Apo Theken Straße 8A" th:value="${user.getAddress()} ? ${user.getAddress().getStreet()} : ${addressForm.getStreet()}" name="street" th:errorclass="fieldError" type="text" required="required"/>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></p>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="name">Postleitzahl</label>
+                    <input class="textinput" placeholder="69420" th:value="${user.getAddress()} ? ${user.getAddress().getPostCode()} : ${addressForm.getPostCode()}" name="postCode" th:errorclass="fieldError" type="text" required="required"/>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}"></p>
+                </div>
+        
+                <div class="field">
+                    <label class="label" for="password">Stadt</label>
+                    <input class="textinput" placeholder="Unter dem Brunnen" th:value="${user.getAddress()} ? ${user.getAddress().getCity()} : ${addressForm.getCity()}" name="city" th:errorclass="fieldError" type="text" required="required"/>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
+                </div>
+                
+                <div class="field">
+                    <button th:text="${user.getAddress() == null} ? ${'Adresse hinzufügen'} : ${'Adresse ändern'}" type="submit" class="ui button"></button>
+                </div>
+            </form>
+            
+            <div class="field">
+                <span>Bezahlmethoden</span>
+                <h4 class="value" th:text="${'TBC'}">TBC</h4>
+            </div>
+
+            <form th:if="${true}" method="post" role="form" class="ui form" id="form" th:action="@{/checkout/insurance}" th:object="${insuranceForm}">
+                <div class="field">
+                    <h2 class="ui dividing header">Versicherung</h2>
+                </div>  
+                <div class="field">
+                    <label class="label" for="name">Krankenkasse</label>
+                    <input class="textinput" placeholder="Krankenkasse" id="name" name="company" th:value="${user.getInsurance()} ? ${user.getInsurance().getCompany()} : ${insuranceForm.getCompany()}" th:errorclass="fieldError" type="text" required="required"/>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></p>
+                </div>
+                <div class="field">
+                    <label class="label" for="name">Versichertennummer</label>
+                    <input class="textinput" placeholder="A69420694206" id="name" name="insuranceNumber" th:value="${user.getInsurance()} ? ${user.getInsurance().getId()} : ${insuranceForm.getInsuranceNumber()}" th:errorclass="fieldError" type="text" required="required"/>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('insuranceNumber')}" th:errors="*{insuranceNumber}"></p>
+                </div>  
+                <div class="field">                        
+                    <button th:if="${user.getInsurance()}" type="submit" class="ui button">Ändern</button>
+                    <button th:unless="${user.getInsurance()}" type="submit" class="ui button">Hinzufügen</button>
+                </div>
+            </form>
+
+            <div class="field">
+                <span>Summe</span>
+                <h4 class="value" th:text="${cart.getPrice()}">1337</h4>
+            </div>
+            <form class="field" method="post" th:action="@{/checkout}">
+                <button type="submit" class="ui button">Jetzt Bezahlen</button>
+            </form>
         </div>
     </body>
 </html>

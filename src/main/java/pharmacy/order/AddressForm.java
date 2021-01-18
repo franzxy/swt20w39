@@ -1,4 +1,4 @@
-package pharmacy.user;
+package pharmacy.order;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotEmpty;

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
@@ -22,9 +24,11 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,12 +37,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pharmacy.catalog.Medicine;
+import pharmacy.user.Address;
+import pharmacy.user.Insurance;
+import pharmacy.user.UserManagement;
 
 @EnableScheduling
 @Controller
 @SessionAttributes("cart")
 public class OrderController {
 	//private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
+	@Autowired
+	private final UserManagement userManagement;
 	@Autowired
 	private final OrderManagement<Order> orderManagement;
 	@Autowired
@@ -48,7 +57,7 @@ public class OrderController {
 	private boolean completionsuccess;
 	private Order failedorder;
 	private Map<ProductIdentifier, Integer> quan;
-	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, Map<String, Integer> waitlist) {
+	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, Map<String, Integer> waitlist, UserManagement userManagement) {
 
 		Assert.notNull(orderManagement, "OrderManagement must not be null.");
 		this.orderManagement = orderManagement;
@@ -58,6 +67,7 @@ public class OrderController {
 		this.completionsuccess=true;
 		this.failedorder=null;
 		this.quan=new HashMap<ProductIdentifier, Integer>();
+		this.userManagement = userManagement;
 	}
 
 	@ModelAttribute("cart")
@@ -113,15 +123,69 @@ public class OrderController {
 		return "redirect:/cart";
 	}
 
+	@GetMapping("/checkout")
+	@PreAuthorize("isAuthenticated()")
+	String checkout(Model model, AddressForm addressForm, InsuranceForm insuranceForm, Cart cart) {
+
+		if (cart.isEmpty()) {
+			return "redirect:/cart";
+		}
+	
+		model.addAttribute("cart", cart);
+		model.addAttribute("insuranceForm", insuranceForm);
+		model.addAttribute("addressForm", addressForm);
+		model.addAttribute("user", userManagement.currentUser().get());
+		return "checkout";
+	}
+
+	@GetMapping("/checkout/address")
+	@PreAuthorize("isAuthenticated()")
+	String checkoutAddress(Model model, InsuranceForm insuranceForm, AddressForm addressForm, Cart cart) {
+
+		if (cart.isEmpty()) {
+			return "redirect:/cart";
+		}
+	
+		model.addAttribute("cart", cart);
+		model.addAttribute("insuranceForm", insuranceForm);
+		model.addAttribute("addressForm", addressForm);
+		model.addAttribute("user", userManagement.currentUser().get());
+		return "checkout";
+	}
+	
+	@PostMapping("/checkout/address")
+	@PreAuthorize("isAuthenticated()")
+	String addCheckoutAddress(Model model, Cart cart, @Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors result) {
+		
+		if (cart.isEmpty()) {
+			return "redirect:/cart";
+		}
+	
+		model.addAttribute("cart", cart);
+		model.addAttribute("user", userManagement.currentUser().get());
+		
+		if (result.hasErrors()) {
+			return "checkout";
+		}
+		
+		userManagement.currentUser().get().changeAddress(new Address(addressForm.getName(), addressForm.getStreet(), addressForm.getPostCode(), addressForm.getCity()));
+
+		return "redirect:/checkout";
+	}
+	
 	@PostMapping("/checkout")
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
+		var user = userManagement.currentUser().get();
+		if (user.getAddress().toString().isEmpty()) {
+			return "redirect:/checkout";
+		}
 		
 		return userAccount.map(account -> {
 
 			var order = new Order(account, Cash.CASH);
 
 			cart.addItemsTo(order);
-
+			
 			orderManagement.payOrder(order);
 
 			cart.clear();
