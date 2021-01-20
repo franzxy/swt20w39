@@ -27,34 +27,30 @@ __Schriftführer:__ Timon Trettin +
 * 10 Minuten Verteidigung
 
 == Aufgaben bis zum 31.01.2021
-* Falk Natkowski: Order
-* Lukas Luger: Finances, Order
-* Timon Trettin: User, Order
 
 === Anwendung Allgemein
 * .properties wieder nutzen?
 
 === Cross-Testing
-* Light mode
-* HTML und Bean Validation
-* Finanzen Endwert darf nicht kleiner als Anfangswert sein
-* /users, /account schauen ob bestellugen vor löschen
-* bei tags split(",").trim()
-* "Welches Produkt suchst du?"
-* /account Mitarbeiter und Admin Bereich
-- Technische Schulden jeder für sich
+* Technische Schulden: Jeder
+* HTML und Bean Validation: Jeder
+* Finanzen Endwert darf nicht kleiner als Anfangswert sein: Lukas
+* bei tags split(",").trim(): Falk
+* /users, /account schauen ob bestellugen vor löschen: Timon
+* /account Mitarbeiter und Admin Bereich: Timon
+* Light mode: Timon
 
 === Order
-* Abfertigen nur zwsichen 6:00-20:00 Mo-Sa.
+* Abfertigen nur zwsichen 6:00-20:00 Mo-Sa: Falk
 * Checkout "/checkout"
-** Zahlungsart wählen
-** wenn Med rez.pfl.: Vericherung
-* Warenkorb Item Anzahl in Navbar
+** Wenn Medikament im cart Rezept pflichtig ist, prescription Boolean auf true: Falk
+** Zahlungsart wählen: Timon
+* Warenkorb Item Anzahl in Navbar: Timon
 
-=== Finances
+=== Finances: Lukas
 * Einträge sollen korrektes Datum haben
 
-=== User
+=== User: Timon
 * Zahlungsmethoden
 ** PayDirekt
 ** Kreditkarte
