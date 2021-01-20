@@ -141,8 +141,8 @@ class InventoryController {
 	String addingMedicine(@Valid @ModelAttribute("formular")MedicineForm formular, Errors result, Model model) {
 		if(result.hasErrors()){
 			this.formular=formular;
-			model.addAttribute("formular", this.formular);
-			return "redirect:/meddetail";
+			//model.addAttribute("formular", this.formular);
+			return "meddetail";
 		}
 		int qan=0;
 		this.formular=formular;
