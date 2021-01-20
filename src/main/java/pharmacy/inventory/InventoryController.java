@@ -216,6 +216,7 @@ class InventoryController {
 		tmp.findAll().forEach(item-> {
 			if(item.getId().getIdentifier().equals(formular.getId())){
 				this.inventory.delete(item);
+				this.medicineCatalog.delete((Medicine)item.getProduct());
 			}
 		});
 		this.formular=new MedicineForm();

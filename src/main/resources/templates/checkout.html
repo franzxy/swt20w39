@@ -55,8 +55,8 @@
                 <span>Bezahlmethoden</span>
                 <h4 class="value" th:text="${'TBC'}">TBC</h4>
             </div>
-
-            <form th:if="${true}" method="post" role="form" class="ui form" id="form" th:action="@{/checkout/insurance}" th:object="${insuranceForm}">
+            
+            <form th:if="${haspresonly}" method="post" role="form" class="ui form" id="form" th:action="@{/checkout/insurance}" th:object="${insuranceForm}">
                 <div class="field">
                     <h2 class="ui dividing header">Versicherung</h2>
                 </div>  
