@@ -27,9 +27,9 @@ __Schriftführer:__ Timon Trettin +
 * 10 Minuten Verteidigung
 
 == Aufgaben bis zum 31.01.2021
-* Falk Natkowski: Catalog, Inventory, Order, UI
-* Lukas Luger: Finances, Inventory, Order, UI
-* Timon Trettin: User, Order, UI
+* Falk Natkowski: Order
+* Lukas Luger: Finances, Order
+* Timon Trettin: User, Order
 
 === Anwendung Allgemein
 * .properties wieder nutzen?
@@ -68,15 +68,15 @@ __Schriftführer:__ Timon Trettin +
 * Testplan überarbeiten
 
 === Pflichentheft
-* Zusammenfassung Timon
-* Aufgabenstellung und Zielsetung Timon
-* Produktnutzung Timon
-* Interessensgruppen Falk
-* Systemgrenze und Top-Level-Architektur Falk
-* Anwendungsfälle Lukas
-* Funktionale Anforderungen Lukas
-* Nicht-Funktionale Anforderungen Timon
-* Datenmodell Timon
+* Zusammenfassung: Timon
+* Aufgabenstellung und Zielsetung: Timon
+* Produktnutzung: Timon
+* Interessensgruppen: Falk
+* Systemgrenze und Top-Level-Architektur: Falk
+* Anwendungsfälle: Lukas
+* Funktionale Anforderungen: Lukas
+* Nicht-Funktionale Anforderungen: Timon
+* Datenmodell: Timon
 * Akzeptanztestfälle -> Testplan
 
 === Dev Doku
