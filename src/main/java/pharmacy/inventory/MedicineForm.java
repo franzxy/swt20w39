@@ -30,7 +30,7 @@ public class MedicineForm {
         this.presonly=false;
         this.price=0.0;
         this.purchasingprice=0.0;
-        this.quantity=0;
+        this.quantity=1;
         this.id="";
     }
 
