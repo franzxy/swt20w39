@@ -21,6 +21,9 @@
                 <div class="field">
                     <a class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
                     <a class="button" sec:authorize="isAuthenticated()" th:href="@{/checkout}">Zum Checkout</a>
+                    <form class="field" sec:authorize="isAuthenticated()" method="post" th:action="@{/checkout}">
+                        <button type="submit" class="ui button">Jetzt Bezahlen</button>
+                    </form>
                 </div>
                 <thead>
                 <tr>

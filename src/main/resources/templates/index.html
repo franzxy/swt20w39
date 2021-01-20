@@ -23,8 +23,8 @@
 				<input class="input" type="hidden" th:value="${oldTerm}" name="searchbar"/>
 	
 					<div class="option">
-						<p for="nopres">Rezeptfrei</p>
-						<input class="checkbox" type="checkbox" id="nopres" name="nopres" th:checked="${nopres}" />
+						<p for="noPres">Rezeptfrei</p>
+						<input class="checkbox" type="checkbox" id="noPres" name="noPres" th:checked="${noPres}" />
 					</div>
 	
 					<div class="option">
@@ -40,15 +40,21 @@
 				</div>
 			</form>
 
-			<div class="field">
-				<h3 th:text="${header}"></h3>
+			<div th:if="${header}" class="field">
+				<div class="row header">
+					<p th:text="${header}"></p>
+					<p>&nbsp;</p>
+					<b th:text="${'„'+oldTerm+'“'}"></b>
+					<p th:unless="${oldTag}" th:text="${', in der Kategorie '+oldTag}"></p>
+					<p th:if="${noPres}" th:text="${', Rezeptfrei'}"></p>
+				</div>
 			</div>
 
 			<div class="meds" th:remove="all-but-first">
 
 				<a class="med" th:each="medicine : ${catalog}" th:href="@{/medicine/{id}(id=${medicine.id})}">
 
-					<i class="medimg" th:style="'background-image: url('+@{/img/med/{image}.png(image=${medicine.image})}+');'" ></i>
+					<div class="medimgwrapper"><i class="medimg" th:style="'background-image: url('+@{/img/med/{image}.png(image=${medicine.image})}+');'" ></i></div>
 
 					<div class="meddetails">
 
