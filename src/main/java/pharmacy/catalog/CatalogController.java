@@ -40,7 +40,7 @@ class CatalogController {
 	@GetMapping("/")
 	public String catalog(@RequestParam(name="s", required=true, defaultValue = "") String searchTerm,
 	                      @RequestParam(name="t", required=true, defaultValue = "") String tag,
-	                      @RequestParam(name="p", defaultValue = "false") Boolean noPres,
+	                      @RequestParam(name="p", defaultValue = "false") boolean noPres,
 	                      Model model) {
 
 		model.addAttribute("searchform", new SearchForm());

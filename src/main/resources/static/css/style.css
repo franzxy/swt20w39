@@ -135,7 +135,6 @@ nav a {
 select {
 	margin-left: 10px;
 	border: none;
-	color: white;
 	background-color: lightgray;
 	height: 40px;
 	padding: 0 10px;
@@ -211,7 +210,6 @@ input {
 	height: 40px;
 	padding: 0 20px;
 	border: none;
-	color: black;
 	background-color: lightgray;
 }
 

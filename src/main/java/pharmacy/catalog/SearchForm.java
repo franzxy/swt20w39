@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 public class SearchForm {
 	private String searchTerm;
 	private String tag;
-	private boolean nopres;
+	private boolean noPres;
 
 	private static final Logger LOG = LoggerFactory.getLogger(SearchForm.class);
 
@@ -19,7 +19,7 @@ public class SearchForm {
 	}
 
 	public boolean getNoPres() {
-		return this.nopres;
+		return this.noPres;
 	}
 
 	public void setSearchTerm(String s) {
@@ -30,16 +30,13 @@ public class SearchForm {
 		this.tag = tag;
 	}
 
-	public void setNopres(boolean b) {
-		this.nopres = b;
+	public void setNoPres(boolean b) {
+		this.noPres = b;
 	}
 
 	public boolean isSelected(String t) {
-
-
 		LOG.info(t);
 		LOG.info(tag);
 		return t.equals(tag);
-
 	}
 }
