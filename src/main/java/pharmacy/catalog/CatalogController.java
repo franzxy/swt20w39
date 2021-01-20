@@ -40,7 +40,7 @@ class CatalogController {
 	@GetMapping("/")
 	public String catalog(@RequestParam(name="s", required=true, defaultValue = "") String searchTerm,
 	                      @RequestParam(name="t", required=true, defaultValue = "") String tag,
-	                      @RequestParam(name="p", defaultValue = "false") boolean noPres,
+	                      @RequestParam(name="p", defaultValue = "false") Boolean noPres,
 	                      Model model) {
 
 		model.addAttribute("searchform", new SearchForm());
@@ -56,7 +56,6 @@ class CatalogController {
 		else i = catalog.findAll().iterator();
 
 		if(searchTerm.equals("")) {
-
 			while(i.hasNext()) {
 				Medicine m = i.next();
 				Set<String> tags = m.getCategories().toSet();
@@ -65,9 +64,7 @@ class CatalogController {
 				if(tag.equals("") || tags.contains(tag)) result.add(m);
 
 			}
-		}
-
-		else {
+		} else {
 			String[] search = searchTerm.toLowerCase().split(" ");
 
 			while(i.hasNext()) {
@@ -85,13 +82,12 @@ class CatalogController {
 			}
 		}
 
-		String header = "";
+		String header;
 
-		if(result.size() == 0) header = "Keine Ergebnisse";
-
-		else {
-			header = "Ergebnisse für \"" +  searchTerm + "\":";
-			if(!tag.equals("")) header = "Ergebnisse für \"" +  searchTerm + "\" in Kategorie \"" + tag +"\":";
+		if(result.size() == 0) {
+			header = "Keine Ergebnisse für";
+		} else {
+			header = "Ergebnisse für";
 		}
 
 		if(!searchTerm.equals("")) model.addAttribute("header", header);
@@ -99,7 +95,7 @@ class CatalogController {
 		model.addAttribute("tags", newTags);
 		model.addAttribute("oldTerm", searchTerm);
 		model.addAttribute("oldTag", tag);
-		model.addAttribute("nopres", noPres);
+		model.addAttribute("noPres", noPres);
 		//model.addAttribute("catalog", result);
 		model.addAttribute("title", "Apotheke");
 
