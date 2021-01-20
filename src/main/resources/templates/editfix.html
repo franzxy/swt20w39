@@ -23,28 +23,28 @@
                       <div class="field">
                         <label>Miete: </label>
                         <div class="row">
-                          <input class="numberinput"type="number"th:field="*{Miete}" />
+                          <input max="1000000000"min="0" required="required"class="numberinput"type="number"th:field="*{Miete}" />
                           <a class="currency">€</a>
                         </div>
                       </div>
                       <div class="field">
                         <label>Strom:</label>
                         <div class="row">
-                          <input class="numberinput"type="number"th:field="*{Strom}" />
+                          <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Strom}" />
                           <a class="currency">€</a>
                         </div>
                       </div>
                       <div class="field">
                         <label>Wasser:</label>
                         <div class="row">
-                          <input class="numberinput"type="number"th:field="*{Wasser}" />
+                          <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Wasser}" />
                           <a class="currency">€</a>
                         </div>
                       </div>
                       <div class="field">
                         <label>Heizkosten:</label>
                         <div class="row">
-                          <input class="numberinput"type="number"th:field="*{Heizkosten}" />
+                          <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Heizkosten}" />
                           <a class="currency">€</a>
                         </div>
                       </div>
