@@ -100,7 +100,7 @@ public class FinanceController {
 		return ret;
 	}
 	//Main Filter Thing
-	private List<AccountancyEntry> filter(FilterForm filterB){
+	private void filter(Model model,FilterForm filterB){
 		FilterForm.Filter filter1=filterB.getFilter();
 		DateTimeFormatter format=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		List<AccountancyEntry> tmp=new ArrayList<AccountancyEntry>();
@@ -118,20 +118,24 @@ public class FinanceController {
 			try{
 				LocalDate begin=LocalDate.parse(filterB.getBegin(), format);
 				LocalDate end=LocalDate.parse(filterB.getEnd(), format);
-				tmp.forEach(acc->{
+				tmp.forEach(acc -> {
 					LocalDate l=acc.getDate().get().toLocalDate();
 					if(l.isAfter(begin) && l.isBefore(end)){
 						ret.add(acc);
 					}
 				});
+				model.addAttribute("fail", !end.isAfter(begin));
 			}catch(DateTimeParseException e){
 				System.out.println("Failed to parse Time");
-				return tmp;
+				model.addAttribute("tab", tmp);
+				model.addAttribute("fail", true);
 			}
-			return ret;
+			model.addAttribute("tab", ret);
 		}else{
-			return tmp;
+			model.addAttribute("tab", tmp);
+			model.addAttribute("fail", false);
 		}
+		
 		
 	}
 	private void updateMoney(){
@@ -213,7 +217,7 @@ public class FinanceController {
 		model.addAttribute("minus",this.minus.getNumber().doubleValue());
 		model.addAttribute("fixk",this.fixk);
 		model.addAttribute("total", this.ist.getNumber().doubleValue());
-		model.addAttribute("tab", this.filter(filterB));
+		this.filter(model,filterB);
 		
 		return "finances";
 	}
