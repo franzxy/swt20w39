@@ -81,12 +81,12 @@ Dies ist eine Tabelle aller Personen oder Personengruppen (natürlich oder juris
 
 [options="header"]
 |===
-| Name | Priorität (1..5) | Beschreibung | Ziele
-| Ärztehaus | 5 | Auftraggeber | Automatisierter Verkauf von Medikamenten, Gemeinsames Lager von Apotheke und Praxen, Mehr Geld verdienen
-| Kunden | 4 | Primärer Nutzer | Medikamente kaufen / geliefert bekommen, Gutes User Experience
+| Name            | Priorität (1..5) | Beschreibung | Ziele
+| Kunden          | 5 | Primärer Nutzer | Medikamente kaufen / geliefert bekommen, Gutes User Experience
 | Administratoren | 2 | Verwaltung des Computersystems | Möglichkeit, sämtliche Daten im System zu Überprüfen, Prozesse Überwachen und evtl. verändern
-| Programmierer | 3 | Wir |Entwicklung und Instandhaltung der Software, Gut erweiterbare Software, Geringer Instandhaltungsaufwand, Gute Debugging-Möglichkeiten
-| Ärzte / Praxen | 3 | An das Ärztehaus angrenzende Praxen | Zugriff auf Lager
+| Programmierer   | 2 | Ersteller der Anwendung |Entwicklung und Instandhaltung der Software, Gut erweiterbare Software, Geringer Instandhaltungsaufwand, Gute Debugging-Möglichkeiten
+| Mitarbeiter     | 3 | Angestellte der Apotheke | Nutzerinteraktionen BEarbeiten und VErwalten, Bestellungen ausführen
+| Boss            | 4 | Leiter der Apotheke | Management des Unternehmens
 |===
 
 == Systemgrenze und Top-Level-Architektur
