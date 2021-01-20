@@ -4,7 +4,7 @@
         <a class="logo" th:href="@{/}">ApoTheke</a>
     </div>
     <form class="search" action="#"  th:action="@{/}" th:object=${searchform} method="post">
-        <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Was suchst du?" />
+        <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Welches Produkt suchst du?" />
         <button class="iconbutton" type="submit"><img class="icon" th:src="@{/img/search.png}"></button>
     </form>
     <div class="personal">

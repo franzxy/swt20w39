@@ -29,10 +29,7 @@ public class User {
 	private String picture;
 
 	private Insurance insurance;
-/*
-	@OneToMany()
-	private List<PaymentMethod> payments = new ArrayList<>();
-*/
+
 	private String iban;
 	private Money salary;
 
@@ -117,19 +114,7 @@ public class User {
 	public void setVacationRemaining(Integer newVacationRemaining) {
 		vacationRemaining = newVacationRemaining;
 	}
-/*
-	public List<PaymentMethod> getPayments() {
-		return payments;
-	}
 
-	public void addPayment(PaymentMethod newPayment) {
-		payments.add(newPayment);
-	}
-
-	public void removePayment(Integer payment) {
-		payments.remove(payments.get(payment));
-	}
-*/
 	public List<Vacation> getVacations() {
 		return vacations;
 	}

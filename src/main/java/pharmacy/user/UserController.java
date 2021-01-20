@@ -28,19 +28,7 @@ class UserController {
 	UserController(UserManagement userManagement) {
 		this.userManagement = userManagement;
 	}
-/*
-	@ControllerAdvice
-	public class GlobalControllerAdvice {
-		
-		@ModelAttribute
-		public void globalAttributes(Model model) {
-			if(userManagement.currentUser().isPresent()) {
-				model.addAttribute("picture", userManagement.currentUser().get().getPicture());
-			}
-		}
-	} 
-*/
-
+	
 	@GetMapping("/menu")
 	String menu() {
 

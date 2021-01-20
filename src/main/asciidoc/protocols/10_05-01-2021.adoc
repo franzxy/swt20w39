@@ -9,7 +9,7 @@ Ende:     16:00 +
 __Schriftführer:__ Timon Trettin +
 
 == Nächstes Treffen
-12.01.2021, 16:40 Uhr, BBB
+12.01.2021, 15:00 Uhr, BBB
 
 == Teilnehmer
 * Lennart Wittkowski: Tutor
@@ -22,7 +22,7 @@ __Schriftführer:__ Timon Trettin +
 * Lukas Luger: Finances, Inventory, Order, UI
 * Timon Trettin: User, Order, Time, UI
 
-=== Pflichtenheft, Dev Docu
+=== Pflichtenheft, Dev Doku
 * Auf aktuellen Stand bringen
 
 === Anwendung Allgemein

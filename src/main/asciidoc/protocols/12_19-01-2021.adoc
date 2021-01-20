@@ -1,0 +1,104 @@
+= Protokoll Gruppe 39
+
+Treffen am 19.01.2021
+
+Ort:      BBB +
+Beginn:   15:00 +
+Ende:     16:30 +
+
+__Schriftführer:__ Timon Trettin +
+
+== Nächstes Treffen
+26.01.2021, 15:00 Uhr, BBB
+
+== Teilnehmer
+* Emelie Radziwill: Tutor
+* Falk Natkowski
+* Lukas Luger
+* Timon Trettin
+
+== Abschlusspräsentation
+* voraussichtlich am 03.02.2021 in der 3. Doppelstunde
+* 10 Minuten PowerPoint
+** Was haben wir gemacht?
+** Designentscheidungen
+** Wie wurden Probleme gelöst?
+* 10 Minuten Vorstellung User Story
+* 10 Minuten Verteidigung
+
+== Aufgaben bis zum 31.01.2021
+* Falk Natkowski: Catalog, Inventory, Order, UI
+* Lukas Luger: Finances, Inventory, Order, UI
+* Timon Trettin: User, Order, UI
+
+=== Anwendung Allgemein
+* .properties wieder nutzen?
+
+=== Cross-Testing
+* Light mode
+* HTML und Bean Validation
+* Finanzen Endwert darf nicht kleiner als Anfangswert sein
+* /users, /account schauen ob bestellugen vor löschen
+* bei tags split(",").trim()
+* "Welches Produkt suchst du?"
+* /account Mitarbeiter und Admin Bereich
+- Technische Schulden jeder für sich
+
+=== Cross-Testing
+* Falk: User, Features, Verbesserungsvorschläge
+* Lukas: Mitabreiter, UI, Verbesserungsvorschläge
+* Timon: Admin, UX, Einleitung, Verbesserungsvorschläge
+
+=== Order
+* Abfertigen nur zwsichen 6:00-20:00 Mo-Sa.
+* Checkout "/checkout"
+** Zahlungsart wählen
+** wenn Med rez.pfl.: Vericherung
+* Warenkorb Item Anzahl in Navbar
+
+=== Finances
+* Einträge sollen korrektes Datum haben
+
+=== User
+* Zahlungsmethoden
+** PayDirekt
+** Kreditkarte
+** Bankeinzug** 
+* Urlaub "/vacation"
+** "BOSS" Anträge zustimmen und ablehnen
+** "EMPLYOEE" Urlaubsantrag stellen
+
+=== Tests
+* Testabdeckung 80%
+* Testplan überarbeiten
+
+=== Pflichentheft
+* Zusammenfassung Timon
+* Aufgabenstellung und Zielsetung Timon
+* Produktnutzung Timon
+* Interessensgruppen Falk
+* Systemgrenze und Top-Level-Architektur Falk
+* Anwendungsfälle Lukas
+* Funktionale Anforderungen Lukas
+* Nicht-Funktionale Anforderungen Timon
+* Datenmodell Timon
+* Akzeptanztestfälle -> Testplan
+
+=== Dev Doku
+* Einführung und Ziele: Timon
+* Randbedingungen: Timon
+* Kontextabgrenzung -> Pflichtenheft
+* Lösungsstrategie: Timon
+* Bausteinsich
+** Inventory: UML Falk
+** Catalog: UML Falk
+** User: Timon
+** Order: UML Falk
+** Finances: UML Falk
+** Rückverfolgbarkeit zwischen Analyse und Entwurfsmodell: Jeder
+* Laufzeitsicht
+** Inventory: Lukas
+** Catalog: Falk
+** User: Timon
+** Order: Timon
+** Finances: Lukas
