@@ -10,6 +10,20 @@
         <nav th:include="navigation :: navigation"></nav>
 
         <div class="center">
+            <!-- Lets play a game: guess the object name ^^
+            <form class="form" role="form" th:action="@{/login}" method="post" th:object="${login}"> 
+                <div class="field">
+                    <label class="label" for="username">Benutzername</label>
+                    <input class="textinput" type="text" id="username" name="username" th:errorclass="fieldError" autofocus="autofocus"/>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="password">Passwort</label>
+                    <input class="textinput" type="password" id="password" th:errorclass="fieldError" name="password"/>
+                    <p class="ui negative message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                </div>
+            -->
             <form class="form" role="form" th:action="@{/login}" method="post"> 
                 <div class="field">
                     <label class="label" for="username">Benutzername</label>

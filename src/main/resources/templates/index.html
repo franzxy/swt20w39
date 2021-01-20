@@ -17,6 +17,7 @@
 
 		<nav th:include="navigation :: navigation"></nav>
 
+		<div class="center">
 			<form class="filters" action="#"  th:action="@{/}" th:object=${searchform} method="post">
 	
 				<input class="input" type="hidden" th:value="${oldTerm}" name="searchbar"/>
@@ -39,25 +40,26 @@
 				</div>
 			</form>
 
-		<div class="field">
-			<h3 th:text="${header}"></h3>
-		</div>
+			<div class="field">
+				<h3 th:text="${header}"></h3>
+			</div>
 
-		<div class="meds" th:remove="all-but-first">
+			<div class="meds" th:remove="all-but-first">
 
-			<a class="med" th:each="medicine : ${catalog}" th:href="@{/medicine/{id}(id=${medicine.id})}">
+				<a class="med" th:each="medicine : ${catalog}" th:href="@{/medicine/{id}(id=${medicine.id})}">
 
-				<img class="medimg" th:src="${medicine.hasImage(medicine.name)} ? @{/img/med/{image}.png(image=${medicine.image})} : '/img/med/default.png'" src="../static/img/med/default.png"/>
+					<i class="medimg" th:style="'background-image: url('+@{/img/med/{image}.png(image=${medicine.image})}+');'" ></i>
 
-				<div class="meddetails">
+					<div class="meddetails">
 
-					<h5 th:text="${medicine.name}"></h5>
-					<div class="content" th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Typ</div>
-					<div class="content" th:text="${'Verfügbar: ' + availability.get(medicine.getId().getIdentifier())}">Verfügbarkeit</div>
-					<div class="extra content" th:text="${{medicine.price}}">Preis</div>
+						<h5 th:text="${medicine.name}"></h5>
+						<div class="content" th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Typ</div>
+						<div class="content" th:text="${'Verfügbar: ' + availability.get(medicine.getId().getIdentifier())}">Verfügbarkeit</div>
+						<div class="extra content" th:text="${{medicine.price}}">Preis</div>
 
-				</div>
-			</a>
+					</div>
+				</a>
+			</div>
 		</div>
 	</body>
 </html>

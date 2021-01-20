@@ -34,6 +34,24 @@
             <div class="field">
                 <a class="button" th:text="${'Meine Finanzen'}" th:href="@{/myfinances}"></a>
             </div>
-        </div>            
+        </div>      
+
+        <div class="center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
+            <div class="field">
+                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
+            </div>
+            <div class="field">
+                <a class="button" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
+            </div>
+            <div class="field">
+                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
+            </div>
+            <div class="field">
+                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
+            </div>
+            <div class="field">
+                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
+            </div>
+        </div>      
     </body>
 </html>

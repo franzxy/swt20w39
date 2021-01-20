@@ -8,8 +8,8 @@ html {
 	height: 100%;
 	width: 100%;
 	font: 13px/22px Roboto, sans-serif;
-	background: black;
-	color: white;
+	background-color: white;
+	color: black;
 }
 
 body {
@@ -18,12 +18,13 @@ body {
 }
 
 nav {
-	background-color: #df091d;
+	background-color: white;
 	display: grid;
 	grid-template-columns: 1fr 2fr 1fr;
-	grid-template-rows: 40px;
+	grid-template-rows: 60px;
 	grid-template-areas: 
-    "menu search personal";
+	"menu search personal";
+	align-items: center;
 }
 
 nav a {
@@ -51,22 +52,26 @@ nav a {
 }
 
 .logo {
+	margin-left: 20px;
 	font-size: large;
 	font-weight: bold;
-	color: white;
+	color: #df091d;
 	text-decoration: none;
 }
 
+.picture {
+	background-size: cover !important;
+}
+
 .search {
+	padding-right: 5px;
+	border-radius: 20px;
 	grid-area: search;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 40px;
-}
-
-.search .iconbutton{
-	background: #202020;
+	background-color: #df091d;
 }
 
 .personal {
@@ -120,10 +125,11 @@ nav a {
 }
 
 select {
+	border-radius: 20px;
 	margin-left: 10px;
 	border: none;
 	color: white;
-	background: #df091d;
+	background-color: #df091d;
 	height: 40px;
 	padding: 0 10px;
 }
@@ -133,7 +139,7 @@ select {
 }
 
 .filters {
-	background: #404040;
+	border-radius: 20px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -176,6 +182,7 @@ select {
 }
 
 input {
+	border-radius: 20px;
 	align-self: flex-start;
 	display: flex;
 	justify-content: center;
@@ -184,10 +191,22 @@ input {
 	width: calc(100% - 20px);
 	flex-grow: 1;
 	height: 40px;
-	padding: 0 10px;
+	padding: 0 20px;
 	border: none;
 	color: white;
-	background: #202020;
+	background-color: #df091d;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #fff;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: #fff;
+}	
+
+::-ms-input-placeholder { /* Microsoft Edge */
+	color: #fff;
 }
 
 .numberinput {
@@ -195,20 +214,16 @@ input {
 }
 
 .iconbutton {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	border-radius: 20px;
+	text-decoration: none;
+	background-color: #df091d;
 	border: none;
-	background: none;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 50%;
 	height: 40px;
 	width: 40px;
 	cursor: pointer;
-}
-
-.icon {
-	background: none;
-	height: 20px;
-	width: 20px;
 }
 
 .span {
@@ -232,10 +247,11 @@ label {
 	align-items: center;
 	text-align: center;
 	border: none;
-	background: #df091d;
+	background-color: #df091d;
 	width: 100px;
 	padding: 0 10px;
 	height: 40px;
+	border-radius: 20px;
 	cursor: pointer;
 	color: white;
 	text-decoration: none;
@@ -270,6 +286,10 @@ label {
 	padding: 10px 0;
 }
 
+.space {
+	margin-right: 20px;
+}
+
 .catalog {
 	display: flex;
 	align-items: center;
@@ -278,43 +298,38 @@ label {
 
 .meds {
 	width: 100%;
-	justify-content: space-evenly;
+	gap: 20px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-}
-
-.space {
-	margin-right: 20px;
 }
 
 .med {
-	overflow: hidden;
-	color: white;
+	flex-grow: 1;
+	flex-basis: 200px;
+	border-radius: 20px;
+	color: black;
 	text-decoration: none;
-	width: 200px;
-	background: #404040;
+	max-width: 400px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin-bottom: 20px;
 }
 
 .med:hover .medimg {
-	background: white;
-	transform: scale(1.1);
+	background-color: lightgray;
 }
 
 .medimg {
-	background: #404040;
-	width: 200px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 100%;
 	height: 200px;
-	transition: all 0.3s;
+	transition: background-color 0.3s;
 }
 
 .meddetails {
-	z-index: 2;
-	background: #404040;
 	padding: 10px;
 	flex-grow: 1;
 	display: flex;

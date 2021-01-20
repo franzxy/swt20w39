@@ -64,7 +64,7 @@
 					<td>
 						<a th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer kann nicht gelöscht werden.</a>
 						<a th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter können nicht gelöscht werden.</a>
-						<a th:if="${user.userAccount.hasRole(customer)}" class="button" th:href="@{/user/{id}/remove(id=${user.getId()})}">Löschen</a>
+						<a th:if="${user.userAccount.hasRole(customer)}" class="iconbutton" th:href="@{/user/{id}/remove(id=${user.getId()})}"><img class="icon" th:src="@{/img/trash.png}"></a>
 					</td>
 				</tr>
 			</table>

@@ -1,17 +1,12 @@
 <nav th:fragment="navigation">
-    <div class="menu">
-        <a class="iconbutton" th:href="@{/menu}" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')"><img class="icon" th:src="@{/img/menu.png}" /></a>
-        <a class="logo" th:href="@{/}">ApoTheke</a>
-    </div>
+    <a class="menu logo" th:href="@{/}">ApoTheke</a>
     <form class="search" action="#"  th:action="@{/}" th:object=${searchform} method="post">
         <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Welches Produkt suchst du?" />
-        <button class="iconbutton" type="submit"><img class="icon" th:src="@{/img/search.png}"></button>
+        <button class="iconbutton" th:style="'background-image: url('+@{/img/search.png}+');'" type="submit"></button>
     </form>
     <div class="personal">
-        <a class="iconbutton" th:href="@{/cart}"><img class="icon" th:src="@{/img/cart.png}"></a>
-        <a class="iconbutton" th:href="@{/account}">
-            <img th:if="${picture}" class="icon" th:src="${picture}">
-            <img th:unless="${picture}" class="icon" th:src="@{/img/account.png}">
-        </a>
+        <a class="iconbutton" th:style="'background-image: url('+@{/img/cart.png}+');'" th:href="@{/cart}"></a>
+        <a th:if="${picture}" th:style="'background-image: url('+${picture}+');'" class="iconbutton picture" th:href="@{/account}"></a>
+        <a th:unless="${picture}" th:style="'background-image: url('+@{/img/account.png}+');'" class="iconbutton" th:href="@{/account}"></a>
     </div>
 </nav>
