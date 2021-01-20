@@ -15,21 +15,21 @@
               <div class="information">
                 <label>Kontostand</label>
                 <div class="row">
-                  <p th:text="${total}"/></p>
+                  <p th:text="${#numbers.formatDecimal(total,2,3)}"/></p>
                   <p>€</p>
                 </div>
               </div>
               <div class="information">
                 <label>Einnahmen</label>
                 <div class="row">
-                  <p th:text="${plus}"/></p>
+                  <p th:text="${#numbers.formatDecimal(plus,2,3)}"/></p>
                   <p>€</p>
                 </div>
               </div>
               <div class="information">
                 <label>Ausgaben</label>
                 <div class="row">
-                  <p th:text="${minus}"/></p>
+                  <p th:text="${#numbers.formatDecimal(minus,2,3)}"/></p>
                   <p>€</p>
                 </div>
               </div>
