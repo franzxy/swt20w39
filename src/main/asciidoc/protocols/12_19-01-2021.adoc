@@ -44,11 +44,6 @@ __Schriftführer:__ Timon Trettin +
 * /account Mitarbeiter und Admin Bereich
 - Technische Schulden jeder für sich
 
-=== Cross-Testing
-* Falk: User, Features, Verbesserungsvorschläge
-* Lukas: Mitabreiter, UI, Verbesserungsvorschläge
-* Timon: Admin, UX, Einleitung, Verbesserungsvorschläge
-
 === Order
 * Abfertigen nur zwsichen 6:00-20:00 Mo-Sa.
 * Checkout "/checkout"
