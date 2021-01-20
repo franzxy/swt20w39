@@ -55,6 +55,7 @@ public class OrderController {
 	//private final Map<String, Integer> waitlist;
 	private boolean completionsuccess;
 	private Order failedorder;
+	public Cart cart;
 	private Map<ProductIdentifier, Integer> quan;
 	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, UserManagement userManagement) {
 
@@ -67,12 +68,18 @@ public class OrderController {
 		this.failedorder=null;
 		this.quan=new HashMap<ProductIdentifier, Integer>();
 		this.userManagement = userManagement;
+		this.cart = new Cart();
 	}
 
 	@ModelAttribute("cart")
 	Cart initializeCart() {
-		return new Cart();
+		return cart;
 	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
 	private boolean haspresonly(Cart c){
 		if(c.isEmpty()) return false;
 		ArrayList<Boolean> ispresonly=new ArrayList<Boolean>();

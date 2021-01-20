@@ -18,27 +18,6 @@
 		<nav th:include="navigation :: navigation"></nav>
 
 		<div class="center">
-			<form class="filters" action="#"  th:action="@{/}" th:object=${searchform} method="post">
-	
-				<input class="input" type="hidden" th:value="${oldTerm}" name="searchbar"/>
-	
-					<div class="option">
-						<p for="noPres">Rezeptfrei</p>
-						<input class="checkbox" type="checkbox" id="noPres" name="noPres" th:checked="${noPres}" />
-					</div>
-	
-					<div class="option">
-						<p for="selector">Kategorie</p>
-						<select class="selector" th:field="*{tag}">
-							<option value="">Keine</option>
-							<option th:each="tag : ${tags}" th:text="${tag}" th:value="${tag}"></option>
-						</select>
-					</div>
-	
-				<div class="field">
-					<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
-				</div>
-			</form>
 
 			<div th:if="${header}" class="field">
 				<div class="row header">
@@ -49,6 +28,27 @@
 					<p th:if="${noPres}" th:text="${', Rezeptfrei'}"></p>
 				</div>
 			</div>
+			<form class="filters" action="#"  th:action="@{/}" th:object=${searchform} method="post">
+	
+				<input class="input" type="hidden" th:value="${oldTerm}" name="searchbar"/>
+	
+				<div class="option">
+					<p for="noPres">Rezeptfrei</p>
+					<input class="checkbox" type="checkbox" id="noPres" name="noPres" th:checked="${noPres}" />
+				</div>
+
+				<div class="option">
+					<p for="selector">Kategorie</p>
+					<select class="selector" th:field="*{tag}">
+						<option value="">Keine</option>
+						<option th:each="tag : ${tags}" th:text="${tag}" th:value="${tag}"></option>
+					</select>
+				</div>
+	
+				<div class="option">
+					<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
+				</div>
+			</form>
 
 			<div class="meds" th:remove="all-but-first">
 
