@@ -58,7 +58,7 @@ __Schriftführer:__ Timon Trettin +
 * Zahlungsmethoden
 ** PayDirekt
 ** Kreditkarte
-** Bankeinzug** 
+** Bankeinzug
 * Urlaub "/vacation"
 ** "BOSS" Anträge zustimmen und ablehnen
 ** "EMPLYOEE" Urlaubsantrag stellen
