@@ -253,7 +253,7 @@ class InventoryController {
 				med.setPresonly(m.isPresonly());
 				med.setPrice(m.getPrice().getNumber().doubleValue());
 				med.setPurchasingprice(m.getPurchaseprice().getNumber().doubleValue());
-				med.setQuantity(item.getQuantity().getAmount().intValue());
+				med.setQuantity(m.getQuantity());
 				med.setTags(String.join(",", m.getCategories().toList()));
 			}
 		});
