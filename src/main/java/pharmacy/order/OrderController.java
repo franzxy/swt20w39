@@ -38,7 +38,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pharmacy.catalog.Medicine;
 import pharmacy.user.Address;
-import pharmacy.user.Insurance;
 import pharmacy.user.UserManagement;
 
 @EnableScheduling
@@ -52,18 +51,18 @@ public class OrderController {
 	private final OrderManagement<Order> orderManagement;
 	@Autowired
 	private final UniqueInventory<UniqueInventoryItem> inventory;
-	@Autowired
-	private final Map<String, Integer> waitlist;
+	//@Autowired
+	//private final Map<String, Integer> waitlist;
 	private boolean completionsuccess;
 	private Order failedorder;
 	private Map<ProductIdentifier, Integer> quan;
-	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, Map<String, Integer> waitlist, UserManagement userManagement) {
+	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, UserManagement userManagement) {
 
 		Assert.notNull(orderManagement, "OrderManagement must not be null.");
 		this.orderManagement = orderManagement;
 		Assert.notNull(inventory, "Inventory must not be null.");
 		this.inventory = inventory;
-		this.waitlist=waitlist;
+		//this.waitlist=waitlist;
 		this.completionsuccess=true;
 		this.failedorder=null;
 		this.quan=new HashMap<ProductIdentifier, Integer>();
@@ -77,9 +76,7 @@ public class OrderController {
 	private boolean haspresonly(Cart c){
 		if(c.isEmpty()) return false;
 		ArrayList<Boolean> ispresonly=new ArrayList<Boolean>();
-		c.get().forEach(item ->{
-			ispresonly.add(((Medicine)item.getProduct()).isPresonly());
-		});
+		c.get().forEach(item -> ispresonly.add(((Medicine)item.getProduct()).isPresonly()));
 		for(boolean b:ispresonly) if(b) return true;
 		return false;
 	}
