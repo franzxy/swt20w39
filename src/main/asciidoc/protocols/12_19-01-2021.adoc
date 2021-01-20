@@ -18,7 +18,7 @@ __Schriftführer:__ Timon Trettin +
 * Timon Trettin
 
 == Abschlusspräsentation
-* voraussichtlich am 03.02.2021 in der 3. Doppelstunde
+* Voraussichtlich am 03.02.2021 in der 3. Doppelstunde
 * 10 Minuten PowerPoint
 ** Was haben wir gemacht?
 ** Designentscheidungen
