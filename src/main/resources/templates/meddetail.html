@@ -21,47 +21,54 @@
                     <input type="hidden"th:field="*{id}" />
                     <div class="field">
                         <label>Name:</label>
-                        <input class="textinput" type="text"th:field="*{name}" th:errorclass="fieldError"  required="required" />
-                        <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                        <input class="textinput" type="text"th:field="*{name}" th:errorclass="fieldError" name="name"  required="required"/>
+                         <p class="ui negative message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
                     </div>
                     <div class="field">
                         <label>Beschreibung:</label>
-                        <input class="textinput"type="text"th:field="*{description}" th:errorclass="fieldError"  required="required" />
+                        <input class="textinput"type="text"th:field="*{description}" th:errorclass="fieldError" name="description" required="required" />
+                        <p class="ui negative message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
                     </div>
                     <div class="field">
                         <label>Tags (mit Komma trennen):</label>
-                        <input class="textinput"type="text"th:field="*{tags}" th:errorclass="fieldError"  required="required" />
+                        <input class="textinput"type="text"th:field="*{tags}" th:errorclass="fieldError" name="tags" required="required" />
+                        <p class="ui negative message" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}"></p>
                     </div>
                     <div class="field">
                         <label>Pfad zum Bild:</label>
-                        <input class="textinput"type="text"th:field="*{image}" th:errorclass="fieldError"  required="required" />
+                        <input class="textinput"type="text"th:field="*{image}" th:errorclass="fieldError" name="image" required="required" />
+                        <p class="ui negative message" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></p>
                     </div>
                     <div class="field">
                         <label>Gewicht:</label>
                         <div class="row">
-                            <input class="numberinput"type="number"th:field="*{amount}" />
+                            <input class="numberinput"type="number"th:field="*{amount}" th:errorclass="fieldError" name="amount" required="required" />
                             <a class="currency">g</a>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></p>
                         </div>
                     </div>
                     <div class="field">
                         <label>Menge:</label>
                         <div class="row">
-                            <input class="numberinput"type="number"th:field="*{quantity}" />
+                            <input class="numberinput"type="number"th:field="*{quantity}" th:errorclass="fieldError" name="quantity" required="required"/>
                             <a class="currency">Stück</a>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
                         </div>
                     </div>
                     <div class="field">
                         <label >Verkaufspreis:</label>
                         <div class="row">
-                            <input class="numberinput"type="number"th:field="*{price}" />
+                            <input class="numberinput"type="number"th:field="*{price}" th:errorclass="fieldError" name="price" required="required" />
                             <a class="currency">€</a>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
                         </div>
                     </div>
                     <div class="field">
                         <label>Einkaufspreis:</label>
                         <div class="row">
-                            <input class="numberinput"type="number"th:field="*{purchasingprice}" />
+                            <input class="numberinput"type="number"th:field="*{purchasingprice}" th:errorclass="fieldError" name="purchasingprice" required="required"/>
                             <a class="currency">€</a>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('purchasingprice')}" th:errors="*{purchasingprice}"></p>
                         </div>
                     </div>
                     <div class="field">
