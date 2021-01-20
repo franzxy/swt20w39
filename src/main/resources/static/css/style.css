@@ -18,6 +18,7 @@ body {
 }
 
 nav {
+	width: 100%;
 	background-color: white;
 	display: grid;
 	grid-template-columns: 1fr 2fr 1fr;
@@ -64,7 +65,6 @@ nav a {
 }
 
 .search {
-	padding-right: 5px;
 	border-radius: 20px;
 	grid-area: search;
 	display: flex;
@@ -72,6 +72,12 @@ nav a {
 	align-items: center;
 	height: 40px;
 	background-color: #df091d;
+}
+
+.searchbtn {
+	display: flex;
+	min-width: 40px;
+	background-size: 15px auto !important;
 }
 
 .personal {
@@ -125,13 +131,14 @@ nav a {
 }
 
 select {
-	border-radius: 20px;
 	margin-left: 10px;
 	border: none;
 	color: white;
 	background-color: #df091d;
 	height: 40px;
 	padding: 0 10px;
+	border-radius: 20px;
+	cursor: pointer;
 }
 
 .justify {
@@ -188,7 +195,7 @@ input {
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	width: calc(100% - 20px);
+	width: calc(100% - 40px);
 	flex-grow: 1;
 	height: 40px;
 	padding: 0 20px;
@@ -300,6 +307,7 @@ label {
 	width: 100%;
 	gap: 20px;
 	display: flex;
+	justify-content: center;
 	flex-direction: row;
 	flex-wrap: wrap;
 }

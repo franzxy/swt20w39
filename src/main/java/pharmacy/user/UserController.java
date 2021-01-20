@@ -28,12 +28,6 @@ class UserController {
 	UserController(UserManagement userManagement) {
 		this.userManagement = userManagement;
 	}
-	
-	@GetMapping("/menu")
-	String menu() {
-
-		return "menu";
-	}
 
 	@GetMapping("/register")
 	String register(Model model, UserForm userForm) {
