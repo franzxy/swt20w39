@@ -74,7 +74,15 @@ public class OrderController {
 	Cart initializeCart() {
 		return new Cart();
 	}
-
+	private boolean haspresonly(Cart c){
+		if(c.isEmpty()) return false;
+		ArrayList<Boolean> ispresonly=new ArrayList<Boolean>();
+		c.get().forEach(item ->{
+			ispresonly.add(((Medicine)item.getProduct()).isPresonly());
+		});
+		for(boolean b:ispresonly) if(b) return true;
+		return false;
+	}
 	@GetMapping("/cart")
 	String basket(@ModelAttribute Cart cart, Model model) {
 		HashMap<String, Integer> availability = new HashMap<String, Integer>();
@@ -98,8 +106,15 @@ public class OrderController {
 		return "redirect:/";
 	}
 	@GetMapping("/cart/{id}/delete")
-	String deleteItem(@PathVariable String id, @ModelAttribute Cart cart) {
+	String deleteItem(@PathVariable String id, @ModelAttribute Cart cart, Model model) {
+		HashMap<String, Integer> availability = new HashMap<String, Integer>();
+		cart.forEach(cartitem->{
+			Medicine Med= (Medicine) cartitem.getProduct();
+			int quan=inventory.findByProduct(Med).get().getQuantity().getAmount().intValue();
+			availability.put(cartitem.getId(), quan);
+		});
 		cart.removeItem(id);
+		model.addAttribute("availability", availability);
 		return "cart";
 	}
 
@@ -130,7 +145,7 @@ public class OrderController {
 		if (cart.isEmpty()) {
 			return "redirect:/cart";
 		}
-	
+		model.addAttribute("haspresonly", this.haspresonly(cart));
 		model.addAttribute("cart", cart);
 		model.addAttribute("insuranceForm", insuranceForm);
 		model.addAttribute("addressForm", addressForm);
@@ -145,7 +160,7 @@ public class OrderController {
 		if (cart.isEmpty()) {
 			return "redirect:/cart";
 		}
-	
+		model.addAttribute("haspresonly", this.haspresonly(cart));
 		model.addAttribute("cart", cart);
 		model.addAttribute("insuranceForm", insuranceForm);
 		model.addAttribute("addressForm", addressForm);
@@ -160,7 +175,7 @@ public class OrderController {
 		if (cart.isEmpty()) {
 			return "redirect:/cart";
 		}
-	
+		model.addAttribute("haspresonly", this.haspresonly(cart));
 		model.addAttribute("cart", cart);
 		model.addAttribute("user", userManagement.currentUser().get());
 		
