@@ -1,7 +1,7 @@
 <nav th:fragment="navigation">
     <a class="menu logo" th:href="@{/}">ApoTheke</a>
     <form class="search" action="#"  th:action="@{/}" th:object=${searchform} method="post">
-        <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Produkte durchsuchen" />
+        <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Produkte Suchen" />
         <button class="iconbutton" type="submit"><i class="icon searchicon" th:style="'background-image: url('+@{/img/search.png}+');'"></i></button>
     </form>
     <div class="personal">
