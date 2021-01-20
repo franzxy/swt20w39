@@ -51,13 +51,15 @@
             <td>
               <form action="#" th:action="@{/increase}" th:object="${formular}"method="POST">
                 <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}" />
-                <input class="button" type="submit" value="+1" />
+                <input class="iconbutton"style="color:white; margin:auto" type="submit" value="+1" />
               </form>
             </td>
             <td>
               <form action="#" th:action="@{/delete}"th:object="${formular}" method="POST">
                 <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
-                <input class="iconbutton"type="image" th:src="@{/img/trash.png}" value="" />
+                <div class="iconbutton">
+                <input class="icon"style=" background-color: Transparent;margin:auto"type="image" th:src="@{/img/trash.png}" value="" /></div>
+                <!--<a  class="iconbutton" th:href="@{/user/{id}/remove(id=${user.getId()})}"><img class="icon" th:src="@{/img/trash.png}"></a>-->
               </form>
             </td>
             </tr>
