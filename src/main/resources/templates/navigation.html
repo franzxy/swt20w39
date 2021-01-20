@@ -1,11 +1,11 @@
 <nav th:fragment="navigation">
     <a class="menu logo" th:href="@{/}">ApoTheke</a>
     <form class="search" action="#"  th:action="@{/}" th:object=${searchform} method="post">
-        <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Welches Produkt suchst du?" />
+        <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Produkte durchsuchen" />
         <button class="iconbutton" type="submit"><i class="icon searchicon" th:style="'background-image: url('+@{/img/search.png}+');'"></i></button>
     </form>
     <div class="personal">
-        <a class="iconbutton" th:href="@{/cart}"><i class="icon" th:style="'background-image: url('+@{/img/cart.png}+');'"></i></a>
+        <a class="iconbutton" th:href="@{/cart}"><i class="icon" th:style="'background-image: url('+@{/img/cart.png}+');'"></i><span th:if="${counter}" class="cartcounter" th:text="${counter}"></ö></a>
         <a th:if="${picture}" class="iconbutton" th:href="@{/account}"><i class="icon picture" th:style="'background-image: url('+${picture}+');'"></i></a>
         <a th:unless="${picture}" class="iconbutton" th:href="@{/account}"><i class="icon" th:style="'background-image: url('+@{/img/account.png}+');'"></i></a>
     </div>
