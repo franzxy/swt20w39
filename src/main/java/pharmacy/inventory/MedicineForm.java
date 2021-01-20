@@ -5,13 +5,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import org.javamoney.moneta.Money;
 
 import pharmacy.catalog.Medicine;
 
 public class MedicineForm {
-    @NotEmpty(message="Darf nicht leer sein")
+    @NotBlank(message="Darf nicht leer sein")
     private String description, name, tags, image;
     private String id;
     private double amount; 
@@ -37,7 +38,7 @@ public class MedicineForm {
         String image2="1"; //Paste default pic here
         File pic = new File(".\\src\\main\\resources\\static\\img\\med\\"+this.image+".png");
         if(pic.exists()) image2=this.image;
-        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.split(",")), this.amount,  this.presonly, image2, this.quantity);
+        return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.replace(" ", "").split(",")), this.amount,  this.presonly, image2, this.quantity);
     }
 
     public String getDescription() {
