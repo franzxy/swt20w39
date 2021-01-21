@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public class FilterForm{
 	public enum Filter {
 		ALLE("Alles"),
-		OBEST("Online Bestellungen"),
+		OBEST("Kunden Bestellungen"),
 		GEHÄLTER("Gehälter"),
 		STROM("Strom"),
 		MIETE("Miete"),
