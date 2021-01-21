@@ -24,18 +24,18 @@ class PharmacyModularityTests {
 		modules.verify();
 	}*/
 
-	@Test // #120
+	@Test
 	void writeComponentDiagrams() throws IOException {
 
-		Options options = Options.defaults() //
-				.withColorSelector(this::getColorForModule) //
-				.withDefaultDisplayName(this::getModuleDisplayName) //
+		Options options = Options.defaults()
+				.withColorSelector(this::getColorForModule)
+				.withDefaultDisplayName(this::getModuleDisplayName)
 				.withTargetOnly(isSalespointModule);
 
 		Documenter documenter = new Documenter(modules);
 		documenter.writeModulesAsPlantUml(options);
 
-		modules.stream().filter(isSalespointModule.negate()) //
+		modules.stream().filter(isSalespointModule.negate())
 				.forEach(it -> documenter.writeModuleAsPlantUml(it, options));
 	}
 
