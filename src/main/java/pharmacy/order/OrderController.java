@@ -1,5 +1,6 @@
 package pharmacy.order;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
+import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -57,7 +59,9 @@ public class OrderController {
 	private Order failedorder;
 	public Cart cart;
 	private Map<ProductIdentifier, Integer> quan;
-	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, UserManagement userManagement) {
+	private final BusinessTime time;
+
+	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, UserManagement userManagement, BusinessTime time) {
 
 		Assert.notNull(orderManagement, "OrderManagement must not be null.");
 		this.orderManagement = orderManagement;
@@ -69,6 +73,7 @@ public class OrderController {
 		this.quan=new HashMap<ProductIdentifier, Integer>();
 		this.userManagement = userManagement;
 		this.cart = new Cart();
+		this.time = time;
 	}
 
 	@ModelAttribute("cart")
@@ -215,6 +220,10 @@ public class OrderController {
 
 	@GetMapping("/orders")
 	String orders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+
+		boolean itsBusinessTime = ((time.getTime().getHour() >= 6) && (time.getTime().getHour() < 20));
+		model.addAttribute("TimeToDoBusiness", itsBusinessTime);
+
 		List<Order> ret =List.of() ;
 		if(!userAccount.isEmpty()){
 			if(userAccount.get().hasRole(Role.of("BOSS"))){
@@ -234,6 +243,7 @@ public class OrderController {
 		}
 		model.addAttribute("rech",ret);
 		model.addAttribute("filter", new OrderFilter());
+
 		return "orders";
 	}
 
