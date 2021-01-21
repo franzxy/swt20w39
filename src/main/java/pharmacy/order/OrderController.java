@@ -1,5 +1,6 @@
 package pharmacy.order;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -201,6 +202,7 @@ public class OrderController {
 	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 		var user = userManagement.currentUser().get();
 		if (user.getAddress().toString().isEmpty()) {
+
 			return "redirect:/checkout";
 		}
 		
@@ -221,7 +223,7 @@ public class OrderController {
 	@GetMapping("/orders")
 	String orders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 
-		boolean itsBusinessTime = ((time.getTime().getHour() >= 6) && (time.getTime().getHour() < 20));
+		boolean itsBusinessTime = ((time.getTime().getHour() >= 6) && (time.getTime().getHour() < 20) && (time.getTime().getDayOfWeek() != DayOfWeek.SUNDAY ));
 		model.addAttribute("TimeToDoBusiness", itsBusinessTime);
 
 		List<Order> ret =List.of() ;
