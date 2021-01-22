@@ -4,6 +4,7 @@ import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
+import org.salespointframework.order.CartItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.slf4j.Logger;
@@ -28,13 +29,13 @@ class CatalogController {
 	private final MedicineCatalog catalog;
 	@Autowired
 	private UniqueInventory<UniqueInventoryItem> inventory;
-	//private final MultiInventory<MultiInventoryItem> inventory;
-	//private final BusinessTime businessTime;
+	private Cart cart;
 
-	CatalogController(MedicineCatalog medicineCatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> inventory) {
+	CatalogController(MedicineCatalog medicineCatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> inventory, Cart cart) {
 		this.catalog = medicineCatalog;
 		this.inventory = inventory;
-		//this.businessTime = businessTime;
+		this.cart = cart;
+
 	}
 
 	@GetMapping("/")
@@ -75,7 +76,8 @@ class CatalogController {
 					if (m.getName().toLowerCase().contains(s)) {
 						newTags.addAll(tags);
 
-						if(tag.equals("") || tags.contains(tag))result.add(m);
+						if(tag.equals("") || tags.contains(tag))
+							result.add(m);
 
 					}
 				}
@@ -103,7 +105,17 @@ class CatalogController {
 		HashMap<String, Integer> availability = new HashMap<String, Integer>();
 		ArrayList<Medicine> optimisedres = new ArrayList<>();
 		result.forEach(Med->{
-			int quan=inventory.findByProduct(Med).get().getQuantity().getAmount().intValue();
+			int quan = inventory.findByProduct(Med).get().getQuantity().getAmount().intValue();
+
+			for(CartItem c : cart.toList()) {
+				if(c.getProductName().equals(Med.getName())) {
+					quan = quan - c.getQuantity().getAmount().intValue();
+				}
+			}
+
+
+
+
 			availability.put(Med.getId().getIdentifier(), quan);
 			//remove Items that aren't available
 			if(quan>0)optimisedres.add(Med);
