@@ -17,15 +17,12 @@
                 <label>Der Warenkorb ist leer.</label>
                 <a class="button" th:href="@{/}">Einkaufen</a>
             </div>
-            <table class="cart" th:unless="${cart.empty}">
-                <div class="field">
-                    <a class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
-                    <a class="button" sec:authorize="isAuthenticated()" th:href="@{/checkout}">Zum Checkout</a>
-                    <form class="field" sec:authorize="isAuthenticated()" method="post" th:action="@{/checkout}">
-                        <button type="submit" class="ui button">Jetzt Bezahlen</button>
-                    </form>
-                </div>
-                <thead>
+            <a th:unless="${cart.empty}" class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
+            <a th:unless="${cart.empty}" class="button" sec:authorize="isAuthenticated()" th:href="@{/checkout}">Zum Checkout</a>
+            <form sec:authorize="isAuthenticated()" method="post" th:action="@{/checkout}">
+                <button type="submit" class="ui button">Jetzt Bezahlen</button>
+            </form>
+            <table th:unless="${cart.empty}">
                 <tr>
                     <th >Artikel</th>
                     <th >Menge</th>
@@ -45,7 +42,7 @@
                         </td>
                         <td th:text="${{item.price}}">10 Euro</td>
                         <td>
-                         <a class="iconbutton" th:href="@{/cart/{id}/delete(id=${item.id})}"><img class="icon" th:src="@{/img/trash.png}"></a>   
+                        <a class="iconbutton" th:href="@{/cart/{id}/delete(id=${item.id})}"><img class="icon" th:src="@{/img/trash.png}"></a>   
                         </td>
                     </tr>
                     <tr>

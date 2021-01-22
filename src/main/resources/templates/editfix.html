@@ -6,59 +6,49 @@
 		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Fixkosten</title>
 	</head>
-    <body>
+  <body>
     <nav th:include="navigation :: navigation"></nav>
+
     <div class="position">
       <a th:href="@{/finances}">Finanzen</a>
       <p>></p>
       <a th:href="@{/editfix}">Fixkosten</a>
     </div>
+
 		<div class="center">
-        <div class="popup border">
-            <div id="editfix" class="overlay">
-                <div class="popup border">
-                  <form action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
-                      <ul >
-                      <h1 style="margin: 5px;">Fixkosten Ändern</h1>
-                      <div class="field">
-                        <label>Miete: </label>
-                        <div class="row">
-                          <input max="1000000000"min="0" required="required"class="numberinput"type="number"th:field="*{Miete}" />
-                          <a class="currency">€</a>
-                        </div>
-                      </div>
-                      <div class="field">
-                        <label>Strom:</label>
-                        <div class="row">
-                          <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Strom}" />
-                          <a class="currency">€</a>
-                        </div>
-                      </div>
-                      <div class="field">
-                        <label>Wasser:</label>
-                        <div class="row">
-                          <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Wasser}" />
-                          <a class="currency">€</a>
-                        </div>
-                      </div>
-                      <div class="field">
-                        <label>Heizkosten:</label>
-                        <div class="row">
-                          <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Heizkosten}" />
-                          <a class="currency">€</a>
-                        </div>
-                      </div>
-                      <div class="field">
-                         <input style="width: auto;margin: 5px"class="button" type="submit" value="Speichern und Schließen" />
-                      </div>
-                        </ul>
-                      </form> 
-                    
-                </div>
-              </div>
-            <form action="/finances" >
-              <div class="field">
-                <input style="margin:5px" class="button"type="submit" value="Abbrechen"></input>
-              </div>
-            </form>
+      <form class="form gap" action="#editfix" th:action="@{/editfix}"  th:object="${fixk}" method="POST">
+        <div class="field">
+          <label>Miete</label>
+          <div class="row">
+            <input max="1000000000"min="0" required="required"class="numberinput"type="number"th:field="*{Miete}" />
+            <a class="currency">€</a>
+          </div>
         </div>
+        <div class="field">
+          <label>Strom</label>
+          <div class="row">
+            <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Strom}" />
+            <a class="currency">€</a>
+          </div>
+        </div>
+        <div class="field">
+          <label>Wasser</label>
+          <div class="row">
+            <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Wasser}" />
+            <a class="currency">€</a>
+          </div>
+        </div>
+        <div class="field">
+          <label>Heizkosten</label>
+          <div class="row">
+            <input max="1000000000" min="0" required="required"class="numberinput"type="number"th:field="*{Heizkosten}" />
+            <a class="currency">€</a>
+          </div>
+        </div>
+        <div class="field">
+            <input class="button" type="submit" value="Aktualisieren" />
+        </div>
+      </form> 
+    </div>
+  </body>
+</html>

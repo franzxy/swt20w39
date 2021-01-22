@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.javamoney.moneta.Money;
+import org.salespointframework.payment.CreditCard;
+import org.salespointframework.payment.DebitCard;
 import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -23,19 +25,16 @@ public class User {
 
 	@OneToOne
 	private UserAccount userAccount;
-
-	private Address address;
 	
 	private String picture;
 
+	private Address address;
 	private Insurance insurance;
+	private Boolean ordered;
 
-	private String iban;
 	private Money salary;
-
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Vacation> vacations = new ArrayList<>();
-
 	private Integer vacationRemaining;
 	
 	@SuppressWarnings("unused")
@@ -69,20 +68,20 @@ public class User {
 		address = newAddress;
 	}
 
-	public String getIban() {
-		return iban;
-	}
-
-	public void setIban(String newIban) {
-		iban = newIban;
-	}
-
 	public String getPicture() {
 		return picture;
 	}
 
 	public void setPicture(String newPicture) {
 		picture = newPicture;
+	}
+
+	public Boolean getOrdered() {
+		return ordered;
+	}
+
+	public void setOrdered(Boolean newOrdered) {
+		ordered = newOrdered;
 	}
 
 	public Insurance getInsurance() {

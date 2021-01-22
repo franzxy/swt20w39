@@ -201,7 +201,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/checkout")
-	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
+	String buy(Model model, AddressForm addressForm, InsuranceForm insuranceForm, @ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 		var user = userManagement.currentUser().get();
 		if (user.getAddress().toString().isEmpty()) {
 
@@ -215,6 +215,8 @@ public class OrderController {
 			cart.addItemsTo(order);
 			
 			orderManagement.payOrder(order);
+
+			user.setOrdered(true);
 
 			cart.clear();
 

@@ -23,39 +23,27 @@
 
             <div class="form"><div class="field">
                 <label class="label" for="name">Passwort</label>
-                <a class="button" th:text="${'Passwort Ändern'}" th:href="@{/account/settings/password}"></a>
+                <a class="button" th:text="${'Ändern'}" th:href="@{/account/settings/password}"></a>
             </div></div>
-
-            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/settings/picture}" th:object="${pictureForm}">
-                <div class="field">
-                    <label class="label" for="name">Profilbild</label>
-                    <div class="row">
-                        <input class="textinput" id="name" name="picture" th:value="${user.getPicture()} ? ${user.getPicture()} : ${pictureForm.getPicture()}" placeholder="URL" th:errorclass="fieldError" type="text" required="required"/>
-                        <button th:if="${user.getPicture()}" type="submit" class="ui button">Ändern</button>
-                        <button th:unless="${user.getPicture()}" type="submit" class="ui button">Hinzufügen</button>
-                    </div>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"></p>
-                </div>
-            </form>
 
             <div class="form"><div class="field">
                 <label class="label" for="name">Versicherung</label>
-                <a th:if="${user.getInsurance()}" class="button" th:text="${'Versicherung Ändern'}" th:href="@{/account/settings/insurance}"></a>
-                <a th:unless="${user.getInsurance()}" class="button" th:text="${'Versicherung Hinzufügen'}" th:href="@{/account/settings/insurance}"></a>
+                <a th:if="${user.getInsurance()}" class="button" th:text="${'Ändern'}" th:href="@{/account/settings/insurance}"></a>
+                <a th:unless="${user.getInsurance()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/settings/insurance}"></a>
             </div></div>
 
             <div class="form"><div class="field">
                 <label class="label" for="name">Adresse</label>
-                <a th:if="${user.getAddress()}" class="button" th:text="${'Adresse Ändern'}" th:href="@{/account/settings/address}"></a>
-                <a th:unless="${user.getAddress()}" class="button" th:text="${'Adresse Hinzufügen'}" th:href="@{/account/settings/address}"></a>
+                <a th:if="${user.getAddress()}" class="button" th:text="${'Ändern'}" th:href="@{/account/settings/address}"></a>
+                <a th:unless="${user.getAddress()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/settings/address}"></a>
             </div></div>
 <!--
             <div class="form" sec:authorize="hasRole('EMPLOYEE')"><div class="field">
                 <a class="button" th:text="${'Mitarbeiter Daten Ändern'}" th:href="@{/account/settings/employeedata}"></a>
             </div></div>
 -->
-            <div class="form" sec:authorize="hasRole('CUSTOMER')"><div class="field"></div>
-                <a class="button" th:text="${'Account Löschen'}" th:href="@{/account/settings/remove}"></a>
+            <div class="form" sec:authorize="hasRole('CUSTOMER')" th:if="not ${user.getOrdered}"><div class="field"></div>
+                <a class="button" th:text="${'Löschen'}" th:href="@{/account/settings/remove}"></a>
             </div></div>
         </div>            
     </body>

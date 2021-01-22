@@ -130,7 +130,7 @@ class UserController {
 
 		return "redirect:/users";
 	}
-	/*
+
 	@GetMapping("/user/{userId}/vacation/{vacationId}/approve")
 	@PreAuthorize("hasRole('BOSS')")
 	String approveVacations(@PathVariable Long userId, @PathVariable Integer vacationId) {
@@ -172,10 +172,12 @@ class UserController {
 
 		return "account";
 	}
-*/
+	
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
-	String account(Model model) {
+	String account(Model model, PictureForm pictureForm) {
+		
+		model.addAttribute("pictureForm", pictureForm);
 
 		model.addAttribute("user", userManagement.currentUser().get());
 		model.addAttribute("customer", Role.of("CUSTOMER"));

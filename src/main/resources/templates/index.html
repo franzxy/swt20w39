@@ -24,8 +24,6 @@
 					<p th:text="${header}"></p>
 					<p>&nbsp;</p>
 					<b th:text="${'„'+oldTerm+'“'}"></b>
-					<p th:unless="${oldTag}" th:text="${', in der Kategorie '+oldTag}"></p>
-					<p th:if="${noPres}" th:text="${', Rezeptfrei'}"></p>
 				</div>
 			</div>
 			<form class="filters" action="#"  th:action="@{/}" th:object=${searchform} method="post">
