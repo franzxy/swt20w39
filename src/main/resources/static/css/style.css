@@ -31,7 +31,8 @@ nav {
 
 .position {
 	padding: 10px 0;
-	font-size: larger;
+	align-self: flex-start;
+	font-size: x-large;
 }
 
 .position a {
@@ -132,7 +133,9 @@ nav {
 }
 
 .currency {
-	background-color: #202020;
+	border-bottom-right-radius: 20px;
+	border-top-right-radius: 20px;
+	background-color: lightgray;
 	height: 40px;
 	justify-content: center;
 	text-align: center;
@@ -248,6 +251,16 @@ input {
 
 .numberinput {
 	width: 50px;
+}
+
+.rightcorners {
+	border-bottom-right-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+}
+
+.leftcorners {
+	border-top-left-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
 }
 
 .iconbutton {

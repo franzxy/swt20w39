@@ -37,8 +37,8 @@
                     <form class="ui form" method="post" th:action="@{/cart}" th:if="${available &gt; 0}">
                         <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
                         <div class="row">
-                            <input class="numberinput" id="number" type="number" name="number" min="1" th:max="${available}" step="1" value="1"/><br/>
-                            <button type="submit" class="button" th:text="${'In den Warenkorb'}"></button>
+                            <input class="numberinput rightcorners" id="number" type="number" name="number" min="1" th:max="${available}" step="1" value="1"/><br/>
+                            <button type="submit" class="button leftcorners" th:text="${'In den Warenkorb'}"></button>
                         </div>
                     </form>
                 </div>

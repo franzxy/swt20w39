@@ -71,9 +71,9 @@
                         <div class="field">
                             <label class="label" for="name">Profilbild</label>
                             <div class="row">
-                                <input class="textinput" id="name" name="picture" th:value="${user.getPicture()} ? ${user.getPicture()} : ${pictureForm.getPicture()}" placeholder="URL" th:errorclass="fieldError" type="text" required="required"/>
-                                <button th:if="${user.getPicture()}" type="submit" class="ui button">Ändern</button>
-                                <button th:unless="${user.getPicture()}" type="submit" class="ui button">Hinzufügen</button>
+                                <input class="textinput rightcorners" id="name" name="picture" th:value="${user.getPicture()} ? ${user.getPicture()} : ${pictureForm.getPicture()}" placeholder="URL" th:errorclass="fieldError" type="text" required="required"/>
+                                <button th:if="${user.getPicture()}" type="submit" class="ui button leftcorners">Ändern</button>
+                                <button th:unless="${user.getPicture()}" type="submit" class="ui button leftcorners">Hinzufügen</button>
                             </div>
                             <p class="ui negative message" th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"></p>
                         </div>
