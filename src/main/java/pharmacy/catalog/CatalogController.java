@@ -138,15 +138,25 @@ class CatalogController {
 	}
 
 	@GetMapping("/medicine/{medicine}")
-	public String detail(@PathVariable Medicine medicine, Model model, @ModelAttribute Cart cart) {
+	public String detail(@PathVariable Medicine medicine, Model model) {
 		Quantity q = Quantity.of(0);
 		
 		if(inventory.findByProduct(medicine).isPresent()){
 			q = inventory.findByProduct(medicine).get().getQuantity();
 		}
 
+
+		int quan = q.getAmount().intValue();
+
+		for(CartItem c : cart.toList()) {
+			if(c.getProductName().equals(medicine.getName())) {
+				quan = quan - c.getQuantity().getAmount().intValue();
+			}
+		}
+
+
 		model.addAttribute("medicine" , medicine);
-		model.addAttribute("available", q.getAmount().intValue());
+		model.addAttribute("available", quan);
 
 		return "detail";
 	}
