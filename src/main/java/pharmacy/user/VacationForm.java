@@ -22,12 +22,18 @@ class VacationForm {
 	@NotEmpty(message = "Ende fehlt")
 	@Future(message = "Darf nicht vor Morgen liegen")
 	private final Date endDate;
-
+/*
 	public VacationForm(String startDate, String endDate) {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		this.startDate = formatter.parse(startDate);
 		this.endDate = formatter.parse(endDate);
+	}
+*/
+	public VacationForm(Date startDate, Date endDate) {
+
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
 	public Date getStartDate() {
