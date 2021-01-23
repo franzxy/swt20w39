@@ -1,6 +1,5 @@
 package pharmacy.catalog;
 
-import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
@@ -14,12 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 class CatalogController {
@@ -35,7 +29,6 @@ class CatalogController {
 		this.catalog = medicineCatalog;
 		this.inventory = inventory;
 		this.cart = cart;
-
 	}
 
 	@GetMapping("/")
@@ -98,7 +91,6 @@ class CatalogController {
 		model.addAttribute("oldTerm", searchTerm);
 		model.addAttribute("oldTag", tag);
 		model.addAttribute("noPres", noPres);
-		//model.addAttribute("catalog", result);
 		model.addAttribute("title", "Apotheke");
 
 		//Add quantity from inventory
@@ -113,16 +105,13 @@ class CatalogController {
 				}
 			}
 
-
-
-
 			availability.put(Med.getId().getIdentifier(), quan);
 			//remove Items that aren't available
 			if(quan>0)optimisedres.add(Med);
 		});
+
 		model.addAttribute("availability", availability);
 		model.addAttribute("catalog", optimisedres);
-		
 
 		return "index";
 	}
