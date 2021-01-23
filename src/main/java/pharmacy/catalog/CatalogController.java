@@ -77,14 +77,13 @@ class CatalogController {
 			}
 		}
 
-
-
 		//Add quantity from inventory
 		HashMap<String, Integer> availability = new HashMap<String, Integer>();
 		ArrayList<Medicine> optimisedres = new ArrayList<>();
 		result.forEach(Med->{
 			int quan = inventory.findByProduct(Med).get().getQuantity().getAmount().intValue();
 
+			//Check for items in cart to calculate quantity
 			for(CartItem c : cart.toList()) {
 				if(c.getProductName().equals(Med.getName())) {
 					quan = quan - c.getQuantity().getAmount().intValue();
@@ -96,7 +95,7 @@ class CatalogController {
 			if(quan>0)optimisedres.add(Med);
 		});
 
-
+		//Generate header
 		String header = " für \"" + searchTerm + "\"";
 
 		if(!tag.equals("")) {
@@ -115,20 +114,13 @@ class CatalogController {
 			header = "Ergebnisse" + header + ":";
 		}
 
-
-
 		if(!searchTerm.equals("")) model.addAttribute("header", header);
-
-
 
 		model.addAttribute("tags", newTags);
 		model.addAttribute("oldTerm", searchTerm);
 		model.addAttribute("oldTag", tag);
 		model.addAttribute("noPres", noPres);
 		model.addAttribute("title", "Apotheke");
-
-
-
 
 		model.addAttribute("availability", availability);
 		model.addAttribute("catalog", optimisedres);
