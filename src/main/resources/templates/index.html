@@ -36,10 +36,9 @@
 				</div>
 
 				<div class="option">
-					<p for="selector">Kategorie</p>
 					<select class="selector" th:field="*{tag}">
-						<option value="">Keine</option>
-						<option th:each="tag : ${tags}" th:text="${tag}" th:value="${tag}"></option>
+						<option value="">Keine Kategorie</option>
+						<option th:each="tag : ${tags}" th:text="${tag.substring(0,1).toUpperCase() + tag.substring(1).toLowerCase()}" th:value="${tag}"></option>
 					</select>
 				</div>
 	
