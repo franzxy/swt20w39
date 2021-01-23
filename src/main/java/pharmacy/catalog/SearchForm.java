@@ -1,14 +1,9 @@
 package pharmacy.catalog;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class SearchForm {
 	private String searchTerm;
 	private String tag;
 	private boolean noPres;
-
-	private static final Logger LOG = LoggerFactory.getLogger(SearchForm.class);
 
 	public String getSearchTerm() {
 		return this.searchTerm;
