@@ -77,21 +77,7 @@ class CatalogController {
 			}
 		}
 
-		String header;
 
-		if(result.size() == 0) {
-			header = "Keine Ergebnisse für";
-		} else {
-			header = "Ergebnisse für";
-		}
-
-		if(!searchTerm.equals("")) model.addAttribute("header", header);
-
-		model.addAttribute("tags", newTags);
-		model.addAttribute("oldTerm", searchTerm);
-		model.addAttribute("oldTag", tag);
-		model.addAttribute("noPres", noPres);
-		model.addAttribute("title", "Apotheke");
 
 		//Add quantity from inventory
 		HashMap<String, Integer> availability = new HashMap<String, Integer>();
@@ -109,6 +95,40 @@ class CatalogController {
 			//remove Items that aren't available
 			if(quan>0)optimisedres.add(Med);
 		});
+
+
+		String header = " für \"" + searchTerm + "\"";
+
+		if(!tag.equals("")) {
+			String tagopt = tag.substring(0, 1).toUpperCase() + tag.substring(1);
+			header += " in Kategorie " + tagopt;
+		}
+
+		if(noPres) {
+			header += ", Rezeptfrei";
+		}
+
+		if(optimisedres.size() == 0) {
+			header = "Keine Ergebnisse " + header + ".";
+
+		} else {
+			header = "Ergebnisse" + header + ":";
+		}
+
+
+
+		if(!searchTerm.equals("")) model.addAttribute("header", header);
+
+
+
+		model.addAttribute("tags", newTags);
+		model.addAttribute("oldTerm", searchTerm);
+		model.addAttribute("oldTag", tag);
+		model.addAttribute("noPres", noPres);
+		model.addAttribute("title", "Apotheke");
+
+
+
 
 		model.addAttribute("availability", availability);
 		model.addAttribute("catalog", optimisedres);
