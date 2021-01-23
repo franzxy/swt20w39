@@ -42,5 +42,10 @@ class UserManagementUnitTests {
 		*/
 		// … the customer has a user account attached
 		assertThat(user.getUserAccount()).isNotNull();
+
+		assertThat(form.getName().equals("name"));
+		assertThat(form.getPassword().equals("password"));
+		assertThat(form.getConfirmPassword().equals("address"));
+
 	}
 }
