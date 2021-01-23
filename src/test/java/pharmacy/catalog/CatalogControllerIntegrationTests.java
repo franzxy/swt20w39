@@ -63,4 +63,19 @@ class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
 		assertThat(object).hasSize(1);
 
 	}
+
+	@Test
+	public void searchFormTest() {
+
+		SearchForm form = new SearchForm();
+		form.setSearchTerm("Term");
+		form.setNoPres(true);
+		form.setTag("Tag");
+
+		assertThat(form.getSearchTerm().equals("Term"));
+		assertThat(form.getTag().equals("Tag"));
+		assertThat(form.getNoPres() == true);
+
+
+	}
 }
