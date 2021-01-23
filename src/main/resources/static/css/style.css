@@ -152,6 +152,7 @@ select {
 	padding: 0 10px;
 	border-radius: 20px;
 	cursor: pointer;
+	border-right: 10px solid lightgray;
 }
 
 .justify {
@@ -173,6 +174,7 @@ select {
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
+	flex-wrap: nowrap;
 	height: 40px;
 }
 
