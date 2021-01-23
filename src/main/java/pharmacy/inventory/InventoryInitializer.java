@@ -1,24 +1,17 @@
 package pharmacy.inventory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
-import org.salespointframework.inventory.*;
-import org.salespointframework.quantity.Metric;
-import org.salespointframework.catalog.Product;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
 import pharmacy.catalog.Medicine;
 import pharmacy.catalog.MedicineCatalog;
+
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 
 @Component
 @Order(20)

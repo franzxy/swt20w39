@@ -63,4 +63,11 @@ class CatalogControllerIntegrationTests extends AbstractIntegrationTests {
 		assertThat(object).hasSize(1);
 
 	}
+
+	@Test
+	public void searchFormTest() {
+
+		SearchForm form = new SearchForm();
+
+	}
 }

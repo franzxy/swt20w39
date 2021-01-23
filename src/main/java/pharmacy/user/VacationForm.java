@@ -1,6 +1,7 @@
 package pharmacy.user;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,7 +24,7 @@ class VacationForm {
 	@Future(message = "Darf nicht vor Morgen liegen")
 	private final Date endDate;
 
-	public VacationForm(String startDate, String endDate) {
+	public VacationForm(String startDate, String endDate) throws ParseException {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		this.startDate = formatter.parse(startDate);

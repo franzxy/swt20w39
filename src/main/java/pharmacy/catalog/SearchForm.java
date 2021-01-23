@@ -35,8 +35,6 @@ public class SearchForm {
 	}
 
 	public boolean isSelected(String t) {
-		LOG.info(t);
-		LOG.info(tag);
 		return t.equals(tag);
 	}
 }
