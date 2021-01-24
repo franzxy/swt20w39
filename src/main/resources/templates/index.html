@@ -35,17 +35,12 @@
 					<input class="checkbox" type="checkbox" id="noPres" name="noPres" th:checked="${noPres}" />
 				</div>
 
-				<div class="option">
-					<p for="selector">Kategorie</p>
-					<select class="selector" th:field="*{tag}">
-						<option value="">Keine</option>
-						<option th:each="tag : ${tags}" th:text="${tag}" th:value="${tag}"></option>
-					</select>
-				</div>
-	
-				<div class="option">
-					<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
-				</div>
+				<select class="selector" th:field="*{tag}">
+					<option value="">Keine Kategorie</option>
+					<option th:each="tag : ${tags}" th:text="${tag.substring(0,1).toUpperCase() + tag.substring(1).toLowerCase()}" th:value="${tag}"></option>
+				</select>
+				
+				<button th:text="Filtern" type="submit" class="ui labeled icon button"></button>
 			</form>
 
 			<div class="meds" th:remove="all-but-first">
