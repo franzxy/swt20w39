@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Account</title>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+
+        <div class="center">
+            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
+            <a class="button" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
+            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
+            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
+            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
+        </div>      
+    </body>
+</html>

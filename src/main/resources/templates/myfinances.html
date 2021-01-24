@@ -14,6 +14,12 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
    
+        <div class="position">
+            <a th:href="@{/account}">Account</a>
+            <p>></p>
+            <a th:href="@{#}">Meine Finanzen</a>
+        </div>
+   
         <div class="center" >
             <table class="ui celled table">
                 <tr>

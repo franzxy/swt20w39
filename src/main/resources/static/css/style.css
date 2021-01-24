@@ -179,6 +179,8 @@ select {
 }
 
 .card {
+	gap: 20px;
+	padding-bottom: 20px;
 	flex-grow: 1;
 	flex-basis: 400px;
 	border-radius: 20px;
@@ -286,18 +288,19 @@ input {
 	width: 24px;
 }
 
-.span {
-	margin-bottom: 5px;
+span {
+	align-self: center;
+	margin-bottom: 10px;
 }
 
 label {
-	margin-bottom: 5px;
 	align-self: flex-start;
+	margin-bottom: 10px;
 }
 
 .inputlabel {
 	display: inline;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .button {
@@ -309,7 +312,7 @@ label {
 	border: none;
 	background: rgb(16,162,0);
 	background: linear-gradient(90deg, rgba(16,162,0,1) 0%, rgba(0,93,82,1) 100%);
-	width: 100px;
+	min-width: 100px;
 	padding: 0 10px;
 	height: 40px;
 	border-radius: 20px;

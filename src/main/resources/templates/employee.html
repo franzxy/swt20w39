@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+		<title>Account</title>
+	</head>
+    <body>
+        <nav th:include="navigation :: navigation"></nav>
+
+        <div class="center">
+            <div class="filters">
+                <div class="card">
+                    <p class="header">Bestellungen</p>
+                    <a class="button" th:text="${'Bestellungen abfertigen'}" th:href="@{/orders}"></a>
+                </div>
+                <div class="card">
+                    <p class="header">Urlaub</p>
+                    <form class="form" method="post" role="form" id="form" th:action="@{/employee}" th:object="${vacationForm}">
+            
+                        <div class="field">
+                            <label class="label align" for="address">Beginn</label>
+                            <input class="textinput" id="address" name="address" th:field="*{startDate}" th:errorclass="fieldError" type="date"
+                                required="required"/>
+                                <p class="ui negative message" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></p>
+                        </div>
+                
+                        <div class="field">
+                            <label class="label" for="password">Ende</label>
+                            <input class="textinput" id="password" name="password" th:field="*{endDate}" th:errorclass="fieldError" type="date"
+                                required="required"/>
+                                <p class="ui negative message" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></p>
+                        </div>
+
+                        <div class="field">
+                            <button type="submit" class="ui button">Beantragen</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card">
+                    <p class="header">Urlaubsanträge</p>
+
+                </div>  
+            </div>  
+        </div>    
+    </body>
+</html>

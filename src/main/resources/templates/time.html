@@ -21,11 +21,12 @@
                 </div>
                 <div class="field">
                     <label class="label" for="duration">Stunden</label>
-                    <input class="numberinput" th:field="*{duration}" type="number"
-                        required="required"/>
+                    <div class="row">
+                        <input class="numberinput rightcorners" th:field="*{duration}" type="number"
+                            required="required"/>
+                        <button type="submit" class="button leftcorners">Überspringen</button>
+                    </div>
                 </div>
-
-                <button type="submit" class="ui button">Überspringen</button>
             </form>
         </div>
     </body>

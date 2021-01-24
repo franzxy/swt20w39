@@ -44,6 +44,6 @@ class TimeController {
 
 		businessTime.forward(Duration.ofHours(durationForm.getDuration()));
 
-		return "time";
+		return "redirect:/time";
 	}
 }

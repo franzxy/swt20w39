@@ -6,6 +6,8 @@
     </form>
     <div class="personal">
         <a class="iconbutton" th:href="@{/cart}"><i class="icon" th:style="'background-image: url('+@{/img/cart.png}+');'"></i><span th:if="${counter}" class="cartcounter" th:text="${counter}"></ö></a>
+        <a sec:authorize="hasRole('BOSS')" class="button" th:href="@{/admin}">Adminbereich</a>
+        <a sec:authorize="hasRole('EMPLOYEE')" class="button" th:href="@{/employee}">Mitarbeiterbereich</a>
         <a th:if="${picture}" class="iconbutton" th:href="@{/account}"><i class="icon picture" th:style="'background-image: url('+${picture}+');'"></i></a>
         <a th:unless="${picture}" class="iconbutton" th:href="@{/account}"><i class="icon" th:style="'background-image: url('+@{/img/account.png}+');'"></i></a>
     </div>
