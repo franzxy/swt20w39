@@ -1,7 +1,10 @@
 package pharmacy.user;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.security.core.parameters.P;
 import pharmacy.AbstractIntegrationTests;
+
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -39,5 +42,33 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 		assertEquals(p.getNewPassword(), "password");
 		assertEquals(p.getConfirmPassword(), "confirm");
+	}
+
+	@Test
+	public void testPictureForm() {
+		PictureForm p = new PictureForm("pic");
+
+		assertEquals(p.getPicture(), "pic");
+	}
+
+	@Test
+	public void testUserNameForm() {
+		UserNameForm u = new UserNameForm("name");
+
+		assertEquals(u.getName(), "name");
+	}
+
+	@Test
+	public void testVacationForm() {
+		Date start = new Date();
+		start.setTime(10);
+
+		Date end = new Date();
+		end.setTime(20);
+
+		VacationForm v = new VacationForm(start, end);
+
+		assertEquals(v.getStartDate(), start);
+		assertEquals(v.getEndDate(), end);
 	}
 }
