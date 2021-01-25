@@ -12,16 +12,15 @@
 		
 	</head>
     <body>
-        <nav th:include="navigation :: navigation"></nav>
+      
+      <nav th:include="navigation :: navigation"></nav>
         
-        <div class="informations">
-        <form class="space" action="/meddetail" th:object="${formular}" >
+      <div class="center">
+        <form class="start" action="/meddetail" th:object="${formular}" >
           <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
           <input style="width: auto;" class="button" type="submit" th:value="${'Medikament hinzufügen'}"/>
-       </form>
-      </div>
-    <div class="center">
-       <table class="ui celled table">
+        </form>
+        <table class="ui celled table">
           <tr>
               <th >Name</th>
               <th >Prdouktbeschreibung</th>
@@ -62,7 +61,8 @@
                 <!--<a  class="iconbutton" th:href="@{/user/{id}/remove(id=${user.getId()})}"><img class="icon" th:src="@{/img/trash.png}"></a>-->
               </form>
             </td>
-            </tr>
-        </table></div>
-    </body>
+          </tr>
+      </table>
+    </div>
+  </body>
 </html>

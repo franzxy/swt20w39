@@ -27,6 +27,7 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -83,6 +84,7 @@ public class OrderController {
 		return cart;
 	}
 
+	@Bean
 	public Cart getCart() {
 		return cart;
 	}
@@ -200,7 +202,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/checkout")
-	String buy(@ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
+	String buy(Model model, AddressForm addressForm, InsuranceForm insuranceForm, @ModelAttribute Cart cart, @LoggedIn Optional<UserAccount> userAccount) {
 		var user = userManagement.currentUser().get();
 		if (user.getAddress().toString().isEmpty()) {
 
@@ -214,6 +216,8 @@ public class OrderController {
 			cart.addItemsTo(order);
 			
 			orderManagement.payOrder(order);
+
+			user.setOrdered(true);
 
 			cart.clear();
 
@@ -230,7 +234,7 @@ public class OrderController {
 		List<Order> ret =List.of() ;
 		if(!userAccount.isEmpty()){
 			if(userAccount.get().hasRole(Role.of("BOSS"))){
-				ret=this.orderManagement.findAll(Pageable.unpaged()).toList());
+				ret=this.orderManagement.findAll(Pageable.unpaged()).toList();
 			}
 			if(userAccount.get().hasRole(Role.of("CUSTOMER"))){
 				ret=this.orderManagement.findBy(userAccount.get()).toList();

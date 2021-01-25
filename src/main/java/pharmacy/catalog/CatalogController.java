@@ -1,9 +1,9 @@
 package pharmacy.catalog;
 
-import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
+import org.salespointframework.order.CartItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.slf4j.Logger;
@@ -13,12 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 class CatalogController {
@@ -28,13 +23,12 @@ class CatalogController {
 	private final MedicineCatalog catalog;
 	@Autowired
 	private UniqueInventory<UniqueInventoryItem> inventory;
-	//private final MultiInventory<MultiInventoryItem> inventory;
-	//private final BusinessTime businessTime;
+	private Cart cart;
 
-	CatalogController(MedicineCatalog medicineCatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> inventory) {
+	CatalogController(MedicineCatalog medicineCatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> inventory, Cart cart) {
 		this.catalog = medicineCatalog;
 		this.inventory = inventory;
-		//this.businessTime = businessTime;
+		this.cart = cart;
 	}
 
 	@GetMapping("/")
@@ -75,19 +69,49 @@ class CatalogController {
 					if (m.getName().toLowerCase().contains(s)) {
 						newTags.addAll(tags);
 
-						if(tag.equals("") || tags.contains(tag))result.add(m);
+						if(tag.equals("") || tags.contains(tag))
+							result.add(m);
 
 					}
 				}
 			}
 		}
 
-		String header;
+		//Add quantity from inventory
+		HashMap<String, Integer> availability = new HashMap<String, Integer>();
+		ArrayList<Medicine> optimisedres = new ArrayList<>();
+		result.forEach(Med->{
+			int quan = inventory.findByProduct(Med).get().getQuantity().getAmount().intValue();
 
-		if(result.size() == 0) {
-			header = "Keine Ergebnisse für";
+			//Check for items in cart to calculate quantity
+			for(CartItem c : cart.toList()) {
+				if(c.getProductName().equals(Med.getName())) {
+					quan = quan - c.getQuantity().getAmount().intValue();
+				}
+			}
+
+			availability.put(Med.getId().getIdentifier(), quan);
+			//remove Items that aren't available
+			if(quan>0)optimisedres.add(Med);
+		});
+
+		//Generate header
+		String header = " für \"" + searchTerm + "\"";
+
+		if(!tag.equals("")) {
+			String tagopt = tag.substring(0, 1).toUpperCase() + tag.substring(1);
+			header += " in Kategorie " + tagopt;
+		}
+
+		if(noPres) {
+			header += ", Rezeptfrei";
+		}
+
+		if(optimisedres.size() == 0) {
+			header = "Keine Ergebnisse " + header + ".";
+
 		} else {
-			header = "Ergebnisse für";
+			header = "Ergebnisse" + header + ":";
 		}
 
 		if(!searchTerm.equals("")) model.addAttribute("header", header);
@@ -96,21 +120,10 @@ class CatalogController {
 		model.addAttribute("oldTerm", searchTerm);
 		model.addAttribute("oldTag", tag);
 		model.addAttribute("noPres", noPres);
-		//model.addAttribute("catalog", result);
 		model.addAttribute("title", "Apotheke");
 
-		//Add quantity from inventory
-		HashMap<String, Integer> availability = new HashMap<String, Integer>();
-		ArrayList<Medicine> optimisedres = new ArrayList<>();
-		result.forEach(Med->{
-			int quan=inventory.findByProduct(Med).get().getQuantity().getAmount().intValue();
-			availability.put(Med.getId().getIdentifier(), quan);
-			//remove Items that aren't available
-			if(quan>0)optimisedres.add(Med);
-		});
 		model.addAttribute("availability", availability);
 		model.addAttribute("catalog", optimisedres);
-		
 
 		return "index";
 	}
@@ -126,15 +139,25 @@ class CatalogController {
 	}
 
 	@GetMapping("/medicine/{medicine}")
-	public String detail(@PathVariable Medicine medicine, Model model, @ModelAttribute Cart cart) {
+	public String detail(@PathVariable Medicine medicine, Model model) {
 		Quantity q = Quantity.of(0);
 		
 		if(inventory.findByProduct(medicine).isPresent()){
 			q = inventory.findByProduct(medicine).get().getQuantity();
 		}
 
+
+		int quan = q.getAmount().intValue();
+
+		for(CartItem c : cart.toList()) {
+			if(c.getProductName().equals(medicine.getName())) {
+				quan = quan - c.getQuantity().getAmount().intValue();
+			}
+		}
+
+
 		model.addAttribute("medicine" , medicine);
-		model.addAttribute("available", q.getAmount().intValue());
+		model.addAttribute("available", quan);
 
 		return "detail";
 	}

@@ -16,36 +16,33 @@
         <nav th:include="navigation :: navigation"></nav>
 
         <div class="center">
-            <div class="field">
-                <h1 th:text="${medicine.name}">Medikament</h1>
-            </div>
 
-            <div class="field">
-                <img class="medimg" th:src="${medicine.hasImage(medicine.name)} ? @{/img/med/{image}.png(image=${medicine.image})} : '/img/med/default.png'" src="../static/img/med/default.png"/>
-            </div>
+            <div class="filters justify">
 
-            <div class="field">
-                <span th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Verwendung</span>
-            </div>
-
-            <div class="field">
-                <a th:text="${medicine.description}">Beschreibung</a>
-            </div>
-            <div class="field">
-                <a th:text="${medicine.amount + ' Gramm'}">Menge</a>
-            </div>
-                
-            <div class="field">
-                <a th:text="${{medicine.price}}">Preis</a>
-            </div>
-            
-            <form class="ui form" method="post" th:action="@{/cart}" th:if="${available &gt; 0}">
-                <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
-                <div class="row">
-                    <input class="numberinput" id="number" type="number" name="number" min="1" th:max="${available}" step="1" value="1"/><br/>
-                    <button type="submit" class="button" th:text="${'In den Warenkorb'}"></button>
+                <div class="medimgwrapperdetail">
+                    <i class="medimg" th:style="'background-image: url('+@{/img/med/{image}.png(image=${medicine.image})}+');'" ></i>
                 </div>
-            </form>
+
+                <div class="gap column">
+                    <p class="header" th:text="${medicine.name}">Medikament</p>
+                    
+                    <span th:text="${medicine.presonly} ? 'Verschreibungspflichtig' : 'Frei Verkäuflich'">Verwendung</span>
+
+                    <a th:text="${medicine.description}">Beschreibung</a>
+
+                    <a th:text="${medicine.amount + ' Gramm'}">Menge</a>
+
+                    <a th:text="${{medicine.price}}">Preis</a>
+
+                    <form class="ui form" method="post" th:action="@{/cart}" th:if="${available &gt; 0}">
+                        <input type="hidden" name="pid" value="0" th:value="${medicine.id}"/>
+                        <div class="row">
+                            <input class="numberinput rightcorners" id="number" type="number" name="number" min="1" th:max="${available}" step="1" value="1"/><br/>
+                            <button type="submit" class="button leftcorners" th:text="${'In den Warenkorb'}"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -12,60 +12,57 @@
 		
 	</head>
     <body>
-        <nav th:include="navigation :: navigation"></nav>
+      <nav th:include="navigation :: navigation"></nav>
+      <div class="center">
 
-        <form class="filters" sec:authorize="hasRole('BOSS')" action="#" th:action="@{/orders}"  th:object="${filter}" method="POST">
-            <div class="option">
-                <p>Kategorie</p>
-                <select th:field="*{filter}" >
-                  <option th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}" th:value="${ty.name()}" th:text="${ty}"></option>
-                </select>
-            </div>
-              <!--<div class="option" th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">
-                <input class="radio" type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
-                <p th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</p>
-              </div>-->
+      <form class="filters" sec:authorize="hasRole('BOSS')" action="#" th:action="@{/orders}"  th:object="${filter}" method="POST">
+          <div class="option">
+              <p>Kategorie</p>
+              <select th:field="*{filter}" >
+                <option th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}" th:value="${ty.name()}" th:text="${ty}"></option>
+              </select>
+          </div>
+            <!--<div class="option" th:each="ty : ${T(pharmacy.order.OrderFilter.Filter).values()}">
+              <input class="radio" type="radio" th:field="*{filter}" th:value="${ty.name()}"/>
+              <p th:for="${#ids.prev('filter')}" th:text="${ty}">Wireframe</p>
+            </div>-->
 
-            <div class="field">
-              <input class="button" type="submit" value="Filtern" />
-            </div>
-        </form> 
-        <div class="center">
+          <div class="option">
+            <input class="button" type="submit" value="Filtern" />
+          </div>
+      </form> 
           
-           <table class="ui celled table">
-                <tr>
-                    <th >Datum</th>
-                    <th >ID</th>
-                    <th >Betrag in €</th>
-                    <th >Status</th>
-                    <th >User</th>
-                    <th sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">Fertigstellen</th>
-                    <th sec:authorize="hasRole('BOSS')">Abbrechen</th>
-                    <th >Rechung</th>
-                </tr>
-            <tr th:if="${rech.empty}">
-                <td style="text-align: center;"colspan="8"> Keine Bestellungen </td>
-            </tr>
-            <tr th:each="sec : ${rech}"> 
-                <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
-                <td  th:text="${sec.getId().getIdentifier()}">ID</td>
-                <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
-                <td  th:text="${sec.getOrderStatus().toString()}">Status</td>
-                <td  th:text="${sec.getUserAccount().getUsername()}">User</td>
-                <td sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" >
-                  <a th:if="${(sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).PAID) && TimeToDoBusiness}" th:text="Fertigstellen"class="button"th:href="@{/orders/{id}/complete(id=${sec.getId()})}"></a>
-                </td>
-                <td sec:authorize="hasRole('BOSS')" >
-                  <a th:unless="${sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).COMPLETED}" class="button"th:text="Abbrechen" th:href="@{/orders/{id}/cancel(id=${sec.getId()})}"></a>
-                </td>
-                <td>
-                  <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId()})}"></a>
-                </td>
-                </tr>
-            </table>
-            </div>
-   
-        
-        
-    </body>
+      <table class="ui celled table">
+        <tr>
+            <th >Datum</th>
+            <th >ID</th>
+            <th >Betrag in €</th>
+            <th >Status</th>
+            <th >User</th>
+            <th sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">Fertigstellen</th>
+            <th sec:authorize="hasRole('BOSS')">Abbrechen</th>
+            <th >Rechung</th>
+        </tr>
+        <tr th:if="${rech.empty}">
+          <td style="text-align: center;"colspan="8"> Keine Bestellungen </td>
+        </tr>
+        <tr th:each="sec : ${rech}"> 
+          <td th:text="${#temporals.format(sec.getDateCreated(),'dd.MM.yyyy HH:mm')}">Time</td>
+          <td  th:text="${sec.getId().getIdentifier()}">ID</td>
+          <td  th:text="${sec.getTotal().getNumber().doubleValue()}">Betrag</td>
+          <td  th:text="${sec.getOrderStatus().toString()}">Status</td>
+          <td  th:text="${sec.getUserAccount().getUsername()}">User</td>
+          <td sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" >
+            <a th:if="${(sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).PAID) && TimeToDoBusiness}" th:text="Fertigstellen"class="button"th:href="@{/orders/{id}/complete(id=${sec.getId()})}"></a>
+          </td>
+          <td sec:authorize="hasRole('BOSS')" >
+            <a th:unless="${sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).COMPLETED}" class="button"th:text="Abbrechen" th:href="@{/orders/{id}/cancel(id=${sec.getId()})}"></a>
+          </td>
+          <td>
+            <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId()})}"></a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
 </html>

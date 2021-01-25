@@ -35,7 +35,7 @@ public class MedicineForm {
     }
 
     public Medicine toMedicine(){   
-        String image2="1"; //Paste default pic here
+        String image2="default"; //Paste default pic here
         File pic = new File(".\\src\\main\\resources\\static\\img\\med\\"+this.image+".png");
         if(pic.exists()) image2=this.image;
         return new Medicine(this.name, this.description, Money.of( this.price, "EUR"), Money.of( this.purchasingprice, "EUR"),  Arrays.asList(tags.replace(" ", "").split(",")), this.amount,  this.presonly, image2, this.quantity);

@@ -14,76 +14,67 @@
             <a th:href="@{/meddetail}">Medikament</a>
           </div>
 		<div class="center">
-        <div class="popup border">
-            <form action="#newmed" th:action="@{/addmed}"  th:object="${formular}" method="POST">
-                <ul >
-                    <h1  style="margin: 5px;">Medikament bearbeiten</h1>
-                    <input type="hidden"th:field="*{id}" />
-                    <div class="field">
-                        <label>Name:</label>
-                        <input maxlength="255"class="textinput" type="text"th:field="*{name}" th:errorclass="fieldError" name="name"  required="required"/>
-                         <p class="ui negative message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
-                    </div>
-                    <div class="field">
-                        <label>Beschreibung:</label>
-                        <input maxlength="255"class="textinput"type="text"th:field="*{description}" th:errorclass="fieldError" name="description" required="required" />
-                        <p class="ui negative message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
-                    </div>
-                    <div class="field">
-                        <label>Tags (mit Komma trennen):</label>
-                        <input cmaxlength="255"lass="textinput"type="text"th:field="*{tags}" th:errorclass="fieldError" name="tags" required="required" />
-                        <p class="ui negative message" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}"></p>
-                    </div>
-                    <div class="field">
-                        <label>Pfad zum Bild:</label>
-                        <input maxlength="255"class="textinput"type="text"th:field="*{image}" th:errorclass="fieldError" name="image" required="required" />
-                        <p class="ui negative message" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></p>
-                    </div>
-                    <div class="field">
-                        <label>Gewicht:</label>
-                        <div class="row">
-                            <input min="0.0001"step="0.0001"class="numberinput"type="number"th:field="*{amount}" th:errorclass="fieldError" name="amount" required="required" />
-                            <a class="currency">g</a>
-                            <p class="ui negative message" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></p>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label>Zielmenge:</label>
-                        <div class="row">
-                            <input min="1"class="numberinput"type="number"th:field="*{quantity}" th:errorclass="fieldError" name="quantity" required="required"/>
-                            <a class="currency">Stück</a>
-                            <p class="ui negative message" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label >Verkaufspreis:</label>
-                        <div class="row">
-                            <input min="0"class="numberinput"type="number"th:field="*{price}" th:errorclass="fieldError" name="price" required="required" />
-                            <a class="currency">€</a>
-                            <p class="ui negative message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label>Einkaufspreis:</label>
-                        <div class="row">
-                            <input min="0"class="numberinput"type="number"th:field="*{purchasingprice}" th:errorclass="fieldError" name="purchasingprice" required="required"/>
-                            <a class="currency">€</a>
-                            <p class="ui negative message" th:if="${#fields.hasErrors('purchasingprice')}" th:errors="*{purchasingprice}"></p>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label>Rezeptpflichtig:</label>
-                        <input type="checkbox" name ="presonly" th:field="*{presonly}" />
-                    </div>
-                    <div class="field">
-                        <input style="width: auto;margin: 5px" class="button" type="submit" value="Speichern und Schließen" />
-                    </div>
-            </ul>
-            </form>
-            <form action="/discard" th:object="${formular}" >
+            <form class="form gap" action="#newmed" th:action="@{/addmed}"  th:object="${formular}" method="POST">
                 <div class="field">
-                    <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
-                    <input class="button"type="submit" value="Abbrechen"></input>
+                    <label>Name</label>
+                    <input maxlength="255"class="textinput" type="text"th:field="*{name}" th:errorclass="fieldError" name="name"  required="required"/>
+                        <p class="ui negative message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+                </div>
+                <div class="field">
+                    <label>Beschreibung</label>
+                    <input maxlength="255"class="textinput"type="text"th:field="*{description}" th:errorclass="fieldError" name="description" required="required" />
+                    <p class="ui negative message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+                </div>
+                <div class="field">
+                    <label>Tags (mit Komma trennen)</label>
+                    <input cmaxlength="255"lass="textinput"type="text"th:field="*{tags}" th:errorclass="fieldError" name="tags" required="required" />
+                    <p class="ui negative message" th:if="${#fields.hasErrors('tags')}" th:errors="*{tags}"></p>
+                </div>
+                <div class="field">
+                    <label>Pfad zum Bild</label>
+                    <input maxlength="255"class="textinput"type="text"th:field="*{image}" th:errorclass="fieldError" name="image" required="required" />
+                    <p class="ui negative message" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></p>
+                </div>
+                <div class="field">
+                    <label>Gewicht</label>
+                    <div class="row">
+                        <input min="0.0001"step="0.0001"class="numberinput"type="number"th:field="*{amount}" th:errorclass="fieldError" name="amount" required="required" />
+                        <a class="currency">g</a>
+                        <p class="ui negative message" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Zielmenge</label>
+                    <div class="row">
+                        <input min="1"class="numberinput"type="number"th:field="*{quantity}" th:errorclass="fieldError" name="quantity" required="required"/>
+                        <a class="currency">Stück</a>
+                        <p class="ui negative message" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label >Verkaufspreis</label>
+                    <div class="row">
+                        <input min="0"class="numberinput"type="number"th:field="*{price}" th:errorclass="fieldError" name="price" required="required" />
+                        <a class="currency">€</a>
+                        <p class="ui negative message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Einkaufspreis</label>
+                    <div class="row">
+                        <input min="0"class="numberinput"type="number"th:field="*{purchasingprice}" th:errorclass="fieldError" name="purchasingprice" required="required"/>
+                        <a class="currency">€</a>
+                        <p class="ui negative message" th:if="${#fields.hasErrors('purchasingprice')}" th:errors="*{purchasingprice}"></p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Rezeptpflichtig</label>
+                    <input type="checkbox" name ="presonly" th:field="*{presonly}" />
+                </div>
+                <div class="field">
+                    <input class="button" type="submit" value="Aktualisieren" />
                 </div>
             </form>
         </div>
+    </body>
+</html>

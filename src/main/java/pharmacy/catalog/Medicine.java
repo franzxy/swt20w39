@@ -1,12 +1,11 @@
 package pharmacy.catalog;
 
-import java.io.File;
-import java.util.List;
-
-import javax.persistence.Entity;
-
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
+
+import javax.persistence.Entity;
+import java.io.File;
+import java.util.List;
 
 @Entity
 public class Medicine extends Product {

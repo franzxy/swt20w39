@@ -13,19 +13,11 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         <div class="center">
-            <div class="form" th:if="${cart.empty}">
-                <label>Der Warenkorb ist leer.</label>
+            <div class="field" th:if="${cart.empty}">
+                <span>Der Warenkorb ist leer.</span>
                 <a class="button" th:href="@{/}">Einkaufen</a>
             </div>
-            <table class="cart" th:unless="${cart.empty}">
-                <div class="field">
-                    <a class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
-                    <a class="button" sec:authorize="isAuthenticated()" th:href="@{/checkout}">Zum Checkout</a>
-                    <form class="field" sec:authorize="isAuthenticated()" method="post" th:action="@{/checkout}">
-                        <button type="submit" class="ui button">Jetzt Bezahlen</button>
-                    </form>
-                </div>
-                <thead>
+            <table th:unless="${cart.empty}">
                 <tr>
                     <th >Artikel</th>
                     <th >Menge</th>
@@ -38,14 +30,14 @@
                             <form class="ui form" method="post" th:action="@{/updatecart}">
                                 <div class="row">
                                     <input type="hidden" name="pid" value="0" th:value="${item.id}"/>
-                                    <input class="numberinput" id="number" type="number" name="number" min="1" th:max="${availability.get(item.id)}" step="1" th:value="${item.quantity}"/><br/>
-                                    <button type="submit" class="button" th:text="${'Aktualisieren'}"></button>
+                                    <input class="numberinput rightcorners" id="number" type="number" name="number" min="1" th:max="${availability.get(item.id)}" step="1" th:value="${item.quantity}"/><br/>
+                                    <button type="submit" class="button leftcorners" th:text="${'Aktualisieren'}"></button>
                                 </div>
                             </form>
                         </td>
                         <td th:text="${{item.price}}">10 Euro</td>
                         <td>
-                         <a class="iconbutton" th:href="@{/cart/{id}/delete(id=${item.id})}"><img class="icon" th:src="@{/img/trash.png}"></a>   
+                        <a class="iconbutton" th:href="@{/cart/{id}/delete(id=${item.id})}"><img class="icon" th:src="@{/img/trash.png}"></a>   
                         </td>
                     </tr>
                     <tr>
@@ -64,6 +56,8 @@
                         </td>
                     </tr>
             </table>
+            <a th:unless="${cart.empty}" class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
+            <a th:unless="${cart.empty}" class="button" sec:authorize="isAuthenticated()" th:href="@{/checkout}">Zum Checkout</a>
         </div>
     </body>
 </html>

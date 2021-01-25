@@ -12,45 +12,73 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        <!-- Have Categories Account, Profile and Work/ Admin -->
+
         <div class="center">
             
-            <div class="field">
+            <div class="between">
                 <h1 th:text="${'Hallo, '+user.userAccount.getUsername()}">Benutzername</h1>
-            </div>
-            
-            <div class="field">
                 <a class="button" th:text="Ausloggen" th:href="@{/logout}"></a>
             </div>
+        
+            <div class="filters">
+                <div class="card">
+                    <div class="field">
+                        <p class="header">Account</p>
+                    </div>
+                    
+                    <div class="filters">
+                        <div class="setting">
+                            <a class="button" th:text="${'Meine Bestellungen'}" th:href="@{/myorders}"></a>
+                        </div>
+                        <div class="setting">
+                            <a class="button" th:text="${'Meine Finanzen'}" th:href="@{/myfinances}"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="field">
+                        <p class="header">Einstellungen</p>
+                    </div>
+                    <div class="filters">
+                        <div class="setting">
+                            <label class="label" for="name">Passwort</label>
+                            <a class="button start" th:text="${'Ändern'}" th:href="@{/account/settings/password}"></a>
+                        </div>
 
-            <div class="field">
-                <a class="button" th:text="Einstellungen" th:href="@{/account/settings}"></a>
-            </div>
+                        <div class="setting">
+                            <label class="label" for="name">Adresse</label>
+                            <a th:if="${user.getAddress()}" class="button" th:text="${'Ändern'}" th:href="@{/account/settings/address}"></a>
+                            <a th:unless="${user.getAddress()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/settings/address}"></a>
+                        </div>
 
-            <div class="field">
-                <a class="button" th:text="${'Meine Bestellungen'}" th:href="@{/myorders}"></a>
-            </div>
-
-            <div class="field">
-                <a class="button" th:text="${'Meine Finanzen'}" th:href="@{/myfinances}"></a>
-            </div>
-        </div>      
-
-        <div class="center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
-            </div>
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
-            </div>
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
-            </div>
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
-            </div>
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
+                        <div class="setting">
+                            <label class="label" for="name">Versicherung</label>
+                            <a th:if="${user.getInsurance()}" class="button" th:text="${'Ändern'}" th:href="@{/account/settings/insurance}"></a>
+                            <a th:unless="${user.getInsurance()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/settings/insurance}"></a>
+                        </div>
+                        
+                        <div class="setting" sec:authorize="hasRole('CUSTOMER')" th:unless="${user.getOrdered()}">
+                            <label class="label" for="name">Account</label>
+                            <a class="button" th:text="${'Löschen'}" th:href="@{/account/settings/remove}"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="field">
+                        <p class="header">Profil</p>
+                    </div>
+                    <form method="post" role="form" class="ui form" id="form" th:action="@{/account/settings/picture}" th:object="${pictureForm}">
+                        <div class="field">
+                            <label class="label" for="name">Profilbild</label>
+                            <div class="row">
+                                <input class="textinput rightcorners" id="name" name="picture" th:value="${user.getPicture()} ? ${user.getPicture()} : ${pictureForm.getPicture()}" placeholder="URL" th:errorclass="fieldError" type="text" required="required"/>
+                                <button th:if="${user.getPicture()}" type="submit" class="ui button leftcorners">Ändern</button>
+                                <button th:unless="${user.getPicture()}" type="submit" class="ui button leftcorners">Hinzufügen</button>
+                            </div>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"></p>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>      
     </body>

@@ -9,24 +9,25 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
+
         <div class="center">
-          <div class="field">
-            <div class="row">
-              <div class="information">
+          <div class="field gap">
+            <div class="row gap">
+              <div>
                 <label>Kontostand</label>
                 <div class="row">
                   <p th:text="${#numbers.formatDecimal(total,2,3)}"/></p>
                   <p>€</p>
                 </div>
               </div>
-              <div class="information">
+              <div>
                 <label>Einnahmen</label>
                 <div class="row">
                   <p th:text="${#numbers.formatDecimal(plus,2,3)}"/></p>
                   <p>€</p>
                 </div>
               </div>
-              <div class="information">
+              <div>
                 <label>Ausgaben</label>
                 <div class="row">
                   <p th:text="${#numbers.formatDecimal(minus,2,3)}"/></p>
@@ -34,12 +35,12 @@
                 </div>
               </div>
             </div>
-          <div class="row">
-           <form class="space" action="/editfix">
+          <div class="row gap">
+           <form action="/editfix">
              <input  style="width: auto;"class="button"type="submit" th:value="${'Fixkosten bearbeiten'}"></input>
            </form>     
            
-           <form class="space" th:action="@{/create}" method="POST">
+           <form th:action="@{/create}" method="POST">
              <input style="width: auto;" class="button"type="submit" value="Beispieleinträge generieren"></input>
            </form>
           </div>
@@ -66,7 +67,7 @@
             <div th:if="${fail}"class="option">
               <p class="ui negative message">Falsche Angaben</p>
             </div>
-            <div class="field">
+            <div class="option">
               <input class="button"type="submit" value="Filtern" />
             </div>
          </form> 

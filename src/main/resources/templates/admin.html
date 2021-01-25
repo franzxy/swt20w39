@@ -8,22 +8,17 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
-		<title>404 Error</title>
-		
+		<title>Account</title>
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
+
         <div class="center">
-            <div class="field">
-                <img width="40%" th:src="@{/img/404.svg}" src="../static/img/med2.png"/>
-            </div>
-            <div class="field">
-                <h1>Wer soll verantwortlich sein?</h1>
-            </div>
-            <div class="field">
-                <div class="row justify">
-                    <a class="button space">Sie</a>
-                    <a class="button">Die Entwickler</a>
-                </div>
-            </div>
-        </div>
+            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
+            <a class="button" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
+            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
+            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
+            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
+        </div>      
+    </body>
+</html>

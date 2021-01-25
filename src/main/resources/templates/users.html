@@ -17,7 +17,7 @@
 					<!--<th>Urlaub</th>-->
 					<th>Löschen</th>
 				</tr>
-				<tr class="ui card" th:each="user : ${users}">
+				<tr class="ui" th:each="user : ${users}">
 					<td th:text="${user.userAccount.getUsername()}">Benutzername</td>
 					<td th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer</td>
 					<td th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter</td>
@@ -27,7 +27,7 @@
 							
 							<div class="field">
 								<label for="name">IBAN</label>
-								<input id="name" name="iban" placeholder="DE69420694206942069420" th:value="${user.getIban()} ? ${user.getIban()} : ${employeeForm.getIban()}" type="text" th:errorclass="fieldError" required="required"/>
+								<input id="name" name="iban" placeholder="DE69420694206942069420" th:field="*{iban}" type="text" th:errorclass="fieldError" required="required"/>
 								<p class="ui negative message" th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}"></p>
 							</div>
 
@@ -64,7 +64,8 @@
 					<td>
 						<a th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer kann nicht gelöscht werden.</a>
 						<a th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter können nicht gelöscht werden.</a>
-						<a th:if="${user.userAccount.hasRole(customer)}" class="iconbutton" th:href="@{/user/{id}/remove(id=${user.getId()})}"><img class="icon" th:src="@{/img/trash.png}"></a>
+						<a th:if="${user.userAccount.hasRole(customer)} and ${user.getOrdered()}">Kunde hat bereits Bestellungen.</a>
+						<a th:if="${user.userAccount.hasRole(customer)} and not ${user.getOrdered()}" class="iconbutton" th:href="@{/user/{id}/remove(id=${user.getId()})}"><img class="icon" th:src="@{/img/trash.png}"></a>
 					</td>
 				</tr>
 			</table>

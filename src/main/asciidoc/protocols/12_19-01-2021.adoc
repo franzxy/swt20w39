@@ -36,7 +36,7 @@ __Schriftführer:__ Timon Trettin +
 * HTML und Bean Validation: Jeder
 * Finanzen Endwert darf nicht kleiner als Anfangswert sein: Lukas
 * bei tags split(",").trim(): Falk
-* /users, /account schauen ob bestellugen vor löschen: Timon
+* /users, /account schauen ob Bestellungen vor löschen: Timon
 * /account Mitarbeiter und Admin Bereich: Timon
 * Light mode: Timon
 
@@ -80,7 +80,7 @@ __Schriftführer:__ Timon Trettin +
 * Randbedingungen: Timon
 * Kontextabgrenzung -> Pflichtenheft
 * Lösungsstrategie: Timon
-* Bausteinsich
+* Bausteinsicht
 ** Inventory: UML Falk
 ** Catalog: UML Falk
 ** User: Timon

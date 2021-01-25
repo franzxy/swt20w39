@@ -1,16 +1,8 @@
 package pharmacy.user;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
-
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.hibernate.type.TrueFalseType;
-import org.salespointframework.useraccount.UserAccountManagement;
-import org.salespointframework.useraccount.Password.UnencryptedPassword;
-import org.springframework.security.core.context.SecurityContextHolder;
-import javax.validation.constraints.Pattern;	
+import javax.validation.constraints.Size;
 
 class PasswordForm {
 	

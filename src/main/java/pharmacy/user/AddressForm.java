@@ -1,6 +1,5 @@
 package pharmacy.user;
 
-import javax.persistence.Embeddable;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
