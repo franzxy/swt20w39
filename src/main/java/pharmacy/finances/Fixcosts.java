@@ -3,11 +3,24 @@ package pharmacy.finances;
 import org.springframework.util.Assert;
 
 public class Fixcosts {
+
     private double rent;
     private double electricity;
     private double water;
     private double heating;
 
+    public Fixcosts() {
+
+        this.rent = 0.0;
+
+        this.electricity = 0.0;
+
+        this.water = 0.0;
+
+        this.heating = 0.0;
+
+    }
+    
     public double getRent() {
 
         return rent;
@@ -62,18 +75,5 @@ public class Fixcosts {
         this.heating = heating;
 
     }
-
-    public Fixcosts() {
-
-        this.rent = 0.0;
-
-        this.electricity = 0.0;
-
-        this.water = 0.0;
-
-        this.heating = 0.0;
-
-    }
-
     
 }

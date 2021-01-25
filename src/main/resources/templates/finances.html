@@ -16,21 +16,21 @@
               <div>
                 <label>Kontostand</label>
                 <div class="row">
-                  <p th:text="${#numbers.formatDecimal(total,2,3)}"/></p>
+                  <p th:text="${#numbers.formatDecimal(total,1,2)}"/></p>
                   <p>€</p>
                 </div>
               </div>
               <div>
                 <label>Einnahmen</label>
                 <div class="row">
-                  <p th:text="${#numbers.formatDecimal(plus,2,3)}"/></p>
+                  <p th:text="${#numbers.formatDecimal(plus,1,2)}"/></p>
                   <p>€</p>
                 </div>
               </div>
               <div>
                 <label>Ausgaben</label>
                 <div class="row">
-                  <p th:text="${#numbers.formatDecimal(minus,2,3)}"/></p>
+                  <p th:text="${#numbers.formatDecimal(minus,1,2)}"/></p>
                   <p>€</p>
                 </div>
               </div>
@@ -45,7 +45,7 @@
            </form>
           </div>
         </div>
-        <form class="filters"  action="#" th:action="@{/finances}"  th:object="${filterB}" method="POST">
+        <form class="filters"  action="#" th:action="@{/finances}"  th:object="${filterForm}" method="POST">
             <div class="option">
               <p>Kategorie</p>
   				    <select  th:field="*{filter}" >
@@ -82,12 +82,12 @@
             <td colspan="3"> Keine Buchhaltungseinträge verfügbar</td>
         </tr>
         <tr th:each="entry : ${tab}"> 
-            <td th:text="${#temporals.format(entry.getDate().get(),'dd.MM.yyyy HH:mm')}">Time</td>
-            <td th:if="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}">
-              <a th:href="@{/finances/{id}(id=${entry.getDescription()})}"style="color: blue;" th:text="${entry.getDescription()}"></a>
+            <td th:text="${#temporals.format(entry.getValue(),'dd.MM.yyyy')}">Time</td>
+            <td th:if="${#strings.startsWith(entry.getKey().getDescription(),'Rechnung Nr')}">
+              <a th:href="@{/finances/{id}(id=${entry.getKey().getId()})}"style="color: blue;" th:text="${entry.getKey().getDescription()}"></a>
             </td>
-            <td th:unless="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}" th:text="${entry.getDescription()}">Beschreibung</td>
-             <td  th:text="${#numbers.formatDecimal(entry.getValue().getNumber().doubleValue(),2,3)}">Betrag</td>
+            <td th:unless="${#strings.startsWith(entry.getKey().getDescription(),'Rechnung Nr')}" th:text="${entry.getKey().getDescription()}">Beschreibung</td>
+             <td  th:text="${#numbers.formatDecimal(entry.getKey().getValue().getNumber().doubleValue(),1,2)}">Betrag</td>
             
             </tr>
       </table>
