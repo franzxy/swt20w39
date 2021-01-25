@@ -26,6 +26,7 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -229,12 +230,7 @@ public class OrderController {
 		List<Order> ret =List.of() ;
 		if(!userAccount.isEmpty()){
 			if(userAccount.get().hasRole(Role.of("BOSS"))){
-				ArrayList<Order> all = new ArrayList<Order>();
-				all.addAll(this.orderManagement.findBy(OrderStatus.COMPLETED).toList());
-				all.addAll(this.orderManagement.findBy(OrderStatus.PAID).toList());
-				all.addAll(this.orderManagement.findBy(OrderStatus.OPEN).toList()); 
-				ret=all;
-				
+				ret=this.orderManagement.findAll(Pageable.unpaged()).toList());
 			}
 			if(userAccount.get().hasRole(Role.of("CUSTOMER"))){
 				ret=this.orderManagement.findBy(userAccount.get()).toList();
