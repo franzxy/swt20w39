@@ -28,10 +28,10 @@
                     
                     <div class="filters">
                         <div class="setting">
-                            <a class="button" th:text="${'Bestellungen'}" th:href="@{/myorders}"></a>
+                            <a class="button" th:text="${'Meine Bestellungen'}" th:href="@{/myorders}"></a>
                         </div>
                         <div class="setting">
-                            <a class="button" th:text="${'Finanzen'}" th:href="@{/myfinances}"></a>
+                            <a class="button" th:text="${'Meine Finanzen'}" th:href="@{/myfinances}"></a>
                         </div>
                     </div>
                 </div>
@@ -79,31 +79,6 @@
                         </div>
                     </form>
                 </div>
-                <div class="card" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-                    <div class="field">
-                        <p class="header" sec:authorize="hasRole('BOSS')">Adminbereich</p>
-                        <p class="header" sec:authorize="hasRole('EMPLOYEE')">Mitarbeiterbereich</p>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>      
-
-        <div class="center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')">
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
-            </div>
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
-            </div>
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
-            </div>
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
-            </div>
-            <div class="field">
-                <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
             </div>
         </div>      
     </body>

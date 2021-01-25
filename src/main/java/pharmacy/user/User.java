@@ -27,14 +27,21 @@ public class User {
 	private UserAccount userAccount;
 	
 	private String picture;
-
+/*
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<PaymentMethod> payments = new ArrayList<>();
+*/
 	private Address address;
+
 	private Insurance insurance;
+
 	private Boolean ordered;
 
 	private Money salary;
+
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Vacation> vacations = new ArrayList<>();
+
 	private Integer vacationRemaining;
 	
 	@SuppressWarnings("unused")
@@ -59,7 +66,19 @@ public class User {
 	public void removeRole(Role role) {
 		userAccount.remove(role);
 	}
+/*
+	public List<PaymentMethod> getPayments() {
+		return payments;
+	}
 
+	public void addPayment(PaymentMethod newVacation) {
+		payments.add(newVacation);
+	}
+
+	public void removePayment(Integer vac) {
+		payments.remove(payments.get(vac));
+	}
+*/
 	public Address getAddress() {
 		return address;
 	}
@@ -125,5 +144,4 @@ public class User {
 	public void removeVacation(Integer vac) {
 		vacations.remove(vacations.get(vac));
 	}
-
 }

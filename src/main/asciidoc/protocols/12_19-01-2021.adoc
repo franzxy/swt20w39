@@ -80,7 +80,7 @@ __Schriftführer:__ Timon Trettin +
 * Randbedingungen: Timon
 * Kontextabgrenzung -> Pflichtenheft
 * Lösungsstrategie: Timon
-* Bausteinsich
+* Bausteinsicht
 ** Inventory: UML Falk
 ** Catalog: UML Falk
 ** User: Timon

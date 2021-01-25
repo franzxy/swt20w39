@@ -1,11 +1,17 @@
 package pharmacy.user;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import org.salespointframework.payment.PaymentMethod;
 
-@Embeddable
-public class BankAccount extends PaymentMethod {
+public class BankAccount extends PaymentMethod implements Serializable {
+
+	private @Id @GeneratedValue long id;
 
 	private String name;
 	private String iban;

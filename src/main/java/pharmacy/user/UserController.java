@@ -148,30 +148,6 @@ class UserController {
 
 		return "redirect:/users";
 	}
-
-	@GetMapping("/vacation")
-	@PreAuthorize("hasRole('EMPLOYEE')")
-	String vacation(Model model, VacationForm vacationForm) {
-
-		model.addAttribute("vacationForm", vacationForm);
-
-		model.addAttribute("user", userManagement.currentUser().get());
-
-		return "vacation";
-	}
-	
-	@PostMapping("/vacation")
-	@PreAuthorize("hasRole('EMPLOYEE')")
-	String addVacation(@Valid @ModelAttribute("vacationForm")VacationForm vacationForm, Errors result) {
-		
-		if (result.hasErrors()) {
-			return "vacation";
-		}
-		
-		userManagement.addVacation(userManagement.currentUser().get(), vacationForm);
-
-		return "account";
-	}
 	
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
@@ -306,6 +282,50 @@ class UserController {
 		userManagement.removeUser(userManagement.currentUser().get());
 
 		return "redirect:/logout";
+	}
+	
+	@GetMapping("/admin")
+	@PreAuthorize("hasRole('BOSS')")
+	String admin(Model model) {
+
+		model.addAttribute("user", userManagement.currentUser().get());
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
+
+		return "admin";
+	}
+
+	@GetMapping("/employee")
+	@PreAuthorize("hasRole('EMPLOYEE')")
+	String vacation(Model model, VacationForm vacationForm) {
+
+		model.addAttribute("vacationForm", vacationForm);
+
+		model.addAttribute("user", userManagement.currentUser().get());
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
+
+		return "employee";
+	}
+	
+	@PostMapping("/employee")
+	@PreAuthorize("hasRole('EMPLOYEE')")
+	String addVacation(Model model, @Valid @ModelAttribute("vacationForm")VacationForm vacationForm, Errors result) {
+		
+		model.addAttribute("user", userManagement.currentUser().get());
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
+
+		if (result.hasErrors()) {
+			return "employee";
+		}
+		
+		userManagement.addVacation(userManagement.currentUser().get(), vacationForm);
+
+		return "employee";
 	}
 /*
 	String example(@LoggedIn Optional<UserAccount> userAccount) {

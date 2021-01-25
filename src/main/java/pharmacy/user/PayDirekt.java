@@ -1,11 +1,19 @@
 package pharmacy.user;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 
 import org.salespointframework.payment.PaymentMethod;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Embeddable
-public class PayDirekt extends PaymentMethod {
+import javassist.SerialVersionUID;
+
+public class PayDirekt extends PaymentMethod implements Serializable {
+
+	private @Id @GeneratedValue long id;
 
 	private String name;
 

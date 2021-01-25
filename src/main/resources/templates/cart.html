@@ -13,15 +13,10 @@
     <body>
         <nav th:include="navigation :: navigation"></nav>
         <div class="center">
-            <div class="form" th:if="${cart.empty}">
-                <label>Der Warenkorb ist leer.</label>
+            <div class="field" th:if="${cart.empty}">
+                <span>Der Warenkorb ist leer.</span>
                 <a class="button" th:href="@{/}">Einkaufen</a>
             </div>
-            <a th:unless="${cart.empty}" class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
-            <a th:unless="${cart.empty}" class="button" sec:authorize="isAuthenticated()" th:href="@{/checkout}">Zum Checkout</a>
-            <form sec:authorize="isAuthenticated()" method="post" th:action="@{/checkout}">
-                <button type="submit" class="ui button">Jetzt Bezahlen</button>
-            </form>
             <table th:unless="${cart.empty}">
                 <tr>
                     <th >Artikel</th>
@@ -61,6 +56,8 @@
                         </td>
                     </tr>
             </table>
+            <a th:unless="${cart.empty}" class="button" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login zum Bezahlen</a>
+            <a th:unless="${cart.empty}" class="button" sec:authorize="isAuthenticated()" th:href="@{/checkout}">Zum Checkout</a>
         </div>
     </body>
 </html>
