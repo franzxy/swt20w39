@@ -91,8 +91,8 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 		m.setQuantity(0);
 		m.setId("id");
 
-		m.setImage("2");
-		assertEquals(m.toMedicine().getImage(), "2");
+		m.setImage("1");
+		assertEquals(m.toMedicine().getImage(), "1");
 
 		m.setImage("nonexistant");
 		assertEquals(m.toMedicine().getImage(), "default");
