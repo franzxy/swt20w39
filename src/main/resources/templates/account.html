@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto?family=Roboto:wght@900">
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Account</title>
@@ -16,17 +16,15 @@
         <div class="center">
             
             <div class="between">
-                <h1 th:text="${'Hallo, '+user.userAccount.getUsername()}">Benutzername</h1>
+                <p class="header">Hallo <b th:text="${user.userAccount.getUsername()}">Benutzername</b></p>
                 <a class="button" th:text="Ausloggen" th:href="@{/logout}"></a>
             </div>
         
-            <div class="filters">
+            <div class="cards">
                 <div class="card">
-                    <div class="field">
-                        <p class="header">Account</p>
-                    </div>
+                    <p class="header self-center">Account</p>
                     
-                    <div class="filters">
+                    <div class="filters self-center">
                         <div class="setting">
                             <a class="button" th:text="${'Meine Bestellungen'}" th:href="@{/myorders}"></a>
                         </div>
@@ -36,38 +34,35 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="field">
-                        <p class="header">Einstellungen</p>
-                    </div>
+                    <p class="header self-center">Einstellungen</p>
                     <div class="filters">
                         <div class="setting">
                             <label class="label" for="name">Passwort</label>
-                            <a class="button start" th:text="${'Ändern'}" th:href="@{/account/settings/password}"></a>
+                            <a class="button start" th:text="${'Ändern'}" th:href="@{/account/password}"></a>
                         </div>
 
                         <div class="setting">
                             <label class="label" for="name">Adresse</label>
-                            <a th:if="${user.getAddress()}" class="button" th:text="${'Ändern'}" th:href="@{/account/settings/address}"></a>
-                            <a th:unless="${user.getAddress()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/settings/address}"></a>
+                            <a th:if="${user.getAddress()}" class="button" th:text="${'Ändern'}" th:href="@{/account/address}"></a>
+                            <a th:unless="${user.getAddress()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/address}"></a>
+                        </div>
+
+                        <div class="setting">
+                            <label class="label" for="name">Bezahlmethoden</label>
+                            <a th:if="${user.getPayDirekt()} or ${user.getBankAccount()} or ${user.getPaymentCard()}" class="button" th:text="${'Ändern'}" th:href="@{/account/payments}"></a>
+                            <a th:unless="${user.getPayDirekt()} or ${user.getBankAccount()} or ${user.getPaymentCard()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/payments}"></a>
                         </div>
 
                         <div class="setting">
                             <label class="label" for="name">Versicherung</label>
-                            <a th:if="${user.getInsurance()}" class="button" th:text="${'Ändern'}" th:href="@{/account/settings/insurance}"></a>
-                            <a th:unless="${user.getInsurance()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/settings/insurance}"></a>
-                        </div>
-                        
-                        <div class="setting" sec:authorize="hasRole('CUSTOMER')" th:unless="${user.getOrdered()}">
-                            <label class="label" for="name">Account</label>
-                            <a class="button" th:text="${'Löschen'}" th:href="@{/account/settings/remove}"></a>
+                            <a th:if="${user.getInsurance()}" class="button" th:text="${'Ändern'}" th:href="@{/account/insurance}"></a>
+                            <a th:unless="${user.getInsurance()}" class="button" th:text="${'Hinzufügen'}" th:href="@{/account/insurance}"></a>
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="field">
-                        <p class="header">Profil</p>
-                    </div>
-                    <form method="post" role="form" class="ui form" id="form" th:action="@{/account/settings/picture}" th:object="${pictureForm}">
+                    <p class="header self-center">Profil</p>
+                    <form method="post" role="form" class="ui form" id="form" th:action="@{/account/picture}" th:object="${pictureForm}">
                         <div class="field">
                             <label class="label" for="name">Profilbild</label>
                             <div class="row">
@@ -78,6 +73,10 @@
                             <p class="ui negative message" th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"></p>
                         </div>
                     </form>
+                </div>
+                <div class="card" sec:authorize="hasRole('CUSTOMER')" th:unless="${user.getOrdered()}">
+                    <p class="header self-center" for="name">Löschen</p>
+                    <a class="button self-center" th:text="${'Jetzt Löschen'}" th:href="@{/account/remove}"></a>
                 </div>
             </div>
         </div>      

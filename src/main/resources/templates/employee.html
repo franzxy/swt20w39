@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto?family=Roboto:wght@900">
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
 		<title>Account</title>
@@ -14,13 +14,13 @@
         <nav th:include="navigation :: navigation"></nav>
 
         <div class="center">
-            <div class="filters">
+            <div class="cards">
                 <div class="card">
-                    <p class="header">Bestellungen</p>
-                    <a class="button" th:text="${'Bestellungen abfertigen'}" th:href="@{/orders}"></a>
+                    <p class="header self-center">Bestellungen</p>
+                    <a class="button self-center" th:text="${'Bestellungen abfertigen'}" th:href="@{/orders}"></a>
                 </div>
                 <div class="card">
-                    <p class="header">Urlaub</p>
+                    <p class="header self-center">Urlaub Beantragen</p>
                     <form class="form" method="post" role="form" id="form" th:action="@{/employee}" th:object="${vacationForm}">
             
                         <div class="field">
@@ -37,13 +37,11 @@
                                 <p class="ui negative message" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></p>
                         </div>
 
-                        <div class="field">
-                            <button type="submit" class="ui button">Beantragen</button>
-                        </div>
+                        <button type="submit" class="self-center button">Beantragen</button>
                     </form>
                 </div>
-                <div class="card">
-                    <p class="header">Urlaubsanträge</p>
+                <div th:unless="${user.getVacations().isEmpty()}" class="card">
+                    <p class="header self-center">Urlaubsanträge</p>
 
                 </div>  
             </div>  

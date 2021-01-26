@@ -1,9 +1,14 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-        <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto?family=Roboto:wght@900">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+        
 		<title>Registrieren</title>
 	</head>
     <body>
@@ -36,12 +41,10 @@
                     
                 </div>
 
-                <div class="field">
-                    <button type="submit" class="ui button">Registrieren</button>
-                </div>
+                <button type="submit" class="button self-center">Registrieren</button>
 
-                <div class="field">
-                    <span class="span">Schon registriert?</span>
+                <div class="self-center">
+                    <label class="span">Schon registriert?</label>
                     <a class="button" th:href="@{/login}">Login</a>
                 </div>
             </form>

@@ -1,9 +1,14 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto?family=Roboto:wght@900">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
         <link rel="shortcut icon" type="image/png" th:href="@{/img/pharmacy.png}"/>
+        
 		<title>Login</title>
 	</head>
     <body>
@@ -33,11 +38,11 @@
                     <label class="label" for="password">Passwort</label>
                     <input class="textinput" type="password" id="password" name="password"/>
                 </div>
-                <div class="field">
+                <div class="self-center">
                     <button class="button" type="submit">Login</button>
                 </div>
-                <div class="field">
-                    <span class="span">Neu hier?</span>
+                <div class="self-center">
+                    <label>Neu hier?</label>
                     <a class="button" th:href="@{/register}">Registrieren</a>
                 </div>
             </form>

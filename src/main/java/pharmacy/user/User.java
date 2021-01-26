@@ -27,10 +27,11 @@ public class User {
 	private UserAccount userAccount;
 	
 	private String picture;
-/*
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<PaymentMethod> payments = new ArrayList<>();
-*/
+
+	private PayDirekt payDirekt;
+	private BankAccount bankAccount;
+	private PaymentCard paymentCard;
+
 	private Address address;
 
 	private Insurance insurance;
@@ -66,19 +67,31 @@ public class User {
 	public void removeRole(Role role) {
 		userAccount.remove(role);
 	}
-/*
-	public List<PaymentMethod> getPayments() {
-		return payments;
+	
+	public PayDirekt getPayDirekt() {
+		return payDirekt;
+	}
+	
+	public void setPayDirekt(PayDirekt newPayDirekt) {
+		payDirekt = newPayDirekt;
 	}
 
-	public void addPayment(PaymentMethod newVacation) {
-		payments.add(newVacation);
+	public BankAccount getBankAccount() {
+		return bankAccount;
+	}
+	
+	public void setBankAccount(BankAccount newBankAccount) {
+		bankAccount = newBankAccount;
+	}
+		
+	public PaymentCard getPaymentCard() {
+		return paymentCard;
+	}
+	
+	public void setPaymentCard(PaymentCard newPaymentCard) {
+		paymentCard = newPaymentCard;
 	}
 
-	public void removePayment(Integer vac) {
-		payments.remove(payments.get(vac));
-	}
-*/
 	public Address getAddress() {
 		return address;
 	}

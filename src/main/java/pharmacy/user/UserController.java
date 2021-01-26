@@ -162,22 +162,8 @@ class UserController {
 
 		return "account";
 	}
-
-	@GetMapping("/account/settings")
-	@PreAuthorize("isAuthenticated()")
-	String settings(Model model, PictureForm pictureForm) {
-
-		model.addAttribute("pictureForm", pictureForm);
-
-		model.addAttribute("user", userManagement.currentUser().get());
-		model.addAttribute("customer", Role.of("CUSTOMER"));
-		model.addAttribute("employee", Role.of("EMPLOYEE"));
-		model.addAttribute("boss", Role.of("BOSS"));
-
-		return "settings";
-	}
 	
-	@PostMapping("/account/settings/picture")
+	@PostMapping("/account/picture")
 	@PreAuthorize("isAuthenticated()")
 	String changePicture(Model model, @Valid @ModelAttribute("pictureForm")PictureForm pictureForm, Errors result) {
 		model.addAttribute("user", userManagement.currentUser().get());
@@ -188,10 +174,10 @@ class UserController {
 		
 		userManagement.changePicture(userManagement.currentUser().get(), pictureForm);
 
-		return "redirect:/account/settings";
+		return "redirect:/account";
 	}
 
-	@GetMapping("/account/settings/password")
+	@GetMapping("/account/password")
 	@PreAuthorize("isAuthenticated()")
 	String password(Model model, PasswordForm passwordForm) {
 
@@ -205,7 +191,7 @@ class UserController {
 		return "password";
 	}
 
-	@GetMapping("/account/settings/insurance")
+	@GetMapping("/account/insurance")
 	@PreAuthorize("isAuthenticated()")
 	String insurance(Model model, InsuranceForm insuranceForm) {
 
@@ -219,7 +205,7 @@ class UserController {
 		return "insurance";
 	}
 
-	@GetMapping("/account/settings/address")
+	@GetMapping("/account/address")
 	@PreAuthorize("isAuthenticated()")
 	String account(Model model, AddressForm addressForm) {
 
@@ -232,8 +218,78 @@ class UserController {
 
 		return "address";
 	}
+
+	@GetMapping("/account/payments")
+	@PreAuthorize("isAuthenticated()")
+	String accountPayments(Model model, BankAccountForm bankAccountForm, PaymentCardForm creditCardForm, PayDirektForm payDirektForm) {
+
+		model.addAttribute("bankAccountForm", bankAccountForm);
+		model.addAttribute("creditCardForm", creditCardForm);
+		model.addAttribute("payDirektForm", payDirektForm);
+
+		model.addAttribute("user", userManagement.currentUser().get());
+		model.addAttribute("customer", Role.of("CUSTOMER"));
+		model.addAttribute("employee", Role.of("EMPLOYEE"));
+		model.addAttribute("boss", Role.of("BOSS"));
+
+		return "payments";
+	}
 	
-	@PostMapping("/account/settings/password")
+	@PostMapping("/account/bankaccount")
+	@PreAuthorize("isAuthenticated()")
+	String changeAccountBank(Model model, @Valid @ModelAttribute("bankAccountForm")BankAccountForm bankAccountForm, Errors result, PaymentCardForm creditCardForm, PayDirektForm payDirektForm) {
+		
+		model.addAttribute("creditCardForm", creditCardForm);
+		model.addAttribute("payDirektForm", payDirektForm);
+
+		model.addAttribute("user", userManagement.currentUser().get());
+		
+		if (result.hasErrors()) {
+			return "payments";
+		}
+		
+		userManagement.changeBankAccount(bankAccountForm);
+
+		return "redirect:/account/payments";
+	}
+	
+	@PostMapping("/account/card")
+	@PreAuthorize("isAuthenticated()")
+	String changeAccountBank(Model model, @Valid @ModelAttribute("creditCardForm")PaymentCardForm creditCardForm, Errors result, BankAccountForm bankAccountForm, PayDirektForm payDirektForm) {
+		
+		model.addAttribute("bankAccountForm", bankAccountForm);
+		model.addAttribute("payDirektForm", payDirektForm);
+
+		model.addAttribute("user", userManagement.currentUser().get());
+		
+		if (result.hasErrors()) {
+			return "payments";
+		}
+		
+		userManagement.changePaymentCard(creditCardForm);
+
+		return "redirect:/account/payments";
+	}
+	
+	@PostMapping("/account/paydirekt")
+	@PreAuthorize("isAuthenticated()")
+	String changeAccountBank(Model model, @Valid @ModelAttribute("payDirektForm")PayDirektForm payDirektForm, Errors result, PaymentCardForm creditCardForm, BankAccountForm bankAccountForm) {
+		
+		model.addAttribute("bankAccountForm", bankAccountForm);
+		model.addAttribute("creditCardForm", creditCardForm);
+
+		model.addAttribute("user", userManagement.currentUser().get());
+		
+		if (result.hasErrors()) {
+			return "payments";
+		}
+		
+		userManagement.changePayDirekt(payDirektForm);
+
+		return "redirect:/account/payments";
+	}
+	
+	@PostMapping("/account/password")
 	@PreAuthorize("isAuthenticated()")
 	String changeAccountPassword(Model model, @Valid @ModelAttribute("passwordForm")PasswordForm passwordForm, Errors result) {
 		model.addAttribute("user", userManagement.currentUser().get());
@@ -244,10 +300,10 @@ class UserController {
 		
 		userManagement.changePassword(passwordForm);
 
-		return "redirect:/account/settings";
+		return "redirect:/account";
 	}
 	
-	@PostMapping("/account/settings/insurance")
+	@PostMapping("/account/insurance")
 	@PreAuthorize("isAuthenticated()")
 	String changeAccountInsurance(Model model, @Valid @ModelAttribute("insuranceForm")InsuranceForm insuranceForm, Errors result) {
 		model.addAttribute("user", userManagement.currentUser().get());
@@ -258,10 +314,10 @@ class UserController {
 		
 		userManagement.changeInsurance(userManagement.currentUser().get(), insuranceForm);
 
-		return "redirect:/account/settings";
+		return "redirect:/account";
 	}
 	
-	@PostMapping("/account/settings/address")
+	@PostMapping("/account/address")
 	@PreAuthorize("isAuthenticated()")
 	String addAccountAddress(Model model, @Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors result) {
 		model.addAttribute("user", userManagement.currentUser().get());
@@ -272,10 +328,10 @@ class UserController {
 		
 		userManagement.changeAddress(userManagement.currentUser().get(), addressForm);
 
-		return "redirect:/account/settings";
+		return "redirect:/account";
 	}
 
-	@GetMapping("/account/settings/remove")	
+	@GetMapping("/account/remove")	
 	@PreAuthorize("hasRole('CUSTOMER')")
 	String removeAccountUser() {
 		

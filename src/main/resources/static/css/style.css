@@ -54,8 +54,8 @@ nav {
 	height: 40px;
 	margin-left: 20px;
 	margin-right: 10px;
-	font-size: large;
-	font-weight: bold;
+	font-size: x-large;
+	font-weight: 900;
 	color: rgb(16,162,0);
 	text-decoration: none;
 }
@@ -159,8 +159,16 @@ select {
 	justify-content: center;
 }
 
+.cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+	gap: 20px;
+}
+
 .filters {
-	border-radius: 20px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -181,12 +189,10 @@ select {
 .card {
 	gap: 20px;
 	padding-bottom: 20px;
-	flex-grow: 1;
-	flex-basis: 400px;
+	width: 300px;
 	border-radius: 20px;
 	color: black;
 	text-decoration: none;
-	max-width: 800px;
 	display: flex;
 	flex-direction: column;
 }
@@ -289,22 +295,24 @@ input {
 }
 
 span {
+	display: flex;
 	align-self: center;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 label {
+	display: flex;
 	align-self: flex-start;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .inputlabel {
 	display: inline;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .button {
-	align-self: center;
+	align-self: flex-start;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -321,6 +329,10 @@ label {
 	text-decoration: none;
 }
 
+.self-center {
+	align-self: center !important;
+}
+
 .form {
 	display: flex;
 	justify-content: center;
@@ -332,7 +344,6 @@ label {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 }
 
@@ -417,7 +428,6 @@ label {
 	flex-grow: 1;
 	display: flex;
 	justify-content: space-evenly;
-	align-items: center;
 	flex-direction: column;
 }
 
@@ -451,7 +461,7 @@ tbody {
 }
 
 table tr:nth-child(even){
-	background-color: dimgray;
+	background-color: rgb(150, 150, 150);
 }
 
 table tr:nth-child(odd){

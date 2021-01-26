@@ -64,6 +64,27 @@ public class UserManagement {
 		
 		return "password changed";
 	}
+
+	public String changeBankAccount(BankAccountForm form) {
+		
+		currentUser().get().setBankAccount(new BankAccount(form.getName(), form.getIban(), form.getBic()));
+		
+		return "bank account changed";
+	}
+
+	public String changePaymentCard(PaymentCardForm form) {
+		
+		currentUser().get().setPaymentCard(new PaymentCard(form.getName(), form.getNumber(), form.getSecure()));
+		
+		return "credit card changed";
+	}
+
+	public String changePayDirekt(PayDirektForm form) {
+		
+		currentUser().get().setPayDirekt(new PayDirekt(form.getName()));	
+		
+		return "pay direkt changed";
+	}
 	
 	public String changeInsurance(User user, InsuranceForm insuranceForm) {
 		

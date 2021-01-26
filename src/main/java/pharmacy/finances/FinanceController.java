@@ -270,12 +270,12 @@ public class FinanceController {
 		
 		return "financedetails";
 	}
-	@GetMapping("/editfix")
+	@GetMapping("/finances/editfix")
 	public String fix(Model model) {
 		model.addAttribute("fixk",this.fixk);
 		return "editfix";
 	}
-	@PostMapping("/editfix")
+	@PostMapping("/finances/editfix")
 	public String fixsave(@ModelAttribute Fixkosten fixk,Model model) {
 		this.fixk=fixk;
 		model.addAttribute("fixk",fixk);
