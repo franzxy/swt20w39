@@ -1,6 +1,7 @@
 package pharmacy.finances;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.util.Assert;
 
 public class FilterForm{
 	public enum Filter {
@@ -31,6 +32,8 @@ public class FilterForm{
 		}
 
 		public void setId(int id){
+
+			Assert.notNull(id, "Id must not be null!");
 
 			this.id=id;
 
@@ -63,6 +66,8 @@ public class FilterForm{
 
 	public void setFilter(Filter filter) {
 
+		Assert.notNull(filter, "Filter must not be null!");
+
 		this.filter = filter;
 
 	}
@@ -74,6 +79,8 @@ public class FilterForm{
 	}
 
 	public void setBegin(String begin) {
+
+		Assert.notNull(begin, "Begin must not be null!");
 
 		this.begin = begin;
 
@@ -87,6 +94,8 @@ public class FilterForm{
 
 	public void setEnd(String end) {
 
+		Assert.notNull(end, "End must not be null!");
+
 		this.end = end;
 
 	}
@@ -98,6 +107,8 @@ public class FilterForm{
 	}
 
 	public void setIntfilter(boolean intfilter) {
+
+		Assert.notNull(intfilter, "IntFilter must not be null!");
 
 		this.intfilter = intfilter;
 
