@@ -1,5 +1,6 @@
 package pharmacy.finances;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -53,7 +54,8 @@ public class AccountancyAdapter {
 
         private final LocalDate init;
 
-        public AccountancyAdapter(Accountancy accountancy, UserManagement userManagement, BusinessTime businessTime, OrderManagement<Order> orderManagement) {
+        public AccountancyAdapter(Accountancy accountancy, UserManagement userManagement, BusinessTime businessTime, 
+                OrderManagement<Order> orderManagement) {
             
             Assert.notNull(accountancy, "Accountancy must not be null!");
             Assert.notNull(userManagement, "UserManagement must not be null!");
@@ -126,7 +128,9 @@ public class AccountancyAdapter {
             Assert.notNull(description, "Description must not be null!");
             Assert.notNull(date, "Date must not be null!");
 
-            if(amount != 0){
+            BigDecimal cost = BigDecimal.valueOf(amount);
+
+            if( cost.compareTo(BigDecimal.ZERO) != 0 ){
 
                 AccountancyEntry entry = new AccountancyEntry(Money.of(amount, "EUR"), description);
                 
@@ -137,6 +141,8 @@ public class AccountancyAdapter {
         }
 
         private void createFixcosts(LocalDate date){
+
+            Assert.notNull(date, "Date must not be null!");
 
             this.createCosts(this.fixcosts.getHeating()*(-1), "Heizkosten", date);
             this.createCosts(this.fixcosts.getRent()*(-1), "Miete", date);
@@ -174,9 +180,9 @@ public class AccountancyAdapter {
 
             this.orderManagement.findAll(Pageable.unpaged()).forEach(order -> {
                 
-                if(((Order) order).getUserAccount().hasRole(Role.of(role))) {
+                if(order.getUserAccount().hasRole(Role.of(role))) {
 
-                    ret.addAll(this.filterByName(((Order)order).getId().getIdentifier()));
+                    ret.addAll(this.filterByName(order.getId().getIdentifier()));
 
                 }
 
@@ -186,7 +192,8 @@ public class AccountancyAdapter {
 
         }
 
-        private List<AccountancyEntryIdentifier> filterByInterval(LocalDate begin, LocalDate end, List<AccountancyEntryIdentifier> list){
+        private List<AccountancyEntryIdentifier> filterByInterval(LocalDate begin, LocalDate end, 
+                List<AccountancyEntryIdentifier> list){
             
             Assert.notNull(begin, "Begin date must not be null!");
             Assert.notNull(end, "End date must not be null!");
@@ -196,7 +203,8 @@ public class AccountancyAdapter {
 
             list.stream().forEach(id -> {
 
-                LocalDate date = this.entries.containsKey(id) ? this.entries.get(id) : this.accountancy.get(id).get().getDate().get().toLocalDate();
+                LocalDate originalDate = this.accountancy.get(id).get().getDate().get().toLocalDate();
+                LocalDate date = this.entries.containsKey(id) ? this.entries.get(id) : originalDate;
 
                 if(date.isBefore(end) && date.isAfter(begin)){
                     
@@ -218,7 +226,8 @@ public class AccountancyAdapter {
 
             list.stream().forEach(id -> {
 
-                LocalDate date = this.entries.containsKey(id) ? this.entries.get(id) : this.accountancy.get(id).get().getDate().get().toLocalDate();
+                LocalDate originalDate = this.accountancy.get(id).get().getDate().get().toLocalDate();
+                LocalDate date = this.entries.containsKey(id) ? this.entries.get(id) : originalDate;
 
                 ret.put(this.accountancy.get(id).get(), date);
             
@@ -234,6 +243,7 @@ public class AccountancyAdapter {
             Assert.notNull(date, "Date must not be null!");
 
             this.entries.put(entry.getId(), date);
+
             this.accountancy.add(entry);
 
         }
@@ -288,7 +298,11 @@ public class AccountancyAdapter {
 
             for(Order o : orders){
 
-                if(o.getId().getIdentifier().equals(orderId)) return o;
+                if(o.getId().getIdentifier().equals(orderId)){
+
+                    return o;
+
+                } 
             
             }
 
@@ -305,13 +319,20 @@ public class AccountancyAdapter {
             //Filter by Categories
             switch(filterForm.getFilter()) {
 
-                case OBEST			: ret = this.filterByRole("CUSTOMER");			                            break;
-                case GEHÄLTER		: ret = this.filterByName("Gehalt von");				                    break;
-                case STROM			: ret = this.filterByName("Strom");					                        break;
-                case MIETE			: ret = this.filterByName("Miete");					                        break;
-                case WASSER			: ret = this.filterByName("Wasser");					                    break;
-                case HEIZ			: ret = this.filterByName("Heizkosten");				                    break;
-                default				: ret = this.accountancy.findAll().map(entry -> entry.getId()).toList();    break;
+                case OBEST			: ret = this.filterByRole("CUSTOMER");			                            
+                break;
+                case GEHÄLTER		: ret = this.filterByName("Gehalt von");				                    
+                break;
+                case STROM			: ret = this.filterByName("Strom");					                        
+                break;
+                case MIETE			: ret = this.filterByName("Miete");					                        
+                break;
+                case WASSER			: ret = this.filterByName("Wasser");					                    
+                break;
+                case HEIZ			: ret = this.filterByName("Heizkosten");				                    
+                break;
+                default				: ret = this.accountancy.findAll().map(entry -> entry.getId()).toList();    
+                break;
     
             }
 
@@ -321,7 +342,12 @@ public class AccountancyAdapter {
                 LocalDate begin = LocalDate.parse(filterForm.getBegin(), this.format);
                 LocalDate end = LocalDate.parse(filterForm.getEnd(), this.format);
 
-                if(begin.isAfter(end)) throw new DateTimeParseException("begin is after end", filterForm.getBegin()+" "+filterForm.getEnd(), 0);
+                if(begin.isAfter(end)){
+
+                    throw new DateTimeParseException("begin is after end", filterForm.getBegin()+" "
+                            +filterForm.getEnd(), 0);
+                
+                } 
                 
                 return this.idsToMap(this.filterByInterval(begin, end, ret));
 
@@ -337,7 +363,11 @@ public class AccountancyAdapter {
 
             for(AccountancyEntry entry : this.accountancy.findAll().toList()){
 
-                if(entry.isRevenue()) ret = ret.add(entry.getValue());
+                if(entry.isRevenue()){
+
+                    ret = ret.add(entry.getValue());
+
+                } 
             
             }
             
@@ -351,7 +381,11 @@ public class AccountancyAdapter {
 
             for(AccountancyEntry entry : this.accountancy.findAll().toList()){
 
-                if(entry.isExpense()) ret = ret.add(entry.getValue());
+                if(entry.isExpense()){
+
+                    ret = ret.add(entry.getValue());
+
+                } 
             
             }
 
@@ -393,7 +427,12 @@ public class AccountancyAdapter {
 
         public void createExamples(){
 
-            UserAccount apo = this.userManagement.findAll().filter(user -> user.getUserAccount().hasRole(Role.of("BOSS"))).stream().findFirst().get().getUserAccount();
+            UserAccount apo = this.userManagement.findAll().filter(user -> {
+                
+               return user.getUserAccount().hasRole(Role.of("BOSS"));
+
+            }).stream().findFirst().get().getUserAccount();
+
             Order o1=new Order(apo);
             o1.addChargeLine(Money.of(20,"EUR"), "default");
             o1.setPaymentMethod(Cash.CASH);
