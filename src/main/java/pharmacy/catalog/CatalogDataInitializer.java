@@ -79,7 +79,7 @@ class CatalogDataInitializer implements DataInitializer {
 		medicineCatalog.save(new Medicine("Hautcreme", "Für häutende Haut",
 				Money.of(14, "EUR"), Money.of(10, "EUR"), Arrays.asList("ausschlag", "creme", "betäubend"),
 				0.03,  true, "10",4));
-		medicineCatalog.save(new Medicine("Allergiemittel","Für Alergiker mit hohem Niveau",
+		medicineCatalog.save(new Medicine("Allergiemittel","Für Allergiker mit hohem Niveau",
 				Money.of(9, "EUR"), Money.of(4, "EUR"), Arrays.asList("allergie", "atemnot", "spritze"),
 				0.03,  true, "11",5));
 		medicineCatalog.save(new Medicine("Insulin", "Gut insuliertes Insolium Insulites",
