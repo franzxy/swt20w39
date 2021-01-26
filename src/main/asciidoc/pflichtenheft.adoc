@@ -85,7 +85,7 @@ Dies ist eine Tabelle aller Personen oder Personengruppen (natürlich oder juris
 | Kunden          | 5 | Primärer Nutzer | Medikamente kaufen / geliefert bekommen, Gutes User Experience
 | Administratoren | 2 | Verwaltung des Computersystems | Möglichkeit, sämtliche Daten im System zu Überprüfen, Prozesse Überwachen und evtl. verändern
 | Programmierer   | 2 | Ersteller der Anwendung |Entwicklung und Instandhaltung der Software, Gut erweiterbare Software, Geringer Instandhaltungsaufwand, Gute Debugging-Möglichkeiten
-| Mitarbeiter     | 3 | Angestellte der Apotheke | Nutzerinteraktionen BEarbeiten und VErwalten, Bestellungen ausführen
+| Mitarbeiter     | 3 | Angestellte der Apotheke | Nutzerinteraktionen Bearbeiten und Verwalten, Bestellungen ausführen
 | Boss            | 4 | Leiter der Apotheke | Management des Unternehmens
 |===
 
