@@ -29,8 +29,8 @@
 . link:#datenmodell[Datenmodell] +
 .. link:#überblick-klassendiagramm[Überblick: Klassendiagramm] +
 .. link:#klassen-und-enumerationen[Klassen und Enumerationen] +
-. link:#Akzeptanztestfälle[akzeptanztestfälle] +
-. link:#Glossar[glossar] +
+. link:#Akzeptanztestfälle[Akzeptanztestfälle] +
+. link:#Glossar[Glossar] +
 
 :numbered:
 == Zusammenfassung
