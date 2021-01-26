@@ -15,6 +15,7 @@
           </div>
 		<div class="center">
             <form class="form gap" action="#newmed" th:action="@{/addmed}"  th:object="${formular}" method="POST">
+                <input type="hidden" th:field="*{id}" th:value="*{id}"/>
                 <div class="field">
                     <label>Name</label>
                     <input maxlength="255"class="textinput" type="text"th:field="*{name}" th:errorclass="fieldError" name="name"  required="required"/>
@@ -54,7 +55,7 @@
                 <div class="field">
                     <label >Verkaufspreis</label>
                     <div class="row">
-                        <input min="0"class="numberinput"type="number"th:field="*{price}" th:errorclass="fieldError" name="price" required="required" />
+                        <input min="0"step="0.01"class="numberinput"type="number"th:field="*{price}" th:errorclass="fieldError" name="price" required="required" />
                         <a class="currency">€</a>
                         <p class="ui negative message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
                     </div>
@@ -62,7 +63,7 @@
                 <div class="field">
                     <label>Einkaufspreis</label>
                     <div class="row">
-                        <input min="0"class="numberinput"type="number"th:field="*{purchasingprice}" th:errorclass="fieldError" name="purchasingprice" required="required"/>
+                        <input min="0"step="0.01"class="numberinput"type="number"th:field="*{purchasingprice}" th:errorclass="fieldError" name="purchasingprice" required="required"/>
                         <a class="currency">€</a>
                         <p class="ui negative message" th:if="${#fields.hasErrors('purchasingprice')}" th:errors="*{purchasingprice}"></p>
                     </div>
