@@ -321,7 +321,7 @@ public class AccountancyAdapter {
 
                 case OBEST			: ret = this.filterByRole("CUSTOMER");			                            
                 break;
-                case GEHÄLTER		: ret = this.filterByName("Gehalt von");				                    
+                case GEHAELTER		: ret = this.filterByName("Gehalt von");				                    
                 break;
                 case STROM			: ret = this.filterByName("Strom");					                        
                 break;
@@ -428,7 +428,7 @@ public class AccountancyAdapter {
         public void createExamples(){
 
             UserAccount apo = this.userManagement.findAll().filter(user -> {
-                
+
                return user.getUserAccount().hasRole(Role.of("BOSS"));
 
             }).stream().findFirst().get().getUserAccount();
