@@ -1,6 +1,7 @@
 package pharmacy.order;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.util.Assert;
 
 public class OrderFilter{
 	public enum Filter {
@@ -8,11 +9,10 @@ public class OrderFilter{
 		OFFEN("Offen"),
 		BEZAHLT("Bezahlt"),
 		COMPLETED("Abgeschlossen");
+		
 		@Id
 		private int id;
-		
-		
-		//@Value("alle")
+
 		private final String s;
 		
 		Filter(String es){
@@ -24,6 +24,9 @@ public class OrderFilter{
 			return s;
 		}
 		public void setId(int id){
+
+			Assert.notNull(id, "Id must not be null!");
+
 			this.id=id;
 		}
 	}
@@ -35,6 +38,9 @@ public class OrderFilter{
 	}
 
 	public void setFilter(Filter filter) {
+
+		Assert.notNull(filter, "Filter must not be null!");
+
 		this.filter = filter;
 	}
 
