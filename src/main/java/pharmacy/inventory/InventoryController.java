@@ -112,7 +112,7 @@ class InventoryController {
 			
 			autorestock();
 
-			begin.plusDays(1);
+			begin = begin.plusDays(1);
 
 		}
 
