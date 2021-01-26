@@ -16,14 +16,14 @@
       <nav th:include="navigation :: navigation"></nav>
         
       <div class="center">
-        <form class="self-center" action="/meddetail" th:object="${formular}" >
+        <form class="self-center" action="#" th:action="@{/meddetail}"th:object="${formular}" method="POST">
           <input type="hidden" id="id" name="id" value="ID" th:value="''"/>
-          <input style="width: auto;" class="button" type="submit" th:value="${'Medikament hinzufügen'}"/>
+          <input style="width: auto;"class="button" type="submit" value="Medikament hinzufügen" />
         </form>
         <table class="ui celled table">
           <tr>
               <th >Name</th>
-              <th >Prdouktbeschreibung</th>
+              <th >Produktbeschreibung</th>
               <th >Vorrätig</th>
               <th >Zielmenge</th>
               <th >Zusatzbestellung</th>
@@ -58,7 +58,6 @@
                 <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>
                 <div class="iconbutton">
                 <input class="icon"style=" background-color: Transparent;margin:auto"type="image" th:src="@{/img/trash.png}" value="" /></div>
-                <!--<a  class="iconbutton" th:href="@{/user/{id}/remove(id=${user.getId()})}"><img class="icon" th:src="@{/img/trash.png}"></a>-->
               </form>
             </td>
           </tr>

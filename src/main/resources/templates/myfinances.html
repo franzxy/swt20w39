@@ -32,17 +32,17 @@
                     <td colspan="3"> Keine Buchhaltungseinträge Verfügbar</td>
                 </tr>
                 <tr th:each="entry : ${tab}"> 
-                    <td th:text="${#temporals.format(entry.getDate().get(),'dd.MM.yyyy HH:mm')}">Time</td>
-                    <td th:if="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}">
-                    <a th:href="@{/finances/{id}(id=${entry.getDescription()})}"style="color: blue;" th:text="${entry.getDescription()}"></a>
+                    <td th:text="${#temporals.format(entry.getValue(),'dd.MM.yyyy')}">Time</td>
+                    <td th:if="${#strings.startsWith(entry.getKey().getDescription(),'Rechnung Nr')}">
+                    <a th:href="@{/finances/{id}(id=${entry.getKey().getId()})}"style="color: blue;" th:text="${entry.getKey().getDescription()}"></a>
                     </td>
-                    <td th:unless="${#strings.startsWith(entry.getDescription(),'Rechnung Nr')}" >
+                    <td th:unless="${#strings.startsWith(entry.getKey().getDescription(),'Rechnung Nr')}" >
                         <div class="row">
-                            <a class="space" th:text="${entry.getDescription()}"/>
-                            <a class="button" th:href="@{/myfinances/{id}(id=${entry.getId()})}" th:text="${'Lohnzettel'}"></a>
+                            <a class="space" th:text="${entry.getKey().getDescription()}"/>
+                            <a class="button" th:href="@{/myfinances/{id}(id=${entry.getKey().getId()})}" th:text="${'Lohnzettel'}"></a>
                         </div>
                     </td>
-                    <td  th:text="${entry.getValue().getNumber().doubleValue()}">Betrag</td>  
+                    <td  th:text="${#numbers.formatDecimal(entry.getKey().getValue().getNumber().doubleValue(),1,2)}">Betrag</td>  
                 </tr>
            </table>
            </div>

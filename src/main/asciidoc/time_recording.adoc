@@ -19,7 +19,7 @@ Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Bes
 |Jahreswechsel |…   |1440|…   |…   |1800   |1320 |120   
 |9 |…   |1200|…   |…   |1080   |2100 |60  
 |10 |…   |960   |…   |…   |690  |540  |60     
-|11 |…   |…   |…   |…   |…  |70  |90     
+|11 |…   |…   |…   |…   |300  |70  |90     
 |12 |…   |…   |…   |…   |…  |…  |… 
 |===
 

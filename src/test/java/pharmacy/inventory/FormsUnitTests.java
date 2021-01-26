@@ -1,6 +1,7 @@
 package pharmacy.inventory;
 
 import org.javamoney.moneta.Money;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pharmacy.AbstractIntegrationTests;
 import pharmacy.catalog.Medicine;
@@ -11,10 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FormsUnitTests extends AbstractIntegrationTests {
 
+	private MedicineForm m;
+
+	@BeforeEach
+	public void setUp() {
+		m = new MedicineForm();
+	}
+
 	@Test
 	public void testMedicineForm() {
-		MedicineForm m = new MedicineForm();
-
 		assertEquals(m.getDescription(), "");
 		assertEquals(m.getName(), "");
 		assertEquals(m.getTags(), "");
@@ -29,8 +35,6 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 	@Test
 	public void testChangeMedicineFormValues() {
-		MedicineForm m = new MedicineForm();
-
 		m.setDescription("s");
 		m.setName("n");
 		m.setTags("t");
@@ -57,8 +61,6 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 	@Test
 	public void testToMedicine() {
-		MedicineForm m = new MedicineForm();
-
 		m.setDescription("s");
 		m.setName("n");
 		m.setTags("t");
@@ -75,5 +77,24 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 		assertEquals(m.toMedicine().getName(), med.getName());
 		assertEquals(m.toMedicine().getDescription(), med.getDescription());
+	}
+
+	@Test
+	public void testDefaultImage() {
+		m.setDescription("s");
+		m.setName("n");
+		m.setTags("t");
+		m.setAmount(1.0);
+		m.setPresonly(true);
+		m.setPrice(1.0);
+		m.setPurchasingprice(1.0);
+		m.setQuantity(0);
+		m.setId("id");
+
+		//m.setImage("1");
+		//assertEquals(m.toMedicine().getImage(), "1");
+
+		m.setImage("nonexistant");
+		assertEquals(m.toMedicine().getImage(), "default");
 	}
 }
