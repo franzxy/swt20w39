@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.salespointframework.inventory.InventoryItemIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Order;
@@ -26,7 +25,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.yaml.snakeyaml.error.YAMLException;
 
 import pharmacy.catalog.Medicine;
 import pharmacy.catalog.MedicineCatalog;

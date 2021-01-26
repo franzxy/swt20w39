@@ -1,12 +1,10 @@
 package pharmacy.inventory;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+
 import org.javamoney.moneta.Money;
 import org.springframework.util.Assert;
 
