@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 @Component
 @Order(20)
 class InventoryInitializer implements DataInitializer {
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private final UniqueInventory<UniqueInventoryItem> inventory;
 	
@@ -25,8 +26,10 @@ class InventoryInitializer implements DataInitializer {
 
 		Assert.notNull(inventory, "Inventory must not be null!");
 		Assert.notNull(medicineCatalog, "MedicineCatalog must not be null!");
+		
 		this.inventory = inventory;
 		this.medicineCatalog = medicineCatalog;
+
 	}
 
 	@Override
