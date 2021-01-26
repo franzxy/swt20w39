@@ -26,7 +26,7 @@ class InventoryInitializer implements DataInitializer {
 
 		Assert.notNull(inventory, "Inventory must not be null!");
 		Assert.notNull(medicineCatalog, "MedicineCatalog must not be null!");
-		
+
 		this.inventory = inventory;
 		this.medicineCatalog = medicineCatalog;
 
@@ -38,7 +38,7 @@ class InventoryInitializer implements DataInitializer {
 		medicineCatalog.findAll().forEach(medicine -> {
 
 			if (inventory.findByProduct(medicine).isEmpty()) {
-					inventory.save(new UniqueInventoryItem((Medicine)medicine, Quantity.of(((Medicine)medicine).getQuantity())));
+					inventory.save(new UniqueInventoryItem(medicine, Quantity.of(medicine.getQuantity())));
 			}
 		});
 		
