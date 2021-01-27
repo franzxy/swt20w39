@@ -80,4 +80,20 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 		assertEquals(b.getIban(), "iban");
 		assertEquals(b.getBic(), "bic");
 	}
+
+	@Test
+	public void testPayDirektForm() {
+		PayDirektForm p = new PayDirektForm("name");
+
+		assertEquals(p.getName(), "name");
+	}
+
+	@Test
+	public void testPaymentCardForm() {
+		PaymentCardForm p = new PaymentCardForm("name", "number", "secure");
+
+		assertEquals(p.getName(), "name");
+		assertEquals(p.getNumber(), "number");
+		assertEquals(p.getSecure(), "secure");
+	}
 }
