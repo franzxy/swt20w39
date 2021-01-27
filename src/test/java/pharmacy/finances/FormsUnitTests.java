@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pharmacy.AbstractIntegrationTests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FormsUnitTests extends AbstractIntegrationTests {
 
@@ -20,9 +20,10 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 		assertEquals(f.getFilter(), FilterForm.Filter.ALLE);
 		assertEquals(f.getBegin(), "");
 		assertEquals(f.getEnd(), "");
-		assertEquals(f.isIntfilter(), false);
+		assertFalse(f.isIntfilter());
 	}
 
+	@Test
 	public void testChangeFilterFormValues() {
 		f.setFilter(FilterForm.Filter.HEIZ);
 		f.setBegin("begin");
@@ -32,7 +33,7 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 		assertEquals(f.getFilter(), FilterForm.Filter.HEIZ);
 		assertEquals(f.getBegin(), "begin");
 		assertEquals(f.getEnd(), "end");
-		assertEquals(f.isIntfilter(), true);
+		assertTrue(f.isIntfilter());
 	}
 
 	@Test
