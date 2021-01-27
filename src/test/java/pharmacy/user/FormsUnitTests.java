@@ -71,4 +71,13 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 		assertEquals(v.getStartDate(), start);
 		assertEquals(v.getEndDate(), end);
 	}
+
+	@Test
+	public void testBankAccountForm() {
+		BankAccountForm b = new BankAccountForm("name", "iban", "bic");
+
+		assertEquals(b.getName(), "name");
+		assertEquals(b.getIban(), "iban");
+		assertEquals(b.getBic(), "bic");
+	}
 }
