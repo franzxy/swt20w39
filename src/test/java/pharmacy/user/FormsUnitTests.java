@@ -23,9 +23,8 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 	@Test
 	public void testEmployeeForm() {
-		EmployeeForm e = new EmployeeForm( "salary");
+		EmployeeForm e = new EmployeeForm("salary");
 
-		//assertEquals(e.getIban(), "iban");
 		assertEquals(e.getSalary(), "salary");
 	}
 
@@ -61,11 +60,9 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 	@Test
 	public void testVacationForm() {
-		Date start = new Date();
-		start.setTime(10);
+		String start = "24-12-2000";
 
-		Date end = new Date();
-		end.setTime(20);
+		String end = "25-12-2000";
 
 		VacationForm v = new VacationForm("10", "20");
 
