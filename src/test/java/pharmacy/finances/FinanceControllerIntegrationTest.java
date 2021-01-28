@@ -1,10 +1,15 @@
 package pharmacy.finances;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collections;
+import java.util.Optional;
+
+import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
-import org.salespointframework.accountancy.Accountancy;
 import org.salespointframework.accountancy.AccountancyEntry;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
@@ -13,13 +18,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
-import org.javamoney.moneta.Money;
-import org.javatuples.Pair;
 import pharmacy.AbstractIntegrationTests;
 
 
@@ -37,7 +35,6 @@ public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests 
 
     @Test
     @WithMockUser(roles = "BOSS")
-	@SuppressWarnings("unchecked")
 	public void controllerIntegrationTest10() {
 
 		Model model = new ExtendedModelMap();
@@ -78,7 +75,6 @@ public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests 
     }
     @Test
     @WithMockUser(roles = "BOSS")
-	@SuppressWarnings("unchecked")
 	public void controllerIntegrationTest11() {
         Model model = new ExtendedModelMap();
         FilterForm f = new FilterForm();
@@ -116,7 +112,6 @@ public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests 
     }
     @Test
     @WithMockUser(roles = "BOSS")
-	@SuppressWarnings("unchecked")
 	public void controllerIntegrationTest12() {
         Model model = new ExtendedModelMap();
         FilterForm f = new FilterForm();
