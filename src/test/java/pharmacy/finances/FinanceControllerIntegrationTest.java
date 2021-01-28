@@ -25,7 +25,7 @@ public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests 
     @Test
     @WithMockUser(roles = "BOSS")
 	@SuppressWarnings("unchecked")
-	public void controllerIntegrationTest1() {
+	public void controllerIntegrationTest10() {
 
 		Model model = new ExtendedModelMap();
 
@@ -63,8 +63,88 @@ public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests 
 
 
     }
+    @Test
+    @WithMockUser(roles = "BOSS")
+	@SuppressWarnings("unchecked")
+	public void controllerIntegrationTest11() {
+        Model model = new ExtendedModelMap();
+        FilterForm f = new FilterForm();
+        String returnedView = this.controller.financesupdate(f, model);
 
+        assertEquals("finances", returnedView);
+        Object object = model.asMap().get("filterForm");
+        
+        assertTrue(object.getClass().getSimpleName().equals("FilterForm"));
+        
+        object = model.asMap().get("fixcosts");
+        
+        assertTrue(object.getClass().getSimpleName().equals("Fixcosts"));
+
+        object = model.asMap().get("fail");
+        
+        assertFalse((Boolean)object);
+
+        object = model.asMap().get("total");
+        
+        assertTrue((Double) object == 0.0);
+
+        object = model.asMap().get("minus");
+        
+        assertTrue((Double) object == 0.0);
+
+        object = model.asMap().get("plus");
+        
+        assertTrue((Double) object == 0.0);
+
+        object = model.asMap().get("tab");
+        
+        assertEquals(Collections.emptyMap(), object);
     
+    }
+    @Test
+    @WithMockUser(roles = "BOSS")
+	@SuppressWarnings("unchecked")
+	public void controllerIntegrationTest12() {
+        Model model = new ExtendedModelMap();
+        FilterForm f = new FilterForm();
+        f.setBegin("bla");
+        f.setEnd("blub");
+        f.setIntfilter(true);
+        String returnedView = this.controller.financesupdate(f, model);
+
+        assertEquals("finances", returnedView);
+        Object object = model.asMap().get("filterForm");
+        
+        assertTrue(object.getClass().getSimpleName().equals("FilterForm"));
+        
+        object = model.asMap().get("fixcosts");
+        
+        assertTrue(object.getClass().getSimpleName().equals("Fixcosts"));
+
+        object = model.asMap().get("fail");
+        
+        assertTrue((Boolean)object);
+
+        object = model.asMap().get("total");
+        
+        assertTrue((Double) object == 0.0);
+
+        object = model.asMap().get("minus");
+        
+        assertTrue((Double) object == 0.0);
+
+        object = model.asMap().get("plus");
+        
+        assertTrue((Double) object == 0.0);
+
+        object = model.asMap().get("tab");
+        
+        assertEquals(Collections.emptyMap(), object);
+    
+    }
+    
+
+
     @Test
     void nullContructor() {
         assertThatExceptionOfType(IllegalArgumentException.class) //
