@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.core.parameters.P;
 import pharmacy.AbstractIntegrationTests;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,9 +23,9 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 	@Test
 	public void testEmployeeForm() {
-		EmployeeForm e = new EmployeeForm("iban", "salary");
+		EmployeeForm e = new EmployeeForm( "salary");
 
-		assertEquals(e.getIban(), "iban");
+		//assertEquals(e.getIban(), "iban");
 		assertEquals(e.getSalary(), "salary");
 	}
 
@@ -66,10 +67,18 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 		Date end = new Date();
 		end.setTime(20);
 
-		VacationForm v = new VacationForm(start, end);
+		VacationForm v = new VacationForm("10", "20");
 
-		assertEquals(v.getStartDate(), start);
-		assertEquals(v.getEndDate(), end);
+		Calendar startc = Calendar.getInstance();
+		Calendar endc = Calendar.getInstance();
+		startc.setTime(v.getStartDate());
+		assertEquals(startc.get(Calendar.DAY_OF_YEAR),1);
+		assertEquals(endc.get(Calendar.DAY_OF_YEAR), 28);
+
+		assertEquals(startc.get(Calendar.YEAR),1988);
+		assertEquals(endc.get(Calendar.YEAR), 2021);
+
+		
 	}
 
 	@Test
