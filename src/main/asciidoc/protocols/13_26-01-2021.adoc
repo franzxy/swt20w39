@@ -1,0 +1,74 @@
+= Protokoll Gruppe 39
+
+Treffen am 26.01.2021
+
+Ort:      BBB +
+Beginn:   15:00 +
+Ende:     16:30 +
+
+__Schriftführer:__ Timon Trettin +
+
+== Teilnehmer
+* Lennart Wittkowski: Tutor
+* Falk Natkowski
+* Lukas Luger
+* Timon Trettin
+
+== Abschlusspräsentation
+* Voraussichtlich am 03.02.2021 in der 3. Doppelstunde
+* 10 Minuten PowerPoint
+** Was haben wir gemacht?
+** Designentscheidungen
+** Wie wurden Probleme gelöst?
+* 10 Minuten Vorstellung User Story
+* 10 Minuten Verteidigung
+
+== Aufgaben bis zum 31.01.2021
+
+=== Anwendung Allgemein
+* Persistente Datenbank testen
+* Letzte Bugs fixen
+
+=== LimeSurvey Fragebogen
+* Zusammen ausfüllen
+
+=== Java Doc
+* Nicht für Getter/ Setter
+
+=== Evaluation
+* Ausfüllen und hochladen
+
+=== Tests
+* Testabdeckung 80%
+* Testplan überarbeiten
+
+=== Pflichentheft
+* Zusammenfassung: Timon
+* Aufgabenstellung und Zielsetung: Timon
+* Produktnutzung: Timon
+* Interessensgruppen: Falk
+* Systemgrenze und Top-Level-Architektur: Falk
+* Anwendungsfälle: Lukas
+* Funktionale Anforderungen: Lukas
+* Nicht-Funktionale Anforderungen: Timon
+* Datenmodell: Timon
+* Akzeptanztestfälle -> Testplan
+
+=== Dev Doku
+* Einführung und Ziele: Timon
+* Randbedingungen: Timon
+* Kontextabgrenzung -> Pflichtenheft
+* Lösungsstrategie: Timon
+* Bausteinsicht
+** Inventory: UML Falk
+** Catalog: UML Falk
+** User: Timon
+** Order: UML Falk
+** Finances: UML Falk
+** Rückverfolgbarkeit zwischen Analyse und Entwurfsmodell: Jeder
+* Laufzeitsicht
+** Inventory: Lukas
+** Catalog: Falk
+** User: Timon
+** Order: Timon
+** Finances: Lukas

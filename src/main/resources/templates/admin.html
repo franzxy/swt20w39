@@ -14,11 +14,11 @@
         <nav th:include="navigation :: navigation"></nav>
 
         <div class="center">
-            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
-            <a class="button" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
-            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
-            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
-            <a class="button" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
+            <a class="button self-center" sec:authorize="hasRole('BOSS')" th:href="@{/inventory}">Inventar</a>
+            <a class="button self-center" sec:authorize="hasRole('EMPLOYEE') or hasRole('BOSS')" th:href="@{/orders}">Bestellungen</a>
+            <a class="button self-center" sec:authorize="hasRole('BOSS')" th:href="@{/finances}">Finanzen</a>
+            <a class="button self-center" sec:authorize="hasRole('BOSS')" th:href="@{/users}">Benutzer</a>
+            <a class="button self-center" sec:authorize="hasRole('BOSS')" th:href="@{/time}">Zeitreise</a>
         </div>      
     </body>
 </html>

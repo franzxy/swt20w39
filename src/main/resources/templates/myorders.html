@@ -14,14 +14,14 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-   
-        <div class="position">
-            <a th:href="@{/account}">Account</a>
-            <p>></p>
-            <a th:href="@{#}">Meine Bestellungen</a>
-        </div>
 
         <div class="center">
+   
+            <div class="position">
+                <a th:href="@{/account}">Account</a>
+                <p>&#10095;</p>
+                <a th:href="@{#}">Meine Bestellungen</a>
+            </div>
            <table class="ui celled table">
                 <tr>
                     <th >Datum</th>

@@ -17,7 +17,7 @@ public class Vacation implements Serializable {
 
 	private Date startDate;
 	private Date endDate;
-	private Integer duration;
+	private Long duration;
 	private Boolean approved;
 
 	public Vacation() {}
@@ -26,7 +26,8 @@ public class Vacation implements Serializable {
 		
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.duration = toIntExact(TimeUnit.DAYS.convert(Math.abs(endDate.getTime() - startDate.getTime()), TimeUnit.MICROSECONDS));
+		Long dur = Math.abs(endDate.getTime() - startDate.getTime());
+		this.duration = TimeUnit.DAYS.convert(dur, TimeUnit.MILLISECONDS);
 	}
 
 	public Date getStartDate() {
@@ -45,7 +46,7 @@ public class Vacation implements Serializable {
 		endDate = date;
 	}
 
-	public Integer getDuration() {
+	public Long getDuration() {
 		return duration;
 	}
 

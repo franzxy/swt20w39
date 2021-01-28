@@ -140,7 +140,7 @@ class UserController {
 		return "redirect:/users";
 	}
 	
-	@GetMapping("/user/{userId}/vacation/{vacationId}/reject")
+	@GetMapping("/user/{userId}/vacation/{vacationId}/remove")
 	@PreAuthorize("hasRole('BOSS')")
 	String rejectVacations(@PathVariable Long userId, @PathVariable Integer vacationId) {
 		
@@ -382,6 +382,15 @@ class UserController {
 		userManagement.addVacation(userManagement.currentUser().get(), vacationForm);
 
 		return "employee";
+	}
+	
+	@GetMapping("/vacation/{vacationId}/remove")
+	@PreAuthorize("hasRole('EMPLOYEE')")
+	String removeVacation(@PathVariable Integer vacationId) {
+		
+		userManagement.removeVacation(userManagement.currentUser().get(), vacationId);
+
+		return "redirect:/employee";
 	}
 /*
 	String example(@LoggedIn Optional<UserAccount> userAccount) {

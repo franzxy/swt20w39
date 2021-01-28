@@ -21,6 +21,10 @@
                 </div>
                 <div class="card">
                     <p class="header self-center">Urlaub Beantragen</p>
+                    <div class="column">
+                        <label>Verbleibende Urlaubstage</label>
+                        <b th:text="${user.getVacationRemaining()}"></b>
+                    </div>
                     <form class="form" method="post" role="form" id="form" th:action="@{/employee}" th:object="${vacationForm}">
             
                         <div class="field">
@@ -40,10 +44,29 @@
                         <button type="submit" class="self-center button">Beantragen</button>
                     </form>
                 </div>
-                <div th:unless="${user.getVacations().isEmpty()}" class="card">
+                <div th:unless="${user.getVacations().isEmpty()}" class="card max-content">
                     <p class="header self-center">Urlaubsanträge</p>
-
-                </div>  
+                    <table class="ui celled table">
+                        <tr>
+                            <th>Beginn</th>
+                            <th>Ende</th>
+                            <th>Dauer</th>
+                            <th>Status</th>
+                            <th>Löschen</th>
+                        </tr>
+                        <tr class="ui" th:each="index : ${#numbers.sequence(0,(user.getVacations().size() - 1))}" 
+                            th:object="${user.getVacations()[__${index}__]}">
+                            <td th:text="*{getStartDate()}"></td>
+                            <td th:text="*{getEndDate()}"></td>
+                            <td th:text="*{getDuration()}"></td>
+                            <td th:if="*{getApproved()}">Genehmigt</td>
+                            <td th:unless="*{getApproved()}">Nicht Genehmigt</td>
+                            <td>
+                                <a th:unless="*{getApproved()}" class="iconbutton" th:href="@{/vacation/{id}/remove(id=${index})}"><img class="icon" th:src="@{/img/trash.png}"></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>  
         </div>    
     </body>

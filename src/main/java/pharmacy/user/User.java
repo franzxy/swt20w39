@@ -43,7 +43,7 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Vacation> vacations = new ArrayList<>();
 
-	private Integer vacationRemaining;
+	private Integer vacationRemaining = 30;
 	
 	@SuppressWarnings("unused")
 	public User() {}

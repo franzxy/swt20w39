@@ -12,12 +12,12 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav> 
-        <div class="position">
-            <a th:href="@{/finances}">Finanzen</a>
-            <p>></p>
-            <a th:href="@{#}">Details</a>
-          </div>
         <div class="center">
+            <div class="position">
+                <a th:href="@{/finances}">Finanzen</a>
+                <p>&#10095;</p>
+                <a th:href="@{#}">Details</a>
+            </div>
                 
             <div class="field">
                 <label class="label">Datum</label>

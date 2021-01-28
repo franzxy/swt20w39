@@ -94,7 +94,7 @@ public class OrderController {
 		return cart;
 	}
 
-	private boolean haspresonly(Cart c){
+	public boolean haspresonly(Cart c){
 
 		if(c.isEmpty()){
 

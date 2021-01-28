@@ -29,18 +29,6 @@ nav {
 	align-items: center;
 }
 
-.position {
-	padding: 10px 0;
-	align-self: flex-start;
-	font-size: x-large;
-}
-
-.position a {
-	text-decoration: none;
-	color: white;
-	margin: 0 20px;
-}
-
 .menu {
 	grid-area: menu;
 	height: 100%;
@@ -56,7 +44,7 @@ nav {
 	margin-right: 10px;
 	font-size: x-large;
 	font-weight: 900;
-	color: rgb(16,162,0);
+	color: green;
 	text-decoration: none;
 }
 
@@ -125,11 +113,19 @@ nav {
 }
 
 .position {
+	align-self: flex-start;
 	grid-area: position;
+	gap: 10px;
 	height: 40px;
 	display: flex;
 	align-items: center;
 	flex-direction: row;
+}
+
+.position a {
+	font-size: x-large;
+	text-decoration: none;
+	color: black;
 }
 
 .currency {
@@ -195,6 +191,10 @@ select {
 	text-decoration: none;
 	display: flex;
 	flex-direction: column;
+}
+
+.max-content {
+	width: max-content;
 }
 
 .setting {
@@ -375,7 +375,7 @@ label {
 	width: 100%;
 	gap: 20px;
 	display: flex;
-	justify-content: center;
+	justify-content: space-evenly;
 	flex-direction: row;
 	flex-wrap: wrap;
 }
