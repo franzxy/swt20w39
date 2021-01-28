@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.DayOfWeek;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
+import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 
 	@Autowired
 	private UserAccountManagement userManagement;
+
+	@Autowired
+	private BusinessTime time;
 
 	@Test
 	@SuppressWarnings("unchecked")
@@ -90,6 +95,13 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 		assertTrue(c.isEmpty());
 		map = (Map<String, Integer>) model.asMap().get("availability");
 		assertEquals(map, Collections.emptyMap());
+		//--------haspresonly true and empty cart
+		assertFalse(this.controller.haspresonly(c));
+		Medicine med2 = this.catalog.findByPresonly(true).iterator().next();
+		c.addOrUpdateItem(med2, Quantity.of(1));
+		assertTrue(this.controller.haspresonly(c));
+		//--------initializecart
+		assertEquals(c, this.controller.initializeCart());
 		
 		// -------buy()
 		// -------add-/checkout() / -Address
@@ -137,6 +149,10 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 		this.controller.orders(model, Optional.empty());
 		list = (List<Order>) model.asMap().get("rech");
 		assertEquals(list.size(), 0);
+		boolean toexpect = ((time.getTime().getHour() >= 6) && (time.getTime().getHour() < 20) && 
+		(time.getTime().getDayOfWeek() != DayOfWeek.SUNDAY ));
+		assertEquals(toexpect, model.asMap().get("TimeToDoBusiness"));
+
 //-------postorders()
 		OrderFilter f = new OrderFilter();
 		f.setFilter(Filter.ALLE);
