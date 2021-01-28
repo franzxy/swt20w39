@@ -1,10 +1,11 @@
 package pharmacy.finances;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.ui.ExtendedModelMap;
@@ -13,12 +14,16 @@ import org.springframework.ui.Model;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
 import pharmacy.AbstractIntegrationTests;
 
 
 public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests {
 
-
+    @Autowired
+    private UserAccountManagement userAccountManagement;
+    
     @Autowired 
     FinanceController controller;
 
@@ -141,6 +146,19 @@ public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests 
         
         assertEquals(Collections.emptyMap(), object);
     
+    }
+    @Test
+    void controllerIntegrationTest20() {
+        Model model = new ExtendedModelMap();
+        Optional<UserAccount> user = Optional.empty();
+        String returnedView = this.controller.myfinances( model, user );
+        assertEquals(returnedView, "myfinances");
+        assertEquals(model.asMap().get("tab"),Collections.emptyMap() ); 
+        user = this.userAccountManagement.findByUsername("apo");
+        assertTrue(user.isPresent());
+        assertEquals(model.asMap().get("tab"), Collections.emptyMap());
+
+
     }
     
 
