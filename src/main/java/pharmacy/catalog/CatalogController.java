@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.*;
 
 @Controller
@@ -135,7 +137,18 @@ class CatalogController {
 		model.addAttribute("SearchForm", form);
 		form.setSearchTerm(bar);
 
-		return "redirect:/?s=" + form.getSearchTerm() + "&p=" + form.getNoPres() + "&t=" + form.getTag();
+		String UTFTerm = "";
+		String UTFTag = "";
+
+		try {
+			if(!(form.getSearchTerm() == null)) UTFTerm = URLEncoder.encode(form.getSearchTerm(), "UTF-8");
+			if(!(form.getTag() == null)) UTFTag = URLEncoder.encode(form.getTag(), "UTF-8");
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/?s=" + UTFTerm + "&p=" + form.getNoPres() + "&t=" + UTFTag;
 	}
 
 	@GetMapping("/medicine/{medicine}")
