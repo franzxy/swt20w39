@@ -16,6 +16,7 @@ import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.payment.Cash;
+import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -192,6 +193,19 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 		assertEquals(res, "redirect:/orders");
 		assertTrue(this.orderManagement.contains(cust.getId()));
 		assertTrue(this.orderManagement.get(cust.getId()).get().isCompleted());
+		Order test2 = new Order(apo.get());
+		res = this.controller.complete(test2.getId(), model);
+		assertEquals(res, "redirect:/orders");
+
+		Order test3 = new Order(apo.get());
+		Medicine med = this.catalog.findAll().stream().findFirst().get();
+		test3.addOrderLine(med, Quantity.of(3));
+		test3.setPaymentMethod(Cash.CASH);
+		this.orderManagement.save(test3);
+		this.orderManagement.payOrder(test3);
+		res = this.controller.complete(test3.getId(), model);
+
+		assertEquals(res, "redirect:/ordercompletionfail");
 //-------myorders()
 		res = this.controller.myorders(model, hans);
 		list = (List<Order>) model.asMap().get("rech");
