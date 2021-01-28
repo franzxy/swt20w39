@@ -16,6 +16,7 @@
             <form class="cards" method="post" th:action="@{/checkout}">
                 <div class="card">
                     <b class="ui dividing header self-center">Adresse</b>
+                    <input class="input" type="hidden" th:value="${user.getAddress()}" name="address"/>
                     <div class="column gap self-center" th:if="${user.getAddress()}">
                         <div>
                             <label>Name</label>
@@ -39,15 +40,21 @@
                 </div>
                 <div class="card">
                     <b class="header self-center">Zahlungsmittel</b>
-                    <select th:if="${user.getPayDirekt()} or ${user.getBankAccount()} or ${user.getPaymentCard()}">
-                        <option th:if="${user.getPayDirekt()}">PayDirekt</option>
-                        <option th:if="${user.getPaymentCard()}">Kartenzahlung</option>
-                        <option th:if="${user.getBankAccount()}">Bankeinzug</option>
+
+                    <input type="hidden" th:value="null" name="payment" th:unless="${user.getPayDirekt()} or ${user.getBankAccount()} or ${user.getPaymentCard()}"/>
+
+                    <select name="payment" th:if="${user.getPayDirekt()} or ${user.getBankAccount()} or ${user.getPaymentCard()}">
+                        <option th:value="${'payDirekt'}" th:if="${user.getPayDirekt()}">PayDirekt</option>
+                        <option th:value="${'paymentCard'}" th:if="${user.getPaymentCard()}">Kartenzahlung</option>
+                        <option th:value="${'bankAccount'}" th:if="${user.getBankAccount()}">Bankeinzug</option>
                     </select>
                     <a th:if="${user.getPayDirekt()} and ${user.getBankAccount()} and ${user.getPaymentCard()}" class="button self-center" th:href="@{/account/payments}">Zahlungsmittel ändern</a>
                     <a th:unless="${user.getPayDirekt()} and ${user.getBankAccount()} and ${user.getPaymentCard()}" class="button self-center" th:href="@{/account/payments}">Zahlungsmittel hinzufügen</a>
                 </div>
                 <div th:if="${haspresonly}" class="card">
+                    
+                    <input class="input" type="hidden" th:value="${user.getInsurance()}" name="insurance"/>
+
                     <b class="header self-center">Versicherung</b>
                     <div class="column gap self-center" th:if="${user.getInsurance()}">
                         <div>

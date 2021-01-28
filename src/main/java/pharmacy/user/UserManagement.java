@@ -196,8 +196,10 @@ public class UserManagement {
 
 	public String approveVacation(User user, Integer index) {
 		var vac = user.getVacations().get(index);
-		vac.setApproved(true);
-		user.setVacationRemaining(user.getVacationRemaining() - vac.getDuration());
+		if (vac.getDuration() < user.getVacationRemaining()) {
+			vac.setApproved(true);
+			user.setVacationRemaining(user.getVacationRemaining() - vac.getDuration().intValue());
+		}
 		
 		return "vacation added";
 	}

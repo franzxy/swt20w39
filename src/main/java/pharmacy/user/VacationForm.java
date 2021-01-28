@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -16,32 +17,49 @@ import org.salespointframework.time.BusinessTime;
 
 class VacationForm {
 
-	@NotEmpty(message = "Start fehlt")
-	@FutureOrPresent(message = "Darf nicht vor Heute liegen")
-	private final Date startDate;
+	private final String startDate;
+	private Date startTempDate;
 
-	@NotEmpty(message = "Ende fehlt")
-	@Future(message = "Darf nicht vor Morgen liegen")
-	private final Date endDate;
-/*
+	private final String endDate;
+	private Date endTempDate;
+	
 	public VacationForm(String startDate, String endDate) {
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		this.startDate = formatter.parse(startDate);
-		this.endDate = formatter.parse(endDate);
-	}
-*/
-	public VacationForm(Date startDate, Date endDate) {
 
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 
 	public Date getStartDate() {
-		return startDate;
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 1988);
+		cal.set(Calendar.MONTH, Calendar.JANUARY);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		Date dateRepresentation = cal.getTime();
+		startTempDate = dateRepresentation;
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.GERMAN);
+		try {
+			startTempDate = formatter.parse(startDate);
+		} catch(Exception e) {
+		 
+		}
+		return startTempDate;
 	}
 
 	public Date getEndDate() {
-		return endDate;
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 1988);
+		cal.set(Calendar.MONTH, Calendar.JANUARY);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		Date dateRepresentation = cal.getTime();
+		endTempDate = dateRepresentation;
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.GERMAN);
+		try {
+			endTempDate = formatter.parse(endDate);
+		} catch(Exception e) {
+		 
+		}
+		return endTempDate;
 	}
 }
