@@ -448,6 +448,8 @@ public class AccountancyAdapter {
 
             this.add(new AccountancyEntry(Money.of(23,"EUR")," Test"));
 
+            this.autoPay();
+
         }
     
 }
