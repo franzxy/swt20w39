@@ -218,7 +218,7 @@ public class AccountancyAdapter {
 
         }
 
-        public HashMap<AccountancyEntry, LocalDate> idsToMap(List<AccountancyEntryIdentifier> list){
+        private HashMap<AccountancyEntry, LocalDate> idsToMap(List<AccountancyEntryIdentifier> list){
 
             Assert.notNull(list, "List must not be null!");
 
