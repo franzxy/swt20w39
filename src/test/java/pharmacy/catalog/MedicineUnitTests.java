@@ -23,7 +23,7 @@ public class MedicineUnitTests extends AbstractIntegrationTests {
 
 		assertThat(m.getName().equals("name"));
 		assertThat(m.getDescription().equals("description"));
-		assertThat(m.getCategories().equals(list));
+		assertThat(m.getCategories().toList().equals(list));
 		assertThat(m.getAmount() == 1.0);
 		assertThat(m.isPresonly() == true);
 		assertThat(m.getQuantity() == 1);
