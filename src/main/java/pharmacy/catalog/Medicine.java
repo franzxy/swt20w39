@@ -77,7 +77,7 @@ public class Medicine extends Product {
 		this.quantity = quantity;
 	}
 
-	public boolean hasImage(String med) {
+	public boolean hasImage() {
 		File f = new File("src/main/resources/static/img/med/" + getImage() + ".png");
 		return (f.exists());
 	}
