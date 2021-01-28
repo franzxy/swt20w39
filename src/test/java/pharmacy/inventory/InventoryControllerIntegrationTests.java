@@ -7,7 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.Map;
+import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -90,6 +91,11 @@ class InventoryControllerIntegrationTests extends AbstractIntegrationTests {
 		form.setTags("tag, tAAAGG");
 		String result = this.inventoryController.addingMedicine(form, err, model);
 		assertEquals(result, "redirect:/inventory");
+		String id = this.inventory.findAll().stream().findFirst().get().getId().getIdentifier();
+		form.setId(id);
+		this.inventoryController.addingMedicine(form, err, model);
+		long count = this.inventory.findAll().filter(i -> i.getProduct().getName().equals("xy")).get().count();
+		assertEquals(count, 2);
 		//Model Auswerten
 	}
 	@Test
@@ -108,7 +114,10 @@ class InventoryControllerIntegrationTests extends AbstractIntegrationTests {
 		String id = this.inventory.findAll().stream().findFirst().get().getId().getIdentifier();
 		form.setId(id);
 		String result = this.inventoryController.inreaseQuantity(form, model);
-		assertEquals(result, "redirect:/inventory");
+		this.inventoryController.inreaseQuantity(form, model);
+		Map<String, Integer> map = (Map<String, Integer>) model.asMap().get("waitlist");
+		assertEquals(map.get(id), 2);
+		
 		//Model Auswerten
 	}
 	@Test
@@ -147,8 +156,8 @@ class InventoryControllerIntegrationTests extends AbstractIntegrationTests {
 		assertEquals(result, "meddetail");
 
 		model = new ExtendedModelMap();
-		result = this.inventoryController.details(form, model);
-		assertEquals(result, "meddetail");
+		form.setId("");
+		this.inventoryController.details(form, model);
 		//Model auswerten
 	}
 	@Test
