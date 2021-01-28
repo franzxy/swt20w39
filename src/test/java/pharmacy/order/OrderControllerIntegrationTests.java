@@ -1,16 +1,14 @@
 package pharmacy.order;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.OptionalLong;
 
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
@@ -28,7 +26,6 @@ import pharmacy.AbstractIntegrationTests;
 import pharmacy.catalog.Medicine;
 import pharmacy.catalog.MedicineCatalog;
 import pharmacy.order.OrderFilter.Filter;
-import pharmacy.user.UserManagement;
 
 class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 
@@ -64,8 +61,9 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 		assertTrue(c.isEmpty());
 		// -------addItem()
 		Medicine m = this.catalog.findAll().stream().findFirst().get();
-
-		res = this.controller.addItem(m, 2, c);
+		this.controller.addItem(m, -1, c);
+		assertEquals(c.get().findFirst().get().getQuantity().getAmount().intValue(), 1);
+		res = this.controller.addItem(m, 1, c);
 		assertEquals(res, "redirect:/");
 		assertEquals(c.stream().findFirst().get().getQuantity().getAmount().intValue(), 2);
 		// -------updateItem()
@@ -73,7 +71,6 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 		res = this.controller.updateItem(id, 3, c);
 		assertEquals(res, "redirect:/cart");
 		assertEquals(c.stream().findFirst().get().getQuantity().getAmount().intValue(), 3);
-
 		// -------basket() & getAvailability()
 		res = this.controller.basket(c, model);
 		assertEquals(res, "cart");
@@ -84,12 +81,15 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 		// -------basket2()
 		res = this.controller.basket2();
 		assertEquals(res, "redirect:/cart");
+		//--------updateItem with negative value
+		this.controller.updateItem(id, -1, c);
+		assertEquals(c.get().findFirst().get().getQuantity().getAmount().intValue(), 1);
 		// -------deleteItem()
 		res = this.controller.deleteItem(id, c, model);
 		assertTrue(c.isEmpty());
 		map = (Map<String, Integer>) model.asMap().get("availability");
 		assertEquals(map, Collections.emptyMap());
-
+		
 		// -------buy()
 		// -------add-/checkout() / -Address
 	}
@@ -184,6 +184,9 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 		assertEquals(res, "redirect:/orders");
 		assertTrue(this.orderManagement.contains(empl.getId()));
 		assertTrue(this.orderManagement.get(empl.getId()).get().isCanceled());
+		Order test = new Order(apo.get());
+		res = this.controller.cancel(test.getId(), model);
+		assertEquals(res, "redirect:/orders");
 //-------complete()
 		res = this.controller.complete(cust.getId(), model);
 		assertEquals(res, "redirect:/orders");
@@ -193,6 +196,9 @@ class OrderControllerIntegrationTests extends AbstractIntegrationTests {
 		res = this.controller.myorders(model, hans);
 		list = (List<Order>) model.asMap().get("rech");
 		assertEquals(list.size(), 1);
+		this.controller.myorders(model, Optional.empty());
+		list = (List<Order>) model.asMap().get("rech");
+		assertEquals(list.size(), 0);
 
 	}
 
