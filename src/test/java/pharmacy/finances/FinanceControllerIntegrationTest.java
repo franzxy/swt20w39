@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.salespointframework.accountancy.Accountancy;
+import org.salespointframework.accountancy.AccountancyEntry;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.javamoney.moneta.Money;
+import org.javatuples.Pair;
 import pharmacy.AbstractIntegrationTests;
 
 
@@ -23,6 +27,10 @@ public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests 
 
     @Autowired
     private UserAccountManagement userAccountManagement;
+    
+    @Autowired
+    private AccountancyAdapter accountancyAdapter;
+
     
     @Autowired 
     FinanceController controller;
@@ -160,7 +168,68 @@ public class FinanceControllerIntegrationTest  extends AbstractIntegrationTests 
 
 
     }
-    
+    @Test
+    void controllerIntegrationTest30() {
+        Model model = new ExtendedModelMap();
+        this.accountancyAdapter.createExamples();
+        AccountancyEntry entry =  this.accountancyAdapter.findByUserAccount(
+            this.userAccountManagement.findByUsername("apo").get()).keySet().stream().findFirst().get();
+
+        String returnedView = this.controller.salarypaper(entry.getId(), model );
+        assertEquals(model.asMap().get("det").getClass().getSimpleName(), "Pair");
+
+        assertEquals(returnedView, "salarypaper");
+
+    }
+    @Test
+    void controllerIntegrationTest40() {
+        Model model = new ExtendedModelMap();
+        this.accountancyAdapter.createExamples();
+        AccountancyEntry entry =  this.accountancyAdapter.findByUserAccount(
+            this.userAccountManagement.findByUsername("apo").get()).keySet().stream().findFirst().get();
+
+        String returnedView = this.controller.financedetail(entry.getId(), model );
+        assertEquals(model.asMap().get("det").getClass().getSimpleName(), "Order");
+
+        assertEquals(returnedView, "financedetails");
+
+    }
+    @Test
+    void controllerIntegrationTest50() {
+        Model model = new ExtendedModelMap();
+        
+        String returnedView = this.controller.fix( model );
+        assertEquals(model.asMap().get("fixcosts").getClass().getSimpleName(), "Fixcosts");
+
+        assertEquals(returnedView, "editfix");
+
+    }
+    @Test
+    void controllerIntegrationTest51() {
+        Model model = new ExtendedModelMap();
+        Fixcosts f = new Fixcosts();
+        String returnedView = this.controller.fixsave(f, model );
+        assertEquals(model.asMap().get("fixcosts").getClass().getSimpleName(), "Fixcosts");
+        assertEquals(f, this.accountancyAdapter.getFix());
+        assertEquals(returnedView, "redirect:/finances");
+
+    }
+    @Test
+    void controllerIntegrationTest60() {
+        Model model = new ExtendedModelMap();
+        String returnedView = this.controller.hallo(model);
+        assertEquals(returnedView, "redirect:/finances");
+
+    }
+    @Test
+    void controllerIntegrationTest61() {
+        Model model = new ExtendedModelMap();
+        String returnedView = this.controller.createdefaultenties(model);
+        assertEquals(returnedView, "redirect:/finances");
+        assertTrue(this.accountancyAdapter.getBalance().isEqualTo(Money.of(43, "EUR")));
+    }
+
+
 
 
     @Test
