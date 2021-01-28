@@ -60,15 +60,15 @@ public class AccountancyAdapterUnitTest extends AbstractIntegrationTests{
    }
     @Test   
     void nullTest(){
-        assertThatExceptionOfType(NullPointerException.class) //
+        assertThatExceptionOfType(IllegalArgumentException.class) //
                 .isThrownBy(() -> accountancyAdapter.add(null));
-        assertThatExceptionOfType(NullPointerException.class) //
+        assertThatExceptionOfType(IllegalArgumentException.class) //
                 .isThrownBy(() -> accountancyAdapter.setFix(null));
-        assertThatExceptionOfType(NullPointerException.class) //
+        assertThatExceptionOfType(IllegalArgumentException.class) //
                 .isThrownBy(() -> accountancyAdapter.findByUserAccount(null));
-        assertThatExceptionOfType(NullPointerException.class) //
+        assertThatExceptionOfType(IllegalArgumentException.class) //
                 .isThrownBy(() -> accountancyAdapter.getOrder(null));
-        assertThatExceptionOfType(NullPointerException.class) //
+        assertThatExceptionOfType(IllegalArgumentException.class) //
                 .isThrownBy(() -> accountancyAdapter.get(null));
         
     }
