@@ -21,6 +21,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -57,6 +58,13 @@ class InventoryController {
 	InventoryController(UniqueInventory<UniqueInventoryItem> inventory, MedicineCatalog medicineCatalog, 
 			UserAccountManagement userAccount, OrderManagement<Order> orderManagement, BusinessTime time, 
 			Map<String, Integer> waitlist) {
+
+		Assert.notNull(inventory, "Inventory must not be null!");
+		Assert.notNull(medicineCatalog, "MedicineCatalog must not be null!");
+		Assert.notNull(userAccount, "UserAccountManagement must not be null!");
+		Assert.notNull(orderManagement, "OrderManagement must not be null!");
+		Assert.notNull(time, "BusinessTime must not be null!");
+		Assert.notNull(waitlist, "Waitlist must not be null!");
 
 		this.inventory = inventory;
 		this.medicineCatalog=medicineCatalog;

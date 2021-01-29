@@ -4,9 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.core.parameters.P;
 import pharmacy.AbstractIntegrationTests;
 
+import java.util.Calendar;
 import java.util.Date;
 
+import static com.mysema.commons.lang.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FormsUnitTests extends AbstractIntegrationTests {
 
@@ -59,14 +62,10 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 	@Test
 	public void testVacationForm() {
-		String start = "24-12-2000";
+		VacationForm v = new VacationForm("2000-02-02", "2001-03-04");
 
-		String end = "25-12-2000";
-
-		VacationForm v = new VacationForm(start, end);
-
-		assertEquals(v.getStartDate(), start);
-		assertEquals(v.getEndDate(), end);
+		assertNotNull(v.getStartDate());
+		assertNotNull(v.getEndDate());
 	}
 
 	@Test

@@ -30,7 +30,7 @@ public class UserUnitTests extends AbstractIntegrationTests {
 		assertNull(u.getOrdered());
 		assertNull(u.getInsurance());
 		assertNull(u.getSalary());
-		assertNull(u.getVacationRemaining());
+		assertTrue(30==u.getVacationRemaining());
 		assertEquals(u.getVacations(), new ArrayList<Vacation>());
 
 	}

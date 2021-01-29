@@ -49,4 +49,13 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 
 		assertEquals(filter.toString(), "Abgeschlossen");
 	}
+
+	@Test
+	public void testCheckoutForm() {
+		CheckoutForm c = new CheckoutForm(true, "pay", false);
+
+		assertEquals(c.getAddress(), true);
+		assertEquals(c.getPayment(), "pay");
+		assertEquals(c.getInsurance(), false);
+	}
 }
