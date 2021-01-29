@@ -1,0 +1,95 @@
+4 
+30%
+
+5
+Auditorium 5
+Tutor 2
+Lernraum 1
+Andere Studenten 3
+Einführungsvorlesung in die verwendeten Technologien einschl. Spring und SalesPoint 4
+
+6
+JavaDoc 1
+Überblick (http://st.inf.tu-dresden.de/SalesPoint/) 2
+Videoshop-Beispiel (https://github.com/st-tu-dresden/videoshop) einschließlich Pflichtenheft und
+Entwicklerdokumentation 3
+Guestbook-Beispiel (https://github.com/st-tu-dresden/guestbook) 4
+Skripte von Oliver Drotbohm (http://static.odrotbohm.de/lectures/) 5
+
+8
+aus time recording
+
+9
+ja
+
+11
+- findById(String)
+- BusinessTime + Accountancy 
+ 
+12
+Mit geringen Abstrichen
+
+13
+Etwa gleich umfangreich
+
+14
+von 6 auf 5 nach ~30% auf 3 nach 60%
+=> abweichungen aka online apo
+
+15
+Ja
+
+16
+Analyse - Gerade so erfüllt
+Entwurf - Mit Abstrichen
+Implementation und Test - Voll erfüllt
+Dokumentation - Voll erfüllt
+
+18
+1. ja
+2. ja - funzt nich mit business time
+3. ja
+4. ja
+5. ja
+6. ja
+alles außer support und useraccount.web
+und nicht das letzte
+
+19
+UserAccount - erklärung ergänzen
+
+20
+Kommunikation im Team - nicht angewendet
+Erstellung der Dokumentation - angwewendet
+Reverse Engineering (Erzeugung von Diagrammen aus Code) - angwewendet
+
+21
+nicht nützlich
+
+22
+Magic Draw schwer zu installieren und UI meh
+Zeitaufwand für erstellung zu hoch
+
+24
+nein
+
+25
+ja
+
+26
+aufgabenstellung auf salespoint ausgelegt
+
+27
+Konsistenz zwischen Modell und Code hergestellt 0
+Darauf wurde geachtet 0
+Aus Modellen wurden Testfälle abgeleite 0
+
+28
+MagicDraw UML
+
+29
+Ja
+
+30
+Ja
+

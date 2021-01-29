@@ -1,9 +1,0 @@
-[options="header"]
-|===
-|Begriff                 |Beschreibung
-|Inventar            | Digitale Darstellung des Medikamentenbestands.
-|Artikel                | Zusammenfassung aller Medikamente, Tinkturen, Zutaten etc.
-|Bestand                | Verfügbare Menge eines Artikels
-|Account                 | Zugriff, welcher Kundendaten enthält
-|Registrierung | Anlegen eines neuen Accounts
-|===

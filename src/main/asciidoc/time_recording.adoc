@@ -15,23 +15,28 @@ Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Bes
 |6  |95  |300 |120 |…   |80   |110 |35   
 |7  |900 |840 |1020  |…   |960   |1200 |60     
 |8  |…   |960 |1300   |…   |1100   |1500  |100  
-|Jahreswechsel |…   |300 |…   |…   |240   |120   |200  
-|Jahreswechsel |…   |1440|…   |…   |1800   |1320 |120   
-|9  |…   |1200|…   |…   |1080   |2100 |60  
+|9 und Jahreswechsel |…   |2940|…   |…   |3120   |3540 |380  
 |10 |…   |960 |…   |…   |690  |540  |60     
 |11 |…   |1260|…   |…   |300  |1200  |90     
-|12 |…   |…   |…   |…   |…  |…  |60
+|12 |…   |840  |…   |…   |1500  |1.080  |60
 |===
 
 Bitte tragen Sie am Ende des Praktikums noch folgende weitere Werte ein:
 Summe der Arbeitsstunden pro Student:
 
-SUMME(SPALTE(DevX))
+* Falk: 156
+* Lukas: 163
+* Timon: 183
 
 Arbeitsstunden pro Woche pro Student:
 
-SUMME(SPALTE(DevX)) / 12
+* Falk: 13
+* Lukas: 14
+* Timon: 15
 
 Durchschnittliche Arbeitzeit aller Studenten pro Woche:
 
-(SUMME(SPALTE(Dev1)) + SUMME(SPALTE(Dev2)) + SUMME(SPALTE(Dev3)) + SUMME(SPALTE(Dev4)) + SUMME(SPALTE(Dev5)) +SUMME(SPALTE(Dev6))) / 6
+14
+
+Anmerkung:
+Es wurden nur Falk, Lukas und Timon berechnet.

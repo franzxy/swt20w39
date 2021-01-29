@@ -1,5 +1,0 @@
-:figure-caption!:
-
-[#img-Top-Level-Architektur]
-.Top-Level-Architektur
-image::./../../asciidoc/models/design/Top-Level-Architektur.png[Top-Level-Architektur]

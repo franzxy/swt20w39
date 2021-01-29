@@ -41,25 +41,21 @@ Vor allem soll ein agiles Dokument geschaffen werden, welches auch im Laufe der 
 
 == Aufgabenstellung und Zielsetzung
 
-In so schwierigen Zeiten wird es immer wichtiger, dass essenzielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. Deshalb soll eine neue Webapp für die Apotheke des Unterbrunner Ärztehaus entstehen, welche unter anderem die Möglichkeit der Lieferung für bewegungseingeschränkte oder gefährdete Personen ermöglicht.
+In so schwierigen Zeiten wird es immer wichtiger, dass essenzielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. 
+Deshalb soll die neue Webapp der Apotheke des Unterbrunner Ärztehaus einen simplen, lokalen und zuverlässigen Medikamentenversand ermöglichen. Diese Webapp wird die Apotheke zu einer Online Apotheke umwandeln, welche zusammen mit der im Januar 2021 kommenden elektronischen Patientenakte eine zukunftsfähige Plattform bietet. 
+Bei der wird ein besonderer Fokus auf digitale Barrierefreiheit gelegt.
 
-Die Apotheke hat mehrere Benutzer mit verschiedenen Rechten. Jeder Besucher kann das Inventar einsehen, ohne sich anzumelden, um bequem den Bestand prüfen zu können. Im Inventar wird unterschieden zwischen Medikamenten und Zutaten für das Labor. Außerdem hat jeder Artikel einen Bestand, eine Nachbestellmenge und eine Information, ob der Artikel rezeptpflichtig ist.
+Die Apotheke hat mehrere Benutzer mit verschiedenen Rechten. Jeder Besucher kann den vollen Produktkatalog einsehen, ohne sich anzumelden, um Produkte zu suchen, den Bestand einzusehen oder Produkte in den Warenkorb zu legen. Ein eingeloggter Nutzer kann zusätzlich Bestellungen auslösen. Falls die bestellten Produkte Verschreibungspflichtig sind, wird beim Checkout die Angabe der Krankenversicherung Verlangt.
 
-Nach einer kurzen Anmeldung können Nutzer auch Waren in die Apotheke bestellen lassen, bewegungseingeschränkte Nutzer können außerdem diese Waren zu sich nach Hause liefern lassen. Arzt Praxen bekommen ihren eigenen Account, welcher es einer Praxis ermöglicht auf den Medikamentenschrank zuzugreifen. In der Apotheke selbst gibt es die Möglichkeit Kassenaccounts zu erstellen, um in Zukunft mehrere Selbstbedienerkassen zu unterstützen. Mitarbeiter können neben dem abrechnen von rezeptpflichtigen Medikamenten auch eigene hinzufügen, welche im Labor hergestellt wurden. Zudem können Mitarbeiter sich Urlaub nehmen. Der Boss hat die Möglichkeit Artikel manuell nachzubestellen, Nutzer zu erstellen, Mitarbeiter einzustellen, zu feuern und deren Gehalt anzupassen, außerdem kann er die Finanzen der Apotheke verwalten.
+Dieser Produktkatalog basiert auf dem Inventar, wo jeder Artikel einen Bestand, eine Nachbestellmenge, eine Beschreibung und eine Information, ob der Artikel rezeptpflichtig ist besitzt. Außerdem gibt es Kategorien welche die Schlagwortsuche ermöglichen.
 
-Wenn eine Bestellung ausgelöst wurde, werden Zeitpunkt, Betrag, Artikel und zugehörige Menge, Kunde und eventuelle Rezept-Nummern gespeichert. Wenn der Vorgang abgeschlossen wurde, wird bei regulären Kunden abhängig von der Krankenkasse abgerechnet. Bei Praxen wird am Ende des Monats abgerechnet. Zudem werden die Gehälter der Mitarbeiter so verwaltet, genau wie die monatliche Abrechnung mit den Krankenkassen.
-
-Wenn eine Praxis eine Anfrage an das Labor schickt, wird eine offene Bestellung erzeugt, der im Labor tätige Mitarbeiter kann diese dann erfüllen, indem er die benötigten Materialien aus dem Inventar entfernt und daraufhin die Bestellung als abgeschlossen kennzeichnet.
-
-Auch die Inventarverwaltung soll erleichtert werden, daher wird wöchentlich eine Liste mit Medikamenten erstellt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist.
-
-Zwar können Nutzer sich frei Registrieren, mithilfe einer E-Mail-Adresse und eines Passworts, allerdings muss die Akkreditierung der Bewegungseinschränkung vor Ort geschehen. Das Erstellen von Kassen, Praxen und Mitarbeiter Accounts wurde erleichtert, damit nicht jeder erst einen Account manuell erstellen muss.
+Wenn eine Bestellung ausgelöst wurde, werden Zeitpunkt, Betrag, Artikel und zugehörige Menge, Kunde und eventuelle Rezept-Nummern gespeichert. Diese Bestellung kann dann von Mitarbeitern abgefertigt werden.
 
 Das Ziel der Anwendung ist es, sehr zuverlässig und langwierig betrieben werden zu können, weshalb eine Webapp eine gute Wahl darstellt. Zudem bietet die modualre Nutzer-Struktur die Möglichkeit weitere Account-Typen ohne viel Aufwand hinzuzufügen.
 
 Der Aufbau der Seite sollte additiv sein, also niemals dem Nutzer Funktionalität entziehen, wenn seine Freigabe steigt. Das heißt, dass der Boss mindestens genau so viele Funktionen wie der Mitarbeiter hat. Dies hilft zusätzlich bei der Inbetriebnahme des Systems, da Nutzer sich gegenseitig besser unterstützen können.
 
-Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige Bilder verzichtet werden und statt dessen auf korrekte Kontrast verhätnisse und gut skalierende Schrift geachtet werden.
+Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige Bilder verzichtet werden und statt dessen auf korrekte Kontrast-Verhätnisse und gut skalierende Schrift geachtet werden.
 
 == Produktnutzung
 
@@ -73,7 +69,7 @@ Mozilla Firefox, Version 55.0.3+
 
 Google Chrome, Version 61.0.3163+
 
-Die Hauptnutzer des Programms sind die Mitarbeiter der Apotheke, welche typische Webseitennavigation beherrschen, wie auch Ärzte und ihre vertrauenswürdigen Schwestern, der Chef, Selbstbedienungskundschaft und registrierte Kunden bei sich daheim.
+Die Hauptnutzer des Programms sind die Kunden der Apotheke, welche typische Webseitennavigation beherrschen, wie auch Mitarbeiter und Geschäftsführer.
 
 == Interessensgruppen
 
@@ -86,7 +82,7 @@ Dies ist eine Tabelle aller Personen oder Personengruppen (natürlich oder juris
 | Administratoren | 2 | Verwaltung des Computersystems | Möglichkeit, sämtliche Daten im System zu Überprüfen, Prozesse Überwachen und evtl. verändern
 | Programmierer   | 2 | Ersteller der Anwendung |Entwicklung und Instandhaltung der Software, Gut erweiterbare Software, Geringer Instandhaltungsaufwand, Gute Debugging-Möglichkeiten
 | Mitarbeiter     | 3 | Angestellte der Apotheke | Nutzerinteraktionen Bearbeiten und Verwalten, Bestellungen ausführen
-| Boss            | 4 | Leiter der Apotheke | Management des Unternehmens
+| Geschäftsführer  | 4 | Leiter der Apotheke | Management des Unternehmens
 |===
 
 == Systemgrenze und Top-Level-Architektur
