@@ -498,7 +498,6 @@ public class OrderController {
 
 					}
 				}else{
-					System.out.println("Bin angekommen");
 
 					this.failedorder = order;
 
@@ -557,7 +556,7 @@ public class OrderController {
 
 				Order o = this.orderManagement.get(id).get();
 				this.orderManagement.delete(o);
-				
+
 			}
 		}
 
