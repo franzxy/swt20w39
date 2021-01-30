@@ -11,42 +11,35 @@
 		<title>Details</title>
 	</head>
     <body>
-        <nav th:include="navigation :: navigation"></nav> 
-        <div class="center">
-                
-            <div class="field">
-                <label class="label">Datum</label>
-                <b th:text="${#temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"></b>
+        <nav th:include="navigation :: navigation"></nav>
+        <div class="center"th:if="${det == null}"><h3>Diese Bestellung wurde gelöscht.</h3></div> 
+        <div th:if="${det != null}"class="center">
+            
+            <div >
+                <b th:text="${'Datum: '+ #temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"></b>
             </div>
                 
-            <div class="field">
-                <label class="label">ID</label>
-                <b th:text="${det.getId().getIdentifier()}"></b>
+            <div >
+                <b th:text="${'ID: '+ det.getId().getIdentifier()}"></b>
             </div>
                 
-            <div class="field">
-                <label class="label">Betrag</label>
-                <b th:text="${det.getTotal().getNumber().doubleValue()}"></b>
+            <div >
+                
+                <b th:text="${'Betrag: '+det.getTotal().getNumber().doubleValue()}"></b>
             </div>
                 
-            <div class="field">
+            <div >
                 <label class="label">Status</label>
                 <b th:text="${det.getOrderStatus().toString()}"></b>
             </div>
                 
-            <div class="field">
+            <div >
                 <label class="label">User</label>
                 <b th:text="${det.getUserAccount().getUsername()}"></b>
             </div>
                 
-            <div class="field">
-                <label class="label">User ID</label>
-                <b th:text="${det.getUserAccount().getId().getIdentifier()}"></b>
-            </div>
-                
-            <div class="field">
-                <label class="label">Bezahlmethode</label>
-                <b th:text="${det.getPaymentMethod()}"></b>
+            <div >
+                <b th:text="${'Bezahlmethode: '+det.getPaymentMethod()}"></b>
             </div>
             <table class="ui celled table">
                 <tr>
