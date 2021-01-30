@@ -1,0 +1,43 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2020/21
+// Auch wenn der Bogen nicht anonymisiert ist, dürfen Sie gern Ihre Meinung offen kundtun.
+// Sowohl positive als auch negative Anmerkungen werden gern gesehen und zur stetigen Verbesserung genutzt.
+// Versuchen Sie in dieser Auswertung also stets sowohl Positives wie auch Negatives zu erwähnen.
+
+**Von: Lukas Luger**
+
+**Gruppe: 39**
+
+== Was habe ich gelernt / was habe ich nicht gelernt?
+* Ich habe gelernt:
+** mit Thymeleaf und Spring zu arbeiten
+** wie wichtig interne Kommunikation ist
+** Backend ist wichtiger als Frontend
+* Ich habe nicht gelernt:
+** eine dynamische Anwednung zu entwerfen
+
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* Kommunikation ist essentiell für Erfolg
+* stets auf ausgeglichenheit der Aufgabenverteilung achten
+* beim nächsten mal stetige Kommunikation beibehalten, von anfang an
+// Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* Salespoint ist sehr Limitiert in der Ausführung, bei Erweiterung einer Klasse folgt oft Erweiterung des gesamten packages bzw. eigene Implementierung.
+* Für Tests ist es Teilweise sehr umständlich Objekte einer Klasse von Spring zu erzeugen.
+// Einschätzung der Arbeit mit den bereitgestellten und zusätzlich genutzten Frameworks. Was War gut? Was war verbesserungswürdig?
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* Salespoint offener machen, öfter findById(String) ist wünschenswert
+* Fixe Kosten bei accountancy, welche mit businesstime Hand in Hand gehen
+// Möglichst mit Beschreibung, warum die Umsetzung des von Ihnen angebrachten Vorschlages nötig ist.
+
+== Feedback für den Tutor
+* Ist immer an einer Lösung interressiert
+* bringt gute Lösungsansätze und Vorschläge ein
+* stets hilfsbereit
+// Fühlten Sie sich durch den vom Lehrstuhl bereitgestellten Tutor gut betreut? Was war positiv? Was war verbesserungswürdig?
+
+== Sonstiges und Anmerkungen
+-
+// Welche Aspekte fanden in den oben genannten Punkten keine Erwähnung?
