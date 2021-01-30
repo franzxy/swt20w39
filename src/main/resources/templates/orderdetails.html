@@ -15,45 +15,39 @@
         <nav th:include="navigation :: navigation"></nav> 
             <div class="center">
                  
-                <div class="position">
-                    <a th:href="@{/orders}">Bestellungen</a>
-                    <p>&#10095;</p>
-                    <a th:href="@{#}">Details</a>
+                <div class="field">
+                    <label class="label">Datum</label>
+                    <b th:text="${#temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"></b>
                 </div>
                  
                 <div class="field">
-                    <span class="span">Datum</span>
-                    <h4 th:text="${#temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"></h4>
+                    <label class="label">ID</label>
+                    <b th:text="${det.getId().getIdentifier()}"></b>
                 </div>
                  
                 <div class="field">
-                    <span class="span">ID</span>
-                    <h4 th:text="${det.getId().getIdentifier()}"></h4>
+                    <label class="label">Betrag</label>
+                    <b th:text="${det.getTotal().getNumber().doubleValue()}"></b>
                 </div>
                  
                 <div class="field">
-                    <span class="span">Betrag</span>
-                    <h4 th:text="${det.getTotal().getNumber().doubleValue()}"></h4>
+                    <label class="label">Status</label>
+                    <b th:text="${det.getOrderStatus().toString()}"></b>
                 </div>
                  
                 <div class="field">
-                    <span class="span">Status</span>
-                    <h4 th:text="${det.getOrderStatus().toString()}"></h4>
+                    <label class="label">User</label>
+                    <b th:text="${det.getUserAccount().getUsername()}"></b>
                 </div>
                  
                 <div class="field">
-                    <span class="span">User</span>
-                    <h4 th:text="${det.getUserAccount().getUsername()}"></h4>
+                    <label class="label">User ID</label>
+                    <b th:text="${det.getUserAccount().getId().getIdentifier()}"></b>
                 </div>
                  
                 <div class="field">
-                    <span class="span">User ID</span>
-                    <h4 th:text="${det.getUserAccount().getId().getIdentifier()}"></h4>
-                </div>
-                 
-                <div class="field">
-                    <span class="span">Bezahlmethode</span>
-                    <h4 th:text="${det.getPaymentMethod()}"></h4>
+                    <label class="label">Bezahlmethode</label>
+                    <b th:text="${det.getPaymentMethod()}"></b>
                 </div>
                 <table class="ui celled table">
                     <tr>
@@ -62,7 +56,7 @@
                         
                     </tr>
                 <tr th:if="${det.getOrderLines().isEmpty()}">
-                    <td style="text-align: center;"colspan="3"> Keine Infos </td>
+                    <td style="text-align: center;"collabel="3"> Keine Infos </td>
                 </tr>
                 <tr th:each="orderline : ${det.getOrderLines().get().toArray()}"> 
                     <td  th:text="${orderline.getProductName()}">Name</td>

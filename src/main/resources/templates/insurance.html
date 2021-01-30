@@ -12,14 +12,14 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        
-        <div class="position">
-            <a th:href="@{/account}">Account</a>
-            <p>></p>
-            <a th:href="@{/account/insurance}">Versicherung</a>
-        </div>
 
         <div class="center">
+        
+            <div class="position">
+                <a th:href="@{/account}">Account</a>
+                <p>&#10095;</p>
+                <a th:href="@{/account/insurance}">Versicherung</a>
+            </div>
 
             <form method="post" role="form" class="ui form" id="form" th:action="@{/account/insurance}" th:object="${insuranceForm}">
                 <div class="field">
