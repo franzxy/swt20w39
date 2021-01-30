@@ -29,7 +29,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import pharmacy.user.UserManagement;
-
+/**
+ * Diese Klasse bietet eine Erweiterung zu {@link org.salespointframework.accountancy.Accountancy}
+ * 
+ * @author Lukas Luger
+ */
 @Service
 @Transactional
 public class AccountancyAdapter {
@@ -53,6 +57,14 @@ public class AccountancyAdapter {
         private final  DateTimeFormatter format;
 
         private final LocalDate init;
+        /**
+         * Generiert einen neuen {@link AccountancyAdapter}
+         * 
+         * @param accountancy
+         * @param userManagement
+         * @param businessTime
+         * @param orderManagement
+         */
 
         public AccountancyAdapter(Accountancy accountancy, UserManagement userManagement, BusinessTime businessTime, 
                 OrderManagement<Order> orderManagement) {
@@ -248,6 +260,13 @@ public class AccountancyAdapter {
 
         }
 
+        /**
+         * Dient dazu einen neuen {@link org.salespointframework.accountancy.AccountancyEntry}
+         * zu Accountancy hinzuzufügen
+         * 
+         * @param entry
+         * 
+         */
         public void add(AccountancyEntry entry){
 
             Assert.notNull(entry, "Entry must not be null!");
@@ -255,6 +274,12 @@ public class AccountancyAdapter {
             this.add(entry, LocalDate.now());
 
         }
+        /**
+         * Setzt die gegebenen Fixkosten der Klasse {@link pharmacy.finances.Fixcosts}
+         * 
+         * @param fix
+         * 
+         */
 
         public void setFix(Fixcosts fix){
             
@@ -263,6 +288,13 @@ public class AccountancyAdapter {
             this.fixcosts = fix;
 
         }
+        /**
+         * Liefert eine HashMap mit {@link org.salespointframework.accountancy.AccountancyEntry}
+         * und {@link LocalDate} , da das Datum der {@link org.salespointframework.accountancy.AccountancyEntry}s nicht
+         * immer korrekt ist.
+         * @param userAccount
+         * @return HashMap<AccountancyEntry, LocalDate>
+         */
 
         public HashMap<AccountancyEntry, LocalDate> findByUserAccount(UserAccount userAccount){
 
@@ -285,6 +317,12 @@ public class AccountancyAdapter {
             return this.idsToMap(ret);
 
         }
+        /**
+         * Gibt eine passende Order zurück, falls diese existiert zu einem {@link AccountancyEntryIdentifier},
+         * sonst null.
+         * @param id
+         * @return {@link Order}
+         */
 
         public Order getOrder(AccountancyEntryIdentifier id){
 
@@ -309,6 +347,12 @@ public class AccountancyAdapter {
             return null;
 
         }
+        /**
+         * Gibt eine HashMap der {@link AccountancyEntry}s und des dazugehörigen {@link LocalDate}s zurück,
+         * welche mittels {@link FilterForm} gefiltert wurde
+         * @param filterForm
+         * @return HashMap<AccountancyEntry, LocalDate>
+         */
 
         public HashMap<AccountancyEntry, LocalDate> filter(FilterForm filterForm){
 
@@ -355,8 +399,14 @@ public class AccountancyAdapter {
             
             return this.idsToMap(ret);
 
-        } 
+        }
 
+        /**
+         * Gibt die Summe der Einnahmen zurück.
+         * 
+         * @return {@link Money}
+         * 
+         */
         public Money getRevenue(){
 
             Money ret = Money.of(0.0, "EUR");
@@ -374,7 +424,12 @@ public class AccountancyAdapter {
             return ret;
 
         }
-
+        /**
+         * Gibt die Summe der Ausgaben zurück.
+         * 
+         * @return {@link Money}
+         * 
+         */
         public Money getExpenses(){
 
             Money ret = Money.of(0.0, "EUR");
@@ -393,6 +448,12 @@ public class AccountancyAdapter {
 
         }
 
+        /**
+         * Gibt die Summe der aller registrierten Ein- und Ausgaben zurück.
+         * 
+         * @return {@link Money}
+         * 
+         */
         public Money getBalance(){
             
             Money ret = Money.of(0.0, "EUR");
@@ -406,13 +467,21 @@ public class AccountancyAdapter {
             return ret;
 
         }
-
+        /**
+         * Gibt die Fixkosten in Form von {@link Fixcosts} zurück.
+         * @return {link Fixcosts}
+         */
         public Fixcosts getFix(){
 
             return this.fixcosts;
         
         }
-
+        /**
+         * Findet einen {@link AccountancyEntry} mithilfe eines {@link AccountancyEntryIdentifier}
+         * und gibt diesen als Pair {@link AccountancyEntry}, {@link LocalDate} zurück.
+         * @param id
+         * @return Pair<AccountancyEntry, LocalDate>
+         */
         public Pair<AccountancyEntry, LocalDate> get(AccountancyEntryIdentifier id){
 
             Assert.notNull(id, "ID must not be null!");
@@ -424,7 +493,9 @@ public class AccountancyAdapter {
             return new Pair<AccountancyEntry, LocalDate>(entry, date);
 
         }
-
+        /**
+         * Generiert Beispieleinträge.
+         */
         public void createExamples(){
 
             UserAccount apo = this.userManagement.findAll().filter(user -> {
