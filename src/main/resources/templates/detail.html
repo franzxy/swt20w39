@@ -30,7 +30,7 @@
 
                     <a th:text="${medicine.description}">Beschreibung</a>
 
-                    <a th:text="${medicine.amount + ' Gramm'}">Menge</a>
+                    <a th:text="${#numbers.formatDecimal(medicine.amount,1,4) + ' Gramm'}">Menge</a>
 
                     <a th:text="${{medicine.price}}">Preis</a>
 
