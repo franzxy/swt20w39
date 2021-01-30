@@ -176,7 +176,7 @@ class InventoryController {
 		inventory.save(item.increaseQuantity(Quantity.of(anz)));
 		
 		
-		AccountancyEntry order = new AccountancyEntry(med.getPurchaseprice().multiply(-1*anz),
+		AccountancyEntry order = new AccountancyEntry(med.getPurchaseprice().multiply((long)(-1*anz)),
 			"Nachbestellung von "+anz+" mal "+med.getName());
 
 		this.accountancy.add(order);
