@@ -46,7 +46,17 @@ import pharmacy.catalog.Medicine;
 import pharmacy.user.Address;
 import pharmacy.user.PayDirekt;
 import pharmacy.user.UserManagement;
-
+/**
+ * Ein Controller für:
+ * <ul>
+ * <li>Bestellübersicht</li>
+ * <li>Warenkorb</li>
+ * <li>Bezahlung</li>
+ * <li>Bearbeiten von Bestellungen</li>
+ * </ul>
+ * @author Timon Trettin
+ * @author Lukas Luger
+ */
 @EnableScheduling
 @Controller
 @SessionAttributes("cart")
@@ -68,7 +78,13 @@ public class OrderController {
 	private Map<ProductIdentifier, Integer> quantity;
 	
 	private final BusinessTime time;
-
+	/**
+	 * Initialisert den OrderController mit den notwendigen Attributen.
+	 * @param orderManagement
+	 * @param inventory
+	 * @param userManagement
+	 * @param time
+	 */
 	OrderController(OrderManagement<Order> orderManagement, UniqueInventory<UniqueInventoryItem> inventory, 
 		UserManagement userManagement, BusinessTime time) {
 
@@ -85,17 +101,27 @@ public class OrderController {
 		this.cart = new Cart();
 		this.time = time;
 	}
-
+	/**
+	 * Setzt das cart dieser Klasse als ModelAttribut.
+	 * @return {@link Cart} cart
+	 */
 	@ModelAttribute("cart")
 	Cart initializeCart() {
 		return cart;
 	}
-
+	/**
+	 * Gibt das Cart zurück.
+	 * @return {@link Cart} cart
+	 */
 	@Bean
 	public Cart getCart() {
 		return cart;
 	}
-
+	/**
+	 * Gibt einen {@link Boolean} zurück ob sich Verschreibungspflichtige Medikamente im Warenkorb befinden.
+	 * @param c
+	 * @return {@link Boolean}
+	 */
 	public boolean haspresonly(Cart c){
 
 		if(c.isEmpty()){
@@ -117,7 +143,12 @@ public class OrderController {
 		return false;
 
 	}
-
+	/**
+	 * Gibt eine Map {@link String}, {@link Integer} zurück. Die Strings repräsentieren die ID eines {@link CartItem}s
+	 * Die Integer Werte die in Inventar verfügbare Menge der Produkte.
+	 * @param cart
+	 * @return HashMap<String, Integer>
+	 */
 	private HashMap<String, Integer> getAvailability(Cart cart){
 
 		HashMap<String, Integer> ret = new HashMap<String, Integer>();
@@ -134,7 +165,13 @@ public class OrderController {
 
 		return ret;
 	}
-
+	/**
+	 * Fügt die verfügbarkeit aus {@link #getAvailability(Cart)} zum Model hinzu, wenn /cart aufgerufen wird.
+	 * Leitet zu "cart" weiter.
+	 * @param cart
+	 * @param model
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/cart")
 	String basket(@ModelAttribute Cart cart, Model model) {
 
@@ -143,7 +180,14 @@ public class OrderController {
 		return "cart";
 
 	}
-
+	/**
+	 * Fügt ein Medikament {@link Medicine} mit einer Anzahl zum Warenkorb hinzu.
+	 * Leitet auf Hauptseite weiter.
+	 * @param item
+	 * @param number
+	 * @param cart
+	 * @return der Name der Ansicht
+	 */
 	@PostMapping("/cart")
 	String addItem(@RequestParam("pid") Medicine item, @RequestParam("number") int number, @ModelAttribute Cart cart) {
 		
@@ -154,7 +198,14 @@ public class OrderController {
 		return "redirect:/";
 
 	}
-	
+	/**
+	 * Löscht ein Medikament aus dem Warenkorb und updated die Verfügbarkeit im Model.
+	 * Leitet zu "cart" weiter.
+	 * @param id
+	 * @param cart
+	 * @param model
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/cart/{id}/delete")
 	String deleteItem(@PathVariable String id, @ModelAttribute Cart cart, Model model) {
 
@@ -166,14 +217,25 @@ public class OrderController {
 
 	}
 
-	
+	/**
+	 * Wenn "/updatecart" aufgerufen wird, dann leite zu "cart" weiter.
+	 * Die Seite "updatecart" existiert nicht. Der Link dient nur zum registrieren der Mengenänderungen im Warenkorb.
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/updatecart")
 	String basket2() {
 
 		return "redirect:/cart";
 
 	}
-
+	/**
+	 * Wird aufgerufen wenn man die Menge eines Produkts im Warenkorb ändert und auf Anpassen clickt.
+	 * Ähnlich zu {@link #addItem(Medicine, int, Cart)}, jedoch wird hier zu "cart" weitergeleitet.
+	 * @param item
+	 * @param number
+	 * @param cart
+	 * @return der Name der Ansicht
+	 */
 	@PostMapping("/updatecart")
 	String updateItem(@RequestParam("pid") String item, @RequestParam("number") int number, 
 		@ModelAttribute Cart cart) {
@@ -187,7 +249,12 @@ public class OrderController {
 		return "redirect:/cart";
 
 	}
-
+	/**
+	 * Dient zum löschen aller Produkte aus dem Warenkorb. Wird aufgerufen bei "Warenkorb leeren".
+	 * Leitet zum Warenkorb zurück.
+	 * @param cart
+	 * @return der Name der Ansicht
+	 */
 	@PostMapping("/clearcart")
 	String emptycart(@ModelAttribute Cart cart){
 
@@ -196,7 +263,14 @@ public class OrderController {
 		return "redirect:/cart";
 
 	}
-
+	/**
+	 * Wird aufgerufen, wenn man auf "checkout" clickt. Prüft ob alle notwendigen Daten für den User present sind via
+	 * {@link CheckoutForm}.
+	 * @param model
+	 * @param checkoutForm
+	 * @param cart
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/checkout")
 	@PreAuthorize("isAuthenticated()")
 	String checkout(Model model, CheckoutForm checkoutForm, Cart cart) {
@@ -214,7 +288,17 @@ public class OrderController {
 		
 		return "checkout";
 	}
-	
+	/**
+	 * Diese Methode wird aufegrufen wenn man beim checkout auf "Jetzt Bezahlen" clickt.
+	 * Sie Prüft ob alle notwendigen Angaben vorhanden sind für den eingeloggten User. Falls das nicht der Fall ist,
+	 * wird man zum Warenkorb umgeleitet. Falls alle Eingaben stimmen wird man auf die Hauptseite weitergeleitet.
+	 * @param model
+	 * @param cart
+	 * @param checkoutForm
+	 * @param result
+	 * @param userAccount
+	 * @return der Name der Ansicht
+	 */
 	@PostMapping("/checkout")
 	@PreAuthorize("isAuthenticated()")
 	String buy(Model model, @ModelAttribute Cart cart, @Valid @ModelAttribute("checkoutForm")CheckoutForm checkoutForm, Errors result, @LoggedIn Optional<UserAccount> userAccount) {
@@ -259,7 +343,14 @@ public class OrderController {
 		}).orElse("redirect:/cart");
 
 	}
-
+	/**
+	 * Ist zuständig für die Bestellungsübersicht für Mitarbeiter und Chef.
+	 * Leitet nicht weiter. Fügt Liste von Bestellungen und einen {@link OrderFilter} zum Model hinzu.
+	 * Sowie ein {@link Boolean} für die Arbeitszeit der Mitarbeiter.
+	 * @param model
+	 * @param userAccount
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/orders")
 	String orders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 
@@ -295,7 +386,15 @@ public class OrderController {
 		return "orders";
 
 	}
-
+	/**
+	 * Wird beim Filtern aufgerufen. Der {@link OrderFilter} liefert den Enum-Typ nachdem gefiltert werden soll.
+	 * Alle anderen Akteure die evtl durch zufall diese Methode ausführen bekommen demensprechend andere, ungefilterte
+	 * Listen von {@link Order}s.
+	 * @param filter
+	 * @param model
+	 * @param userAccount
+	 * @return der Name der Ansicht
+	 */
 	@PostMapping("/orders")
 	String postorders(@ModelAttribute OrderFilter filter,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 
@@ -335,7 +434,14 @@ public class OrderController {
 
 		return "orders";
 	}
-
+	/**
+	 * Verwaltet die Ansicht der Rechnungsdetails. Findet die {@link Order} via dem {@link OrderIdentifier} und fügt
+	 * sie dem Model hinzu. Leitet auf "orderdetails" weiter.
+	 * @param id
+	 * @param model
+	 * @param userAccount
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/orders/{id}")
 	public String detail(@PathVariable OrderIdentifier id, Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		
@@ -354,7 +460,15 @@ public class OrderController {
 			
 		return "orderdetails";
 	}
-	
+	/**
+	 * Wird beim Fertigstellen einer Order aufgerufen. Falls die Bestellung über den Inventarbestand hinaus geht, 
+	 * wird auf "ordercompletionfail" weitergeleitet. Dort lässt sich einsehen wieviel zu viel bestellt wurde.
+	 * Falls das jedoch nicht der Fall sein sollte, wird die Bestellung fertiggestellt. Die Bestellung wird mittels
+	 * {@link OrderIdentifier} gefunden.
+	 * @param id
+	 * @param model
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/orders/{id}/complete")
 	public String complete(@PathVariable OrderIdentifier id, Model model){
 
@@ -390,7 +504,13 @@ public class OrderController {
 		return "redirect:/orders";
 
 	}
-
+	/**
+	 * Bei einem aufruf von "ordercompletionfail" wird die Globale {@link Order} welche fehlschlug, Fertigzustellen
+	 * zum Model hinzugefügt. Zusätzlich wird die vorhandene Menge im Inventar hinzugefügt, um die 
+	 * Fehlerquelle deutlich zu machen.
+	 * @param model
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/ordercompletionfail")
 	public String orderfail(Model model){
 		
@@ -400,7 +520,13 @@ public class OrderController {
 		return "ordercompletionfail";
 		
 	}
-
+	/**
+	 * Wenn man in der Bestellübersicht auf "Abbrechen" clickt wird diese Mehtode aufgerufen.
+	 * Sie Cancelled die {@link Order} im {@link OrderManagement} und leitet zu "orders" um.
+	 * @param id
+	 * @param model
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/orders/{id}/cancel")
 	public String cancel(@PathVariable OrderIdentifier id, Model model){
 
@@ -421,7 +547,13 @@ public class OrderController {
 		return "redirect:/orders";
 
 	}
-
+	/**
+	 * Wird aufgerufen, wenn man auf "Eigene Bestellungen" clickt.
+	 * Findet alle Bestellungen des eingeloggten Users und fügt diese zum Model hinzu.
+	 * @param model
+	 * @param userAccount
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/myorders")
 	String myorders(Model model, @LoggedIn Optional<UserAccount> userAccount) {
 
