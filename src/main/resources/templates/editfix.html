@@ -21,32 +21,32 @@
         <p>&#10095;</p>
         <a th:href="@{/editfix}">Fixkosten</a>
       </div>
-      <form class="form gap" action="#editfix" th:action="@{/editfix}"  th:object="${fixcosts}" method="POST">
+      <form class="form gap" action="#editfix" th:action="@{/finances/editfix}"  th:object="${fixcosts}" method="POST">
         <div class="field">
           <label>Miete</label>
           <div class="row">
-            <input max="1000000000"min="0" required="required"class="numberinput rightcorners"type="number"th:field="*{Rent}" />
+            <input max="1000000000"min="0" step="0.01"required="required"class="numberinput rightcorners"type="number"th:field="*{Rent}" />
             <a class="currency">€</a>
           </div>
         </div>
         <div class="field">
           <label>Strom</label>
           <div class="row">
-            <input max="1000000000" min="0" required="required"class="numberinput rightcorners"type="number"th:field="*{Electricity}" />
+            <input max="1000000000" min="0" step="0.01"required="required"class="numberinput rightcorners"type="number"th:field="*{Electricity}" />
             <a class="currency">€</a>
           </div>
         </div>
         <div class="field">
           <label>Wasser</label>
           <div class="row">
-            <input max="1000000000" min="0" required="required"class="numberinput rightcorners"type="number"th:field="*{Water}" />
+            <input max="1000000000" min="0" step="0.01"required="required"class="numberinput rightcorners"type="number"th:field="*{Water}" />
             <a class="currency">€</a>
           </div>
         </div>
         <div class="field">
           <label>Heizkosten</label>
           <div class="row">
-            <input max="1000000000" min="0" required="required"class="numberinput rightcorners"type="number"th:field="*{Heating}" />
+            <input max="1000000000" min="0"step="0.01" required="required"class="numberinput rightcorners"type="number"th:field="*{Heating}" />
             <a class="currency">€</a>
           </div>
         </div>
