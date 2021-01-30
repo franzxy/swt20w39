@@ -54,7 +54,7 @@ class InventoryControllerIntegrationTests extends AbstractIntegrationTests {
 	@Test
     void nullContructor() {
         assertThatExceptionOfType(IllegalArgumentException.class) //
-                .isThrownBy(() -> new InventoryController(null,null,null,null,null,null));
+                .isThrownBy(() -> new InventoryController(null,null,null,null,null));
     
 	}
 	@Test
