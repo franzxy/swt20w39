@@ -57,7 +57,7 @@
             <a th:if="${(sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).PAID) && TimeToDoBusiness}" th:text="Fertigstellen"class="button"th:href="@{/orders/{id}/complete(id=${sec.getId()})}"></a>
           </td>
           <td sec:authorize="hasRole('BOSS')" >
-            <a th:unless="${sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).COMPLETED}" class="button"th:text="Abbrechen" th:href="@{/orders/{id}/cancel(id=${sec.getId()})}"></a>
+            <a th:unless="${sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).COMPLETED || sec.getOrderStatus() == T(org.salespointframework.order.OrderStatus).CANCELLED}" class="button"th:text="Abbrechen" th:href="@{/orders/{id}/cancel(id=${sec.getId()})}"></a>
           </td>
           <td>
             <a class="button"th:text="Details" th:href="@{/orders/{id}(id=${sec.getId()})}"></a>
