@@ -20,6 +20,7 @@ import org.salespointframework.order.OrderLine;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.order.OrderStatus;
 import org.salespointframework.payment.Cash;
+import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
@@ -43,6 +44,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pharmacy.catalog.Medicine;
 import pharmacy.user.Address;
+import pharmacy.user.PayDirekt;
 import pharmacy.user.UserManagement;
 
 @EnableScheduling
@@ -197,7 +199,7 @@ public class OrderController {
 
 	@GetMapping("/checkout")
 	@PreAuthorize("isAuthenticated()")
-	String checkout(Model model, AddressForm addressForm, InsuranceForm insuranceForm, Cart cart) {
+	String checkout(Model model, CheckoutForm checkoutForm, Cart cart) {
 
 		if (cart.isEmpty()) {
 
@@ -207,81 +209,48 @@ public class OrderController {
 
 		model.addAttribute("haspresonly", this.haspresonly(cart));
 		model.addAttribute("cart", cart);
-		model.addAttribute("insuranceForm", insuranceForm);
-		model.addAttribute("addressForm", addressForm);
+		model.addAttribute("checkoutForm", checkoutForm);
 		model.addAttribute("user", userManagement.currentUser().get());
 		
 		return "checkout";
-
-	}
-
-	@GetMapping("/checkout/address")
-	@PreAuthorize("isAuthenticated()")
-	String checkoutAddress(Model model, InsuranceForm insuranceForm, AddressForm addressForm, Cart cart) {
-
-		if (cart.isEmpty()) {
-
-			return "redirect:/cart";
-
-		}
-
-		model.addAttribute("haspresonly", this.haspresonly(cart));
-		model.addAttribute("cart", cart);
-		model.addAttribute("insuranceForm", insuranceForm);
-		model.addAttribute("addressForm", addressForm);
-		model.addAttribute("user", userManagement.currentUser().get());
-
-		return "checkout";
-
-	}
-	
-	@PostMapping("/checkout/address")
-	@PreAuthorize("isAuthenticated()")
-	String addCheckoutAddress(Model model, Cart cart, @Valid @ModelAttribute("addressForm")AddressForm addressForm, 
-		Errors result) {
-		
-		if (cart.isEmpty()) {
-
-			return "redirect:/cart";
-
-		}
-
-		model.addAttribute("haspresonly", this.haspresonly(cart));
-		model.addAttribute("cart", cart);
-		model.addAttribute("user", userManagement.currentUser().get());
-		
-		if (result.hasErrors()) {
-
-			return "checkout";
-
-		}
-		
-		userManagement.currentUser().get().changeAddress(new Address(addressForm.getName(), addressForm.getStreet(), 
-			addressForm.getPostCode(), addressForm.getCity()));
-
-		return "redirect:/checkout";
 	}
 	
 	@PostMapping("/checkout")
-	String buy(Model model, AddressForm addressForm, InsuranceForm insuranceForm, @ModelAttribute Cart cart, 
-		@LoggedIn Optional<UserAccount> userAccount) {
+	@PreAuthorize("isAuthenticated()")
+	String buy(Model model, @ModelAttribute Cart cart, @Valid @ModelAttribute("checkoutForm")CheckoutForm checkoutForm, Errors result, @LoggedIn Optional<UserAccount> userAccount) {
 
 		var user = userManagement.currentUser().get();
 
-		if (user.getAddress().toString().isEmpty()) {
+		model.addAttribute("haspresonly", this.haspresonly(cart));
+		model.addAttribute("cart", cart);
+		model.addAttribute("user", user);
 
-			return "redirect:/checkout";
+		if (result.hasErrors()) {
+			return "checkout";
 		}
 		
 		return userAccount.map(account -> {
 
-			var order = new Order(account, Cash.CASH);
+			PaymentMethod payment;
+			var checkoutPayment = checkoutForm.getPayment();
+
+			if(checkoutPayment.equals("payDirekt")) {
+				payment = user.getPayDirekt();
+			} else if (checkoutPayment.equals("bankAccount")) {
+				payment = user.getBankAccount();
+			} else if (checkoutPayment.equals("paymentCard")) {
+				payment = user.getPaymentCard();
+			} else {
+				payment = Cash.CASH;
+			}
+
+			var order = new Order(account, payment);
 
 			cart.addItemsTo(order);
 			
 			orderManagement.payOrder(order);
 
-			user.setOrdered(true);
+			userManagement.changeOrdered(user, true);
 
 			cart.clear();
 

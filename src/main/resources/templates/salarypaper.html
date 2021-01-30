@@ -13,12 +13,12 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav> 
-        <div class="position">
-            <a th:href="@{/myfinances}">Finanzen</a>
-            <p>></p>
-            <a th:href="@{#}">Lohnzettel</a>
-          </div>
             <div class="center">
+                <div class="position">
+                    <a th:href="@{/myfinances}">Finanzen</a>
+                    <p>&#10095;</p>
+                    <a th:href="@{#}">Lohnzettel</a>
+                  </div>
                 <div class="field">
                     <span class="span">Datum</span>
                     <h4 th:text="${#temporals.format(det.getValue1(),'dd.MM.yyyy')}"></h4>

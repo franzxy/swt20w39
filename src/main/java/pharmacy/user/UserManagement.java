@@ -141,6 +141,13 @@ public class UserManagement {
 		return "employee added";
 	}
 	
+	public String changeOrdered(User user, Boolean newOrdered) {
+		
+		user.setOrdered(newOrdered);
+
+		return "ordered changed";
+	}
+	
 	public String changeEmployee(User user, EmployeeForm employeeForm) {
 		
 		user.setSalary(Money.of(Long.valueOf(employeeForm.getSalary()), "EUR"));

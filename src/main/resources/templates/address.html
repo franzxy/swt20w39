@@ -12,14 +12,14 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        
-        <div class="position">
-            <a th:href="@{/account}">Account</a>
-            <p>></p>
-            <a th:href="@{/account/address}">Adresse</a>
-        </div>
 
         <div class="center">
+        
+            <div class="position">
+                <a th:href="@{/account}">Account</a>
+                <p>&#10095;</p>
+                <a th:href="@{/account/address}">Adresse</a>
+            </div>
         
             <form method="post" role="form" class="ui form" id="form" th:action="@{/account/address}" th:object="${addressForm}">
 

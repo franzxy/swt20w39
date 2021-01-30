@@ -13,84 +13,89 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav>
-        
-        <div class="position">
-            <a th:href="@{/account}">Account</a>
-            <p>></p>
-            <a th:href="@{/account/payments}">Bezahlmethoden</a>
-        </div>
 
         <div class="center">
-
-            <p class="header">Bankeinzug</p>
         
-            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/bankaccount}" th:object="${bankAccountForm}">
-
-                <div class="field">
-                    <label class="label" for="address">Name</label>
-                    <input class="textinput" placeholder="Apo Theke" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getName()} : ${bankAccountForm.getName()}" name="name" th:errorclass="fieldError" type="text" required="required"/>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-                </div>
-
-                <div class="field">
-                    <label class="label" for="address">IBAN</label>
-                    <input class="textinput" placeholder="Apo Theken Straße 8A" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getIban()} : ${bankAccountForm.getIban()}" name="iban" th:errorclass="fieldError" type="text" required="required"/>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}"></p>
-                </div>
-
-                <div class="field">
-                    <label class="label" for="name">BIC</label>
-                    <input class="textinput" placeholder="69420" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getBic()} : ${bankAccountForm.getBic()}" name="bic" th:errorclass="fieldError" type="text" required="required"/>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('bic')}" th:errors="*{bic}"></p>
-                </div>
-                
-                <div class="self-center">
-                    <button th:text="${user.getBankAccount() == null} ? ${'Bankeinzug hinzufügen'} : ${'Bankeinzug ändern'}" type="submit" class="ui button"></button>
-                </div>
-            </form>
+            <div class="position">
+                <a th:href="@{/account}">Account</a>
+                <p>&#10095;</p>
+                <a th:href="@{/account/payments}">Bezahlmethoden</a>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <p class="header">Bankeinzug</p>
         
-            <p class="header">Kartenzahlung</p>
+                    <form method="post" role="form" class="ui form" id="form" th:action="@{/account/bankaccount}" th:object="${bankAccountForm}">
 
-            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/card}" th:object="${creditCardForm}">
+                        <div class="field">
+                            <label class="label" for="address">Name</label>
+                            <input class="textinput" placeholder="Apo Theke" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getName()} : ${bankAccountForm.getName()}" name="name" th:errorclass="fieldError" type="text" required="required"/>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                        </div>
 
-                <div class="field">
-                    <label class="label" for="address">Name</label>
-                    <input class="textinput" placeholder="Apo Theke" th:value="${user.getPaymentCard()} ? ${user.getPaymentCard().getName()} : ${creditCardForm.getName()}" name="name" th:errorclass="fieldError" type="text" required="required"/>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                        <div class="field">
+                            <label class="label" for="address">IBAN</label>
+                            <input class="textinput" placeholder="Apo Theken Straße 8A" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getIban()} : ${bankAccountForm.getIban()}" name="iban" th:errorclass="fieldError" type="text" required="required"/>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}"></p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="name">BIC</label>
+                            <input class="textinput" placeholder="69420" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getBic()} : ${bankAccountForm.getBic()}" name="bic" th:errorclass="fieldError" type="text" required="required"/>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('bic')}" th:errors="*{bic}"></p>
+                        </div>
+                        
+                        <div class="self-center">
+                            <button th:text="${user.getBankAccount() == null} ? ${'Bankeinzug hinzufügen'} : ${'Bankeinzug ändern'}" type="submit" class="ui button"></button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="field">
-                    <label class="label" for="address">Kartennummer</label>
-                    <input class="textinput" placeholder="Apo Theken Straße 8A" th:value="${user.getPaymentCard()} ? ${user.getPaymentCard().getNumber()} : ${creditCardForm.getNumber()}" name="number" th:errorclass="fieldError" type="text" required="required"/>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></p>
-                </div>
-
-                <div class="field">
-                    <label class="label" for="name">Sicherheitszahlen</label>
-                    <input class="textinput" placeholder="123" th:value="${user.getPaymentCard()} ? ${user.getPaymentCard().getSecure()} : ${creditCardForm.getSecure()}" name="secure" th:errorclass="fieldError" type="text" required="required"/>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('secure')}" th:errors="*{secure}"></p>
-                </div>
-                
-                <div class="self-center">
-                    <button th:text="${user.getPaymentCard() == null} ? ${'Kartenzahlung hinzufügen'} : ${'Kartenzahlung ändern'}" type="submit" class="ui button"></button>
-                </div>
-            </form>
-
-            <p class="header">PayDirekt</p>
         
-            <form method="post" role="form" class="ui form" id="form" th:action="@{/account/paydirekt}" th:object="${payDirektForm}">
+                <div class="card">
+                    <p class="header">Kartenzahlung</p>
 
-                <div class="field">
-                    <label class="label" for="address">Benutzername</label>
-                    <input class="textinput" placeholder="apotheke" th:value="${user.getPayDirekt()} ? ${user.getPayDirekt().getName()} : ${payDirektForm.getName()}" name="name" th:errorclass="fieldError" type="text" required="required"/>
-                    <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                    <form method="post" role="form" class="ui form" id="form" th:action="@{/account/card}" th:object="${creditCardForm}">
+
+                        <div class="field">
+                            <label class="label" for="address">Name</label>
+                            <input class="textinput" placeholder="Apo Theke" th:value="${user.getPaymentCard()} ? ${user.getPaymentCard().getName()} : ${creditCardForm.getName()}" name="name" th:errorclass="fieldError" type="text" required="required"/>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="address">Kartennummer</label>
+                            <input class="textinput" placeholder="Apo Theken Straße 8A" th:value="${user.getPaymentCard()} ? ${user.getPaymentCard().getNumber()} : ${creditCardForm.getNumber()}" name="number" th:errorclass="fieldError" type="text" required="required"/>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="name">Sicherheitszahlen</label>
+                            <input class="textinput" placeholder="123" th:value="${user.getPaymentCard()} ? ${user.getPaymentCard().getSecure()} : ${creditCardForm.getSecure()}" name="secure" th:errorclass="fieldError" type="text" required="required"/>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('secure')}" th:errors="*{secure}"></p>
+                        </div>
+                        
+                        <div class="self-center">
+                            <button th:text="${user.getPaymentCard() == null} ? ${'Kartenzahlung hinzufügen'} : ${'Kartenzahlung ändern'}" type="submit" class="ui button"></button>
+                        </div>
+                    </form>
                 </div>
+                <div class="card">
+                    <p class="header">PayDirekt</p>
                 
-                <div class="self-center">
-                    <button th:text="${user.getPayDirekt() == null} ? ${'PayDirekt hinzufügen'} : ${'PayDirekt ändern'}" type="submit" class="ui button"></button>
-                </div>
-            </form>
+                    <form method="post" role="form" class="ui form" id="form" th:action="@{/account/paydirekt}" th:object="${payDirektForm}">
 
+                        <div class="field">
+                            <label class="label" for="address">Benutzername</label>
+                            <input class="textinput" placeholder="apotheke" th:value="${user.getPayDirekt()} ? ${user.getPayDirekt().getName()} : ${payDirektForm.getName()}" name="name" th:errorclass="fieldError" type="text" required="required"/>
+                            <p class="ui negative message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+                        </div>
+                        
+                        <div class="self-center">
+                            <button th:text="${user.getPayDirekt() == null} ? ${'PayDirekt hinzufügen'} : ${'PayDirekt ändern'}" type="submit" class="ui button"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>

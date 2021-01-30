@@ -14,13 +14,13 @@
   <body>
     <nav th:include="navigation :: navigation"></nav>
 
-    <div class="position">
-      <a th:href="@{/finances}">Finanzen</a>
-      <p>&#10095;</p>
-      <a th:href="@{/editfix}">Fixkosten</a>
-    </div>
-
 		<div class="center">
+
+      <div class="position">
+        <a th:href="@{/finances}">Finanzen</a>
+        <p>&#10095;</p>
+        <a th:href="@{/editfix}">Fixkosten</a>
+      </div>
       <form class="form gap" action="#editfix" th:action="@{/editfix}"  th:object="${fixcosts}" method="POST">
         <div class="field">
           <label>Miete</label>
