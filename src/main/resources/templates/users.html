@@ -48,7 +48,8 @@
 						<p>24/7 Grind</p>
 					</td>
 					<td th:if="${user.userAccount.hasRole(employee)}">
-						<div class="field" th:each="index : ${#numbers.sequence(0,(user.getVacations().size() - 1))}" 
+						<p th:unless="${user.getVacations().size() > 0}">Dieser Mitarbeiter möchte keinen Urlaub nehmen.</p>
+						<div th:if="${user.getVacations().size() > 0}" class="field" th:each="index : ${#numbers.sequence(0,(user.getVacations().size() - 1))}" 
 						th:object="${user.getVacations()[__${index}__]}">
 							<p th:text="*{'Von: '+getStartDate()}"></p>
 							<p th:text="*{'Bis: '+getEndDate()}"></p>

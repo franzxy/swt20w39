@@ -36,7 +36,7 @@ public class User {
 
 	private Insurance insurance;
 
-	private Boolean ordered;
+	private Boolean ordered = false;
 
 	private Money salary;
 

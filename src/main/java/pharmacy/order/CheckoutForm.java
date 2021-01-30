@@ -6,13 +6,13 @@ import javax.validation.constraints.Pattern;
 
 class CheckoutForm {
 	
-	@AssertTrue
+	@AssertTrue(message = "Adresse felt")
 	private final Boolean address;
 	
 	@NotEmpty(message = "Bezahlart fehlt")
 	private final String payment;
 
-	@ValidInsurance
+	@ValidInsurance(message = "Versicherung fehlt")
 	private final Boolean insurance;
 
 	public CheckoutForm(Boolean address, String payment, Boolean insurance) {

@@ -10,18 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pharmacy.user.UserManagement;
 
-public class InsuranceValidator implements ConstraintValidator<ValidInsurance, String> {
+public class InsuranceValidator implements ConstraintValidator<ValidInsurance, Boolean> {
 	@Autowired
 	private OrderController controller;
 	@Autowired
 	private UserManagement management;
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if(this.controller.haspresonly(this.controller.getCart())) {
-			if (this.management.currentUser().get().getInsurance().getCompany().isEmpty()) {
-				return false;
-			}
-		}
+	public boolean isValid(Boolean value, ConstraintValidatorContext context) {
+		if(this.controller.haspresonly(this.controller.getCart()) && !value) return false;
 		context.disableDefaultConstraintViolation();
 		context.buildConstraintViolationWithTemplate("Versicherung fehlt").addConstraintViolation();
 		return true;
