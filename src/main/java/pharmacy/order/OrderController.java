@@ -15,6 +15,7 @@ import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.Order;
+import org.salespointframework.order.OrderCompletionFailure;
 import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.order.OrderManagement;
@@ -480,19 +481,30 @@ public class OrderController {
 
 			for(OrderLine orderline : orderlines){
 
-				int quan = inventory.findByProductIdentifier(orderline.getProductIdentifier()).get().getQuantity()
-					.getAmount().intValue();
+				if(inventory.findByProductIdentifier(orderline.getProductIdentifier()).isPresent()){
+					int quan = inventory.findByProductIdentifier(orderline.getProductIdentifier()).get().getQuantity()
+						.getAmount().intValue();
+				
 
-				int orderd = orderline.getQuantity().getAmount().intValue();
+					int orderd = orderline.getQuantity().getAmount().intValue();
 
-				this.quantity.put(orderline.getProductIdentifier(), quan);
+					this.quantity.put(orderline.getProductIdentifier(), quan);
 
-				if(!(quan >= orderd)){
+					if(!(quan >= orderd)){
+
+						this.failedorder = order;
+
+						return "redirect:/ordercompletionfail";
+
+					}
+				}else{
+					System.out.println("Bin angekommen");
 
 					this.failedorder = order;
 
-					return "redirect:/ordercompletionfail";
+					this.quantity.put(orderline.getProductIdentifier(), -1);
 
+					return "redirect:/ordercompletionfail";
 				}
 
 			}
@@ -536,11 +548,16 @@ public class OrderController {
 				Order order = this.orderManagement.get(id).get();
 				this.orderManagement.cancelOrder(order, "Canceled by Boss");
 
-			}catch(ClassCastException e){
+			}catch(ClassCastException e ){
 
-				Order o=this.orderManagement.get(id).get();
+				Order o = this.orderManagement.get(id).get();
 				this.orderManagement.delete(o);
 
+			}catch(OrderCompletionFailure f){
+
+				Order o = this.orderManagement.get(id).get();
+				this.orderManagement.delete(o);
+				
 			}
 		}
 
