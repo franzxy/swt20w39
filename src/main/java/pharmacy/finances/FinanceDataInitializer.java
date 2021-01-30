@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import pharmacy.user.UserManagement;
-
+/**
+ * Eine Implementierung des {@link DataInitializer} welche notwendig ist damit gewisse Objekte erzeugt werden beim 
+ * start.
+ * @author Lukas Luger
+ */
 @Component
 public class FinanceDataInitializer  implements DataInitializer{
 	
@@ -18,6 +22,14 @@ public class FinanceDataInitializer  implements DataInitializer{
 	private final BusinessTime time;
 	private final UserManagement userManagement;
 	private final AccountancyAdapter accountancyAdapter;
+	/**
+	 * Dient zur Initialisierung.
+	 * @param userManagement
+	 * @param orderManagement
+	 * @param accountancy
+	 * @param time
+	 * @param accountancyAdapter
+	 */
 
 	public FinanceDataInitializer( UserManagement userManagement,OrderManagement<Order> orderManagement,  
 		Accountancy accountancy, BusinessTime time, AccountancyAdapter accountancyAdapter) {
@@ -35,7 +47,9 @@ public class FinanceDataInitializer  implements DataInitializer{
 		this.accountancyAdapter = accountancyAdapter;
 	
 	}
-
+	/**
+	 * Diese Methode ist leer, aber notwendig.
+	 */
 	@Override
 	public void initialize() {
 

@@ -5,15 +5,21 @@ import org.springframework.util.Assert;
 /**
  * Diese Klasse dient zum Filtern der Finanzen.
  * Der IntervallFilter besteht aus 3 Komponenten:
- * 		1. Startdatum -> {@link String}
- * 		2. Enddatum -> {@link String}
- * 		3. Aktiviert -> {@link Boolean}
+ * <ul>
+ * 		<li> Startdatum -> {@link String}</li>
+ * 		<li> Enddatum -> {@link String}</li>
+ * 		<li> Aktiviert -> {@link Boolean}</li>
+ * </ul>
  * Der Rest wird mithilfe des enums {@link Filter} gefiltert.
  * 
  * @author Lukas Luger
  */
 
 public class FilterForm{
+	/**
+	 * Enum zum Filtern.
+	 * @author Lukas Luger
+	 */
 	public enum Filter {
 		ALLE("Alles"),
 		OBEST("Kunden Bestellungen"),

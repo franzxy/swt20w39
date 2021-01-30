@@ -261,7 +261,7 @@ public class AccountancyAdapter {
         }
 
         /**
-         * Dient dazu einen neuen {@link org.salespointframework.accountancy.AccountancyEntry}
+         * Dient dazu einen neuen {@link AccountancyEntry}
          * zu Accountancy hinzuzufügen
          * 
          * @param entry
@@ -404,7 +404,7 @@ public class AccountancyAdapter {
         /**
          * Gibt die Summe der Einnahmen zurück.
          * 
-         * @return {@link Money}
+         * @return {@link org.javamoney.moneta.Money}
          * 
          */
         public Money getRevenue(){
@@ -427,7 +427,7 @@ public class AccountancyAdapter {
         /**
          * Gibt die Summe der Ausgaben zurück.
          * 
-         * @return {@link Money}
+         * @return {@link org.javamoney.moneta.Money}
          * 
          */
         public Money getExpenses(){
@@ -451,7 +451,7 @@ public class AccountancyAdapter {
         /**
          * Gibt die Summe der aller registrierten Ein- und Ausgaben zurück.
          * 
-         * @return {@link Money}
+         * @return {@link org.javamoney.moneta.Money}
          * 
          */
         public Money getBalance(){
@@ -469,7 +469,7 @@ public class AccountancyAdapter {
         }
         /**
          * Gibt die Fixkosten in Form von {@link Fixcosts} zurück.
-         * @return {link Fixcosts}
+         * @return {@link Fixcosts}
          */
         public Fixcosts getFix(){
 
