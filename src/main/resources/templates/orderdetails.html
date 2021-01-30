@@ -45,7 +45,7 @@
                         
                     </tr>
                 <tr th:if="${det.getOrderLines().isEmpty()}">
-                    <td style="text-align: center;"collabel="3"> Keine Infos </td>
+                    <td style="text-align: center;"colspan="2"> Keine Infos </td>
                 </tr>
                 <tr th:each="orderline : ${det.getOrderLines().get().toArray()}"> 
                     <td  th:text="${orderline.getProductName()}">Name</td>
