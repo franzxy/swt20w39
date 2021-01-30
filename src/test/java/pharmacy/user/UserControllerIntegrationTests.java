@@ -271,6 +271,44 @@ class UserControllerIntegrationTests extends AbstractIntegrationTests {
 		assertEquals(this.userManagement.currentUser().get().getBankAccount().getIban(), "b");
 		assertEquals(this.userManagement.currentUser().get().getBankAccount().getName(), "a");
 	}
+	@Test
+	@WithMockUser(roles = "EMPLOYEE", username = "hans")
+	void changeAccountBank2Test(){
+		Model model = new ExtendedModelMap();
+		BankAccountForm f1 = new BankAccountForm("a", "b", "c");
+		PaymentCardForm f2 = new PaymentCardForm("hello", "number", "secure");
+		PayDirektForm f3 = new PayDirektForm("name");
+		Errors e = new ErrorTest();
+		String res = this.controller.changeAccountBank(model,f2,e,f1,f3);
+		assertEquals(res, "redirect:/account/payments");
+		assertEquals(model.asMap().get("user"), userManagement.currentUser().get());
+		assertEquals(model.asMap().get("bankAccountForm"), f1);
+		assertEquals(model.asMap().get("payDirektForm"), f3);
+		e.addAllErrors(null);
+		res = this.controller.changeAccountBank(model,f1,e,f2,f3);
+		assertEquals(res, "payments");
+		assertEquals(this.userManagement.currentUser().get().getPaymentCard().getName(), "hello");
+		assertEquals(this.userManagement.currentUser().get().getPaymentCard().getNumber(), "number");
+		assertEquals(this.userManagement.currentUser().get().getPaymentCard().getSecure(), "secure");
+	}
+	@Test
+	@WithMockUser(roles = "EMPLOYEE", username = "hans")
+	void changeAccountBank3Test(){
+		Model model = new ExtendedModelMap();
+		BankAccountForm f1 = new BankAccountForm("a", "b", "c");
+		PaymentCardForm f2 = new PaymentCardForm("hello", "number", "secure");
+		PayDirektForm f3 = new PayDirektForm("name");
+		Errors e = new ErrorTest();
+		String res = this.controller.changeAccountBank(model,f3,e,f2,f1);
+		assertEquals(res, "redirect:/account/payments");
+		assertEquals(model.asMap().get("user"), userManagement.currentUser().get());
+		assertEquals(model.asMap().get("bankAccountForm"), f1);
+		assertEquals(model.asMap().get("creditCardForm"), f2);
+		e.addAllErrors(null);
+		res = this.controller.changeAccountBank(model,f1,e,f2,f3);
+		assertEquals(res, "payments");
+		assertEquals(this.userManagement.currentUser().get().getPayDirekt().getName(), "name");
+	}
 
 
 
