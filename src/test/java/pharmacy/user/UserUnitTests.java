@@ -27,7 +27,7 @@ public class UserUnitTests extends AbstractIntegrationTests {
 		assertNull(u.getPaymentCard());
 		assertNull(u.getAddress());
 		assertNull(u.getPicture());
-		assertNull(u.getOrdered());
+		assertFalse(u.getOrdered());
 		assertNull(u.getInsurance());
 		assertNull(u.getSalary());
 		assertTrue(30==u.getVacationRemaining());
