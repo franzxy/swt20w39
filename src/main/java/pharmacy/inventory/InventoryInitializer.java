@@ -12,7 +12,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import pharmacy.catalog.MedicineCatalog;
-
+/**
+ * Eine Implementierung des {@link DataInitializer} welche notwendig ist damit gewisse Objekte erzeugt werden beim 
+ * start.
+ * @author Lukas Luger
+ */
 @Component
 @Order(20)
 class InventoryInitializer implements DataInitializer {
@@ -21,7 +25,11 @@ class InventoryInitializer implements DataInitializer {
 	private final UniqueInventory<UniqueInventoryItem> inventory;
 	
 	private final MedicineCatalog medicineCatalog;
-	
+	/**
+	 * Dient zur Initialisierung.
+	 * @param inventory
+	 * @param medicineCatalog
+	 */
 	InventoryInitializer(UniqueInventory<UniqueInventoryItem> inventory, MedicineCatalog medicineCatalog) {
 
 		Assert.notNull(inventory, "Inventory must not be null!");
@@ -31,7 +39,9 @@ class InventoryInitializer implements DataInitializer {
 		this.medicineCatalog = medicineCatalog;
 
 	}
-
+	/**
+	 * Diese Methode ist leer, aber notwendig.
+	 */
 	@Override
 	public void initialize() {
 
