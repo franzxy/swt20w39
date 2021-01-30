@@ -10,6 +10,7 @@ import org.springframework.validation.ObjectError;
 public class ErrorTest implements Errors {
     private String objectname;
     private ArrayList<String> nestedPath=new ArrayList<>();
+    private boolean haserrors = false;
     @Override
     public String getObjectName() {
         return this.objectname;
@@ -71,12 +72,12 @@ public class ErrorTest implements Errors {
 
     @Override
     public void addAllErrors(Errors errors) {
-
+        this.haserrors = true;
     }
 
     @Override
     public boolean hasErrors() {
-        return false;
+        return this.haserrors;
     }
 
     @Override
