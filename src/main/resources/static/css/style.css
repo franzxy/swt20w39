@@ -2,7 +2,7 @@
 	margin: 0;
 	padding: 0;
 	outline: none;
-	transition: box-shadow ease 0.2s !important;
+	transition: box-shadow 0.2s linear !important;
 }
 
 *:focus{
@@ -54,7 +54,7 @@ nav {
 	font-weight: 900;
 	color: green;
 	text-decoration: none;
-	transition: color 0.2s linear;
+	transition: color 0.2s linear !important;
 	border-radius: 20px;
 }
 
@@ -77,26 +77,31 @@ nav {
 	justify-content: flex-end;
 	align-items: center;
 	height: 40px;
-	background-color: lightgray;
 }
 
-.searchbutton {
-	right: 5px;
-	position: absolute;
-	height: 30px !important;
-	width: 30px !important;
-	min-width: 30px !important;
-	background-color: transparent !important;
-}
-
-.searchicon {
-	width: 15px !important;
-	height: 15px !important;
+.searchbar:hover .search:not(:focus){
+	background-color: gainsboro;
 }
 
 .search {
 	width: 100%;
-	padding-right: 40px;
+	padding-right: 50px;
+}
+
+.search:focus {
+	background-color: white;
+}
+
+.searchbutton {
+	right: 0;
+	position: absolute;
+	background-color: transparent !important;
+}
+
+.searchicon {
+	fill: #949494;
+	width: 24px;
+	height: 24px;
 }
 
 .personal {
@@ -178,7 +183,7 @@ select {
 	border-radius: 20px;
 	cursor: pointer;
 	border-right: 10px solid lightgray;
-	transition: background-color ease 0.2s, border ease 0.2s;
+	transition: background-color 0.2s linear !important, border 0.2s linear !important;
 }
 
 select:hover {
@@ -296,7 +301,7 @@ input {
 	padding: 0 20px;
 	border: none;
 	background-color: lightgray;
-	transition: background-color ease 0.2s;
+	transition: background-color 0.2s linear !important;
 }
 
 input:hover {
@@ -304,7 +309,8 @@ input:hover {
 }
 
 .numberinput {
-	width: 50px;
+	width: 50px !important;
+	max-width: 50px !important;
 }
 
 .rightcorners {
@@ -331,7 +337,7 @@ input:hover {
 	cursor: pointer;
 	color: white;
 	text-decoration: none;
-	transition: background 0.2s linear;
+	transition: background-color 0.2s linear !important;
 }
 
 .button:hover {
@@ -339,18 +345,18 @@ input:hover {
 }
 
 .iconbutton {
-	height: 40px;
-	width: 40px;
-	min-width: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height: 40px;
+	width: 40px;
+	min-width: 40px;
 	border-radius: 20px;
 	text-decoration: none;
 	background-color: green;
 	border: none;
 	cursor: pointer;
-	transition: background 0.2s linear;
+	transition: background-color 0.2s linear !important;
 }
 
 .iconbutton:hover {
@@ -358,11 +364,9 @@ input:hover {
 }
 
 .icon {
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
 	height: 24px;
 	width: 24px;
+	fill: white;
 }
 
 span {
@@ -459,7 +463,7 @@ label {
 	border-top-right-radius: 20px;
 	width: 100%;
 	height: 200px;
-	transition: background-color ease 0.2s !important;
+	transition: background-color 0.2s linear !important;
 	display: flex;
 	justify-content: center;
 	align-items: center;

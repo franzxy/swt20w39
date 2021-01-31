@@ -34,7 +34,13 @@
 								<div class="row">
 									<input class="numberinput rightcorners" placeholder="420" id="name" name="salary" th:value="${user.getSalary()} ? ${user.getSalary().getNumber()} : ${employeeForm.getSalary()}" th:errorclass="fieldError" type="text" required="required"/>
 									<a class="currency rightcorners">€</a>
-									<button type="submit" class="leftcorners button">Anpassen</button>
+									<button th:if="${user.getSalary()}" type="submit" class="ui button leftcorners">
+										<svg class="icon" viewBox="0 0 24 24">
+											<rect fill="none" height="24" width="24"/>
+											<path d="M17.65,6.35c-1.63-1.63-3.94-2.57-6.48-2.31c-3.67,0.37-6.69,3.35-7.1,7.02C3.52,15.91,7.27,20,12,20 c3.19,0,5.93-1.87,7.21-4.56c0.32-0.67-0.16-1.44-0.9-1.44l0,0c-0.37,0-0.72,0.2-0.88,0.53c-1.13,2.43-3.84,3.97-6.8,3.31 c-2.22-0.49-4.01-2.3-4.48-4.52C5.31,9.44,8.26,6,12,6c1.66,0,3.14,0.69,4.22,1.78l-1.51,1.51C14.08,9.92,14.52,11,15.41,11H19 c0.55,0,1-0.45,1-1V6.41c0-0.89-1.08-1.34-1.71-0.71L17.65,6.35z"/>
+										</svg>
+									</button>
+									<button th:unless="${user.getSalary()}" type="submit" class="ui button leftcorners">Hinzufügen</button>
 								</div>
 								<p class="ui negative message" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></p>
 							</form>
@@ -68,7 +74,12 @@
 						<a th:if="${user.userAccount.hasRole(boss)}">Geschäftsführer kann nicht gelöscht werden.</a>
 						<a th:if="${user.userAccount.hasRole(employee)}">Mitarbeiter können nicht gelöscht werden.</a>
 						<a th:if="${user.userAccount.hasRole(customer)} and ${user.getOrdered()}">Kunde hat bereits Bestellungen.</a>
-						<a th:if="${user.userAccount.hasRole(customer)} and not ${user.getOrdered()}" class="iconbutton" th:href="@{/user/{id}/remove(id=${user.getId()})}"><img class="icon" th:src="@{/img/trash.png}"></a>
+						<a th:if="${user.userAccount.hasRole(customer)} and not ${user.getOrdered()}" class="iconbutton" th:href="@{/user/{id}/remove(id=${user.getId()})}">
+							<svg class="icon" viewBox="0 0 24 24">
+								<rect fill="none" height="24" width="24"/>
+								<path d="M22,10h-4c-0.55,0-1,0.45-1,1s0.45,1,1,1h4c0.55,0,1-0.45,1-1S22.55,10,22,10z M9,12c2.21,0,4-1.79,4-4c0-2.21-1.79-4-4-4 S5,5.79,5,8C5,10.21,6.79,12,9,12z M15.39,14.56C13.71,13.7,11.53,13,9,13c-2.53,0-4.71,0.7-6.39,1.56C1.61,15.07,1,16.1,1,17.22 V20h16v-2.78C17,16.1,16.39,15.07,15.39,14.56z"/>
+							</svg>
+						</a>
 					</td>
 				</tr>
 			</table>
