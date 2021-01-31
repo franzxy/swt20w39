@@ -1,0 +1,54 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2020
+
+**Von: Falk Natkowski**
+
+**Gruppe: 39**
+
+== Was habe ich gelernt / was habe ich nicht gelernt?
+
+* Kenntnisse in Spring Boot, Thymeleaf
+
+* Kenntnisse in der Webentwicklung generell
+
+* Teamarbeit an gemeinsamen (Software-)Projekt (Planung, Kommunikation, Aufgabenverteilung, ...)
+
+* Einarbeitung in unbekanntes Framework / Projektgerüst
+
+* Unit-testing
+
+* Verwendung von Tools wie Maven, Sonarqube, MagicDraw etc.
+
+* Dass es sehr hilfreich ist, die Dokumentation zu lesen
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+
+* Klare Aufgabenverteilung, feste Fristen und eine gut funktionierende Kommunikation sind Grundvorraussetzung
+
+* Probleme, Unklarheiten o. Ä. sofort ansprechen
+
+* Austausch von Ergebnissen, Ideen oder Fragen nicht nur über Gruppenleiter, sondern auch Untereinander
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+
+* Spring Boot + Kickstart ermöglicht ohne große Umstände direkt Implementierung konkreter Features
+
+* SalesPoint bildet einfache, gut zu Verwendende und zu Erweiternde Basis
+
+* Fehlermeldungen von Spring Boot oder Thymeleaf undurchsichtig, kryptisch und für Fehlersuche fast immer nutzlos
+
+* Wenn die Verwendung einer SalesPoint-Implementierung (z.B. auf Grund einer fehlenden Funktion) nicht möglich ist, ist es sehr umständlich, eine eigene Alternative zu Entwickeln
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+
+* Möglichkeit, in Absprache mit Tutor und bei begründeten Beschwerden andere Frameworks/Technologien als die Vorgegebenen zu benutzen
+
+* Bei Online-Durchführung des Praktikums: Webcam-Pflicht mindestens beim ersten Treffen (das zuordnen eines Gesichtes zu einer Person sorgt für eine persönlichere Zusammenarbeit und damit gesteigerte Gruppenleistung)
+
+== Feedback für den Tutor
+
+* Tutor war Hilfsbereit und an einer guten Leistung der Gruppe interessiert
+
+* Bei Gruppeninternen Konflikten wurde immer an einer für alle Mitglieder fairen Lösung gearbeitet
+
+== Sonstiges und Anmerkungen
+// Welche Aspekte fanden in den oben genannten Punkten keine Erwähnung?
