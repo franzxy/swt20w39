@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Representation eines Medizin-Produkts
+ */
 @Entity
 public class Medicine extends Product {
 	private String description, image;
@@ -18,7 +21,18 @@ public class Medicine extends Product {
 	@SuppressWarnings({ "unused", "deprecation" })
 	private Medicine() {
 	}
-	
+
+	/**
+	 * @param name Name
+	 * @param description Beschreibung
+	 * @param price Einkaufspreis
+	 * @param purchasingprice Verkaufspreis
+	 * @param categories Kategorien
+	 * @param amount Menge pro Verkaufseinheit
+	 * @param presonly Verschreibungspflichtig oder nicht
+	 * @param image Bild
+	 * @param quantity Menge im Inventar
+	 */
 	public Medicine(String name, String description, Money price, Money purchasingprice, List<String> categories, double amount, boolean presonly, String image, int quantity){
 		super(name, price);
 		this.presonly=presonly;

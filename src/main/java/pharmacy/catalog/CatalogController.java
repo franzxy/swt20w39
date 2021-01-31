@@ -12,11 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pharmacy.finances.AccountancyAdapter;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
 
+/**
+ * Ein Controller für die Katalogansicht.
+ * Nutzt {@link MedicineCatalog}.
+ * @author Falk Natkowski
+ */
 @Controller
 class CatalogController {
 	private static final Logger LOG = LoggerFactory.getLogger(CatalogController.class);
@@ -27,12 +33,28 @@ class CatalogController {
 	private UniqueInventory<UniqueInventoryItem> inventory;
 	private Cart cart;
 
+	/**
+	 * Initialisiert den Katalog-Controller
+	 * @param {@link MedicineCatalog}
+	 * @param {@link businessTime}
+	 * @param {@link inventory}
+	 * @param {@link cart}
+	 */
 	CatalogController(MedicineCatalog medicineCatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> inventory, Cart cart) {
 		this.catalog = medicineCatalog;
 		this.inventory = inventory;
 		this.cart = cart;
 	}
 
+	/**
+	 * GET-Mapping für Katalog-Controller. Per Link-Parameter können Elemente gefiltert werden.
+	 * Parameter müssen unbedingt per URI-Encoder in UTF-8 codiert werden, um Umlaute zu unterstützen!
+	 * @param searchTerm Suchbegriff, s=
+	 * @param tag Kategorie, t=
+	 * @param noPres Verschreibungspflichtig oder nicht, p=
+	 * @param model
+	 * @return Index-Template
+	 */
 	@GetMapping("/")
 	public String catalog(@RequestParam(name="s", required=true, defaultValue = "") String searchTerm,
 	                      @RequestParam(name="t", required=true, defaultValue = "") String tag,
@@ -131,7 +153,14 @@ class CatalogController {
 	}
 
 
-
+	/**
+	 * POST-Mapping für Katalog-Controller. Nutzt {@link SearchForm} um Suche in Katalog auszulösen.
+	 * Suchparameter werden automatisch in UTF-8 kodiert.
+	 * @param bar Vorheriger Suchbegriff
+	 * @param form Such-Formular
+	 * @param model
+	 * @return Redirect auf / mit Suchparametern im link.
+	 */
 	@PostMapping("/")
 	public String submitSearchInCatalog(@RequestParam("searchbar") String bar, @ModelAttribute SearchForm form, Model model) {
 		model.addAttribute("SearchForm", form);
@@ -151,6 +180,12 @@ class CatalogController {
 		return "redirect:/?s=" + UTFTerm + "&p=" + form.getNoPres() + "&t=" + UTFTag;
 	}
 
+	/**
+	 * GET-Mapping für Detailseite von einzelnem Produkt
+	 * @param medicine Anzuzeigendes Produkt
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/medicine/{medicine}")
 	public String detail(@PathVariable Medicine medicine, Model model) {
 		Quantity q = Quantity.of(0);

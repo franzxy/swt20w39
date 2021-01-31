@@ -1,5 +1,8 @@
 package pharmacy.catalog;
 
+/**
+ * Formular-Objekt für die Suche im Katalog
+ */
 public class SearchForm {
 	private String searchTerm;
 	private String tag;
