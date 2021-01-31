@@ -35,13 +35,13 @@
 
                         <div class="field">
                             <label class="label" for="address">IBAN</label>
-                            <input class="textinput" placeholder="Apo Theken Straße 8A" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getIban()} : ${bankAccountForm.getIban()}" name="iban" th:errorclass="fieldError" type="text" required="required"/>
+                            <input class="textinput" placeholder="DE 1234 1234 1234 1234 12" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getIban()} : ${bankAccountForm.getIban()}" name="iban" th:errorclass="fieldError" type="text" required="required"/>
                             <p class="ui negative message" th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}"></p>
                         </div>
 
                         <div class="field">
                             <label class="label" for="name">BIC</label>
-                            <input class="textinput" placeholder="69420" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getBic()} : ${bankAccountForm.getBic()}" name="bic" th:errorclass="fieldError" type="text" required="required"/>
+                            <input class="textinput" placeholder="AACSDE33" th:value="${user.getBankAccount()} ? ${user.getBankAccount().getBic()} : ${bankAccountForm.getBic()}" name="bic" th:errorclass="fieldError" type="text" required="required"/>
                             <p class="ui negative message" th:if="${#fields.hasErrors('bic')}" th:errors="*{bic}"></p>
                         </div>
                         
@@ -64,7 +64,7 @@
 
                         <div class="field">
                             <label class="label" for="address">Kartennummer</label>
-                            <input class="textinput" placeholder="Apo Theken Straße 8A" th:value="${user.getPaymentCard()} ? ${user.getPaymentCard().getNumber()} : ${creditCardForm.getNumber()}" name="number" th:errorclass="fieldError" type="text" required="required"/>
+                            <input class="textinput" placeholder="3569 9900 1009 5841" th:value="${user.getPaymentCard()} ? ${user.getPaymentCard().getNumber()} : ${creditCardForm.getNumber()}" name="number" th:errorclass="fieldError" type="text" required="required"/>
                             <p class="ui negative message" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></p>
                         </div>
 

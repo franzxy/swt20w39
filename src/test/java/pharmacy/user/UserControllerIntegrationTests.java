@@ -31,7 +31,7 @@ class UserControllerIntegrationTests extends AbstractIntegrationTests {
 	void rejectsUnauthenticatedAccessToController() {
 
 		assertThatExceptionOfType(AuthenticationException.class) //
-				.isThrownBy(() -> controller.users(new ExtendedModelMap(), null, null, null));
+				.isThrownBy(() -> controller.users(new ExtendedModelMap(), null));
 	}
 
 
@@ -42,7 +42,7 @@ class UserControllerIntegrationTests extends AbstractIntegrationTests {
 
 		ExtendedModelMap model = new ExtendedModelMap();
 
-		controller.users(model, null, null, null);
+		controller.users(model, null);
 
 		assertThat(model.get("customer")).isNotNull();
 	}
@@ -192,10 +192,10 @@ class UserControllerIntegrationTests extends AbstractIntegrationTests {
 	}
 	@Test
 	@WithMockUser(roles = "EMPLOYEE", username = "hans")
-	void account2Test(){
+	void addressTest(){
 		Model model = new ExtendedModelMap();
 		AddressForm f = new AddressForm("example", "this way", "12324", "NYX");
-		String res = this.controller.account(model,f);
+		String res = this.controller.address(model,f);
 		assertEquals(res, "address");
 		assertEquals(model.asMap().get("user"), userManagement.currentUser().get());
 		assertEquals(model.asMap().get("customer"), Role.of("CUSTOMER"));
@@ -243,13 +243,13 @@ class UserControllerIntegrationTests extends AbstractIntegrationTests {
 	}
 	@Test
 	@WithMockUser(roles = "EMPLOYEE", username = "hans")
-	void changeAccountBank2Test(){
+	void changeAccountCardTest(){
 		Model model = new ExtendedModelMap();
 		BankAccountForm f1 = new BankAccountForm("a", "b", "c");
 		PaymentCardForm f2 = new PaymentCardForm("hello", "number", "secure");
 		PayDirektForm f3 = new PayDirektForm("name");
 		Errors e = new ErrorTest();
-		String res = this.controller.changeAccountBank(model,f2,e,f1,f3);
+		String res = this.controller.changeAccountCard(model,f2,e,f1,f3);
 		assertEquals(res, "redirect:/account/payments");
 		assertEquals(model.asMap().get("user"), userManagement.currentUser().get());
 		assertEquals(model.asMap().get("bankAccountForm"), f1);
@@ -263,13 +263,13 @@ class UserControllerIntegrationTests extends AbstractIntegrationTests {
 	}
 	@Test
 	@WithMockUser(roles = "EMPLOYEE", username = "hans")
-	void changeAccountBank3Test(){
+	void changeAccountPayTest(){
 		Model model = new ExtendedModelMap();
 		BankAccountForm f1 = new BankAccountForm("a", "b", "c");
 		PaymentCardForm f2 = new PaymentCardForm("hello", "number", "secure");
 		PayDirektForm f3 = new PayDirektForm("name");
 		Errors e = new ErrorTest();
-		String res = this.controller.changeAccountBank(model,f3,e,f2,f1);
+		String res = this.controller.changeAccountPay(model,f3,e,f2,f1);
 		assertEquals(res, "redirect:/account/payments");
 		assertEquals(model.asMap().get("user"), userManagement.currentUser().get());
 		assertEquals(model.asMap().get("bankAccountForm"), f1);
@@ -279,8 +279,4 @@ class UserControllerIntegrationTests extends AbstractIntegrationTests {
 		assertEquals(res, "payments");
 		assertEquals(this.userManagement.currentUser().get().getPayDirekt().getName(), "name");
 	}
-
-
-
-
 }

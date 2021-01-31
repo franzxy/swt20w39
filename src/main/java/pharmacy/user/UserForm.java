@@ -20,12 +20,8 @@ class UserForm {
 	private final String password;
 
 	@NotEmpty(message = "Passwort Bestätigen fehlt")
+	// @ValidPassword(comp = password)
 	private final String confirmPassword;
-
-	@AssertTrue(message="Passwörter stimmen nicht überein.")
-	private boolean isConfirm() {
-		return password.equals(confirmPassword);
-	}
 
 	public UserForm(String name, String password, String confirmPassword) {
 		this.name = name;

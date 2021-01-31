@@ -24,6 +24,7 @@
 * Freie Wahl des Technologie-Stacks
 * Tutor als Scrum Master bzw. den Scrum Master separat unterrichten und möglicherweise mehr Befugnisse erteilen
 * Mehr Zeit für Entwurfs und Analyse Phasen
+* Readme und Wiki statt aktueller Dokumentation, da meistens zu viele Änderungen in zu kurzer Zeit geschehen und keine Tools für dynamische Diagramme in den Bot integriert sind
 
 == Feedback für den Tutor
 + Hilfsbereit +

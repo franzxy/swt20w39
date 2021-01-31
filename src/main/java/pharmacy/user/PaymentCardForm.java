@@ -8,12 +8,10 @@ class PaymentCardForm {
 	@NotEmpty(message = "Name fehlt")
 	private final String name;
 	
-	@NotEmpty(message = "IBAN fehlt")
-	@Pattern(regexp="^[A-Z]{2}(?:[ ]?[0-9]){18,20}$", message = "Das ist keine IBAN")
+	@Pattern(regexp="^[0-9]*$", message = "Das ist keine Kartennummer")
 	private final String number;
 
-	@NotEmpty(message = "BIC fehlt")
-	@Pattern(regexp="^[0-9]*$", message = "Gehalt darf nur aus Zahlen bestehen")
+	@Pattern(regexp="^[0-9]{3}$", message = "Das sind keine Sicherheitszahlen")
 	private final String secure;
 
 	public PaymentCardForm(String name, String number, String secure) {

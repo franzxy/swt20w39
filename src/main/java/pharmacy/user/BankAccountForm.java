@@ -8,12 +8,10 @@ class BankAccountForm {
 	@NotEmpty(message = "Name fehlt")
 	private final String name;
 	
-	@NotEmpty(message = "IBAN fehlt")
-	@Pattern(regexp="^[A-Z]{2}(?:[ ]?[0-9]){18,20}$", message = "Das ist keine IBAN")
+	@Pattern(regexp="^[A-Z]{2}[0-9]{18,20}$", message = "Das ist keine IBAN")
 	private final String iban;
 
-	@NotEmpty(message = "BIC fehlt")
-	@Pattern(regexp="^[0-9]*$", message = "Gehalt darf nur aus Zahlen bestehen")
+	@Pattern(regexp="^([a-zA-Z]{4})([a-zA-Z]{2})(([2-9a-zA-Z]{1})([0-9a-np-zA-NP-Z]{1}))((([0-9a-wy-zA-WY-Z]{1})([0-9a-zA-Z]{2}))|([xX]{3})|)$", message = "Das ist keine BIC")
 	private final String bic;
 
 	public BankAccountForm(String name, String iban, String bic) {

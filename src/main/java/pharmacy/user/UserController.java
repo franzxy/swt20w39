@@ -43,10 +43,8 @@ class UserController {
 
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('BOSS')")
-	String users(Model model, EmployeeForm employeeForm, InsuranceForm insuranceForm, AddressForm addressForm) {
+	String users(Model model, EmployeeForm employeeForm) {
 
-		model.addAttribute("insuranceForm", insuranceForm);
-		model.addAttribute("addressForm", addressForm);
 		model.addAttribute("employeeForm", employeeForm);
 
 		model.addAttribute("users", userManagement.findAll());
@@ -173,7 +171,7 @@ class UserController {
 
 	@GetMapping("/account/address")
 	@PreAuthorize("isAuthenticated()")
-	String account(Model model, AddressForm addressForm) {
+	String address(Model model, AddressForm addressForm) {
 
 		model.addAttribute("addressForm", addressForm);
 
@@ -221,7 +219,7 @@ class UserController {
 	
 	@PostMapping("/account/card")
 	@PreAuthorize("isAuthenticated()")
-	String changeAccountBank(Model model, @Valid @ModelAttribute("creditCardForm")PaymentCardForm creditCardForm, Errors result, BankAccountForm bankAccountForm, PayDirektForm payDirektForm) {
+	String changeAccountCard(Model model, @Valid @ModelAttribute("creditCardForm")PaymentCardForm creditCardForm, Errors result, BankAccountForm bankAccountForm, PayDirektForm payDirektForm) {
 		
 		model.addAttribute("bankAccountForm", bankAccountForm);
 		model.addAttribute("payDirektForm", payDirektForm);
@@ -239,7 +237,8 @@ class UserController {
 	
 	@PostMapping("/account/paydirekt")
 	@PreAuthorize("isAuthenticated()")
-	String changeAccountBank(Model model, @Valid @ModelAttribute("payDirektForm")PayDirektForm payDirektForm, Errors result, PaymentCardForm creditCardForm, BankAccountForm bankAccountForm) {
+	
+	String changeAccountPay(Model model, @Valid @ModelAttribute("payDirektForm")PayDirektForm payDirektForm, Errors result, PaymentCardForm creditCardForm, BankAccountForm bankAccountForm) {
 		
 		model.addAttribute("bankAccountForm", bankAccountForm);
 		model.addAttribute("creditCardForm", creditCardForm);

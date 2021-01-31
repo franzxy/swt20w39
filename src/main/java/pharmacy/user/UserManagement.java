@@ -99,6 +99,13 @@ public class UserManagement {
 
 		return "address added";
 	}
+	
+	public String changeOrdered(User user, Boolean newOrdered) {
+		
+		user.setOrdered(newOrdered);
+
+		return "ordered changed";
+	}
 
 	public String hireEmployee(User user) {
 		
@@ -106,13 +113,6 @@ public class UserManagement {
 		user.addRole(Role.of("EMPLOYEE"));
 
 		return "employee added";
-	}
-	
-	public String changeOrdered(User user, Boolean newOrdered) {
-		
-		user.setOrdered(newOrdered);
-
-		return "ordered changed";
 	}
 	
 	public String changeEmployee(User user, EmployeeForm employeeForm) {
