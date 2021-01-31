@@ -1,0 +1,12 @@
+= Standardbenutzer
+
+== Geschäftsführer (Rolle: "BOSS")
+* Benutzername: "apo", Passwort: "\#123apo#"
+
+== Mitarbeiter (Rolle: "EMPLOYEE")
+* Benutzername: "hans", Passwort: "\#12hans#"
+
+== Kunden (Rolle: "CUSTOMER")
+* Benutzername: "hansi", Passwort: "\#12hans#"
+* Benutzername: "hansa", Passwort: "\#12hans#"
+* Benutzername: "hanso", Passwort: "\#12hans#"

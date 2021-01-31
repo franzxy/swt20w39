@@ -43,25 +43,23 @@
 
 === Aufgabenstellung
 
-In so schwierigen Zeiten wird es immer wichtiger, dass essenzielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. Deshalb soll eine neue Webapp für die Apotheke des Unterbrunner Ärztehaus entstehen, welche unter anderem die Möglichkeit der Lieferung für bewegungseingeschränkte oder gefährdete Personen ermöglicht.
+In so schwierigen Zeiten wird es immer wichtiger, dass essenzielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. 
+Deshalb soll die neue Webapp der Apotheke des Unterbrunner Ärztehaus einen simplen, lokalen und zuverlässigen Medikamentenversand ermöglichen. Diese Webapp wird die Apotheke zu einer Online Apotheke umwandeln, welche zusammen mit der im Januar 2021 kommenden elektronischen Patientenakte eine zukunftsfähige Plattform bietet. 
+Es wird ein besonderer Fokus auf digitale Barrierefreiheit gelegt.
 
-Die Apotheke hat mehrere Benutzer mit verschiedenen Rechten. Jeder Besucher kann das Inventar einsehen, ohne sich anzumelden, um bequem den Bestand prüfen zu können. Im Inventar wird unterschieden zwischen Medikamenten und Zutaten für das Labor. Außerdem hat jeder Artikel einen Bestand, eine Nachbestellmenge und eine Information, ob der Artikel rezeptpflichtig ist.
+Die Apotheke hat mehrere Benutzer mit verschiedenen Rechten. Jeder Besucher kann den vollen Produktkatalog einsehen, ohne sich anzumelden, um Produkte zu suchen, den Bestand einzusehen oder Produkte in den Warenkorb zu legen. Ein eingeloggter Nutzer kann zusätzlich Bestellungen auslösen. Falls die bestellten Produkte Verschreibungspflichtig sind, wird beim Checkout die Angabe der Krankenversicherung Verlangt.
 
-Nach einer kurzen Anmeldung können Nutzer auch Waren in die Apotheke bestellen lassen, bewegungseingeschränkte Nutzer können außerdem diese Waren zu sich nach Hause liefern lassen. Arzt Praxen bekommen ihren eigenen Account, welcher es einer Praxis ermöglicht auf den Medikamentenschrank zuzugreifen. In der Apotheke selbst gibt es die Möglichkeit Kassenaccounts zu erstellen, um in Zukunft mehrere Selbstbedienerkassen zu unterstützen. Mitarbeiter können neben dem abrechnen von rezeptpflichtigen Medikamenten auch eigene hinzufügen, welche im Labor hergestellt wurden. Zudem können Mitarbeiter sich Urlaub nehmen. Der Boss hat die Möglichkeit Artikel manuell nachzubestellen, Nutzer zu erstellen, Mitarbeiter einzustellen, zu feuern und deren Gehalt anzupassen, außerdem kann er die Finanzen der Apotheke verwalten.
+Dieser Produktkatalog basiert auf dem Inventar, wo jeder Artikel einen Bestand, eine Nachbestellmenge, eine Beschreibung und eine Information, ob der Artikel rezeptpflichtig ist besitzt. Außerdem gibt es Kategorien welche die Schlagwortsuche ermöglichen.
 
-Wenn eine Bestellung ausgelöst wurde, werden Zeitpunkt, Betrag, Artikel und zugehörige Menge, Kunde und eventuelle Rezept-Nummern gespeichert. Wenn der Vorgang abgeschlossen wurde, wird bei regulären Kunden abhängig von der Krankenkasse abgerechnet. Bei Praxen wird am Ende des Monats abgerechnet. Zudem werden die Gehälter der Mitarbeiter so verwaltet, genau wie die monatliche Abrechnung mit den Krankenkassen.
+Wenn eine Bestellung ausgelöst wurde, werden Zeitpunkt, Kunde, Betrag, Artikel und zugehörige Menge gespeichert. Diese Bestellung kann dann von Mitarbeitern abgefertigt werden.
 
-Wenn eine Praxis eine Anfrage an das Labor schickt, wird eine offene Bestellung erzeugt, der im Labor tätige Mitarbeiter kann diese dann erfüllen, indem er die benötigten Materialien aus dem Inventar entfernt und daraufhin die Bestellung als abgeschlossen kennzeichnet.
-
-Auch die Inventarverwaltung soll erleichtert werden, daher wird wöchentlich eine Liste mit Medikamenten erstellt, deren Verfallsdatum in der nächsten Woche erreicht wird oder das schon überschritten ist.
-
-Zwar können Nutzer sich frei Registrieren, mithilfe einer E-Mail-Adresse und eines Passworts, allerdings muss die Akkreditierung der Bewegungseinschränkung vor Ort geschehen. Das Erstellen von Kassen, Praxen und Mitarbeiter Accounts wurde erleichtert, damit nicht jeder erst einen Account manuell erstellen muss.
+Für den Geschäftsführer bietet eine Finanzübersicht Einblick über alle Transaktionen und Fixkosten. Mitarbeiter haben über ihre persönliche Finanzeinsicht Zugriff auf Lohnzettel und Kunden können alle Transakionen auf einen Blick einsehen.
 
 Das Ziel der Anwendung ist es, sehr zuverlässig und langwierig betrieben werden zu können, weshalb eine Webapp eine gute Wahl darstellt. Zudem bietet die modualre Nutzer-Struktur die Möglichkeit weitere Account-Typen ohne viel Aufwand hinzuzufügen.
 
 Der Aufbau der Seite sollte additiv sein, also niemals dem Nutzer Funktionalität entziehen, wenn seine Freigabe steigt. Das heißt, dass der Boss mindestens genau so viele Funktionen wie der Mitarbeiter hat. Dies hilft zusätzlich bei der Inbetriebnahme des Systems, da Nutzer sich gegenseitig besser unterstützen können.
 
-Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige Bilder verzichtet werden und statt dessen auf korrekte Kontrast verhätnisse und gut skalierende Schrift geachtet werden.
+Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige Grafiken verzichtet werden und statt dessen auf korrekte Kontrast-Verhätnisse und gut skalierende Icons und Schrift geachtet werden.
 
 === Qualitätsziele
 
@@ -119,11 +117,11 @@ Die folgenden (oder neueren) Browserversionen sind erforderlich, um die Anwendun
 === Vorgaben zum Betrieb der Software
 Dieser Abschnitt gibt einen Überblick darüber, wie und unter welchen Umständen das Produkt nach Fertigstellung verwendet werden soll.
 
-Das System wird von einer Apotheke sowohl als Webshop als auch Vorort Arbeitsumgebung verwendet, um ihre Medikamente an Kunden zu verkaufen. Die Software soll auf einem Server laufen und interessierten Kunden rund um die Uhr über das Internet (über einen Browser) zur Verfügung stehen.
+Das System wird von einer Apotheke als verwendet, um ihre Medikamente an Kunden zu verkaufen. Die Software soll auf einem Server laufen und interessierten Kunden rund um die Uhr über das Internet (über einen Browser) zur Verfügung stehen.
 
-Die Hauptbenutzer der Software sind Kunden, Mitarbeiter, Laboranten und Ärzte die angeblich typische Website-Navigationsschemata kennen, sowie der Boss, der nicht unbedingt einen technischen Hintergrund hat.
+Die Hauptbenutzer der Software sind Kunden, Mitarbeiter und die Geschäftsführung der Apotheke, welche typische Website-Navigationsschemata kennen.
 
-Das System muss nicht technisch gewartet werden, da die Mitarbeiter der Apotheke bereits alle Hände voll zu tun haben. Alle Daten müssen dauerhaft in einer Datenbank gespeichert sein und über die Anwendung zugänglich sein (z. B. sollten für einen Chef keine SQL-Kenntnisse erforderlich sein).
+Das System muss nicht technisch gewartet werden. Alle Daten müssen dauerhaft in einer Datenbank gespeichert sein und über die Anwendung zugänglich sein.
 
 == Kontextabgrenzung
 === Kontextdiagramm
@@ -132,6 +130,7 @@ Das System muss nicht technisch gewartet werden, da die Mitarbeiter der Apotheke
 image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/Kontext.png[Kontext]
 
 == Lösungsstrategie
+
 === Erfüllung der Qualitätsziele
 _Hinweis: Die folgende Tabelle zeigt die zuvor definierten Qualitätsanforderungen und Lösungsansätze, um diese zu erfüllen._
 [options="header"]
@@ -169,7 +168,7 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 
 ==== Persistenz
 
-Persistenz ist deaktiviert.
+Persistenz ist deaktiviert. Kann aber für den Betrieb aktiviert werden.
 
 ==== Benutzeroberfläche
 
@@ -227,8 +226,8 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 |InventoryDataInitializer |Eine Implementierung des Dateninitialisierers zum Erstellen von Dummy-Medikamenten welche aus dem Katalog übernommen werden
 |MedicineForm |Ein Formular um neue Medikamente hinzuzufügen und bestehende zu bearbeiten
 |===
-=== Catalog
 
+=== Catalog
 
 [options="header"]
 |=== 
@@ -251,9 +250,27 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 |UserDataInitializer|Test Benutzer
 |UserManagement|Helfer-Klasse für Benutzer
 |UserRepository|Helfer-Klasse für das Verwalten von UserAccounts
-|EmailForm|Interface zum überprüfen der Email
-|RegistrationForm|Interface zum überprüfen der Registrierung
+|UserForm|Interface zum überprüfen der Registrierung
 |LoginForm|Interface zum überprüfen des Logins
+|Address|Adressen Klasse
+|AddressForm|Interface zum überprüfen der Adresse
+|BankAccount|Bank Account Klasse
+|BankAccountForm|Interface zum überprüfen des Bank Accounts
+|EmployeeForm|Interface zum überprüfen des Gehalts
+|Insurance|Versicherungs Klasse
+|InsuranceForm|Interface zum überprüfen der Versicherung
+|PasswordForm|Interface zum überprüfen des Passworts
+|PasswordValidator|Bean-Validator für Passwörter
+|ValidPassword|Validation-Constraint für Passwörter
+|PayDirekt|PayDirekt Klasse
+|PayDirektForm|Interface zum überprüfen des PayDirekt Accounts
+|PaymentCard|Kartenzahlung Klasse
+|PaymentCardForm|Interface zum überprüfen der Kartenzahlung
+|PictureForm|Interface zum überprüfen des Profilbildes
+|UsernameValidator|Bean-Validator für Benutzernamen
+|ValidUsername|Validation-Constraint für Benutzernamen
+|Vacation|Urlaub Klasse
+|VacationForm|Interface zum überprüfen des Urlaubs
 |===
 
 === Order

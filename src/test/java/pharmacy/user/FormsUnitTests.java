@@ -54,13 +54,6 @@ public class FormsUnitTests extends AbstractIntegrationTests {
 	}
 
 	@Test
-	public void testUserNameForm() {
-		UserNameForm u = new UserNameForm("name");
-
-		assertEquals(u.getName(), "name");
-	}
-
-	@Test
 	public void testVacationForm() {
 		VacationForm v = new VacationForm("2000-02-02", "2001-03-04");
 

@@ -44,19 +44,21 @@ Vor allem soll ein agiles Dokument geschaffen werden, welches auch im Laufe der 
 
 In so schwierigen Zeiten wird es immer wichtiger, dass essenzielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. 
 Deshalb soll die neue Webapp der Apotheke des Unterbrunner Ärztehaus einen simplen, lokalen und zuverlässigen Medikamentenversand ermöglichen. Diese Webapp wird die Apotheke zu einer Online Apotheke umwandeln, welche zusammen mit der im Januar 2021 kommenden elektronischen Patientenakte eine zukunftsfähige Plattform bietet. 
-Bei der wird ein besonderer Fokus auf digitale Barrierefreiheit gelegt.
+Es wird ein besonderer Fokus auf digitale Barrierefreiheit gelegt.
 
 Die Apotheke hat mehrere Benutzer mit verschiedenen Rechten. Jeder Besucher kann den vollen Produktkatalog einsehen, ohne sich anzumelden, um Produkte zu suchen, den Bestand einzusehen oder Produkte in den Warenkorb zu legen. Ein eingeloggter Nutzer kann zusätzlich Bestellungen auslösen. Falls die bestellten Produkte Verschreibungspflichtig sind, wird beim Checkout die Angabe der Krankenversicherung Verlangt.
 
 Dieser Produktkatalog basiert auf dem Inventar, wo jeder Artikel einen Bestand, eine Nachbestellmenge, eine Beschreibung und eine Information, ob der Artikel rezeptpflichtig ist besitzt. Außerdem gibt es Kategorien welche die Schlagwortsuche ermöglichen.
 
-Wenn eine Bestellung ausgelöst wurde, werden Zeitpunkt, Betrag, Artikel und zugehörige Menge, Kunde und eventuelle Rezept-Nummern gespeichert. Diese Bestellung kann dann von Mitarbeitern abgefertigt werden.
+Wenn eine Bestellung ausgelöst wurde, werden Zeitpunkt, Kunde, Betrag, Artikel und zugehörige Menge gespeichert. Diese Bestellung kann dann von Mitarbeitern abgefertigt werden.
+
+Für den Geschäftsführer bietet eine Finanzübersicht Einblick über alle Transaktionen und Fixkosten. Mitarbeiter haben über ihre persönliche Finanzeinsicht Zugriff auf Lohnzettel und Kunden können alle Transakionen auf einen Blick einsehen.
 
 Das Ziel der Anwendung ist es, sehr zuverlässig und langwierig betrieben werden zu können, weshalb eine Webapp eine gute Wahl darstellt. Zudem bietet die modualre Nutzer-Struktur die Möglichkeit weitere Account-Typen ohne viel Aufwand hinzuzufügen.
 
 Der Aufbau der Seite sollte additiv sein, also niemals dem Nutzer Funktionalität entziehen, wenn seine Freigabe steigt. Das heißt, dass der Boss mindestens genau so viele Funktionen wie der Mitarbeiter hat. Dies hilft zusätzlich bei der Inbetriebnahme des Systems, da Nutzer sich gegenseitig besser unterstützen können.
 
-Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige Bilder verzichtet werden und statt dessen auf korrekte Kontrast-Verhätnisse und gut skalierende Schrift geachtet werden.
+Das Design soll barrierefrei und minimalistisch sein. Daher soll auf aufwendige Grafiken verzichtet werden und statt dessen auf korrekte Kontrast-Verhätnisse und gut skalierende Icons und Schrift geachtet werden.
 
 == Produktnutzung
 
@@ -571,35 +573,8 @@ Passwörter von Benutzern sollen nur als "hash-values" gespeichert werden um Die
 
 == UI Prototyp
 
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/home.PNG[]
-Die Startseite bietet Einblick in das Inventar und die Möglichkeit sich anzumelden.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kunde.PNG[]
-Ein registrierter Kunde kann Artikel in die Apotheke bestellen lassen oder, mit der entsprechenden Berechtigung, nach Hause liefern lassen.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kunde_account.PNG[]
-Account Verwaltung für Kunden.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/kasse.PNG[]
-Die Selbstbediener-Kasse, Mitarbeiter haben das gleiche Interface bei ihrer Kasse. Praxen sehen dieses Interface auch, es kann aber nur eine Praxis aktiv bestellen.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_account.PNG[]
-Mitarbeiter können Artikel hinzufügen.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_kunden.PNG[]
-Kunden können als bewegungseingeschränkt gekennzeichnet werden.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/mitarbeiter_account.PNG[]
-Mitarbeiter können ihren Account während des Arbeitsverhältnisses nicht löschen und haben die Möglichkeit Urlaub zu nehmen.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss.PNG[]
-Der Boss kann Artikel nachbestellen.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss_user.PNG[]
-Neue Selbstbedienerkassen, Praxen, Kunden und Mitarbeiter können erstellt, eingesehen und angepasst werden.
-
-image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/boss_finanzen.PNG[]
-Überblick über jegliche Finanzen.
+image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/asciidoc/models/design/ui.PNG[]
+Entwurf für die Startseite.
 
 == Datenmodell
 
@@ -613,23 +588,24 @@ image::https://github.com/st-tu-dresden-praktikum/swt20w39/blob/main/src/main/as
 
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
 
+[options="header"]
 |===
 |Klasse/Enumeration |Beschreibung
-|Aptoheke |Besitzt einen Namen, eine E-mail, Eine Adresse und eine Telefonnummer. Zusätzlich kann man sich registrieren
+|Aptoheke |Man kann sich registrieren
 | User  |   Jeder User besitzt einen Username, ein Passwort und Einen Vor-und Nachnamen. Zusätzlich kann man seinen Account jederzeit löschen und sich an- und abmelden
 | OrderManager | Die Ware aus dem Warenkorb kann bezahlt werden, die Order kann vervolllständigt und angeschaut werden. Die Waren können auch nach Status gesucht werden
-| Order | Hat eine Bezahlmethode und ein Haltbarkeitsdatum. man kann den Status abfragen, die Auftragsposition hinzufügen und entfernen, genauso wie die Kostenpostion hinzufügbar und entfernbar ist. Markiert ob es bezahlt ist und ob die Order vervollständidgt werden 
+| Order | Hat eine Bezahlmethode, man kann den Status abfragen, die Auftragsposition hinzufügen und entfernen, genauso wie die Kostenpostion hinzufügbar und entfernbar ist. Markiert ob es bezahlt ist und ob die Order vervollständidgt werden 
 |ORDER STATUS| Der OrderStatus kann offen, bezahlt, vervollständigt und gecancelt sein
 |OrderLine | Jedes Produkt hat einen Preis, eine Anzahl und einen Produktnamen
 |Inventory | Überprüft ob noch genügend Produkte vorhanden sind. Sucht nach einem Produkt. Verringert gegebenenfalls die Anzahl der lagernden Produkte
 |Cart | Dort kann ein Medikament hinzugefügt und gelöscht werden. Produkte können gekauft und der Preis ermittelt werden
-| Role| In der Apotheke gibt es einen Boss, Ärzte, Kunden und Angestellte
+| Role| In der Apotheke gibt es einen Geschäftsführer, Kunden und Angestellte
 |MedicamentCatalog| Dieser sucht ein Medikament oder alle einer Art. Auch kann gefiltert werden, nach dem Typen des Medikamentes. Zusätzlich ist es Möglich Medikamente in den Warenkorb zu legen 
 |InventoryItem| Jedes Item aus dem Inventar hat eine Anzahl, welche verringert und ausgegeben werden kann. Auch ob noch eine ausreichende Menge vorhanden ist, kann abgefragt werden
 |ChargeLine| Besitzt einen Preis und eine Beschreibung,dient zur Kostenposition
-|Medicament| Besitzt einen Namen, einen Preis und ein Haltbarkeitsdatum, es kann Rezeptpflichtig und rezeptfrei sein
+|Medicament| Besitzt einen Namen, einen Preis und es kann Rezeptpflichtig und rezeptfrei sein
+|Time| Kann für Zeitreisen genutzt werden
 |===
-
 
 == Akzeptanztestfälle
 
