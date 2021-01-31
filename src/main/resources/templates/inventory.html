@@ -40,7 +40,8 @@
             <td  th:text="${entry.getProduct().getDescription()}">Beschreibung</td>
             <td  th:text="${entry.getQuantity().getAmount().intValue()}">Menge</td>
             <td  th:text="${entry.getProduct().getQuantity()}">Zielenge</td>
-            <td><span th:if="${waitlist.containsKey(entry.getId().getIdentifier())}"><span th:text="${waitlist.get(entry.getId().getIdentifier())}"></span></span></td>
+            <td th:if="${waitlist.containsKey(entry.getId().getIdentifier())}" th:text="${waitlist.get(entry.getId().getIdentifier())}">Warteliste</td>
+            <td th:unless="${waitlist.containsKey(entry.getId().getIdentifier())}"></td>
             <td>
               <form action="#" th:action="@{/meddetail}"th:object="${formular}" method="POST">
                 <input type="hidden" id="id" name="id" value="ID" th:value="${entry.getId().getIdentifier()}"/>

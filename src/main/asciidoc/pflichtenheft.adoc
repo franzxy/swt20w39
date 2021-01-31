@@ -593,15 +593,15 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 |Klasse/Enumeration |Beschreibung
 |Aptoheke |Man kann sich registrieren
 | User  |   Jeder User besitzt einen Username, ein Passwort und Einen Vor-und Nachnamen. Zusätzlich kann man seinen Account jederzeit löschen und sich an- und abmelden
-| OrderManager | Die Ware aus dem Warenkorb kann bezahlt werden, die Order kann vervolllständigt und angeschaut werden. Die Waren können auch nach Status gesucht werden
-| Order | Hat eine Bezahlmethode, man kann den Status abfragen, die Auftragsposition hinzufügen und entfernen, genauso wie die Kostenpostion hinzufügbar und entfernbar ist. Markiert ob es bezahlt ist und ob die Order vervollständidgt werden 
+| OrderManagement | Die Ware aus dem Warenkorb kann bezahlt werden, die Order kann vervolllständigt und angeschaut werden. Die Waren können auch nach Status gesucht werden
+| Order | Hat eine Bezahlmethode und ein Haltbarkeitsdatum. man kann den Status abfragen, die Auftragsposition hinzufügen und entfernen, genauso wie die Kostenpostion hinzufügbar und entfernbar ist. Markiert ob es bezahlt ist und ob die Order vervollständidgt werden 
 |ORDER STATUS| Der OrderStatus kann offen, bezahlt, vervollständigt und gecancelt sein
-|OrderLine | Jedes Produkt hat einen Preis, eine Anzahl und einen Produktnamen
 |Inventory | Überprüft ob noch genügend Produkte vorhanden sind. Sucht nach einem Produkt. Verringert gegebenenfalls die Anzahl der lagernden Produkte
+|InventoryItem| Jedes Item aus dem Inventar hat eine Anzahl, welche verringert und ausgegeben werden kann. Auch ob noch eine ausreichende Menge vorhanden ist, kann abgefragt werden
 |Cart | Dort kann ein Medikament hinzugefügt und gelöscht werden. Produkte können gekauft und der Preis ermittelt werden
 | Role| In der Apotheke gibt es einen Geschäftsführer, Kunden und Angestellte
-|MedicamentCatalog| Dieser sucht ein Medikament oder alle einer Art. Auch kann gefiltert werden, nach dem Typen des Medikamentes. Zusätzlich ist es Möglich Medikamente in den Warenkorb zu legen 
-|InventoryItem| Jedes Item aus dem Inventar hat eine Anzahl, welche verringert und ausgegeben werden kann. Auch ob noch eine ausreichende Menge vorhanden ist, kann abgefragt werden
+|MedicineCatalog| Dieser sucht ein Medikament oder alle einer Art. Auch kann gefiltert werden, nach dem Typen des Medikamentes. Zusätzlich ist es Möglich Medikamente in den Warenkorb zu legen
+|Medicine| Besitzt einen Namen, einen Preis und ein Haltbarkeitsdatum, es kann Rezeptpflichtig und rezeptfrei sein
 |ChargeLine| Besitzt einen Preis und eine Beschreibung,dient zur Kostenposition
 |Medicament| Besitzt einen Namen, einen Preis und es kann Rezeptpflichtig und rezeptfrei sein
 |Time| Kann für Zeitreisen genutzt werden
