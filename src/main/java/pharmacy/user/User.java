@@ -15,6 +15,10 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.scheduling.annotation.Scheduled;
 
+/**
+ * Benutzer Klasse
+ * @author Timon Trettin
+ */
 @Entity
 public class User {
 

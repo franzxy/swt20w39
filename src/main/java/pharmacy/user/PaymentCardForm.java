@@ -3,6 +3,10 @@ package pharmacy.user;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+/**
+ * Kartenzahlung Formular
+ * @author Timon Trettin
+ */
 class PaymentCardForm {
 
 	@NotEmpty(message = "Name fehlt")

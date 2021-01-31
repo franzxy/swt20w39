@@ -1,6 +1,10 @@
 package pharmacy.user;
 
 import javax.validation.constraints.NotEmpty;
+/**
+ * Formular für Profilbild
+ * @author Timon Trettin
+ */
 class PictureForm {
 	
 	@NotEmpty(message = "PayDirekt Benutzername fehlt")

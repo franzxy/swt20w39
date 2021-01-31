@@ -2,6 +2,10 @@ package pharmacy.user;
 
 import javax.persistence.Embeddable;
 
+/**
+ * Versicherung Klasse
+ * @author Timon Trettin
+ */
 @Embeddable
 public class Insurance {
 

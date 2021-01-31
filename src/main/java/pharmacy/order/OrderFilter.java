@@ -2,7 +2,10 @@ package pharmacy.order;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.util.Assert;
-
+/**
+ * Filter für Bestellungen
+ * @author Lukas Luger
+ */
 public class OrderFilter{
 	public enum Filter {
 		ALLE("Alles"),

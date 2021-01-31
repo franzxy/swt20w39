@@ -4,6 +4,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * Formular zum überprüfen der Adresse
+ * @author Timon Trettin
+ */
 class AddressForm {
 
 	@NotEmpty(message = "Name fehlt")

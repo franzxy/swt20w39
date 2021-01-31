@@ -5,6 +5,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Pattern;
 
+/**
+ * Nutzer Registrierung Formular
+ * @author Timon Trettin
+ */
 class UserForm {
 	
 	@NotEmpty(message = "Benutzername fehlt")

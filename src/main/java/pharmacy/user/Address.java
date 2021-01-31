@@ -1,7 +1,10 @@
 package pharmacy.user;
 
 import javax.persistence.Embeddable;
-
+/**
+ * Adressen Klasse
+ * @author Timon Trettin
+ */
 @Embeddable
 public class Address {
 

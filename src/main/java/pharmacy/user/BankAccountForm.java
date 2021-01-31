@@ -3,6 +3,10 @@ package pharmacy.user;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+/**
+ * Formular zum überprüfen des Bank Kontos
+ * @author Timon Trettin
+ */
 class BankAccountForm {
 
 	@NotEmpty(message = "Name fehlt")

@@ -13,6 +13,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+/**
+ * User Klasse DataInitializer
+ * @author Timon Trettin
+ */	
 @Component
 @Order(10)
 class UserDataInitializer implements DataInitializer {
@@ -23,6 +27,10 @@ class UserDataInitializer implements DataInitializer {
 	private final UserManagement userManagement;
 	private final UserRepository users;
 
+	/**
+	 * Initialisiert den Initializer.
+	 * @param businessTime
+	*/
 	UserDataInitializer(UserAccountManagement userAccountManagement, UserManagement userManagement, UserRepository users) {
 
 		Assert.notNull(userAccountManagement, "UserAccountManagement must not be null!");
@@ -33,6 +41,9 @@ class UserDataInitializer implements DataInitializer {
 		this.users = users;
 	}
 
+	/**
+	 * Erstellt Standard Benutzer
+	 */
 	@Override
 	public void initialize() {
 

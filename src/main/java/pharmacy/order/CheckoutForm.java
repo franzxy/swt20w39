@@ -2,7 +2,10 @@ package pharmacy.order;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
-
+/**
+ * Formular zum überprüfen der Adresse, Bezahlmethode und Versicherung
+ * @author Timon Trettin
+ */
 class CheckoutForm {
 	
 	@AssertTrue(message = "Adresse felt")

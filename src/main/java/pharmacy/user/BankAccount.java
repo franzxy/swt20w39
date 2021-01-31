@@ -7,6 +7,10 @@ import javax.persistence.Id;
 
 import org.salespointframework.payment.PaymentMethod;
 
+/**
+ * Bank Konto Klasse
+ * @author Timon Trettin
+ */
 public class BankAccount extends PaymentMethod implements Serializable {
 
 	private @Id @GeneratedValue long id;

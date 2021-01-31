@@ -6,6 +6,10 @@ import javax.validation.ConstraintValidatorContext;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Validator für Nutzernamen
+ * @author Timon Trettin
+ */
 public class UsernameValidator implements ConstraintValidator<ValidUserName, String> {
 	@Autowired
 	private UserAccountManagement management;

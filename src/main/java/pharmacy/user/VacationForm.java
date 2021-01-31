@@ -5,6 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Formular für Urlaub
+ * @author Timon Trettin
+ */
 class VacationForm {
 
 	private final String startDate;

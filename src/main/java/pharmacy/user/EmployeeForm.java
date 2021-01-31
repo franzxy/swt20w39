@@ -3,6 +3,10 @@ package pharmacy.user;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+/**
+ * Formular zum für Mitarbeiter Gehalt
+ * @author Timon Trettin
+ */
 class EmployeeForm {
 
 	@NotEmpty(message = "Gehalt fehlt")

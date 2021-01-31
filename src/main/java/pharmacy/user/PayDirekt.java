@@ -6,6 +6,10 @@ import org.salespointframework.payment.PaymentMethod;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * PayDirekt Klasse
+ * @author Timon Trettin
+ */
 public class PayDirekt extends PaymentMethod implements Serializable {
 
 	private @Id @GeneratedValue long id;

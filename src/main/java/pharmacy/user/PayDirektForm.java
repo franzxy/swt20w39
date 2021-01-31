@@ -2,6 +2,10 @@ package pharmacy.user;
 
 import javax.validation.constraints.NotEmpty;
 
+/**
+ * Formular für PayDirekt
+ * @author Timon Trettin
+ */
 class PayDirektForm {
 
 	@NotEmpty(message = "Name fehlt")

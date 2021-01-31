@@ -12,15 +12,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * Benutzer Controller
+ * @author Timon Trettin
+ */
 @Controller
 class UserController {
 
 	private final UserManagement userManagement;
 
+	/**
+	 * Initialisiert den Controller.
+	 * @param userManagement
+	*/
 	UserController(UserManagement userManagement) {
 		this.userManagement = userManagement;
 	}
 
+	/**
+	 * Fügt notwendige Attribute zum Model hinzu bei Registrierung
+	 * @param model
+	 * @param userForm
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/register")
 	String register(Model model, UserForm userForm) {
 
@@ -29,6 +43,12 @@ class UserController {
 		return "register";
 	}
 
+	/**
+	 * Nutzer wird registriert wenn keine Fehler
+	 * @param userForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */
     @PostMapping("/register")
 	String changeRegister(@Valid @ModelAttribute("userForm")UserForm userForm, Errors result) {
 
@@ -41,6 +61,12 @@ class UserController {
 		return "redirect:/login";
 	}
 
+	/**
+	 * Nutzer Liste
+	 * @param model
+	 * @param employeeForm
+	 * @return der Name der Ansicht
+	 */
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('BOSS')")
 	String users(Model model, EmployeeForm employeeForm) {
@@ -54,7 +80,12 @@ class UserController {
 
 		return "users";
 	}
-	
+
+	/**
+	 * Nutzer einstellen
+	 * @param userId
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/user/{userId}/hire")
 	@PreAuthorize("hasRole('BOSS')")
 	String hireEmployee(@PathVariable Long userId) {
@@ -63,7 +94,12 @@ class UserController {
 
 		return "redirect:/users";
 	}
-	
+
+	/**
+	 * Nutzer entlassen
+	 * @param userId
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/user/{userId}/dismiss")
 	@PreAuthorize("hasRole('BOSS')")
 	String dismissEmployee(@PathVariable Long userId) {
@@ -73,6 +109,13 @@ class UserController {
 		return "redirect:/users";
 	}
 
+	/**
+	 * Mitarbeiter gehalt einstellen
+	 * @param userId
+	 * @param employeeForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/user/{userId}/salary")
 	@PreAuthorize("hasRole('BOSS')")
 	String changeEmployeeSalary(@PathVariable Long userId, @Valid @ModelAttribute("employeeForm")EmployeeForm employeeForm, Errors result) {
@@ -86,6 +129,11 @@ class UserController {
 		return "redirect:/users";
 	}
 
+	/**
+	 * Nutzer entfernen
+	 * @param userId
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/user/{userId}/remove")
 	@PreAuthorize("hasRole('BOSS')")
 	String removeUser(@PathVariable Long userId) {
@@ -95,6 +143,12 @@ class UserController {
 		return "redirect:/users";
 	}
 
+	/**
+	 * Urlaub genehmigen
+	 * @param userId
+	 * @param vacationId
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/user/{userId}/vacation/{vacationId}/approve")
 	@PreAuthorize("hasRole('BOSS')")
 	String approveVacations(@PathVariable Long userId, @PathVariable Integer vacationId) {
@@ -103,7 +157,13 @@ class UserController {
 
 		return "redirect:/users";
 	}
-	
+
+	/**
+	 * Urlaub ablehnen
+	 * @param userId
+	 * @param vacationId
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/user/{userId}/vacation/{vacationId}/remove")
 	@PreAuthorize("hasRole('BOSS')")
 	String rejectVacations(@PathVariable Long userId, @PathVariable Integer vacationId) {
@@ -112,7 +172,13 @@ class UserController {
 
 		return "redirect:/users";
 	}
-	
+
+	/**
+	 * Account Übersicht
+	 * @param model
+	 * @param pictureForm
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/account")
 	@PreAuthorize("isAuthenticated()")
 	String account(Model model, PictureForm pictureForm) {
@@ -126,7 +192,14 @@ class UserController {
 
 		return "account";
 	}
-	
+
+	/**
+	 * Profilbild ändern falls keine Fehler
+	 * @param model
+	 * @param pictureForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/account/picture")
 	@PreAuthorize("isAuthenticated()")
 	String changePicture(Model model, @Valid @ModelAttribute("pictureForm")PictureForm pictureForm, Errors result) {
@@ -141,6 +214,12 @@ class UserController {
 		return "redirect:/account";
 	}
 
+	/**
+	 * Passwort ändern
+	 * @param model
+	 * @param passwordForm
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/account/password")
 	@PreAuthorize("isAuthenticated()")
 	String password(Model model, PasswordForm passwordForm) {
@@ -155,6 +234,12 @@ class UserController {
 		return "password";
 	}
 
+	/**
+	 * Versicherung ändern
+	 * @param model
+	 * @param insuranceForm
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/account/insurance")
 	@PreAuthorize("isAuthenticated()")
 	String insurance(Model model, InsuranceForm insuranceForm) {
@@ -169,6 +254,12 @@ class UserController {
 		return "insurance";
 	}
 
+	/**
+	 * Adresse ändern
+	 * @param model
+	 * @param addressForm
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/account/address")
 	@PreAuthorize("isAuthenticated()")
 	String address(Model model, AddressForm addressForm) {
@@ -183,6 +274,14 @@ class UserController {
 		return "address";
 	}
 
+	/**
+	 * Bezahlmethoden ändern
+	 * @param model
+	 * @param bankAccountForm
+	 * @param creditCardForm
+	 * @param payDirektForm
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/account/payments")
 	@PreAuthorize("isAuthenticated()")
 	String accountPayments(Model model, BankAccountForm bankAccountForm, PaymentCardForm creditCardForm, PayDirektForm payDirektForm) {
@@ -198,7 +297,16 @@ class UserController {
 
 		return "payments";
 	}
-	
+
+	/**
+	 * Bank Konto ändern falls keine Fehler
+	 * @param model
+	 * @param bankAccountForm
+	 * @param creditCardForm
+	 * @param payDirektForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/account/bankaccount")
 	@PreAuthorize("isAuthenticated()")
 	String changeAccountBank(Model model, @Valid @ModelAttribute("bankAccountForm")BankAccountForm bankAccountForm, Errors result, PaymentCardForm creditCardForm, PayDirektForm payDirektForm) {
@@ -216,7 +324,16 @@ class UserController {
 
 		return "redirect:/account/payments";
 	}
-	
+
+	/**
+	 * Kartenzahlung ändern falls keine Fehler
+	 * @param model
+	 * @param bankAccountForm
+	 * @param creditCardForm
+	 * @param payDirektForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/account/card")
 	@PreAuthorize("isAuthenticated()")
 	String changeAccountCard(Model model, @Valid @ModelAttribute("creditCardForm")PaymentCardForm creditCardForm, Errors result, BankAccountForm bankAccountForm, PayDirektForm payDirektForm) {
@@ -234,7 +351,16 @@ class UserController {
 
 		return "redirect:/account/payments";
 	}
-	
+
+	/**
+	 * PayDirekt ändern falls keine Fehler
+	 * @param model
+	 * @param bankAccountForm
+	 * @param creditCardForm
+	 * @param payDirektForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/account/paydirekt")
 	@PreAuthorize("isAuthenticated()")
 	
@@ -253,7 +379,14 @@ class UserController {
 
 		return "redirect:/account/payments";
 	}
-	
+
+	/**
+	 * Passwort ändern falls keine Fehler
+	 * @param model
+	 * @param passwordForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/account/password")
 	@PreAuthorize("isAuthenticated()")
 	String changeAccountPassword(Model model, @Valid @ModelAttribute("passwordForm")PasswordForm passwordForm, Errors result) {
@@ -267,7 +400,14 @@ class UserController {
 
 		return "redirect:/account";
 	}
-	
+
+	/**
+	 * Versicherung ändern falls keine Fehler
+	 * @param model
+	 * @param insuranceForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/account/insurance")
 	@PreAuthorize("isAuthenticated()")
 	String changeAccountInsurance(Model model, @Valid @ModelAttribute("insuranceForm")InsuranceForm insuranceForm, Errors result) {
@@ -281,7 +421,14 @@ class UserController {
 
 		return "redirect:/account";
 	}
-	
+
+	/**
+	 * Adresse ändern falls keine Fehler
+	 * @param model
+	 * @param addressForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/account/address")
 	@PreAuthorize("isAuthenticated()")
 	String addAccountAddress(Model model, @Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors result) {
@@ -296,6 +443,10 @@ class UserController {
 		return "redirect:/account";
 	}
 
+	/**
+	 * Account löschen
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/account/remove")	
 	@PreAuthorize("hasRole('CUSTOMER')")
 	String removeAccountUser() {
@@ -304,7 +455,12 @@ class UserController {
 
 		return "redirect:/logout";
 	}
-	
+
+	/**
+	 * Admin Übersicht
+	 * @param model
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/admin")
 	@PreAuthorize("hasRole('BOSS')")
 	String admin(Model model) {
@@ -317,6 +473,12 @@ class UserController {
 		return "admin";
 	}
 
+	/**
+	 * Mitarbeiter Übersicht
+	 * @param model
+	 * @param vacationForm
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/employee")
 	@PreAuthorize("hasRole('EMPLOYEE')")
 	String vacation(Model model, VacationForm vacationForm) {
@@ -330,7 +492,14 @@ class UserController {
 
 		return "employee";
 	}
-	
+
+	/**
+	 * Urlaub nehemn falls keine Fehler
+	 * @param model
+	 * @param vacationForm
+	 * @param result
+	 * @return der Name der Ansicht
+	 */	
 	@PostMapping("/employee")
 	@PreAuthorize("hasRole('EMPLOYEE')")
 	String addVacation(Model model, @Valid @ModelAttribute("vacationForm")VacationForm vacationForm, Errors result) {
@@ -348,7 +517,12 @@ class UserController {
 
 		return "employee";
 	}
-	
+
+	/**
+	 * Urlaub löschen
+	 * @param vacationId
+	 * @return der Name der Ansicht
+	 */	
 	@GetMapping("/vacation/{vacationId}/remove")
 	@PreAuthorize("hasRole('EMPLOYEE')")
 	String removeVacation(@PathVariable Integer vacationId) {

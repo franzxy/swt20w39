@@ -8,7 +8,10 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-
+/**
+ * Versicherungs Constraint
+ * @author Timon Trettin
+ */
 @Documented
 @Constraint(validatedBy = InsuranceValidator.class)
 @Target({ ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE })

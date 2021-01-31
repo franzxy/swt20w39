@@ -6,6 +6,10 @@ import javax.validation.ConstraintValidatorContext;
 import javax.validation.constraintvalidation.SupportedValidationTarget;
 import javax.validation.constraintvalidation.ValidationTarget;
 
+/**
+ * Validator für Passwörter
+ * @author Timon Trettin
+ */
 @SupportedValidationTarget(ValidationTarget.PARAMETERS)
 public class PasswordValidator implements ConstraintValidator<ValidPassword, Object[]> {
 

@@ -7,6 +7,10 @@ import javax.persistence.Id;
 
 import org.salespointframework.payment.PaymentMethod;
 
+/**
+ * Kartenzahlung Klasse
+ * @author Timon Trettin
+ */
 public class PaymentCard extends PaymentMethod implements Serializable {
 
 	private @Id @GeneratedValue long id;
