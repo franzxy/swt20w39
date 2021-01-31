@@ -11,6 +11,10 @@ import org.springframework.util.Assert;
 
 import java.util.Arrays;
 
+/**
+ * Implementierung des {@link DataInitializer} für Katalog-Elemente
+ * @author Falk Natkowski
+ */
 @Component
 @Order(10)
 class CatalogDataInitializer implements DataInitializer {
@@ -24,6 +28,9 @@ class CatalogDataInitializer implements DataInitializer {
 		this.medicineCatalog = medicineCatalog;
 	}
 
+	/**
+	 * Falls noch keine Elemente im Katalog existieren werden sie hier erstellt und mit Werten versehen.
+	 */
 	@Override
 	public void initialize() {
 
