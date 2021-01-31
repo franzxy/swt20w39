@@ -2,6 +2,11 @@
 	margin: 0;
 	padding: 0;
 	outline: none;
+	transition: box-shadow ease 0.2s !important;
+}
+
+*:focus{
+	box-shadow: 0 0 0 2px forestgreen;
 }
 
 html {
@@ -39,13 +44,22 @@ nav {
 }
 
 .logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 40px;
-	margin-left: 20px;
-	margin-right: 10px;
+	padding: 0 10px;
+	margin-left: 10px;
 	font-size: x-large;
 	font-weight: 900;
 	color: green;
 	text-decoration: none;
+	transition: color 0.2s linear;
+	border-radius: 20px;
+}
+
+.logo:hover {
+	color: darkgreen;
 }
 
 .picture {
@@ -55,19 +69,34 @@ nav {
 	background-size: cover !important;
 }
 
-.search {
+.searchbar {
+	position: relative;
 	border-radius: 20px;
 	grid-area: search;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
 	height: 40px;
 	background-color: lightgray;
 }
 
+.searchbutton {
+	right: 5px;
+	position: absolute;
+	height: 30px !important;
+	width: 30px !important;
+	min-width: 30px !important;
+	background-color: transparent !important;
+}
+
 .searchicon {
 	width: 15px !important;
 	height: 15px !important;
+}
+
+.search {
+	width: 100%;
+	padding-right: 40px;
 }
 
 .personal {
@@ -95,7 +124,7 @@ nav {
 	position: absolute;
 	font-size: 12px;
 	font-weight: 900;
-	background: red;
+	background-color: red;
 	color: white;
 	padding: 5px;
 	height: 10px;
@@ -149,6 +178,12 @@ select {
 	border-radius: 20px;
 	cursor: pointer;
 	border-right: 10px solid lightgray;
+	transition: background-color ease 0.2s, border ease 0.2s;
+}
+
+select:hover {
+	background-color: gainsboro;
+	border-right: 10px solid gainsboro;
 }
 
 .justify {
@@ -215,6 +250,7 @@ select {
 }
 
 .checkbox {
+	cursor: pointer;
 	display: flex;
 	align-self: center;
 	height: 20px;
@@ -222,6 +258,7 @@ select {
 }
 
 .radio {
+	cursor: pointer;
 	display: flex;
 	align-self: center;
 	height: 20px;
@@ -242,6 +279,10 @@ select {
 	line-height: 40px;
 }
 
+.header p {
+	word-break: break-all;
+}
+
 input {
 	border-radius: 20px;
 	align-self: flex-start;
@@ -255,6 +296,11 @@ input {
 	padding: 0 20px;
 	border: none;
 	background-color: lightgray;
+	transition: background-color ease 0.2s;
+}
+
+input:hover {
+	background-color: gainsboro;
 }
 
 .numberinput {
@@ -271,6 +317,27 @@ input {
 	border-bottom-left-radius: 0px !important;
 }
 
+.button {
+	align-self: flex-start;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border: none;
+	background-color: green;
+	padding: 0 20px;
+	height: 40px;
+	border-radius: 20px;
+	cursor: pointer;
+	color: white;
+	text-decoration: none;
+	transition: background 0.2s linear;
+}
+
+.button:hover {
+	background-color: darkgreen;
+}
+
 .iconbutton {
 	height: 40px;
 	width: 40px;
@@ -280,10 +347,14 @@ input {
 	align-items: center;
 	border-radius: 20px;
 	text-decoration: none;
-	background: rgb(16,162,0);
-	background: linear-gradient(90deg, rgba(16,162,0,1) 0%, rgba(0,93,82,1) 100%);
+	background-color: green;
 	border: none;
 	cursor: pointer;
+	transition: background 0.2s linear;
+}
+
+.iconbutton:hover {
+	background-color: darkgreen;
 }
 
 .icon {
@@ -309,24 +380,6 @@ label {
 .inputlabel {
 	display: inline;
 	margin-bottom: 5px;
-}
-
-.button {
-	align-self: flex-start;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	border: none;
-	background: rgb(16,162,0);
-	background: linear-gradient(90deg, rgba(16,162,0,1) 0%, rgba(0,93,82,1) 100%);
-	min-width: 100px;
-	padding: 0 10px;
-	height: 40px;
-	border-radius: 20px;
-	cursor: pointer;
-	color: white;
-	text-decoration: none;
 }
 
 .self-center {
@@ -396,16 +449,17 @@ label {
 .medimgwrapperdetail {
 	width: 300px;
 	height: 300px;
-	transition: background-color 0.3s;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .medimgwrapper {
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
 	width: 100%;
 	height: 200px;
-	transition: background-color 0.3s;
+	transition: background-color ease 0.2s !important;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -469,8 +523,7 @@ table tr:nth-child(odd){
 }
   
 tr:first-of-type {
-	background: rgb(16,162,0);
-	background: linear-gradient(90deg, rgba(16,162,0,1) 0%, rgba(0,93,82,1) 100%);
+	background: linear-gradient(90deg, green 0%, darkgreen 100%);
 }
 
 th {

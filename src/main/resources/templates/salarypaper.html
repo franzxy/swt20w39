@@ -13,24 +13,25 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav> 
-            <div class="center">
-                <div class="position">
-                    <a th:href="@{/myfinances}">Finanzen</a>
-                    <p>&#10095;</p>
-                    <a th:href="@{#}">Lohnzettel</a>
-                  </div>
-                <div class="field">
-                    <span class="span">Datum</span>
-                    <h4 th:text="${#temporals.format(det.getValue1(),'dd.MM.yyyy')}"></h4>
+        <div class="center">
+            <div class="position">
+                <a th:href="@{/myfinances}">Finanzen</a>
+                <p>&#10095;</p>
+                <a th:href="@{#}">Lohnzettel</a>
                 </div>
-                <div class="field">
-                    <span class="span">Betrag</span>
-                    <h4 th:text="${det.getValue0().getValue().getNumber().doubleValue()}"></h4>
-                </div>                 
-                <div class="field">
-                    <span class="span">Beschreibung</span>
-                    <h4 th:text="${det.getValue0().getDescription()}"></h4>
-                </div>
+            <div class="field">
+                <span class="span">Datum</span>
+                <h4 th:text="${#temporals.format(det.getValue1(),'dd.MM.yyyy')}"></h4>
             </div>
+            <div class="field">
+                <span class="span">Betrag</span>
+                <h4 th:text="${det.getValue0().getValue().getNumber().doubleValue()}"></h4>
+            </div>                 
+            <div class="field">
+                <span class="span">Beschreibung</span>
+                <h4 th:text="${det.getValue0().getDescription()}"></h4>
+            </div>
+        </div>
     </body>
+	<script> </script>
 </html>

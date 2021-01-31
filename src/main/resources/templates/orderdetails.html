@@ -13,45 +13,46 @@
 	</head>
     <body>
         <nav th:include="navigation :: navigation"></nav> 
-            <div class="center">
-                 
-                <div >
-                    <b th:text="${'Datum: '+#temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"></b>
-                </div>
-                 
-                <div >
-                    <b th:text="${'ID: '+det.getId().getIdentifier()}"></b>
-                </div>
-                 
-                <div >
-                    <b th:text="${'Betrag: '+det.getTotal().getNumber().doubleValue()}"></b>
-                </div>
-                 
-                <div >
-                    <b th:text="${'Status: '+det.getOrderStatus().toString()}"></b>
-                </div>
-                 
-                <div >
-                    <b th:text="${'User: '+det.getUserAccount().getUsername()}"></b>
-                </div>
-                 
-                <div >
-                    <b th:text="${'Bezahlmethode: '+det.getPaymentMethod()}"></b>
-                </div>
-                <table class="ui celled table">
-                    <tr>
-                        <th >Produkt</th>
-                        <th >Bestellt</th>
-                        
-                    </tr>
-                <tr th:if="${det.getOrderLines().isEmpty()}">
-                    <td style="text-align: center;"colspan="2"> Keine Infos </td>
-                </tr>
-                <tr th:each="orderline : ${det.getOrderLines().get().toArray()}"> 
-                    <td  th:text="${orderline.getProductName()}">Name</td>
-                    <td  th:text="${orderline.getQuantity().getAmount().intValue()}">Bestellt</td>
-                    </tr>
-                </table>
+        <div class="center">
+                
+            <div >
+                <b th:text="${'Datum: '+#temporals.format(det.getDateCreated(),'dd.MM.yyyy HH:mm')}"></b>
             </div>
+                
+            <div >
+                <b th:text="${'ID: '+det.getId().getIdentifier()}"></b>
+            </div>
+                
+            <div >
+                <b th:text="${'Betrag: '+det.getTotal().getNumber().doubleValue()}"></b>
+            </div>
+                
+            <div >
+                <b th:text="${'Status: '+det.getOrderStatus().toString()}"></b>
+            </div>
+                
+            <div >
+                <b th:text="${'User: '+det.getUserAccount().getUsername()}"></b>
+            </div>
+                
+            <div >
+                <b th:text="${'Bezahlmethode: '+det.getPaymentMethod()}"></b>
+            </div>
+            <table class="ui celled table">
+                <tr>
+                    <th >Produkt</th>
+                    <th >Bestellt</th>
+                    
+                </tr>
+            <tr th:if="${det.getOrderLines().isEmpty()}">
+                <td style="text-align: center;"colspan="2"> Keine Infos </td>
+            </tr>
+            <tr th:each="orderline : ${det.getOrderLines().get().toArray()}"> 
+                <td  th:text="${orderline.getProductName()}">Name</td>
+                <td  th:text="${orderline.getQuantity().getAmount().intValue()}">Bestellt</td>
+                </tr>
+            </table>
+        </div>
     </body>
+	<script> </script>
 </html>

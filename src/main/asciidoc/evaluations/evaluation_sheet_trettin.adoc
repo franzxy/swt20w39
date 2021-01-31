@@ -1,26 +1,31 @@
 = Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2020/21
-// Auch wenn der Bogen nicht anonymisiert ist, dürfen Sie gern Ihre Meinung offen kundtun.
-// Sowohl positive als auch negative Anmerkungen werden gern gesehen und zur stetigen Verbesserung genutzt.
-// Versuchen Sie in dieser Auswertung also stets sowohl Positives wie auch Negatives zu erwähnen.
 
-**Von:**
+**Von: Timon Trettin**
 
-**Gruppe:**
+**Gruppe: 39**
 
 == Was habe ich gelernt / was habe ich nicht gelernt?
-// Ausführung der positiven und negativen Erfahrungen, die im Softwarepraktikum gesammelt wurden
++ Wie wichtig Kommunikation und Planung sind +
++ Mit Spring und Thymeleaf umzugehen +
++ Zeitmanagement +
+- Wie man eine Gruppe gut leitet +
+- Eine moderne, dynamische Webapp zu entwickeln
 
 == Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
-// Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
++ Gegen Ende die Kommunikation +
+~ Logischere Aufgabenverteilung von Anfang an +
+- Feste Fristen für einzelne Mitglieder setzen, damit nicht alle unter dem Versäumnis einzelner leiden
 
 == Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
-// Einschätzung der Arbeit mit den bereitgestellten und zusätzlich genutzten Frameworks. Was War gut? Was war verbesserungswürdig?
++ Viel Schreibarbeit abgenommen vor allem bei der Nutzerverwaltung +
+- Nicht flexibel genug für eigene Implementierung von z.B. Zahlungsmitteln oder User Attributen
 
 == Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
-// Möglichst mit Beschreibung, warum die Umsetzung des von Ihnen angebrachten Vorschlages nötig ist.
+* Freie Wahl des Technologie-Stacks
+* Tutor als Scrum Master bzw. den Scrum Master separat unterrichten und möglicherweise mehr Befugnisse erteilen
+* Mehr Zeit für Entwurfs und Analyse Phasen
 
 == Feedback für den Tutor
-// Fühlten Sie sich durch den vom Lehrstuhl bereitgestellten Tutor gut betreut? Was war positiv? Was war verbesserungswürdig?
-
-== Sonstiges und Anmerkungen
-// Welche Aspekte fanden in den oben genannten Punkten keine Erwähnung?
++ Hilfsbereit +
++ Immer an einer für alle Beteiligten fairen Lösung interessiert +
++ Bei wichtigen Entscheidungen unterstützend

@@ -122,7 +122,7 @@ class CatalogController {
 		model.addAttribute("oldTerm", searchTerm);
 		model.addAttribute("oldTag", tag);
 		model.addAttribute("noPres", noPres);
-		model.addAttribute("title", "Apotheke");
+		model.addAttribute("title", "ApoTheke");
 
 		model.addAttribute("availability", availability);
 		model.addAttribute("catalog", optimisedres);

@@ -1,14 +1,15 @@
 <nav th:fragment="navigation">
-    <a class="menu logo" th:href="@{/}">ApoTheke</a>
-    <form class="search" action="#"  th:action="@{/}" th:object=${searchform} method="post">
-        <input class="input" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Produkte Suchen" />
-        <button class="iconbutton" type="submit"><i class="icon searchicon" th:style="'background-image: url('+@{/img/search.png}+');'"></i></button>
+    <div class="menu"><a class="logo" th:href="@{/}">ApoTheke</a></div>
+    <form class="searchbar" action="#"  th:action="@{/}" th:object=${searchform} method="post">
+        <input class="input search" type="text" th:value="${oldTerm}" name="searchbar" placeholder="Produkte Suchen" />
+        <button class="iconbutton searchbutton" type="submit"><i class="icon searchicon" th:style="'background-image: url('+@{/img/search.png}+');'"></i></button>
     </form>
     <div class="personal">
         <a class="iconbutton" th:href="@{/cart}"><i class="icon" th:style="'background-image: url('+@{/img/cart.png}+');'"></i><span th:if="${counter}" class="cartcounter" th:text="${counter}"></ö></a>
         <a sec:authorize="hasRole('BOSS')" class="button" th:href="@{/admin}">Adminbereich</a>
         <a sec:authorize="hasRole('EMPLOYEE')" class="button" th:href="@{/employee}">Mitarbeiterbereich</a>
-        <a th:if="${picture}" class="iconbutton" th:href="@{/account}"><i class="icon picture" th:style="'background-image: url('+${picture}+');'"></i></a>
-        <a th:unless="${picture}" class="iconbutton" th:href="@{/account}"><i class="icon" th:style="'background-image: url('+@{/img/account.png}+');'"></i></a>
+        <a sec:authorize="isAuthenticated()" th:if="${picture}"  class="iconbutton" th:href="@{/account}"><i class="icon picture" th:style="'background-image: url('+${picture}+');'"></i></a>
+        <a sec:authorize="isAuthenticated()" th:unless="${picture}" class="iconbutton" th:href="@{/account}"><i class="icon" th:style="'background-image: url('+@{/img/account.png}+');'"></i></a>
+        <a sec:authorize="not isAuthenticated()" class="button login" th:href="@{/account}">Login</a>
     </div>
 </nav>
