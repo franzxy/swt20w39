@@ -71,12 +71,6 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |In der Tabelle ist gelistet wieviel gehalt jeder Mitarbeiter bekommt und wieviel Miete, Strom, Wasser usw. abgebucht wird
 |Lukas 
 
-|I-1.3
-|Erwartete Zahlung von Arztpraxis
-|Ende des Monats, Arztpraxen haben Medikamente aus der Apotheke geholt
-|Aufruf von /finances
-|In der Tabelle ist, wenn bereits von den Praxen bezahlt, eine Gutschrift zu sehen von dem zu erwartenden Betrag, den die Praxen bazhalt haben
-|Lukas 
 
 |I-2.1  
 |Nutzer wird ins System aufgenommen
@@ -101,9 +95,9 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 
 |U-1.2
 |Ein Falsche Transaktion führt zu Fehlermeldung
-|Ein Produkt ohne Preis oder mit negativem Preis liegt im Warenkorb
-|Der Benutzer clickt auf "Bezahlen"
-|Die Buchhaltung gibt eine Fehlermeldung aus.(NullPointerException bzw. IllegalArgumentException) Die Transaktion wird nicht durchgeführt.
+|Ein, aus dem Inventar gelöschtes Produkt ligt im Warenkorb
+|Der Benutzer clickt auf "Warenkorb"
+|Das System gibt eine Fehlermeldung aus (404)
 |Lukas 
 
 |U-1.3
