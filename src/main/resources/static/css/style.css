@@ -183,7 +183,7 @@ select {
 	border-radius: 20px;
 	cursor: pointer;
 	border-right: 10px solid lightgray;
-	transition: background-color 0.2s linear !important, border 0.2s linear !important;
+	transition: background-color 0.2s linear, border 0.2s linear !important;
 }
 
 select:hover {
