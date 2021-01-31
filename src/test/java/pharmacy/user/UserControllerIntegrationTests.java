@@ -75,36 +75,6 @@ class UserControllerIntegrationTests extends AbstractIntegrationTests {
 	}
 	@Test
 	@WithMockUser(roles = "BOSS")
-	void changeInsuranceTest(){
-		long uid = this.userManagement.findAll().stream().findFirst().get().getId();
-		InsuranceForm f = new InsuranceForm("cass", "number");
-		Errors e = new ErrorTest();
-		String res = this.controller.changeInsurance(uid, f, e);
-		assertEquals(res, "redirect:/users");
-		assertEquals(this.userManagement.findUser(uid).get().getInsurance().getCompany(), "cass");
-		assertEquals(this.userManagement.findUser(uid).get().getInsurance().getId(), "number");
-		e.addAllErrors(null);
-		res = this.controller.changeInsurance(uid, f, e);
-		assertEquals(res, "redirect:/users");
-	}
-	@Test
-	@WithMockUser(roles = "BOSS")
-	void addAddressTest(){
-		long uid = this.userManagement.findAll().stream().findFirst().get().getId();
-		AddressForm f = new AddressForm("example", "this way", "12324", "NYX");
-		Errors e = new ErrorTest();
-		String res = this.controller.addAddress(uid, f, e);
-		assertEquals(res, "redirect:/users");
-		assertEquals(this.userManagement.findUser(uid).get().getAddress().getCity(), "NYX");
-		assertEquals(this.userManagement.findUser(uid).get().getAddress().getPostCode(), "12324");
-		assertEquals(this.userManagement.findUser(uid).get().getAddress().getName(), "example");
-		assertEquals(this.userManagement.findUser(uid).get().getAddress().getStreet(), "this way");
-		e.addAllErrors(null);
-		res = this.controller.addAddress(uid, f, e);
-		assertEquals(res, "redirect:/users");
-	}
-	@Test
-	@WithMockUser(roles = "BOSS")
 	void hireEmployeeTest(){
 		long uid = this.userManagement.findAll().stream().filter(u->u.getUserAccount().hasRole(Role.of("CUSTOMER")))
 			.findFirst().get().getId();

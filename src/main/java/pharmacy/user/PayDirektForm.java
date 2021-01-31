@@ -1,7 +1,6 @@
 package pharmacy.user;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 
 class PayDirektForm {
 

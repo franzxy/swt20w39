@@ -1,24 +1,16 @@
 package pharmacy.user;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.LongAdder;
-
-import javax.mail.Address;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.salespointframework.useraccount.Role;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @Controller
 class UserController {
@@ -63,32 +55,6 @@ class UserController {
 		model.addAttribute("boss", Role.of("BOSS"));
 
 		return "users";
-	}
-	
-	@PostMapping("/user/{userId}/insurance")
-	@PreAuthorize("hasRole('BOSS')")
-	String changeInsurance(@PathVariable Long userId, @Valid @ModelAttribute("insuranceForm")InsuranceForm insuranceForm, Errors result) {
-		
-		if (result.hasErrors()) {
-			return "redirect:/users";
-		}
-		
-		userManagement.changeInsurance(userManagement.findUser(userId).get(), insuranceForm);
-
-		return "redirect:/users";
-	}
-	
-	@PostMapping("/user/{userId}/address")
-	@PreAuthorize("hasRole('BOSS')")
-	String addAddress(@PathVariable Long userId, @Valid @ModelAttribute("addressForm")AddressForm addressForm, Errors result) {
-		
-		if (result.hasErrors()) {
-			return "redirect:/users";
-		}
-		
-		userManagement.changeAddress(userManagement.findUser(userId).get(), addressForm);
-
-		return "redirect:/users";
 	}
 	
 	@GetMapping("/user/{userId}/hire")
@@ -392,13 +358,4 @@ class UserController {
 
 		return "redirect:/employee";
 	}
-/*
-	String example(@LoggedIn Optional<UserAccount> userAccount) {
-        // functional style using map and lambda expression:
-        return userAccount.map(account -> {
-            // things to be done if the user account is present
-            return "...";
-        }).orElse("redirect:/");  // if the user account is *not* present
-	}
-*/
 }

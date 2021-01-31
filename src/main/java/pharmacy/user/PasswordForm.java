@@ -10,14 +10,6 @@ class PasswordForm {
 	@NotEmpty(message = "Altes Passwort fehlt")
 	@ValidPassword(message = "Altes Passwort stimmt nicht überein")
 	private String oldPassword;
-	
-	@AssertTrue(message="Old password incorrect")
-	private boolean isValid() {
-		System.out.println(oldPassword);
-		System.out.println(UserManagement.getPassword);
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getCredentials());
-		return oldPassword.equals(SecurityContextHolder.getContext().getAuthentication().getCredentials());
-	}
 */
 	@NotEmpty(message = "Neues Passwort fehlt")
 	@Size(min = 8, max = 128, message = "Passwort muss aus 8-120 Zeichen bestehen")

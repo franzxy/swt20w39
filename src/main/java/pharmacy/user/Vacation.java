@@ -7,8 +7,6 @@ import java.util.concurrent.TimeUnit;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import static java.lang.Math.toIntExact;
 
 @Entity
 public class Vacation implements Serializable {

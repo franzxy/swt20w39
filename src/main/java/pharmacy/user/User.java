@@ -11,9 +11,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.javamoney.moneta.Money;
-import org.salespointframework.payment.CreditCard;
-import org.salespointframework.payment.DebitCard;
-import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.scheduling.annotation.Scheduled;

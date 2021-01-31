@@ -1,31 +1,11 @@
 package pharmacy.order;
 
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import pharmacy.AbstractIntegrationTests;
-import pharmacy.finances.FilterForm;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FormsUnitTests extends AbstractIntegrationTests {
-
-	@Test
-	public void testAddressForm() {
-		AddressForm a = new AddressForm("name", "street", "12345", "city");
-
-		assertEquals(a.getName(), "name");
-		assertEquals(a.getStreet(), "street");
-		assertEquals(a.getPostCode(), "12345");
-		assertEquals(a.getCity(), "city");
-	}
-
-	@Test
-	public void testInsuranceForm() {
-		InsuranceForm i = new InsuranceForm("company", "number");
-
-		assertEquals(i.getCompany(), "company");
-		assertEquals(i.getInsuranceNumber(), "number");
-	}
 
 	@Test
 	public void testFilter() {

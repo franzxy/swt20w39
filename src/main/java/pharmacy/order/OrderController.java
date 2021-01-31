@@ -44,8 +44,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pharmacy.catalog.Medicine;
-import pharmacy.user.Address;
-import pharmacy.user.PayDirekt;
 import pharmacy.user.UserManagement;
 /**
  * Ein Controller für:

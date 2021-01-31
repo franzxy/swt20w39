@@ -2,8 +2,6 @@ package pharmacy.user;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
