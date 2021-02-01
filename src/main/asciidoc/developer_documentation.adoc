@@ -43,7 +43,7 @@
 
 === Aufgabenstellung
 
-In so schwierigen Zeiten wird es immer wichtiger, dass essenzielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. 
+In so schwierigen Zeiten wird es immer wichtiger, dass essentielle Dienste wie die Medikamentenversorgung so zugänglich wie möglich gestaltet werden. 
 Deshalb soll die neue Webapp der Apotheke des Unterbrunner Ärztehaus einen simplen, lokalen und zuverlässigen Medikamentenversand ermöglichen. Diese Webapp wird die Apotheke zu einer Online Apotheke umwandeln, welche zusammen mit der im Januar 2021 kommenden elektronischen Patientenakte eine zukunftsfähige Plattform bietet. 
 Es wird ein besonderer Fokus auf digitale Barrierefreiheit gelegt.
 
