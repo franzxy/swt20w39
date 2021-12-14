@@ -20,15 +20,15 @@
                 <a th:href="@{#}">Lohnzettel</a>
                 </div>
             <div class="field">
-                <label class="span">Datum</label>
+                <span class="span">Datum</span>
                 <h4 th:text="${#temporals.format(det.getValue1(),'dd.MM.yyyy')}"></h4>
             </div>
             <div class="field">
-                <label class="span">Betrag</label>
+                <span class="span">Betrag</span>
                 <h4 th:text="${det.getValue0().getValue().getNumber().doubleValue()}"></h4>
             </div>                 
             <div class="field">
-                <label class="span">Beschreibung</label>
+                <span class="span">Beschreibung</span>
                 <h4 th:text="${det.getValue0().getDescription()}"></h4>
             </div>
         </div>
