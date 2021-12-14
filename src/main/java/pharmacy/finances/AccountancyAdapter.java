@@ -88,18 +88,7 @@ public class AccountancyAdapter {
         @Scheduled(fixedRate = 500)
         protected void autoPay(){
 
-            LocalDate begin = this.getLastDate();
-            LocalDate payday = LocalDate.of(begin.getYear(), begin.getMonthValue()+1, 1);
-            LocalDate end = this.businessTime.getTime().toLocalDate();
-
-            while(payday.isBefore(end)){
-
-                this.createFixcosts(payday);
-                this.createSalary(payday);
-
-                payday = payday.plusMonths(1);
-
-            }
+            System.out.println("test");
 
         }
 
