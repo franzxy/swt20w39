@@ -85,13 +85,6 @@ public class AccountancyAdapter {
 
         }
 
-        @Scheduled(fixedRate = 500)
-        protected void autoPay(){
-
-            System.out.println("test");
-
-        }
-
         private LocalDate getLastDate(){
             
             LocalDate newest = this.init;
@@ -507,8 +500,6 @@ public class AccountancyAdapter {
             this.orderManagement.save(o2);
 
             this.add(new AccountancyEntry(Money.of(23,"EUR")," Test"));
-
-            this.autoPay();
 
         }
     
